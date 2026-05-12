@@ -6,6 +6,8 @@
 <title>Frontend Final · Painel Admin — Vinícius Souza Fotografia</title>
 <link rel="stylesheet" href="tokens.css">
 <link rel="stylesheet" href="shared.css">
+<!-- v1.0.25 — 2026-05-12 · revisão (avatar Patrícia em Pedido com Reembolso) -->
+<!-- v1.0.24 — 2026-05-12 · cobertura funcional (telas P1+P2 + fix data-screen-label Configurações) -->
 <!-- v1.0.23 — 2026-05-12 · fix mojibake residual (318+119+41 replacements) · inputs dark theme · adm-avatar-pill HTML quotes fixed -->
 <!-- v1.0.22 — 2026-05-12 · avatar canonical Vinícius ?img=12 · sponsor logos via.placeholder · enriquecimento -->
 <!-- v1.0.21 — 2026-05-12 · fonte numérica: display→mono/head em KPIs, totais, valores R$ -->
@@ -2821,7 +2823,7 @@
       </div>
       <div>
         <span class="label">Configurações · estúdio + integrações</span>
-        <div class="frame" data-screen-final-label="Admin · Configurações">
+        <div class="frame" data-screen-label="Admin · Configurações">
           <div class="adm-topbar">
             <div class="adm-brand-pill"><svg class="nav-logo"><use href="#nav-logo-h"/></svg><span class="role">Painel</span></div>
             <nav class="adm-crumbs"><span>Sistema</span><span class="sep">/</span><span class="here">Configurações</span></nav>
@@ -3701,6 +3703,807 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       27. FILA DE JOBS — pipeline de processamento (derivadas / poster / preview)
+       ============================================================ -->
+  <section>
+    <div class="screen-label">
+      <span class="num">27</span>
+      <h2>Fila de Jobs — pipeline de processamento de mídia</h2>
+      <span class="tag">/admin/jobs · derivadas · poster · preview MP4 (WM)</span>
+    </div>
+    <div class="pair">
+      <div>
+        <span class="label">Desktop · fila + tentativas + última mensagem</span>
+        <div class="frame" data-screen-label="Admin · Fila de Jobs">
+          <div class="adm-topbar">
+            <div class="adm-brand-pill"><svg class="nav-logo"><use href="#nav-logo-h"/></svg><span class="role">Painel</span></div>
+            <nav class="adm-crumbs"><span>Sistema</span><span class="sep">/</span><span class="here">Fila de Jobs</span></nav>
+            <div class="adm-search-mini" style="margin-left: auto;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/></svg><input placeholder="Buscar job por ID, evento, tipo…"/></div>
+            <div class="adm-icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18z"/></svg></div>
+            <div class="adm-avatar-pill"><div class="avatar" style="width:26px;height:26px;font-size:10px;background:var(--brand-500);color:var(--ink-1000);"><img src="https://i.pravatar.cc/150?img=12" alt="VS" loading="lazy"></div><div><div class="name">Vinícius</div><div class="role">FOTÓGRAFO</div></div></div>
+          </div>
+          <div class="adm">
+            <aside class="adm-side">
+              <div class="lbl">Visão</div><a>Dashboard</a><a>Estatísticas</a>
+              <div class="lbl">Conteúdo</div><a>Eventos / Álbuns<span class="badge b-info">142</span></a><a>Criar evento</a><a>Upload de fotos</a>
+              <div class="lbl">Vendas</div><a>Pedidos<span class="badge b-pend">3</span></a><a>Carrinhos abertos<span class="badge b-info">9</span></a><a>Cupons</a><a>Propostas<span class="badge b-info">2</span></a><a>Repasses</a>
+              <div class="lbl">Pessoas</div><a>Clientes</a><a>Colaboradores</a><a>Chat<span class="badge b-info">2</span></a>
+              <div class="lbl">Moderação</div><a>Comentários<span class="badge b-pend">5</span></a><a>Contatos<span class="badge b-pend">3</span></a><a>Remoções LGPD<span class="badge b-pend">1</span></a>
+              <div class="lbl">Sistema</div><a>Marca d'água</a><a>Personalizar</a><a>Configurações</a><a>Storage</a><a>Recompensas</a><a>Logs &amp; auditoria</a><a class="active">Fila de Jobs<span class="badge b-pend">2</span></a><a>Notificações</a><a>Reconhecimento</a><a>Reset</a>
+            </aside>
+            <main class="adm-main">
+              <div class="adm-page-head">
+                <div><h2>Fila de processamento</h2><div class="sub">— DERIVADAS · POSTER · PREVIEW MP4 (WM) · WORKER ATIVO —</div></div>
+                <div class="actions"><button class="btn" type="button">Pausar fila</button><button class="btn primary" type="button">Reprocessar falhas</button></div>
+              </div>
+              <div class="adm-stats" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="adm-stat">
+                  <div class="top"><span class="lbl">Pendentes</span></div>
+                  <div class="v warn">2</div>
+                  <div class="delta">aguardando worker</div>
+                </div>
+                <div class="adm-stat">
+                  <div class="top"><span class="lbl">Processando</span></div>
+                  <div class="v brand">2</div>
+                  <div class="delta">2 workers ativos</div>
+                </div>
+                <div class="adm-stat">
+                  <div class="top"><span class="lbl">Falhas</span></div>
+                  <div class="v" style="color: var(--signal-500);">1</div>
+                  <div class="delta down">3/3 tentativas esgotadas</div>
+                </div>
+              </div>
+              <div style="display: flex; gap: 6px; margin-bottom: 14px; align-items: center;">
+                <span class="chip active">Todos · 5</span>
+                <span class="chip">Pendentes · 2</span>
+                <span class="chip">Processando · 2</span>
+                <span class="chip">Falhas · 1</span>
+                <div style="margin-left: auto; display: flex; gap: 6px;">
+                  <select><option>Todos os tipos</option><option>photo-derivatives</option><option>video-poster</option><option>video-preview-wm</option></select>
+                  <select><option>Todos os eventos</option><option>Maratona SP 2026</option><option>Cross Games E3</option></select>
+                </div>
+              </div>
+              <div class="ac">
+                <table class="tbl">
+                  <thead><tr><th>ID</th><th>Tipo</th><th>Evento alvo</th><th>Status</th><th>Tentativas</th><th>Iniciado em</th><th>Última mensagem</th><th></th></tr></thead>
+                  <tbody>
+                    <tr>
+                      <td class="id">job_001</td>
+                      <td><span class="type-mono" style="color: var(--brand-400);">photo-derivatives</span></td>
+                      <td>Maratona SP 2026</td>
+                      <td><span class="badge b-info">processing</span></td>
+                      <td class="mono">1/3</td>
+                      <td class="mono">14/05 09:32 · há 2min</td>
+                      <td style="font-family: var(--font-mono); font-size: 11px; color: var(--ink-800);">gerando WM 1280 · 412/1.581</td>
+                      <td><button class="btn sm">Ver log</button></td>
+                    </tr>
+                    <tr>
+                      <td class="id">job_002</td>
+                      <td><span class="type-mono" style="color: var(--brand-400);">video-poster</span></td>
+                      <td>Cross Games E3</td>
+                      <td><span class="badge b-pend">pending</span></td>
+                      <td class="mono">0/3</td>
+                      <td class="mono">14/05 09:34 · há 30s</td>
+                      <td style="font-family: var(--font-mono); font-size: 11px; color: var(--ink-800);">aguardando slot do worker</td>
+                      <td><button class="btn sm">Ver log</button></td>
+                    </tr>
+                    <tr>
+                      <td class="id">job_003</td>
+                      <td><span class="type-mono" style="color: var(--brand-400);">video-preview-wm</span></td>
+                      <td>Circuito Praia</td>
+                      <td><span class="badge b-cancel">failed</span></td>
+                      <td class="mono" style="color: var(--signal-500);">3/3</td>
+                      <td class="mono">14/05 09:29 · há 5min</td>
+                      <td style="font-family: var(--font-mono); font-size: 11px; color: var(--signal-500);">ffmpeg timeout após 240s</td>
+                      <td style="display: flex; gap: 4px;"><button class="btn sm primary">Tentar novamente</button><button class="btn sm">Ver log</button></td>
+                    </tr>
+                    <tr>
+                      <td class="id">job_004</td>
+                      <td><span class="type-mono" style="color: var(--brand-400);">photo-derivatives</span></td>
+                      <td>Casamento M&amp;L</td>
+                      <td><span class="badge b-pend">pending</span></td>
+                      <td class="mono">0/3</td>
+                      <td class="mono">14/05 09:34 · há 10s</td>
+                      <td style="font-family: var(--font-mono); font-size: 11px; color: var(--ink-800);">aguardando slot do worker</td>
+                      <td><button class="btn sm">Ver log</button></td>
+                    </tr>
+                    <tr>
+                      <td class="id">job_005</td>
+                      <td><span class="type-mono" style="color: var(--brand-400);">video-preview-wm</span></td>
+                      <td>Pedalada Verão</td>
+                      <td><span class="badge b-info">processing</span></td>
+                      <td class="mono">2/3</td>
+                      <td class="mono">14/05 09:33 · há 1min</td>
+                      <td style="font-family: var(--font-mono); font-size: 11px; color: var(--ink-800);">encode WM frame 1840/3960</td>
+                      <td><button class="btn sm">Ver log</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div style="margin-top: 14px; padding: 10px 14px; background: var(--ink-100); border: 1px solid var(--ink-500); border-radius: var(--radius); font-family: var(--font-mono); font-size: 11px; color: var(--ink-800); line-height: 1.7;">
+                MAX_ATTEMPTS=3 · WORKER PERSISTIDO EM data/jobs.json · MID-JOB CRASH É RETOMADO NO BOOT · *.partial MP4 É DESCARTADO
+              </div>
+            </main>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <span class="label">Mobile · 390 · fila compacta + retry</span>
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="phone-status"><span>9:41</span><span class="right">●●●●●  100%</span></div>
+            <div class="m-adm-topbar">
+              <div class="brand-pill"><svg class="nav-logo"><use href="#nav-logo-h"/></svg><span class="role">Painel</span></div>
+              <div class="right">
+                <div class="bell"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18z"/></svg><span class="pip"></span></div>
+                <button class="burger" type="button" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="20" height="20"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button>
+              </div>
+            </div>
+            <div class="m-adm-crumbs"><span>Sistema</span><span class="sep">/</span><span class="here">Fila de Jobs</span></div>
+            <div class="m-adm-page-head">
+              <h2>Fila de processamento</h2>
+              <div class="sub">— 2 PROC · 2 PEND · 1 FALHOU —</div>
+              <div class="actions">
+                <button class="btn primary sm" style="flex: 1;">Reprocessar falhas</button>
+                <button class="btn sm">Pausar</button>
+              </div>
+            </div>
+            <div class="m-adm-stats">
+              <div class="m-adm-stat"><div class="lbl">Pendentes</div><div class="v warn">2</div><div class="delta">aguardando</div></div>
+              <div class="m-adm-stat"><div class="lbl">Processando</div><div class="v brand">2</div><div class="delta">2 workers</div></div>
+              <div class="m-adm-stat"><div class="lbl">Falhas</div><div class="v" style="color: var(--signal-500);">1</div><div class="delta">3/3 esgotadas</div></div>
+            </div>
+            <div class="m-adm-chips">
+              <span class="chip active">Todos · 5</span>
+              <span class="chip">Falhas · 1</span>
+              <span class="chip">Proc · 2</span>
+            </div>
+            <div class="m-adm-row"><div><h5 style="font-family: var(--font-mono); font-size: 11px; color: var(--brand-400);">job_001 · photo-derivatives</h5><div class="meta"><span>Maratona SP 2026</span><span>1/3</span><span class="badge b-info">PROC</span></div></div></div>
+            <div class="m-adm-row"><div><h5 style="font-family: var(--font-mono); font-size: 11px; color: var(--brand-400);">job_005 · video-preview-wm</h5><div class="meta"><span>Pedalada Verão</span><span>2/3</span><span class="badge b-info">PROC</span></div></div></div>
+            <div class="m-adm-row"><div><h5 style="font-family: var(--font-mono); font-size: 11px; color: var(--brand-400);">job_002 · video-poster</h5><div class="meta"><span>Cross Games E3</span><span>0/3</span><span class="badge b-pend">PEND</span></div></div></div>
+            <div class="m-adm-row"><div><h5 style="font-family: var(--font-mono); font-size: 11px; color: var(--brand-400);">job_004 · photo-derivatives</h5><div class="meta"><span>Casamento M&amp;L</span><span>0/3</span><span class="badge b-pend">PEND</span></div></div></div>
+            <div class="m-adm-row"><div><h5 style="font-family: var(--font-mono); font-size: 11px; color: var(--brand-400);">job_003 · video-preview-wm</h5><div class="meta"><span>Circuito Praia</span><span style="color: var(--signal-500);">3/3</span><span class="badge b-cancel">FAIL</span><span style="color: var(--signal-500);">ffmpeg timeout 240s</span></div></div><button class="btn sm primary">Retry</button></div>
+            <div style="text-align: center; padding: 12px 14px 24px; font-family: var(--font-mono); font-size: 10px; color: var(--ink-700); line-height: 1.6;">MAX_ATTEMPTS=3 · WORKER PERSISTIDO<br/>data/jobs.json · *.partial DESCARTADO NO BOOT</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       28. EVENTO SEM FOTOS — empty state da aba Fotos no Detalhe Evento
+       ============================================================ -->
+  <section>
+    <div class="screen-label">
+      <span class="num">28</span>
+      <h2>Evento Sem Fotos — variante empty do Detalhe Evento</h2>
+      <span class="tag">/admin/evento/[id] · aba Fotos · primeiro upload</span>
+    </div>
+    <div class="pair">
+      <div>
+        <span class="label">Desktop · empty state + CTAs de upload e metadados</span>
+        <div class="frame" data-screen-label="Admin · Evento Sem Fotos">
+          <div class="adm-topbar">
+            <div class="adm-brand-pill"><svg class="nav-logo"><use href="#nav-logo-h"/></svg><span class="role">Painel</span></div>
+            <nav class="adm-crumbs"><span>Painel</span><span class="sep">/</span><span>Eventos</span><span class="sep">/</span><span class="here">Casamento M&amp;L</span></nav>
+            <div class="adm-search-mini"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/></svg><input placeholder="Buscar foto por ID, pasta…"/></div>
+            <div class="adm-icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18z"/></svg></div>
+            <div class="adm-avatar-pill"><div class="avatar" style="width:26px;height:26px;font-size:10px;background:var(--brand-500);color:var(--ink-1000);"><img src="https://i.pravatar.cc/150?img=12" alt="VS" loading="lazy"></div><div><div class="name">Vinícius</div><div class="role">FOTÓGRAFO</div></div></div>
+          </div>
+          <div class="adm">
+            <aside class="adm-side">
+              <div class="lbl">Visão</div><a>Dashboard</a><a>Estatísticas</a>
+              <div class="lbl">Conteúdo</div><a class="active">Eventos / Álbuns<span class="badge b-info">142</span></a><a>Criar evento</a><a>Upload de fotos</a>
+              <div class="lbl">Vendas</div><a>Pedidos<span class="badge b-pend">3</span></a><a>Carrinhos abertos<span class="badge b-info">9</span></a><a>Cupons</a><a>Propostas<span class="badge b-info">2</span></a><a>Repasses</a>
+              <div class="lbl">Pessoas</div><a>Clientes</a><a>Colaboradores</a><a>Chat<span class="badge b-info">2</span></a>
+              <div class="lbl">Moderação</div><a>Comentários<span class="badge b-pend">5</span></a><a>Contatos<span class="badge b-pend">3</span></a><a>Remoções LGPD<span class="badge b-pend">1</span></a>
+              <div class="lbl">Sistema</div><a>Marca d'água</a><a>Personalizar</a><a>Configurações</a><a>Storage</a><a>Recompensas</a><a>Logs &amp; auditoria</a><a>Notificações</a><a>Reconhecimento</a><a>Reset</a>
+            </aside>
+            <main class="adm-main">
+              <div class="adm-page-head">
+                <div>
+                  <div style="font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-700); letter-spacing: .12em; text-transform: uppercase;">← EVENTOS · ID 200000042</div>
+                  <h2>Casamento M&amp;L</h2>
+                  <div class="sub">— CASAMENTO · 18 MAI 2026 · BELO HORIZONTE/MG · PRIVADO · RASCUNHO —</div>
+                </div>
+                <div class="actions">
+                  <button class="btn">Compartilhar</button>
+                  <button class="btn">Despublicar</button>
+                  <button class="btn primary">Editar evento</button>
+                </div>
+              </div>
+
+              <div class="adm-tabs">
+                <a><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"/></svg>Detalhes</a>
+                <a class="active"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Fotos<span class="num">0</span></a>
+                <a><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>Vídeos<span class="num">0</span></a>
+                <a><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>Patrocinadores<span class="num">0</span></a>
+                <a><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7"/></svg>Comentários<span class="num">0</span></a>
+                <a><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/></svg>Vendas<span class="num">0</span></a>
+              </div>
+
+              <div class="ac" style="margin-top: 24px;">
+                <div style="padding: 64px 32px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 20px;">
+                  <div style="width: 88px; height: 88px; border-radius: 50%; background: var(--ink-300); border: 1px solid var(--ink-500); display: grid; place-items: center; color: var(--ink-700);">
+                    <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                  </div>
+                  <div>
+                    <h3 style="margin: 0 0 6px; font-size: 18px; color: var(--ink-1000);">Nenhuma foto neste evento ainda.</h3>
+                    <p style="margin: 0; font-size: 13px; color: var(--ink-800); max-width: 480px; line-height: 1.5;">Recomendamos definir preço e descontos antes do primeiro upload para que todas as fotos entrem no acervo já configuradas.</p>
+                  </div>
+                  <div style="display: flex; gap: 12px; margin-top: 8px;">
+                    <a class="btn primary" style="padding: 12px 22px; font-size: 13.5px;" href="/admin/upload-fotos">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 6px; vertical-align: -2px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                      Enviar fotos
+                    </a>
+                    <a class="btn" style="padding: 12px 22px; font-size: 13.5px;">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 6px; vertical-align: -2px;"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33"/></svg>
+                      Configurar metadados primeiro
+                    </a>
+                  </div>
+                  <div style="margin-top: 18px; padding: 14px 18px; background: var(--ink-300); border: 1px solid var(--ink-500); border-radius: var(--radius); display: flex; gap: 10px; align-items: start; max-width: 540px; text-align: left;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--brand-400); flex-shrink: 0; margin-top: 2px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                    <div style="font-size: 12px; color: var(--ink-900); line-height: 1.5;">
+                      <strong style="color: var(--ink-1000);">Dica.</strong> Preço base, descontos por volume e marca d'água são herdados pelo upload em massa. Ajuste em <span class="type-mono" style="color: var(--brand-400);">aba Detalhes</span> antes do envio.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </main>
+          </div>
+        </div>
+      </div>
+      <div class="note"><b>Nota.</b> Mobile do empty state reusa o padrão de "Admin · Detalhe Evento" mobile (cluster em "Eventos") — sem render dedicado aqui.</div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       29. DASHBOARD VAZIO — primeiro acesso · KPIs em 0
+       ============================================================ -->
+  <section>
+    <div class="screen-label">
+      <span class="num">29</span>
+      <h2>Dashboard Vazio — primeiro acesso · convite para criar álbum</h2>
+      <span class="tag">/admin · estado inicial · onboarding</span>
+    </div>
+    <div class="pair">
+      <div>
+        <span class="label">Desktop · KPIs zerados + CTA grande</span>
+        <div class="frame" data-screen-label="Admin · Dashboard Vazio">
+          <div class="adm-topbar">
+            <div class="adm-brand-pill"><svg class="nav-logo"><use href="#nav-logo-h"/></svg><span class="role">Painel</span></div>
+            <nav class="adm-crumbs"><span>Painel</span><span class="sep">/</span><span class="here">Visão geral</span></nav>
+            <div class="adm-search-mini"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/></svg><input placeholder="Buscar evento, foto, pedido, cliente…"/><span class="kbd">⌘K</span></div>
+            <div class="adm-icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18z"/></svg></div>
+            <div class="adm-avatar-pill"><div class="avatar" style="width:26px;height:26px;font-size:10px;background:var(--brand-500);color:var(--ink-1000);"><img src="https://i.pravatar.cc/150?img=12" alt="VS" loading="lazy"></div><div><div class="name">Vinícius</div><div class="role">FOTÓGRAFO</div></div></div>
+          </div>
+          <div class="adm">
+            <aside class="adm-side">
+              <div class="lbl">Visão</div>
+              <a class="active">Dashboard</a>
+              <a>Estatísticas</a>
+              <div class="lbl">Conteúdo</div>
+              <a>Eventos / Álbuns<span class="badge b-info">0</span></a>
+              <a>Criar evento</a>
+              <a>Upload de fotos</a>
+              <div class="lbl">Vendas</div>
+              <a>Pedidos</a><a>Carrinhos abertos</a><a>Cupons</a><a>Propostas</a><a>Repasses</a>
+              <div class="lbl">Pessoas</div><a>Clientes</a><a>Colaboradores</a><a>Chat</a>
+              <div class="lbl">Moderação</div><a>Comentários</a><a>Contatos</a><a>Remoções LGPD</a>
+              <div class="lbl">Sistema</div><a>Marca d'água</a><a>Personalizar</a><a>Configurações</a><a>Storage</a><a>Recompensas</a><a>Logs &amp; auditoria</a><a>Notificações</a><a>Reconhecimento</a><a>Reset</a>
+            </aside>
+            <main class="adm-main">
+              <div class="adm-page-head">
+                <div>
+                  <h2>Bem-vindo, Vinícius!</h2>
+                  <div class="sub">— 12 MAI 2026 · 09:14 · BACKEND SQLITE · ACERVO VAZIO —</div>
+                </div>
+                <div class="actions">
+                  <button class="btn">Importar de outra plataforma</button>
+                  <button class="btn primary">+ Novo evento</button>
+                </div>
+              </div>
+
+              <div style="background: var(--brand-dim); border: 1px solid rgba(212,168,108,.3); border-radius: var(--radius); padding: 14px 18px; margin-bottom: 22px; display: flex; gap: 12px; align-items: center; font-size: 13px; color: var(--ink-1000);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="color: var(--brand-400); flex-shrink: 0;"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7"/><circle cx="12" cy="12" r="10"/></svg>
+                Bem-vindo! Comece criando um álbum e enviando suas primeiras fotos.
+              </div>
+
+              <div class="adm-stats">
+                <div class="adm-stat">
+                  <div class="top"><span class="lbl">Faturamento mês</span></div>
+                  <div class="v" style="color: var(--ink-700);">R$ 0,00</div>
+                  <div class="delta">sem vendas</div>
+                </div>
+                <div class="adm-stat">
+                  <div class="top"><span class="lbl">Pedidos pagos</span></div>
+                  <div class="v" style="color: var(--ink-700);">0</div>
+                  <div class="delta">nenhum pedido</div>
+                </div>
+                <div class="adm-stat">
+                  <div class="top"><span class="lbl">Mídia vendida</span></div>
+                  <div class="v" style="color: var(--ink-700);">0</div>
+                  <div class="delta">acervo vazio</div>
+                </div>
+                <div class="adm-stat">
+                  <div class="top"><span class="lbl">Clientes únicos</span></div>
+                  <div class="v" style="color: var(--ink-700);">0</div>
+                  <div class="delta">aguardando 1º acesso</div>
+                </div>
+                <div class="adm-stat">
+                  <div class="top"><span class="lbl">Visitas site</span></div>
+                  <div class="v" style="color: var(--ink-700);">0</div>
+                  <div class="delta">publique seu 1º álbum</div>
+                </div>
+                <div class="adm-stat">
+                  <div class="top"><span class="lbl">Acervo</span></div>
+                  <div class="v" style="color: var(--ink-700);">0</div>
+                  <div class="delta">nenhuma foto enviada</div>
+                </div>
+              </div>
+
+              <div class="ac" style="margin-top: 18px;">
+                <div style="padding: 64px 32px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 18px;">
+                  <div style="width: 96px; height: 96px; border-radius: 50%; background: var(--ink-300); border: 1px dashed var(--ink-600); display: grid; place-items: center; color: var(--brand-400);">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+                  </div>
+                  <div>
+                    <h3 style="margin: 0 0 6px; font-size: 20px; color: var(--ink-1000);">Nenhum álbum criado ainda.</h3>
+                    <p style="margin: 0; font-size: 13.5px; color: var(--ink-800); max-width: 520px; line-height: 1.5;">Crie seu primeiro álbum para começar a vender fotos e vídeos. Você pode importar fotos depois e ajustar preço por evento.</p>
+                  </div>
+                  <div style="display: flex; gap: 12px; margin-top: 4px;">
+                    <a class="btn primary" style="padding: 14px 28px; font-size: 14px;">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="margin-right: 6px; vertical-align: -2px;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                      Criar primeiro álbum
+                    </a>
+                  </div>
+                  <div style="margin-top: 14px; display: flex; gap: 28px; font-family: var(--font-mono); font-size: 11px; color: var(--ink-700); letter-spacing: .04em;">
+                    <span>1. CRIAR ÁLBUM</span>
+                    <span style="color: var(--ink-600);">›</span>
+                    <span>2. UPLOAD</span>
+                    <span style="color: var(--ink-600);">›</span>
+                    <span>3. PUBLICAR</span>
+                    <span style="color: var(--ink-600);">›</span>
+                    <span style="color: var(--signal-500);">4. PRIMEIRA VENDA</span>
+                  </div>
+                </div>
+              </div>
+            </main>
+          </div>
+        </div>
+      </div>
+      <div class="note"><b>Nota.</b> Mobile do dashboard vazio reusa o padrão de "Admin · Dashboard" mobile com KPIs zerados — sem render dedicado.</div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       30. 403 SEM PERMISSÃO — admin restrito · colaborador bloqueado
+       ============================================================ -->
+  <section>
+    <div class="screen-label">
+      <span class="num">30</span>
+      <h2>403 Sem Permissão — colaborador tenta acessar área restrita</h2>
+      <span class="tag">/admin · interceptor de permissão · bloqueio</span>
+    </div>
+    <div class="pair">
+      <div>
+        <span class="label">Desktop · cadeado · código 403 · botão voltar</span>
+        <div class="frame" data-screen-label="Admin · 403 Sem Permissão">
+          <div class="adm-topbar">
+            <div class="adm-brand-pill"><svg class="nav-logo"><use href="#nav-logo-h"/></svg><span class="role">Painel</span></div>
+            <nav class="adm-crumbs"><span>Sistema</span><span class="sep">/</span><span class="here">Acesso negado</span></nav>
+            <div class="adm-search-mini" style="margin-left: auto; opacity: .4;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/></svg><input placeholder="Busca desativada…" disabled/></div>
+            <div class="adm-icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18z"/></svg></div>
+            <div class="adm-avatar-pill"><div class="avatar" style="width:26px;height:26px;font-size:10px;background:var(--ink-500);color:var(--ink-1000);"><img src="https://i.pravatar.cc/150?img=33" alt="Colab" loading="lazy"></div><div><div class="name">Maria L.</div><div class="role">COLABORADOR</div></div></div>
+          </div>
+          <div class="adm">
+            <aside class="adm-side" style="opacity: .35; pointer-events: none;">
+              <div class="lbl">Visão</div><a>Dashboard</a><a>Estatísticas</a>
+              <div class="lbl">Conteúdo</div><a>Eventos / Álbuns</a><a>Criar evento</a><a>Upload de fotos</a>
+              <div class="lbl">Sistema</div><a>Configurações</a><a>Storage</a><a>Reset</a>
+            </aside>
+            <main class="adm-main">
+              <div style="padding: 80px 32px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 24px;">
+                <div style="width: 120px; height: 120px; border-radius: 50%; background: rgba(239,68,68,.08); border: 2px solid var(--signal-500); display: grid; place-items: center; color: var(--signal-500);">
+                  <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                    <rect x="3" y="11" width="18" height="11" rx="2"/>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                  </svg>
+                </div>
+                <div style="font-family: var(--font-mono); font-size: 92px; font-weight: 600; color: var(--signal-500); letter-spacing: -.04em; line-height: 1;">403</div>
+                <div>
+                  <h2 style="margin: 0 0 10px; font-size: 26px; color: var(--ink-1000);">Acesso restrito</h2>
+                  <p style="margin: 0 auto; font-size: 14px; color: var(--ink-800); max-width: 520px; line-height: 1.55;">Esta área é apenas para administradores plenos. Como colaborador, você não tem permissão para acessar. Se acha que é um engano, fale com o fotógrafo responsável pelo evento.</p>
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: 12px;">
+                  <a class="btn primary" style="padding: 12px 26px; font-size: 13.5px;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="margin-right: 6px; vertical-align: -2px;"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                    Voltar ao painel
+                  </a>
+                  <a class="btn" style="padding: 12px 22px; font-size: 13.5px;">Pedir acesso ao admin</a>
+                </div>
+                <div style="margin-top: 22px; padding: 12px 18px; background: var(--ink-100); border: 1px solid var(--ink-500); border-radius: var(--radius); font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-700); letter-spacing: .08em;">
+                  REQUEST_ID 7F4A2C1B · 12 MAI 09:14 · ROUTE /admin/configuracoes · ROLE colaborador
+                </div>
+              </div>
+            </main>
+          </div>
+        </div>
+      </div>
+      <div class="note"><b>Nota.</b> Tela 403 não tem versão mobile dedicada — usa o mesmo overlay full-screen do desktop em viewports menores.</div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       31. PEDIDO COM REEMBOLSO — variante Pedidos com row expandido
+       ============================================================ -->
+  <section>
+    <div class="screen-label">
+      <span class="num">31</span>
+      <h2>Pedido com Reembolso — solicitação aberta · aprovar/negar</h2>
+      <span class="tag">/admin/pedidos · status "Reembolso solicitado" · row expandido</span>
+    </div>
+    <div class="pair">
+      <div>
+        <span class="label">Desktop · linha expandida · motivo + valor + ações</span>
+        <div class="frame" data-screen-label="Admin · Pedido com Reembolso">
+          <div class="adm-topbar">
+            <div class="adm-brand-pill"><svg class="nav-logo"><use href="#nav-logo-h"/></svg><span class="role">Painel</span></div>
+            <nav class="adm-crumbs"><span>Painel</span><span class="sep">/</span><span>Vendas</span><span class="sep">/</span><span class="here">Pedidos · Reembolso</span></nav>
+            <div class="adm-search-mini" style="margin-left: auto;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/></svg><input placeholder="Buscar pedido por ID, cliente…"/></div>
+            <div class="adm-icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18z"/></svg></div>
+            <div class="adm-avatar-pill"><div class="avatar" style="width:26px;height:26px;font-size:10px;background:var(--brand-500);color:var(--ink-1000);"><img src="https://i.pravatar.cc/150?img=12" alt="VS" loading="lazy"></div><div><div class="name">Vinícius</div><div class="role">FOTÓGRAFO</div></div></div>
+          </div>
+          <div class="adm">
+            <aside class="adm-side">
+              <div class="lbl">Visão</div><a>Dashboard</a><a>Estatísticas</a>
+              <div class="lbl">Conteúdo</div><a>Eventos / Álbuns<span class="badge b-info">142</span></a><a>Criar evento</a><a>Upload de fotos</a>
+              <div class="lbl">Vendas</div>
+              <a class="active">Pedidos<span class="badge b-pend">1</span></a>
+              <a>Carrinhos abertos<span class="badge b-info">9</span></a><a>Cupons</a><a>Propostas<span class="badge b-info">2</span></a><a>Repasses</a>
+              <div class="lbl">Pessoas</div><a>Clientes</a><a>Colaboradores</a><a>Chat<span class="badge b-info">2</span></a>
+              <div class="lbl">Moderação</div><a>Comentários<span class="badge b-pend">5</span></a><a>Contatos<span class="badge b-pend">3</span></a><a>Remoções LGPD<span class="badge b-pend">1</span></a>
+              <div class="lbl">Sistema</div><a>Marca d'água</a><a>Personalizar</a><a>Configurações</a><a>Storage</a><a>Recompensas</a><a>Logs &amp; auditoria</a><a>Notificações</a><a>Reconhecimento</a><a>Reset</a>
+            </aside>
+            <main class="adm-main">
+              <div class="adm-page-head">
+                <div><h2>Pedidos</h2><div class="sub">— 1 REEMBOLSO SOLICITADO · EM ANÁLISE HÁ 1 DIA —</div></div>
+                <div class="actions"><button class="btn" type="button">Export CSV</button><button class="btn primary" type="button">+ Liberação manual</button></div>
+              </div>
+              <div style="display: flex; gap: 6px; margin-bottom: 14px;">
+                <span class="chip">Todos · 124</span>
+                <span class="chip">Pagos · 115</span>
+                <span class="chip">Pendentes · 3</span>
+                <span class="chip active">Reembolso solicitado · 1</span>
+                <span class="chip">Reembolsados · 4</span>
+                <span class="chip">Cancelados · 1</span>
+              </div>
+              <div class="ac">
+                <table class="tbl">
+                  <thead><tr><th>Pedido</th><th>Cliente</th><th>Itens</th><th>Forma</th><th>Data</th><th>Status</th><th style="text-align: right;">Total</th><th></th></tr></thead>
+                  <tbody>
+                    <tr style="background: var(--warning-dim);">
+                      <td class="id">#200000042</td>
+                      <td>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                          <div class="avatar" style="width: 24px; height: 24px; background: var(--brand-500); font-size: 9px;"><img src="https://i.pravatar.cc/150?img=48" alt="PA" loading="lazy"></div>
+                          <div>
+                            <div style="font-size: 12.5px; color: var(--ink-1000);">Patrícia S. Almeida</div>
+                            <div style="font-family: var(--font-mono); font-size: 10px; color: var(--ink-700);">patricia.almeida@email.com</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td>1 foto</td>
+                      <td>Pix · Asaas</td>
+                      <td class="mono">10/05 14:08</td>
+                      <td><span class="badge b-pend">Reembolso solicitado</span></td>
+                      <td class="num" style="text-align: right; color: var(--warning-500);">R$ 24,90</td>
+                      <td><button class="btn sm primary">Fechar detalhe</button></td>
+                    </tr>
+                    <tr style="background: var(--ink-100);">
+                      <td colspan="8" style="padding: 18px 22px;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px;">
+                          <div>
+                            <div style="font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-700); letter-spacing: .14em; text-transform: uppercase; margin-bottom: 8px;">— Motivo do cliente —</div>
+                            <div style="padding: 12px 14px; background: var(--ink-200); border: 1px solid var(--ink-500); border-radius: var(--radius); border-left: 3px solid var(--warning-500); font-size: 13px; color: var(--ink-1000); line-height: 1.6;">"Comprei foto errada — queria a #045 (do meu grupo) e marquei a #042. Pode reembolsar para eu refazer com a certa?"</div>
+                            <div style="margin-top: 12px; padding: 12px 14px; background: var(--ink-200); border: 1px solid var(--ink-500); border-radius: var(--radius);">
+                              <div style="font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-700); letter-spacing: .14em; text-transform: uppercase; margin-bottom: 8px;">— Histórico —</div>
+                              <div style="display: flex; flex-direction: column; gap: 8px; font-size: 12px;">
+                                <div style="display: flex; gap: 10px; align-items: start;">
+                                  <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--brand-500); margin-top: 6px; flex-shrink: 0;"></span>
+                                  <div><strong style="color: var(--ink-1000);">Pedido pago</strong> <span style="color: var(--ink-700);">· 09/05 18:32 · Pix confirmado</span></div>
+                                </div>
+                                <div style="display: flex; gap: 10px; align-items: start;">
+                                  <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--warning-500); margin-top: 6px; flex-shrink: 0;"></span>
+                                  <div><strong style="color: var(--ink-1000);">Reembolso solicitado</strong> <span style="color: var(--ink-700);">· 10/05 14:08 · cliente preencheu formulário</span></div>
+                                </div>
+                                <div style="display: flex; gap: 10px; align-items: start;">
+                                  <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--ink-700); margin-top: 6px; flex-shrink: 0;"></span>
+                                  <div><strong style="color: var(--ink-800);">Em análise há 1 dia</strong> <span style="color: var(--ink-700);">· aguardando decisão do admin</span></div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div>
+                            <div style="font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-700); letter-spacing: .14em; text-transform: uppercase; margin-bottom: 8px;">— Item reclamado —</div>
+                            <div style="display: grid; grid-template-columns: 80px 1fr; gap: 12px; padding: 12px; background: var(--ink-200); border: 1px solid var(--ink-500); border-radius: var(--radius);">
+                              <div style="aspect-ratio: 1; border-radius: 4px; overflow: hidden; background: var(--ink-300);">
+                                <img src="https://picsum.photos/seed/refund042/200/200" alt="Foto 042" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+                              </div>
+                              <div>
+                                <div style="font-family: var(--font-mono); font-size: 11px; color: var(--brand-400); letter-spacing: .04em;">#042 · MARATONA SP 2026</div>
+                                <div style="font-size: 13px; color: var(--ink-1000); margin-top: 4px;">Foto Web · marca d'água removida</div>
+                                <div style="font-family: var(--font-mono); font-size: 11px; color: var(--ink-700); margin-top: 4px;">BAIXADA EM 09/05 19:14</div>
+                              </div>
+                            </div>
+                            <div style="margin-top: 12px; padding: 14px; background: var(--signal-dim); border: 1px solid rgba(34,197,94,.3); border-radius: var(--radius); display: flex; justify-content: space-between; align-items: baseline;">
+                              <span style="font-family: var(--font-mono); font-size: 11px; color: var(--ink-900); letter-spacing: .04em;">VALOR A REEMBOLSAR</span>
+                              <span style="font-family: var(--font-mono); font-size: 22px; color: var(--signal-500); font-variant-numeric: tabular-nums; font-weight: 600;">R$ 24,90</span>
+                            </div>
+                            <div style="margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap;">
+                              <button class="btn sm primary" type="button">Aprovar reembolso</button>
+                              <button class="btn sm danger" type="button">Negar reembolso</button>
+                              <button class="btn sm" type="button">Marcar como completado</button>
+                              <button class="btn sm" type="button">Responder ao cliente</button>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="id">#200000039</td>
+                      <td>Maria F. Silva</td>
+                      <td>5 fotos · 1 vídeo</td>
+                      <td>Pix · Asaas</td>
+                      <td class="mono">17/04 18:42</td>
+                      <td><span class="badge b-paid">Pago</span></td>
+                      <td class="num" style="text-align: right; color: var(--signal-500);">R$ 107,20</td>
+                      <td><button class="btn sm">Detalhes</button></td>
+                    </tr>
+                    <tr>
+                      <td class="id">#200000033</td>
+                      <td>Beatriz G.</td>
+                      <td>1 vídeo · 2 fotos</td>
+                      <td>Pix · Asaas</td>
+                      <td class="mono">15/04 09:51</td>
+                      <td><span class="badge b-cancel">Reembolsado</span></td>
+                      <td class="num" style="text-align: right; color: var(--ink-700); text-decoration: line-through;">R$ 107,20</td>
+                      <td><button class="btn sm">Ver reembolso</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </main>
+          </div>
+        </div>
+      </div>
+      <div class="note"><b>Nota.</b> Mobile deste fluxo usa o cluster da tela "Admin · Pedidos" (l.1949) com card expandido — sem render dedicado.</div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       32. COMENTÁRIO EM MODERAÇÃO — row expandido com timeline + resposta
+       ============================================================ -->
+  <section>
+    <div class="screen-label">
+      <span class="num">32</span>
+      <h2>Comentário em Moderação — timeline + opções de ação</h2>
+      <span class="tag">/admin/comentarios · row expandido · responder como admin</span>
+    </div>
+    <div class="pair">
+      <div>
+        <span class="label">Desktop · comentário detalhado · histórico de edições</span>
+        <div class="frame" data-screen-label="Admin · Comentário em Moderação">
+          <div class="adm-topbar">
+            <div class="adm-brand-pill"><svg class="nav-logo"><use href="#nav-logo-h"/></svg><span class="role">Painel</span></div>
+            <nav class="adm-crumbs"><span>Painel</span><span class="sep">/</span><span>Moderação</span><span class="sep">/</span><span class="here">Comentários · #c-0287</span></nav>
+            <div class="adm-search-mini" style="margin-left: auto;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/></svg><input placeholder="Buscar comentário, autor…"/></div>
+            <div class="adm-icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18z"/></svg></div>
+            <div class="adm-avatar-pill"><div class="avatar" style="width:26px;height:26px;font-size:10px;background:var(--brand-500);color:var(--ink-1000);"><img src="https://i.pravatar.cc/150?img=12" alt="VS" loading="lazy"></div><div><div class="name">Vinícius</div><div class="role">FOTÓGRAFO</div></div></div>
+          </div>
+          <div class="adm">
+            <aside class="adm-side">
+              <div class="lbl">Visão</div><a>Dashboard</a><a>Estatísticas</a>
+              <div class="lbl">Conteúdo</div><a>Eventos / Álbuns<span class="badge b-info">142</span></a><a>Criar evento</a><a>Upload de fotos</a>
+              <div class="lbl">Vendas</div><a>Pedidos<span class="badge b-pend">3</span></a><a>Carrinhos abertos<span class="badge b-info">9</span></a><a>Cupons</a><a>Propostas<span class="badge b-info">2</span></a><a>Repasses</a>
+              <div class="lbl">Pessoas</div><a>Clientes</a><a>Colaboradores</a><a>Chat<span class="badge b-info">2</span></a>
+              <div class="lbl">Moderação</div>
+              <a class="active">Comentários<span class="badge b-pend">5</span></a>
+              <a>Contatos<span class="badge b-pend">3</span></a><a>Remoções LGPD<span class="badge b-pend">1</span></a>
+              <div class="lbl">Sistema</div><a>Marca d'água</a><a>Personalizar</a><a>Configurações</a><a>Storage</a><a>Recompensas</a><a>Logs &amp; auditoria</a><a>Notificações</a><a>Reconhecimento</a><a>Reset</a>
+            </aside>
+            <main class="adm-main">
+              <div class="adm-page-head">
+                <div><h2>Comentários</h2><div class="sub">— 5 A MODERAR · 1 SELECIONADO · HISTÓRICO COMPLETO —</div></div>
+                <div class="actions"><button class="btn" type="button">Exportar log</button><button class="btn primary" type="button">Aprovar 4 restantes</button></div>
+              </div>
+              <div style="display: flex; gap: 6px; margin-bottom: 14px;">
+                <span class="chip active">Pendentes · 5</span>
+                <span class="chip">Aprovados · 142</span>
+                <span class="chip">Ocultos · 6</span>
+                <span class="chip">Reportados · 2</span>
+              </div>
+
+              <div class="ac" style="margin-bottom: 14px;">
+                <div style="padding: 18px 22px; background: var(--ink-100); border-bottom: 1px solid var(--ink-500);">
+                  <div style="display: grid; grid-template-columns: 56px 1fr auto; gap: 14px; align-items: start;">
+                    <div class="avatar" style="width: 56px; height: 56px; font-size: 14px;"><img src="https://i.pravatar.cc/150?img=48" alt="Patrícia" loading="lazy"></div>
+                    <div>
+                      <div style="display: flex; gap: 10px; align-items: baseline; margin-bottom: 4px;">
+                        <h5 style="margin: 0; font-size: 14px; color: var(--ink-1000);">Patrícia S. Almeida</h5>
+                        <span style="font-family: var(--font-mono); font-size: 11px; color: var(--ink-700);">patricia.almeida@gmail.com</span>
+                        <span class="badge b-info">CLIENTE</span>
+                      </div>
+                      <div style="font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-700); letter-spacing: .04em;">
+                        em <strong style="color: var(--brand-400);">Foto #087 · Maratona SP 2026</strong> · 10/05 às 22:14 · IP 187.22.4.108
+                      </div>
+                    </div>
+                    <span class="badge b-pend">PENDENTE</span>
+                  </div>
+                </div>
+
+                <div style="padding: 22px;">
+                  <div style="font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-700); letter-spacing: .14em; text-transform: uppercase; margin-bottom: 8px;">— Comentário atual —</div>
+                  <div style="padding: 14px 18px; background: var(--ink-200); border: 1px solid var(--ink-500); border-radius: var(--radius); border-left: 3px solid var(--brand-500); font-size: 14px; color: var(--ink-1000); line-height: 1.6;">"Vinícius, tem como liberar o RAW dessa foto pra eu mandar pro retoque? Pago à parte se for o caso. Adorei a composição!"</div>
+
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 18px;">
+                    <div>
+                      <div style="font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-700); letter-spacing: .14em; text-transform: uppercase; margin-bottom: 8px;">— Histórico de edições —</div>
+                      <div style="display: flex; flex-direction: column; gap: 10px; padding: 14px; background: var(--ink-200); border: 1px solid var(--ink-500); border-radius: var(--radius); font-size: 12px;">
+                        <div style="display: flex; gap: 10px; align-items: start;">
+                          <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--brand-500); margin-top: 6px; flex-shrink: 0;"></span>
+                          <div><strong style="color: var(--ink-1000);">Publicado</strong> <span style="color: var(--ink-700);">· 10/05 22:14 · versão original</span></div>
+                        </div>
+                        <div style="display: flex; gap: 10px; align-items: start;">
+                          <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--warning-500); margin-top: 6px; flex-shrink: 0;"></span>
+                          <div><strong style="color: var(--ink-1000);">Editado pelo autor</strong> <span style="color: var(--ink-700);">· 10/05 22:17 · adicionou "Pago à parte se for o caso"</span></div>
+                        </div>
+                        <div style="display: flex; gap: 10px; align-items: start;">
+                          <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--ink-700); margin-top: 6px; flex-shrink: 0;"></span>
+                          <div><strong style="color: var(--ink-800);">Aguardando moderação</strong> <span style="color: var(--ink-700);">· marcado como pendente automaticamente (palavra "RAW" filtrada)</span></div>
+                        </div>
+                      </div>
+
+                      <div style="font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-700); letter-spacing: .14em; text-transform: uppercase; margin: 18px 0 8px;">— Outros comentários do autor —</div>
+                      <div style="padding: 12px 14px; background: var(--ink-200); border: 1px solid var(--ink-500); border-radius: var(--radius); font-size: 12px; color: var(--ink-900); line-height: 1.55;">
+                        <div style="margin-bottom: 6px;">"Maravilhosa!" <span style="color: var(--ink-700); font-family: var(--font-mono); font-size: 10.5px;">· em #142 · 02/04 · aprovado</span></div>
+                        <div>"Que captura linda" <span style="color: var(--ink-700); font-family: var(--font-mono); font-size: 10.5px;">· em #088 · 28/03 · aprovado</span></div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <div style="font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-700); letter-spacing: .14em; text-transform: uppercase; margin-bottom: 8px;">— Foto-alvo —</div>
+                      <div style="display: grid; grid-template-columns: 96px 1fr; gap: 12px; padding: 12px; background: var(--ink-200); border: 1px solid var(--ink-500); border-radius: var(--radius);">
+                        <div style="aspect-ratio: 1; border-radius: 4px; overflow: hidden; background: var(--ink-300);">
+                          <img src="https://picsum.photos/seed/mod087/200/200" alt="Foto 087" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+                        </div>
+                        <div>
+                          <div style="font-family: var(--font-mono); font-size: 11px; color: var(--brand-400); letter-spacing: .04em;">#087 · MARATONA SP 2026</div>
+                          <div style="font-size: 13px; color: var(--ink-1000); margin-top: 4px;">Largada · 06:30 BRT</div>
+                          <div style="font-family: var(--font-mono); font-size: 11px; color: var(--ink-700); margin-top: 6px; line-height: 1.5;">PREÇO R$ 28,80 · 12 VENDAS · 4 COMENT.</div>
+                        </div>
+                      </div>
+
+                      <div style="font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-700); letter-spacing: .14em; text-transform: uppercase; margin: 18px 0 8px;">— Responder como admin —</div>
+                      <textarea style="width: 100%; min-height: 84px; padding: 12px 14px; background: var(--ink-200); border: 1px solid var(--ink-500); border-radius: var(--radius); font-family: var(--font-sans); font-size: 13px; color: var(--ink-1000); line-height: 1.5; resize: vertical;" placeholder="Escreva uma resposta pública…">Oi Patrícia! Obrigado pelo carinho. Sobre o RAW: faço a entrega como serviço extra, posso te passar valor por DM?</textarea>
+                      <label class="check-row" style="margin-top: 8px;"><input type="checkbox" checked/>Aprovar comentário ao enviar resposta.</label>
+
+                      <div style="margin-top: 14px; display: flex; gap: 6px; flex-wrap: wrap;">
+                        <button class="btn sm primary" type="button">Responder &amp; aprovar</button>
+                        <button class="btn sm" type="button">Aprovar sem responder</button>
+                        <button class="btn sm" type="button">Editar antes</button>
+                        <button class="btn sm" type="button">Restaurar versão original</button>
+                        <button class="btn sm" type="button">Omitir</button>
+                        <button class="btn sm danger" type="button">Remover</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </main>
+          </div>
+        </div>
+      </div>
+      <div class="note"><b>Nota.</b> Mobile do detalhe usa o cluster de "Admin · Comentários" (l.2413) com expand inline — sem render dedicado.</div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       33. TOASTS (referência visual) — strip de 5 estados para o simulador
+       ============================================================ -->
+  <section>
+    <div class="screen-label">
+      <span class="num">33</span>
+      <h2>Toasts — guia visual de notificações (sucesso · erro · info · warning · undo)</h2>
+      <span class="tag">referência para o simulador · não é página</span>
+    </div>
+    <div class="pair">
+      <div>
+        <span class="label">Desktop · 5 estados lado a lado</span>
+        <div class="frame" data-screen-label="Admin · Toasts (referência)">
+          <div style="padding: 32px 26px; background: var(--ink-50);">
+            <div style="margin-bottom: 22px;">
+              <h3 style="margin: 0 0 4px; font-size: 16px; color: var(--ink-1000);">Toasts · referência visual</h3>
+              <div style="font-family: var(--font-mono); font-size: 11px; color: var(--ink-700); letter-spacing: .04em;">— SUCESSO · ERRO · INFO · WARNING · UNDO — 5 ESTADOS · GUIA PARA O SIMULADOR —</div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px;">
+
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+                <div style="font-family: var(--font-mono); font-size: 10px; color: var(--ink-700); letter-spacing: .12em; text-transform: uppercase;">01 · Sucesso</div>
+                <div style="padding: 14px 16px; background: var(--signal-dim); border: 1px solid var(--signal-500); border-left: 3px solid var(--signal-500); border-radius: var(--radius); display: flex; gap: 10px; align-items: start;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="color: var(--signal-500); flex-shrink: 0; margin-top: 1px;"><polyline points="20 6 9 17 4 12"/></svg>
+                  <div style="flex: 1;">
+                    <div style="font-size: 13px; font-weight: 500; color: var(--ink-1000); margin-bottom: 2px;">Pedido confirmado</div>
+                    <div style="font-size: 11.5px; color: var(--ink-800); line-height: 1.5;">#200000042 · R$ 24,90 · Pix recebido</div>
+                  </div>
+                </div>
+                <div style="padding: 10px 12px; background: var(--ink-100); border: 1px solid var(--ink-500); border-radius: var(--radius); font-family: var(--font-mono); font-size: 10px; color: var(--ink-700); line-height: 1.5;">BORDA signal-500<br/>BG signal-dim<br/>DURAÇÃO 4s</div>
+              </div>
+
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+                <div style="font-family: var(--font-mono); font-size: 10px; color: var(--ink-700); letter-spacing: .12em; text-transform: uppercase;">02 · Erro</div>
+                <div style="padding: 14px 16px; background: rgba(239,68,68,.08); border: 1px solid var(--signal-500); border-left: 3px solid var(--signal-500); border-radius: var(--radius); display: flex; gap: 10px; align-items: start;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="color: var(--signal-500); flex-shrink: 0; margin-top: 1px;"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                  <div style="flex: 1;">
+                    <div style="font-size: 13px; font-weight: 500; color: var(--ink-1000); margin-bottom: 2px;">Falha ao salvar</div>
+                    <div style="font-size: 11.5px; color: var(--ink-800); line-height: 1.5;">Sessão expirou. Faça login novamente.</div>
+                  </div>
+                </div>
+                <div style="padding: 10px 12px; background: var(--ink-100); border: 1px solid var(--ink-500); border-radius: var(--radius); font-family: var(--font-mono); font-size: 10px; color: var(--ink-700); line-height: 1.5;">BORDA signal-500<br/>BG rgba(.08)<br/>STICKY · sem timeout</div>
+              </div>
+
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+                <div style="font-family: var(--font-mono); font-size: 10px; color: var(--ink-700); letter-spacing: .12em; text-transform: uppercase;">03 · Info</div>
+                <div style="padding: 14px 16px; background: var(--brand-dim); border: 1px solid var(--brand-400); border-left: 3px solid var(--brand-400); border-radius: var(--radius); display: flex; gap: 10px; align-items: start;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="color: var(--brand-400); flex-shrink: 0; margin-top: 1px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                  <div style="flex: 1;">
+                    <div style="font-size: 13px; font-weight: 500; color: var(--ink-1000); margin-bottom: 2px;">Backup iniciado</div>
+                    <div style="font-size: 11.5px; color: var(--ink-800); line-height: 1.5;">Sincronizando para R2 · ETA 38min</div>
+                  </div>
+                </div>
+                <div style="padding: 10px 12px; background: var(--ink-100); border: 1px solid var(--ink-500); border-radius: var(--radius); font-family: var(--font-mono); font-size: 10px; color: var(--ink-700); line-height: 1.5;">BORDA brand-400<br/>BG brand-dim<br/>DURAÇÃO 5s</div>
+              </div>
+
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+                <div style="font-family: var(--font-mono); font-size: 10px; color: var(--ink-700); letter-spacing: .12em; text-transform: uppercase;">04 · Warning</div>
+                <div style="padding: 14px 16px; background: var(--warning-dim); border: 1px solid var(--warning-500); border-left: 3px solid var(--warning-500); border-radius: var(--radius); display: flex; gap: 10px; align-items: start;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="color: var(--warning-500); flex-shrink: 0; margin-top: 1px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                  <div style="flex: 1;">
+                    <div style="font-size: 13px; font-weight: 500; color: var(--ink-1000); margin-bottom: 2px;">Storage 80% cheio</div>
+                    <div style="font-size: 11.5px; color: var(--ink-800); line-height: 1.5;">412 GB de 500 GB · considere migrar para R2.</div>
+                  </div>
+                </div>
+                <div style="padding: 10px 12px; background: var(--ink-100); border: 1px solid var(--ink-500); border-radius: var(--radius); font-family: var(--font-mono); font-size: 10px; color: var(--ink-700); line-height: 1.5;">BORDA warning-500<br/>BG warning-dim<br/>STICKY · até resolver</div>
+              </div>
+
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+                <div style="font-family: var(--font-mono); font-size: 10px; color: var(--ink-700); letter-spacing: .12em; text-transform: uppercase;">05 · Undo</div>
+                <div style="padding: 14px 16px; background: var(--ink-200); border: 1px solid var(--ink-500); border-left: 3px solid var(--ink-700); border-radius: var(--radius); display: flex; gap: 10px; align-items: center;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="color: var(--ink-700); flex-shrink: 0;"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-2 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L5 6"/></svg>
+                  <div style="flex: 1;">
+                    <div style="font-size: 13px; font-weight: 500; color: var(--ink-1000); margin-bottom: 2px;">Foto removida</div>
+                    <div style="font-size: 11.5px; color: var(--ink-800); line-height: 1.5;">#042 · Maratona SP 2026</div>
+                  </div>
+                  <button class="btn sm" type="button" style="flex-shrink: 0;">Desfazer</button>
+                </div>
+                <div style="padding: 10px 12px; background: var(--ink-100); border: 1px solid var(--ink-500); border-radius: var(--radius); font-family: var(--font-mono); font-size: 10px; color: var(--ink-700); line-height: 1.5;">BORDA ink-700<br/>BG ink-200<br/>DURAÇÃO 8s · com botão</div>
+              </div>
+
+            </div>
+
+            <div style="margin-top: 26px; padding: 14px 18px; background: var(--ink-100); border: 1px solid var(--ink-500); border-radius: var(--radius); font-size: 12.5px; color: var(--ink-900); line-height: 1.6;">
+              <strong style="color: var(--ink-1000);">Convenções.</strong> Toasts aparecem no canto inferior direito, empilham de baixo para cima (máx. 4 visíveis). Sucesso/info têm timeout automático. Erro e warning são sticky até o usuário fechar ou resolver. Undo mantém botão "Desfazer" por 8s antes de descartar.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="note"><b>Nota.</b> Tela de referência sem versão mobile — o simulador deve renderizar toasts responsivos usando os mesmos tokens.</div>
     </div>
   </section>
 

@@ -26,7 +26,7 @@
 
   .hero {
     max-width: 1180px; margin: 0 auto;
-    padding: 84px 32px 48px;
+    padding: 84px 32px 32px;
   }
   .hero .eyebrow {
     color: var(--brand-400);
@@ -50,8 +50,83 @@
     max-width: 700px; margin: 0;
   }
 
+  /* HERO CTA — simulador em destaque */
+  .sim-hero {
+    max-width: 1180px; margin: 0 auto 32px; padding: 0 32px;
+  }
+  .sim-card {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 36px;
+    align-items: center;
+    background: linear-gradient(135deg, var(--brand-dim) 0%, rgba(31,122,224,.04) 60%, transparent 100%);
+    border: 1px solid var(--brand-500);
+    border-radius: var(--radius-lg);
+    padding: 30px 36px;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 0 32px -10px rgba(31,122,224,.35);
+    transition: border-color .25s var(--ease-out), transform .25s var(--ease-out), box-shadow .25s var(--ease-out);
+    position: relative;
+    overflow: hidden;
+  }
+  .sim-card::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 92% 12%, rgba(31,122,224,.25), transparent 55%);
+    pointer-events: none;
+  }
+  .sim-card:hover {
+    border-color: var(--brand-400);
+    transform: translateY(-2px);
+    box-shadow: 0 0 48px -12px rgba(31,122,224,.55);
+  }
+  .sim-card-body { position: relative; z-index: 1; }
+  .sim-card .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 12px;
+    background: var(--brand-500); color: var(--ink-1000);
+    border-radius: 999px; font-family: var(--font-mono);
+    font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .sim-card h2 {
+    font-family: var(--font-heading); font-size: 32px;
+    font-weight: 400; color: var(--ink-1000);
+    margin: 0 0 10px; letter-spacing: -.015em;
+  }
+  .sim-card h2 em {
+    font-family: var(--font-display); font-style: italic;
+    color: var(--brand-400); font-weight: 400;
+  }
+  .sim-card p {
+    color: var(--ink-900); font-size: 14.5px; line-height: 1.55;
+    margin: 0 0 16px; max-width: 620px;
+  }
+  .sim-card .pages {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--ink-800); letter-spacing: .03em;
+    line-height: 1.7;
+  }
+  .sim-card .pages b { color: var(--brand-400); font-weight: 500; }
+  .sim-card .open-cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 16px 26px;
+    background: var(--brand-500); color: var(--ink-1000);
+    border-radius: var(--radius);
+    font-size: 14px; font-weight: 500;
+    box-shadow: 0 8px 24px -8px rgba(31,122,224,.55);
+    position: relative; z-index: 1;
+    transition: background .2s, transform .2s;
+  }
+  .sim-card:hover .open-cta { background: var(--brand-600); transform: translateX(3px); }
+  @media (max-width: 720px) {
+    .sim-card { grid-template-columns: 1fr; gap: 18px; padding: 24px; }
+    .sim-card h2 { font-size: 26px; }
+  }
+
   .meta-grid {
-    max-width: 1180px; margin: 0 auto 48px; padding: 0 32px;
+    max-width: 1180px; margin: 0 auto 32px; padding: 0 32px;
     display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
     gap: 14px;
   }
@@ -75,6 +150,35 @@
     color: var(--ink-800); font-weight: 300; margin-left: 2px;
   }
 
+  /* Diferenciador simulador vs mockup */
+  .diff-block {
+    max-width: 1180px; margin: 0 auto 36px; padding: 0 32px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  .diff-card {
+    background: var(--ink-200); border: 1px solid var(--ink-500);
+    border-radius: var(--radius-lg);
+    padding: 20px 22px;
+  }
+  .diff-card h3 {
+    font-family: var(--font-heading); font-size: 15px;
+    font-weight: 500; color: var(--ink-1000);
+    margin: 0 0 10px;
+  }
+  .diff-card h3 .tag {
+    display: inline-block;
+    font-family: var(--font-mono); font-size: 10px;
+    background: var(--ink-300); color: var(--ink-900);
+    padding: 2px 8px; border-radius: 999px;
+    margin-left: 8px; letter-spacing: .1em; text-transform: uppercase;
+    vertical-align: 2px;
+  }
+  .diff-card.simulador h3 .tag { background: var(--brand-dim); color: var(--brand-400); }
+  .diff-card p {
+    font-size: 13px; color: var(--ink-900); line-height: 1.55; margin: 0;
+  }
+  @media (max-width: 720px) { .diff-block { grid-template-columns: 1fr; } }
+
   .surfaces {
     max-width: 1180px; margin: 0 auto 64px; padding: 0 32px;
     display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -85,6 +189,7 @@
     background: var(--ink-200); border: 1px solid var(--ink-500);
     border-radius: var(--radius-lg);
     padding: 22px 24px 26px;
+    text-decoration: none; color: inherit;
     transition: border-color .25s var(--ease-out), transform .25s var(--ease-out), box-shadow .25s var(--ease-out);
   }
   .surface:hover {
@@ -152,40 +257,6 @@
     border-color: rgba(232,163,58,.35);
   }
 
-  .ref-block {
-    max-width: 1180px; margin: 0 auto 64px; padding: 0 32px;
-  }
-  .ref-block .head {
-    display: flex; align-items: end; justify-content: space-between;
-    padding-bottom: 14px; border-bottom: 1px solid var(--ink-500);
-    margin-bottom: 22px;
-  }
-  .ref-block .head h3 {
-    font-family: var(--font-heading); font-size: 17px; font-weight: 500;
-    color: var(--ink-1000); margin: 0;
-  }
-  .ref-block .head span {
-    font-family: var(--font-mono); font-size: 11px;
-    color: var(--ink-700); letter-spacing: .08em;
-  }
-  .ref-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 12px;
-  }
-  .ref {
-    background: var(--ink-200); border: 1px solid var(--ink-500);
-    border-radius: var(--radius);
-    padding: 12px 14px;
-    display: flex; flex-direction: column; gap: 4px;
-    transition: border-color .15s, background .15s;
-  }
-  .ref:hover { border-color: var(--ink-700); background: var(--ink-300); }
-  .ref .name {
-    font-family: var(--font-mono); font-size: 12px;
-    color: var(--ink-1000); letter-spacing: .02em;
-  }
-  .ref .desc { color: var(--ink-800); font-size: 11.5px; }
-
   .footer-note {
     max-width: 1180px; margin: 0 auto;
     padding: 32px; border-top: 1px solid var(--ink-500);
@@ -218,7 +289,7 @@
 </head>
 <body>
 
-<!-- logo defs -->
+<!-- logo defs (mantém igual ao anterior) -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <path id="vs-symbol-path" fill-rule="evenodd" d="M 445.00 596.00 C 440.01 599.06, 428.00 601.00, 428.00 601.00 C 428.00 601.00, 394.93 601.91, 387.00 601.00 C 379.07 600.09, 370.77 595.95, 367.00 594.00 C 363.23 592.05, 358.00 586.00, 358.00 586.00 C 358.00 586.00, 47.40 65.97, 45.00 61.80 C 37.92 53.03, 37.92 36.70, 53.72 34.90 C 56.40 34.80, 138.06 33.36, 150.00 35.00 C 166.13 36.88, 171.67 42.47, 182.00 52.61 C 185.09 57.81, 408.07 444.73, 408.07 444.73 C 408.07 444.73, 457.48 355.64, 459.00 353.00 C 463.18 345.91, 465.66 341.75, 469.81 341.20 C 474.85 340.93, 486.38 354.43, 491.00 358.00 C 495.62 361.57, 505.35 368.68, 513.00 373.00 C 520.65 377.32, 547.48 388.10, 549.38 389.23 C 551.27 390.37, 555.11 394.62, 554.34 400.23 C 553.48 404.70, 550.54 409.12, 548.27 414.51 C 546.00 419.90, 540.68 428.18, 537.00 435.00 C 533.32 441.82, 530.14 447.91, 520.00 467.00 C 509.86 486.09, 462.30 576.16, 459.00 581.84 C 455.70 587.52, 449.99 592.94, 445.00 596.00 Z M 872.22 91.62 C 872.68 125.01, 843.18 147.44, 819.11 147.49 C 809.41 147.93, 701.44 148.17, 615.18 149.00 C 563.14 157.43, 561.99 199.04, 561.63 208.41 C 563.14 229.70, 577.76 255.04, 611.62 262.47 C 650.19 262.52, 781.54 261.79, 798.00 263.00 C 814.46 264.21, 832.43 271.01, 846.00 277.00 C 859.57 282.99, 873.01 291.05, 884.00 301.00 C 894.99 310.95, 910.82 327.93, 920.00 344.00 C 929.18 360.07, 937.00 379.92, 940.00 399.00 C 943.00 418.08, 944.46 460.35, 932.77 491.21 C 910.20 540.45, 871.48 572.49, 850.46 583.12 C 825.64 599.19, 781.95 601.90, 772.00 602.00 C 762.05 602.10, 519.08 602.05, 515.00 602.00 C 510.92 601.95, 505.05 601.48, 502.08 599.50 C 499.11 597.52, 496.82 594.03, 496.31 590.50 C 495.81 586.97, 498.17 581.65, 500.00 578.00 C 501.83 574.35, 529.18 523.73, 533.00 517.68 C 536.82 511.62, 542.75 505.61, 548.00 502.00 C 553.25 498.39, 559.56 496.33, 565.93 496.09 C 572.29 495.85, 777.60 494.40, 785.35 494.00 C 793.11 493.60, 800.80 487.12, 807.00 482.68 C 813.20 478.24, 819.11 471.95, 823.00 466.00 C 826.89 460.05, 829.61 452.97, 831.00 446.00 C 832.39 439.03, 833.65 429.09, 832.00 421.00 C 830.35 412.91, 826.85 399.77, 820.00 392.00 C 813.15 384.23, 805.62 374.86, 787.00 370.00 C 773.99 368.55, 625.16 371.25, 595.00 367.00 C 519.94 352.27, 499.24 323.23, 477.10 293.20 C 453.35 258.78, 452.08 212.30, 455.58 182.20 C 459.09 152.10, 472.00 119.54, 496.15 95.51 C 515.61 74.26, 562.68 41.53, 607.00 40.54 C 615.03 40.41, 813.94 39.62, 819.16 39.73 C 840.03 39.83, 871.79 58.94, 872.22 91.62 Z"/>
@@ -239,41 +310,75 @@
     <a class="nav-logo-link" href="index.html">
       <svg class="nav-logo" aria-label="Vinícius Souza Fotografia"><use href="#nav-logo-h"/></svg>
     </a>
-    <span class="meta">Frontend Final · <strong>v0.2</strong> · 2026-05-10</span>
+    <span class="meta">Frontend Final · <strong>v0.3</strong> · 2026-05-12</span>
   </div>
   <div class="meta">
-    <a class="lnk" href="../index.html">← Voltar aos mockups antigos</a>
+    <a class="lnk" href="simulador.html">🚀 Abrir simulador →</a>
   </div>
 </div>
 
 <section class="hero">
-  <div class="eyebrow">— Frontend final · proposta unificada —</div>
+  <div class="eyebrow">— Frontend final · 100 telas em 83 rotas —</div>
   <h1>Mockup final do projeto <em>convergindo</em> tudo: cobertura completa do produto atual, acabamento do system design.</h1>
-  <p class="lede">Cobre 100 % do que o produto faz hoje — vendas, vídeos, patrocinadores, recompensas, propostas, repasses, colaboradores, chat, reconhecimento, backup — escrito em cima dos tokens e padrões do <em>ui-kit-public</em>. <strong style="color: var(--ink-1000);">v0.2:</strong> modais funcionais (foto · vídeo · compartilhar · remoção LGPD · cupom · colaborador · patrocinador · vídeo admin), tiers de resolução, drawer mobile que abre, cart side colapsável, animações ctaSheen / discShimmer / addPop / bobble, QR Pix realista (SVG), inputs unificados, autenticidade refeita como página de texto, imagens reais via picsum.</p>
+  <p class="lede">Cobre 100 % do que o produto faz hoje — vendas, vídeos, patrocinadores, recompensas, propostas, repasses, colaboradores, chat, reconhecimento, backup — escrito em cima dos tokens e padrões do <em>ui-kit-public</em>. v0.3 inclui <strong style="color: var(--ink-1000);">simulador funcional</strong> com navegação real entre telas.</p>
 </section>
 
 <div class="status-row">
-  <div class="status-pill ok"><span class="dot"></span>Tokens · obsidian + bone</div>
-  <div class="status-pill ok"><span class="dot"></span>Brand · 4 verticais</div>
-  <div class="status-pill ok"><span class="dot"></span>Modais &amp; drawer funcionais</div>
-  <div class="status-pill ok"><span class="dot"></span>Imagens picsum + QR SVG</div>
-  <div class="status-pill wip"><span class="dot"></span>Iteração por página</div>
+  <div class="status-pill ok"><span class="dot"></span>100 telas mapeadas</div>
+  <div class="status-pill ok"><span class="dot"></span>83 rotas navegáveis</div>
+  <div class="status-pill ok"><span class="dot"></span>Cart · login · lightbox simulados</div>
+  <div class="status-pill ok"><span class="dot"></span>Responsive (mobile + desktop)</div>
+  <div class="status-pill wip"><span class="dot"></span>Iteração ativa</div>
+</div>
+
+<!-- ===========================================================
+     SIMULADOR — destaque principal
+     =========================================================== -->
+<div class="sim-hero">
+  <a class="sim-card" href="simulador.html">
+    <div class="sim-card-body">
+      <span class="badge">🚀 NOVO · navegável</span>
+      <h2>Simulador <em>funcional</em> — entre como se fosse o produto real.</h2>
+      <p>
+        Single-page que se comporta como o site real: você navega, clica num evento, abre fotos no lightbox, adiciona ao carrinho, vai pro checkout, faz login simulado, entra na área do cliente ou no painel admin. Sem backend; tudo em JS no navegador.
+      </p>
+      <div class="pages">
+        <b>O que dá pra testar:</b> home + galeria + lightbox · cart com contador · checkout PIX/boleto/cartão · login (use admin@… pra entrar como admin, qualquer outro vira cliente) · área do cliente · painel admin · troca de modo pela barra superior · 83 rotas no menu ☰
+      </div>
+    </div>
+    <div class="open-cta">
+      Abrir simulador
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </div>
+  </a>
 </div>
 
 <div class="meta-grid">
-  <div class="meta-card"><div class="k">Surfaces</div><div class="v">3 <small>público · cliente · admin</small></div></div>
-  <div class="meta-card"><div class="k">Telas mapeadas</div><div class="v">~48 <small>· 14 + 11 + 23</small></div></div>
-  <div class="meta-card"><div class="k">Rotas reais cobertas</div><div class="v">44 <small>· src/app/**</small></div></div>
-  <div class="meta-card"><div class="k">Tipografia</div><div class="v">3 <small>display · ui · mono</small></div></div>
+  <div class="meta-card"><div class="k">Telas mapeadas</div><div class="v">100 <small>· 45 + 21 + 35</small></div></div>
+  <div class="meta-card"><div class="k">Rotas no simulador</div><div class="v">83 <small>· público · cliente · admin</small></div></div>
+  <div class="meta-card"><div class="k">Telas com mobile dedicado</div><div class="v">21 <small>· no público</small></div></div>
+  <div class="meta-card"><div class="k">Tipografia</div><div class="v">4 <small>display · heading · body · mono</small></div></div>
+</div>
+
+<!-- diferenciação simulador × mockup -->
+<div class="diff-block">
+  <div class="diff-card simulador">
+    <h3>Simulador <span class="tag">teste real</span></h3>
+    <p>Single-page interativo. Você usa o site como se fosse de verdade — clica, navega, adiciona ao carrinho, faz login, troca entre área pública / cliente / admin. Bom pra dar feedback sobre USABILIDADE.</p>
+  </div>
+  <div class="diff-card">
+    <h3>Mockups de revisão <span class="tag">design</span></h3>
+    <p>Páginas com todas as telas lado a lado, em frames desktop e phones mobile, com label de cada uma. Bom pra revisar DESIGN, tipografia, espaçamento, consistência visual — não pra testar fluxo.</p>
+  </div>
 </div>
 
 <div class="surfaces">
   <a class="surface" href="publico.html">
     <div class="num">01 · PÚBLICO</div>
     <h2>Site público</h2>
-    <p class="desc">Home com hero técnico + descoberta de eventos, galeria com carrinho retrátil e lightbox, vídeos do evento, patrocinadores, carrinho, checkout PIX/cartão, autenticação, contato, páginas legais.</p>
+    <p class="desc">Home com hero técnico + descoberta de eventos, galeria com carrinho retrátil e lightbox, vídeos, patrocinadores, carrinho, checkout PIX/cartão/boleto, autenticação, contato, páginas legais, estados de erro (404, 500, manutenção, conta bloqueada).</p>
     <div class="pages">
-      <b>Inclui:</b> /, /evento/[id] (fotos · vídeos · patrocinadores), /carrinho, /checkout, /compras, /login, /cadastro, /trocar-senha, /contato, /autenticidade, /termos, /privacidade, /cookies, 404
+      <b>45 telas:</b> home, evento, lightbox foto/vídeo, cart, checkout (3 métodos + recusado), confirmação, compras guest, login, cadastro, sucesso, trocar senha, contato, autenticidade, termos, privacidade, cookies, 404, 500, manutenção, evento sem fotos/privado, busca sem resultado, conta bloqueada · com pares desktop + mobile.
     </div>
     <div class="open">Abrir mockup público →</div>
   </a>
@@ -281,9 +386,9 @@
   <a class="surface" href="cliente.html">
     <div class="num">02 · CLIENTE</div>
     <h2>Área do cliente</h2>
-    <p class="desc">Hub do cliente logado: dashboard com estatísticas, histórico de compras com timeline e download, carrinho persistido, favoritos &amp; curtidas, comentários, remoções LGPD, notificações, chat com o fotógrafo, reconhecimento facial e configurações.</p>
+    <p class="desc">Hub do cliente logado: dashboard com estatísticas, histórico de compras com timeline e download, carrinho persistido, favoritos &amp; curtidas, comentários, remoções LGPD, notificações, chat com o fotógrafo, reconhecimento facial, recompensas e configurações.</p>
     <div class="pages">
-      <b>Inclui:</b> /minha-conta, /compras, /compras/[id], /carrinho, /favoritos, /comentarios, /remocoes, /notificacoes, /chat, /reconhecimento, /configuracoes
+      <b>21 telas:</b> dashboard, compras, detalhe compra (com e sem reembolso), carrinho, favoritos, comentários, remoções, notificações, chat, reconhecimento (com e sem refs + pré-consentimento), recompensas, configurações, downloads expirando, sessão expirada, e estados vazios.
     </div>
     <div class="open">Abrir mockup cliente →</div>
   </a>
@@ -291,9 +396,9 @@
   <a class="surface" href="admin.html">
     <div class="num">03 · ADMIN</div>
     <h2>Painel do fotógrafo</h2>
-    <p class="desc">Backoffice completo: dashboard, eventos com tabs (detalhes · fotos · vídeos · patrocinadores), upload, pedidos, carrinhos abertos, cupons, propostas, repasses, clientes, colaboradores, chat, comentários, contatos, remoções, marca d'água, personalizar, configurações, notificações, estatísticas, reconhecimento, reset.</p>
+    <p class="desc">Backoffice completo: dashboard com KPIs, eventos com tabs (detalhes · fotos · vídeos · patrocinadores), upload, pedidos, carrinhos abertos, cupons, propostas, repasses, clientes, colaboradores, chat, comentários, contatos, remoções, marca d'água, personalizar, configurações, notificações, recompensas, storage, logs, fila de jobs e estados de erro.</p>
     <div class="pages">
-      <b>23+ telas:</b> /admin, /eventos, /eventos/[id], /criar-evento, /upload-fotos, /pedidos, /carrinhos, /cupons, /propostas, /repasses, /clientes, /colaboradores, /chat, /comentarios, /contatos, /remocoes, /marca-dagua, /personalizar, /configuracoes, /notificacoes, /estatisticas, /reconhecimento, /reset
+      <b>35 telas:</b> dashboard, estatísticas, eventos (lista + 3 tabs + criar + upload), pedidos (lista + reembolso), carrinhos, cupons, propostas, repasses, clientes, colaboradores, chat, comentários (lista + moderação), contatos, remoções, marca d'água, personalizar, configurações, notificações, reconhecimento, reset, recompensas, storage, logs, jobs, 403, dashboard vazio.
     </div>
     <div class="open">Abrir mockup admin →</div>
   </a>
@@ -335,49 +440,8 @@
   </div>
 </div>
 
-<div class="ref-block">
-  <div class="head">
-    <h3>Referências usadas</h3>
-    <span>Material de origem do design</span>
-  </div>
-  <div class="ref-grid">
-    <a class="ref" href="../system design by claude design/ui-kit-public.html">
-      <span class="name">ui-kit-public.html</span>
-      <span class="desc">Referência principal · padrões visuais, nav-logo, layout</span>
-    </a>
-    <a class="ref" href="../system design by claude design/ui-kit-account.html">
-      <span class="name">ui-kit-account.html</span>
-      <span class="desc">Sidebar do cliente · cards de pedido (revisar)</span>
-    </a>
-    <a class="ref" href="../system design by claude design/ui-kit-admin.html">
-      <span class="name">ui-kit-admin.html</span>
-      <span class="desc">Topbar densa · sidebar · tabelas (revisar)</span>
-    </a>
-    <a class="ref" href="../system design by claude design/colors_and_type.css">
-      <span class="name">colors_and_type.css</span>
-      <span class="desc">Tokens originais · obsidian + brand</span>
-    </a>
-    <a class="ref" href="../manual_v1.html">
-      <span class="name">manual_v1.html</span>
-      <span class="desc">Logo SVG · 4 verticais × 4 lockups × 4 versões</span>
-    </a>
-    <a class="ref" href="../01-publico.html">
-      <span class="name">01-publico.html</span>
-      <span class="desc">Mockup atual · invent. de funcionalidades públicas</span>
-    </a>
-    <a class="ref" href="../02-cliente.html">
-      <span class="name">02-cliente.html</span>
-      <span class="desc">Mockup atual · invent. da área do cliente</span>
-    </a>
-    <a class="ref" href="../03-admin.html">
-      <span class="name">03-admin.html</span>
-      <span class="desc">Mockup atual · invent. do painel admin (23 seções)</span>
-    </a>
-  </div>
-</div>
-
 <div class="footer-note">
-  © 2026 <span>Vinícius Rodrigues de Souza</span> · proposta de frontend final · construído sobre o <em>system design by claude design</em> + estado atual do código.
+  © 2026 <span>Vinícius Rodrigues de Souza</span> · proposta de frontend final · construído sobre o <em>system design by claude design</em> + estado atual do código · 100 telas em 83 rotas navegáveis.
 </div>
 
 </body>
