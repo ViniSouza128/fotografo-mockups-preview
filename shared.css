@@ -1281,6 +1281,39 @@ details.collapsible > .body {
 .phone-screen .field input:focus,
 .phone-screen input.input:focus { border-color: var(--brand-500); outline: none; box-shadow: var(--focus-ring); }
 
+/* ───── inputs dark theme global (v1.0.26) ───────────────
+   inputs/textarea/select sem class herdam tema escuro;
+   override por classe específica continua funcionando (lower specificity) */
+input[type="text"],
+input[type="search"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="url"],
+input[type="number"],
+input[type="date"],
+input[type="time"],
+input:not([type]),
+textarea,
+select {
+  background: var(--ink-200);
+  border: 1px solid var(--ink-500);
+  color: var(--ink-1000);
+  border-radius: var(--radius);
+  padding: 8px 12px;
+  font-size: 13px;
+  font-family: var(--font-body);
+  -webkit-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+}
+input::placeholder, textarea::placeholder { color: var(--ink-700); }
+input:focus, textarea:focus, select:focus {
+  border-color: var(--brand-500);
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
 /* ───── toast (mockup statique) ───────────────────────── */
 .toast {
   position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%);

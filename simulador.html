@@ -2141,7 +2141,7 @@
   }
   /* aviso quando força mobile mas rota só tem desktop */
   html.sim-force-mobile .sim-screen .view-desktop-fallback::before {
-    content: "🛈 Esta tela ainda não tem versão mobile dedicada — mostrando o layout desktop";
+    content: "🛈 Layout desktop adaptado — esta tela ainda não tem versão mobile dedicada nos mockups";
     display: block;
     padding: 10px 14px;
     background: rgba(232,163,58,.18);
@@ -2152,6 +2152,31 @@
     text-align: center;
     border-bottom: 1px solid var(--ink-500);
     line-height: 1.45;
+  }
+  /* PHONE SHELL SINTÉTICO: quando força mobile em rota só-desktop, o conteúdo desktop é
+     reduzido proporcionalmente pra caber no shell de 410px de largura.
+     Banner fica fora do zoom (legível); só o .frame é escalonado. */
+  html.sim-force-mobile .sim-screen .view-desktop-fallback {
+    position: relative;
+    background: var(--ink-100);
+    overflow: hidden;
+  }
+  html.sim-force-mobile .sim-screen .view-desktop-fallback > .frame {
+    zoom: 0.32;
+    width: calc(100% / 0.32);
+    transform-origin: top left;
+    pointer-events: auto;
+  }
+  /* Firefox: zoom não suportado — fallback transform-scale */
+  @supports (-moz-appearance: none) {
+    html.sim-force-mobile .sim-screen .view-desktop-fallback > .frame {
+      zoom: 1;
+      transform: scale(0.32);
+      transform-origin: top left;
+      width: 312.5%;
+      height: 312.5%;
+      margin-bottom: -213%;
+    }
   }
 
   /* ─── topbar testador ─── */
@@ -2214,6 +2239,32 @@
     white-space: nowrap; flex-shrink: 0;
   }
   .sim-topbar .route-info b { color: var(--brand-400); font-weight: 500; }
+
+  /* pager X / Y entre ← → */
+  .sim-pager {
+    display: inline-flex; gap: 0; flex-shrink: 0;
+    border: 1px solid var(--ink-500); border-radius: var(--radius); overflow: hidden;
+    align-items: stretch;
+  }
+  .sim-pager button {
+    border: 0 !important; border-radius: 0 !important;
+    padding: 5px 10px !important;
+    background: transparent !important;
+    color: var(--ink-900) !important;
+    font-size: 13px !important;
+  }
+  .sim-pager button:hover { background: var(--ink-300) !important; color: var(--ink-1000) !important; }
+  .sim-pager-count {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 56px; padding: 0 10px;
+    font-family: var(--font-mono); font-size: 10.5px;
+    color: var(--ink-900); letter-spacing: .04em;
+    background: var(--ink-200);
+    border-left: 1px solid var(--ink-500);
+    border-right: 1px solid var(--ink-500);
+    white-space: nowrap;
+  }
+  .sim-pager-count b { color: var(--brand-400); font-weight: 500; margin-right: 1px; }
 
   /* viewport switcher (3 botões grudados) */
   .sim-viewport {
@@ -2407,6 +2458,19 @@
     .sim-topbar .label-text { display: none; }
     .sim-topbar .desktop-only { display: none !important; }
     .sim-toc-menu { width: calc(100vw - 28px); right: -8px; }
+    /* Tour/Share/Reset labels in mobile: só ícones */
+    #btnTour, #btnReset, #btnShare { font-size: 11px !important; padding: 4px 8px !important; }
+  }
+  @media (max-width: 580px) {
+    /* esconde tour/share/reset em telas muito pequenas pra dar espaço */
+    #btnTour, #btnReset, #btnShare { display: none; }
+    .sim-pager-count { min-width: 44px; font-size: 10px; padding: 0 6px; }
+  }
+  /* botão de tour com estado active */
+  .sim-topbar #btnTour.active {
+    background: var(--brand-dim) !important;
+    color: var(--brand-400) !important;
+    border-color: var(--brand-500) !important;
   }
   @media (max-width: 480px) {
     .nav-logo { height: 42px; width: 168px; }
@@ -2511,12 +2575,131 @@
 </svg>
 
 
+<!-- defs from publico -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <path id="vs-symbol-path" fill-rule="evenodd" d="M 445.00 596.00 C 440.01 599.06, 428.00 601.00, 428.00 601.00 C 428.00 601.00, 394.93 601.91, 387.00 601.00 C 379.07 600.09, 370.77 595.95, 367.00 594.00 C 363.23 592.05, 358.00 586.00, 358.00 586.00 C 358.00 586.00, 47.40 65.97, 45.00 61.80 C 37.92 53.03, 37.92 36.70, 53.72 34.90 C 56.40 34.80, 138.06 33.36, 150.00 35.00 C 166.13 36.88, 171.67 42.47, 182.00 52.61 C 185.09 57.81, 408.07 444.73, 408.07 444.73 C 408.07 444.73, 457.48 355.64, 459.00 353.00 C 463.18 345.91, 465.66 341.75, 469.81 341.20 C 474.85 340.93, 486.38 354.43, 491.00 358.00 C 495.62 361.57, 505.35 368.68, 513.00 373.00 C 520.65 377.32, 547.48 388.10, 549.38 389.23 C 551.27 390.37, 555.11 394.62, 554.34 400.23 C 553.48 404.70, 550.54 409.12, 548.27 414.51 C 546.00 419.90, 540.68 428.18, 537.00 435.00 C 533.32 441.82, 530.14 447.91, 520.00 467.00 C 509.86 486.09, 462.30 576.16, 459.00 581.84 C 455.70 587.52, 449.99 592.94, 445.00 596.00 Z M 872.22 91.62 C 872.68 125.01, 843.18 147.44, 819.11 147.49 C 809.41 147.93, 701.44 148.17, 615.18 149.00 C 563.14 157.43, 561.99 199.04, 561.63 208.41 C 563.14 229.70, 577.76 255.04, 611.62 262.47 C 650.19 262.52, 781.54 261.79, 798.00 263.00 C 814.46 264.21, 832.43 271.01, 846.00 277.00 C 859.57 282.99, 873.01 291.05, 884.00 301.00 C 894.99 310.95, 910.82 327.93, 920.00 344.00 C 929.18 360.07, 937.00 379.92, 940.00 399.00 C 943.00 418.08, 944.46 460.35, 932.77 491.21 C 910.20 540.45, 871.48 572.49, 850.46 583.12 C 825.64 599.19, 781.95 601.90, 772.00 602.00 C 762.05 602.10, 519.08 602.05, 515.00 602.00 C 510.92 601.95, 505.05 601.48, 502.08 599.50 C 499.11 597.52, 496.82 594.03, 496.31 590.50 C 495.81 586.97, 498.17 581.65, 500.00 578.00 C 501.83 574.35, 529.18 523.73, 533.00 517.68 C 536.82 511.62, 542.75 505.61, 548.00 502.00 C 553.25 498.39, 559.56 496.33, 565.93 496.09 C 572.29 495.85, 777.60 494.40, 785.35 494.00 C 793.11 493.60, 800.80 487.12, 807.00 482.68 C 813.20 478.24, 819.11 471.95, 823.00 466.00 C 826.89 460.05, 829.61 452.97, 831.00 446.00 C 832.39 439.03, 833.65 429.09, 832.00 421.00 C 830.35 412.91, 826.85 399.77, 820.00 392.00 C 813.15 384.23, 805.62 374.86, 787.00 370.00 C 773.99 368.55, 625.16 371.25, 595.00 367.00 C 519.94 352.27, 499.24 323.23, 477.10 293.20 C 453.35 258.78, 452.08 212.30, 455.58 182.20 C 459.09 152.10, 472.00 119.54, 496.15 95.51 C 515.61 74.26, 562.68 41.53, 607.00 40.54 C 615.03 40.41, 813.94 39.62, 819.16 39.73 C 840.03 39.83, 871.79 58.94, 872.22 91.62 Z"/>
+  </defs>
+  <!-- cart icon symbol -->
+  <symbol id="i-cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+    <line x1="3" y1="6" x2="21" y2="6"/>
+    <path d="M16 10a4 4 0 0 1-8 0"/>
+  </symbol>
+
+  <symbol id="nav-logo-h" viewBox="0 0 1100 280" preserveAspectRatio="xMinYMid meet">
+    <g transform="translate(30 50) scale(0.2898550724637681)"><use href="#vs-symbol-path" fill="#ffffff"/></g>
+    <text fill="#ffffff" x="717.03" y="155" text-anchor="middle" font-family="Montserrat, 'Helvetica Neue', Arial, sans-serif" font-weight="800" font-size="72" letter-spacing="3">VINÍCIUS SOUZA</text>
+    <g>
+      <line x1="524" y1="198" x2="552" y2="198" stroke="#ede8e0" stroke-width="2.2" stroke-linecap="round"/>
+      <line x1="882" y1="198" x2="910" y2="198" stroke="#ede8e0" stroke-width="2.2" stroke-linecap="round"/>
+    </g>
+    <text fill="#ede8e0" x="717.03" y="206" text-anchor="middle" font-family="Montserrat, 'Helvetica Neue', Arial, sans-serif" font-weight="700" font-size="36" letter-spacing="6">FOTOGRAFIA</text>
+  </symbol>
+
+  <!-- QR Pix REAL (gerado via qrcode lib, ECC M, payload PIX BR Code) -->
+  <symbol id="qr-pix-svg" viewBox="0 0 49 49">
+    <path fill="#ede8e0" d="M0 0h49v49H0z"/>
+    <path stroke="#0d0d0d" shape-rendering="crispEdges" d="M4 4.5h7m3 0h1m7 0h1m2 0h4m1 0h1m2 0h3m2 0h7M4 5.5h1m5 0h1m1 0h6m3 0h1m2 0h1m1 0h3m2 0h3m1 0h1m2 0h1m5 0h1M4 6.5h1m1 0h3m1 0h1m2 0h1m2 0h1m8 0h3m2 0h2m2 0h2m2 0h1m1 0h3m1 0h1M4 7.5h1m1 0h3m1 0h1m2 0h1m1 0h1m5 0h1m3 0h4m7 0h1m1 0h1m1 0h3m1 0h1M4 8.5h1m1 0h3m1 0h1m1 0h3m1 0h4m1 0h1m4 0h1m3 0h1m4 0h2m1 0h1m1 0h3m1 0h1M4 9.5h1m5 0h1m3 0h1m1 0h3m1 0h1m2 0h4m2 0h1m1 0h1m1 0h4m1 0h1m5 0h1M4 10.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M14 11.5h4m2 0h4m1 0h1m2 0h4m1 0h2M4 12.5h1m1 0h1m1 0h1m1 0h1m3 0h2m2 0h2m1 0h1m2 0h1m2 0h4m2 0h1m2 0h1m3 0h1m2 0h1M5 13.5h2m1 0h1m2 0h1m1 0h2m2 0h1m3 0h5m1 0h1m1 0h7m1 0h3m1 0h1m1 0h1M5 14.5h3m2 0h2m1 0h1m1 0h1m1 0h1m1 0h1m1 0h2m5 0h3m2 0h2m3 0h3m1 0h3M4 15.5h1m2 0h2m3 0h6m1 0h2m1 0h1m4 0h1m1 0h2m2 0h3m1 0h1m2 0h2m1 0h2M4 16.5h1m1 0h2m1 0h3m2 0h1m3 0h1m2 0h2m1 0h1m1 0h1m2 0h5m1 0h2m1 0h2m2 0h1M4 17.5h1m1 0h4m1 0h3m1 0h1m2 0h3m2 0h2m2 0h1m3 0h5m1 0h1m1 0h5M5 18.5h7m1 0h1m3 0h3m3 0h2m1 0h1m4 0h1m4 0h1m2 0h1m1 0h1M5 19.5h2m1 0h2m1 0h1m1 0h4m1 0h5m1 0h1m2 0h1m1 0h1m1 0h3m2 0h2m1 0h1m1 0h4M5 20.5h8m2 0h2m1 0h1m1 0h6m2 0h5m1 0h1m1 0h1m1 0h1m1 0h1m2 0h1M4 21.5h3m4 0h2m2 0h1m1 0h1m1 0h2m4 0h1m1 0h1m1 0h1m3 0h1m3 0h1m2 0h2m1 0h1M4 22.5h2m2 0h3m3 0h4m1 0h1m1 0h1m2 0h1m1 0h1m1 0h1m1 0h7m1 0h4m1 0h2M4 23.5h2m1 0h1m5 0h1m2 0h5m2 0h4m1 0h1m1 0h1m1 0h2m2 0h1m1 0h4m2 0h1M6 24.5h2m2 0h1m1 0h1m1 0h1m3 0h2m3 0h2m1 0h1m4 0h1m2 0h2m3 0h1m2 0h1M4 25.5h1m1 0h3m2 0h4m2 0h2m1 0h2m1 0h4m1 0h1m3 0h2m2 0h1m2 0h2m1 0h2M5 26.5h2m3 0h3m1 0h5m1 0h3m2 0h1m1 0h1m1 0h1m2 0h2m3 0h1m2 0h1m1 0h1M5 27.5h2m6 0h2m5 0h3m1 0h1m2 0h4m2 0h3m1 0h1m2 0h1m3 0h1M4 28.5h1m1 0h3m1 0h1m2 0h1m3 0h2m1 0h1m4 0h2m1 0h2m3 0h6m1 0h3m1 0h1M4 29.5h1m6 0h1m2 0h1m2 0h1m1 0h1m8 0h5m2 0h4m1 0h2m1 0h1M6 30.5h5m2 0h3m1 0h4m1 0h2m2 0h1m3 0h2m1 0h2m1 0h1m1 0h4m2 0h1M5 31.5h1m1 0h3m2 0h2m1 0h3m1 0h3m3 0h1m1 0h1m1 0h1m2 0h1m1 0h2m1 0h1m2 0h2m1 0h2M5 32.5h1m4 0h3m1 0h2m2 0h1m3 0h1m4 0h2m1 0h5m2 0h2m1 0h1m3 0h1M11 33.5h1m2 0h5m1 0h1m1 0h2m3 0h3m5 0h1m1 0h1m1 0h1m1 0h2m1 0h1M4 34.5h1m1 0h1m1 0h3m1 0h1m1 0h1m2 0h3m7 0h3m2 0h4m1 0h2m2 0h1m2 0h1M5 35.5h1m1 0h3m2 0h1m1 0h1m2 0h3m1 0h1m1 0h1m2 0h1m1 0h1m2 0h1m1 0h1m1 0h2m1 0h5M4 36.5h1m2 0h1m2 0h5m3 0h1m2 0h2m1 0h2m1 0h2m3 0h2m1 0h8M12 37.5h4m1 0h1m1 0h1m1 0h1m5 0h1m1 0h1m2 0h2m1 0h2m3 0h1m1 0h1M4 38.5h7m2 0h1m5 0h1m2 0h1m2 0h1m2 0h1m2 0h1m1 0h4m1 0h1m1 0h3m1 0h1M4 39.5h1m5 0h1m6 0h3m1 0h4m3 0h2m1 0h2m1 0h3m3 0h2m2 0h1M4 40.5h1m1 0h3m1 0h1m1 0h2m1 0h2m2 0h1m2 0h3m3 0h1m1 0h4m2 0h5M4 41.5h1m1 0h3m1 0h1m2 0h2m1 0h2m1 0h2m1 0h2m1 0h1m5 0h1m2 0h1m2 0h1m1 0h1m1 0h3M4 42.5h1m1 0h3m1 0h1m1 0h7m1 0h2m2 0h1m1 0h7m1 0h2m1 0h2m1 0h2m2 0h1M4 43.5h1m5 0h1m3 0h1m1 0h2m2 0h1m2 0h2m4 0h3m5 0h2M4 44.5h7m1 0h1m2 0h6m1 0h1m1 0h1m1 0h1m1 0h2m2 0h3m2 0h1m1 0h4m1 0h1"/>
+  </symbol>
+
+  <!-- (QR antigo removido v1.0.26 — agora usa o SVG QR real acima) -->
+  <symbol id="qr-pix-svg-mock-legacy-DO-NOT-USE" viewBox="0 0 29 29" style="display:none">
+    <rect width="29" height="29" fill="#0d0d0d"/>
+    <g fill="#ede8e0">
+      <rect x="7"  y="6" width="1" height="1"/>
+      <rect x="9"  y="6" width="1" height="1"/>
+      <rect x="11" y="6" width="1" height="1"/>
+      <rect x="13" y="6" width="1" height="1"/>
+      <rect x="15" y="6" width="1" height="1"/>
+      <rect x="17" y="6" width="1" height="1"/>
+      <rect x="19" y="6" width="1" height="1"/>
+      <rect x="21" y="6" width="1" height="1"/>
+      <rect x="6" y="7" width="1" height="1"/>
+      <rect x="6" y="9" width="1" height="1"/>
+      <rect x="6" y="11" width="1" height="1"/>
+      <rect x="6" y="13" width="1" height="1"/>
+      <rect x="6" y="15" width="1" height="1"/>
+      <rect x="6" y="17" width="1" height="1"/>
+      <rect x="6" y="19" width="1" height="1"/>
+      <rect x="6" y="21" width="1" height="1"/>
+    </g>
+    <!-- data cells (mock pattern, parece QR) -->
+    <g fill="#ede8e0">
+      <rect x="8" y="0" width="1" height="1"/><rect x="11" y="0" width="1" height="1"/><rect x="13" y="0" width="1" height="1"/><rect x="14" y="0" width="1" height="1"/><rect x="16" y="0" width="1" height="1"/><rect x="19" y="0" width="1" height="1"/>
+      <rect x="9" y="1" width="1" height="1"/><rect x="10" y="1" width="1" height="1"/><rect x="13" y="1" width="1" height="1"/><rect x="15" y="1" width="1" height="1"/><rect x="17" y="1" width="1" height="1"/><rect x="20" y="1" width="1" height="1"/>
+      <rect x="8" y="2" width="1" height="1"/><rect x="10" y="2" width="1" height="1"/><rect x="12" y="2" width="1" height="1"/><rect x="14" y="2" width="1" height="1"/><rect x="16" y="2" width="1" height="1"/><rect x="17" y="2" width="1" height="1"/><rect x="19" y="2" width="1" height="1"/><rect x="21" y="2" width="1" height="1"/>
+      <rect x="9" y="3" width="1" height="1"/><rect x="11" y="3" width="1" height="1"/><rect x="13" y="3" width="1" height="1"/><rect x="14" y="3" width="1" height="1"/><rect x="18" y="3" width="1" height="1"/><rect x="20" y="3" width="1" height="1"/>
+      <rect x="8" y="4" width="1" height="1"/><rect x="10" y="4" width="1" height="1"/><rect x="12" y="4" width="1" height="1"/><rect x="15" y="4" width="1" height="1"/><rect x="17" y="4" width="1" height="1"/><rect x="19" y="4" width="1" height="1"/><rect x="21" y="4" width="1" height="1"/>
+      <rect x="9" y="5" width="1" height="1"/><rect x="11" y="5" width="1" height="1"/><rect x="13" y="5" width="1" height="1"/><rect x="16" y="5" width="1" height="1"/><rect x="20" y="5" width="1" height="1"/>
+      <rect x="0" y="8" width="1" height="1"/><rect x="2" y="8" width="1" height="1"/><rect x="4" y="8" width="1" height="1"/><rect x="8" y="8" width="1" height="1"/><rect x="10" y="8" width="1" height="1"/><rect x="11" y="8" width="1" height="1"/><rect x="13" y="8" width="1" height="1"/><rect x="14" y="8" width="1" height="1"/><rect x="17" y="8" width="1" height="1"/><rect x="19" y="8" width="1" height="1"/><rect x="22" y="8" width="1" height="1"/><rect x="24" y="8" width="1" height="1"/><rect x="26" y="8" width="1" height="1"/><rect x="28" y="8" width="1" height="1"/>
+      <rect x="1" y="9" width="1" height="1"/><rect x="3" y="9" width="1" height="1"/><rect x="9" y="9" width="1" height="1"/><rect x="12" y="9" width="1" height="1"/><rect x="15" y="9" width="1" height="1"/><rect x="16" y="9" width="1" height="1"/><rect x="18" y="9" width="1" height="1"/><rect x="20" y="9" width="1" height="1"/><rect x="23" y="9" width="1" height="1"/><rect x="25" y="9" width="1" height="1"/><rect x="27" y="9" width="1" height="1"/>
+      <rect x="0" y="10" width="1" height="1"/><rect x="2" y="10" width="1" height="1"/><rect x="5" y="10" width="1" height="1"/><rect x="8" y="10" width="1" height="1"/><rect x="11" y="10" width="1" height="1"/><rect x="13" y="10" width="1" height="1"/><rect x="14" y="10" width="1" height="1"/><rect x="17" y="10" width="1" height="1"/><rect x="20" y="10" width="1" height="1"/><rect x="22" y="10" width="1" height="1"/><rect x="24" y="10" width="1" height="1"/><rect x="26" y="10" width="1" height="1"/>
+      <rect x="1" y="11" width="1" height="1"/><rect x="4" y="11" width="1" height="1"/><rect x="9" y="11" width="1" height="1"/><rect x="10" y="11" width="1" height="1"/><rect x="12" y="11" width="1" height="1"/><rect x="15" y="11" width="1" height="1"/><rect x="18" y="11" width="1" height="1"/><rect x="19" y="11" width="1" height="1"/><rect x="21" y="11" width="1" height="1"/><rect x="23" y="11" width="1" height="1"/><rect x="25" y="11" width="1" height="1"/><rect x="28" y="11" width="1" height="1"/>
+      <rect x="0" y="12" width="1" height="1"/><rect x="3" y="12" width="1" height="1"/><rect x="5" y="12" width="1" height="1"/><rect x="8" y="12" width="1" height="1"/><rect x="11" y="12" width="1" height="1"/><rect x="13" y="12" width="1" height="1"/><rect x="14" y="12" width="1" height="1"/><rect x="16" y="12" width="1" height="1"/><rect x="17" y="12" width="1" height="1"/><rect x="20" y="12" width="1" height="1"/><rect x="22" y="12" width="1" height="1"/><rect x="24" y="12" width="1" height="1"/><rect x="27" y="12" width="1" height="1"/>
+      <rect x="2" y="13" width="1" height="1"/><rect x="4" y="13" width="1" height="1"/><rect x="9" y="13" width="1" height="1"/><rect x="10" y="13" width="1" height="1"/><rect x="12" y="13" width="1" height="1"/><rect x="15" y="13" width="1" height="1"/><rect x="18" y="13" width="1" height="1"/><rect x="19" y="13" width="1" height="1"/><rect x="21" y="13" width="1" height="1"/><rect x="25" y="13" width="1" height="1"/><rect x="26" y="13" width="1" height="1"/><rect x="28" y="13" width="1" height="1"/>
+      <rect x="0" y="14" width="1" height="1"/><rect x="3" y="14" width="1" height="1"/><rect x="5" y="14" width="1" height="1"/><rect x="8" y="14" width="1" height="1"/><rect x="11" y="14" width="1" height="1"/><rect x="14" y="14" width="1" height="1"/><rect x="16" y="14" width="1" height="1"/><rect x="17" y="14" width="1" height="1"/><rect x="20" y="14" width="1" height="1"/><rect x="23" y="14" width="1" height="1"/><rect x="24" y="14" width="1" height="1"/><rect x="27" y="14" width="1" height="1"/>
+      <rect x="1" y="15" width="1" height="1"/><rect x="4" y="15" width="1" height="1"/><rect x="9" y="15" width="1" height="1"/><rect x="13" y="15" width="1" height="1"/><rect x="15" y="15" width="1" height="1"/><rect x="18" y="15" width="1" height="1"/><rect x="22" y="15" width="1" height="1"/><rect x="26" y="15" width="1" height="1"/>
+      <rect x="0" y="16" width="1" height="1"/><rect x="2" y="16" width="1" height="1"/><rect x="5" y="16" width="1" height="1"/><rect x="8" y="16" width="1" height="1"/><rect x="10" y="16" width="1" height="1"/><rect x="12" y="16" width="1" height="1"/><rect x="14" y="16" width="1" height="1"/><rect x="17" y="16" width="1" height="1"/><rect x="19" y="16" width="1" height="1"/><rect x="21" y="16" width="1" height="1"/><rect x="23" y="16" width="1" height="1"/><rect x="25" y="16" width="1" height="1"/><rect x="28" y="16" width="1" height="1"/>
+      <rect x="3" y="17" width="1" height="1"/><rect x="9" y="17" width="1" height="1"/><rect x="11" y="17" width="1" height="1"/><rect x="13" y="17" width="1" height="1"/><rect x="14" y="17" width="1" height="1"/><rect x="16" y="17" width="1" height="1"/><rect x="18" y="17" width="1" height="1"/><rect x="20" y="17" width="1" height="1"/><rect x="22" y="17" width="1" height="1"/><rect x="24" y="17" width="1" height="1"/><rect x="27" y="17" width="1" height="1"/>
+      <rect x="0" y="18" width="1" height="1"/><rect x="2" y="18" width="1" height="1"/><rect x="4" y="18" width="1" height="1"/><rect x="8" y="18" width="1" height="1"/><rect x="10" y="18" width="1" height="1"/><rect x="12" y="18" width="1" height="1"/><rect x="15" y="18" width="1" height="1"/><rect x="17" y="18" width="1" height="1"/><rect x="19" y="18" width="1" height="1"/><rect x="21" y="18" width="1" height="1"/><rect x="26" y="18" width="1" height="1"/>
+      <rect x="1" y="19" width="1" height="1"/><rect x="3" y="19" width="1" height="1"/><rect x="5" y="19" width="1" height="1"/><rect x="9" y="19" width="1" height="1"/><rect x="11" y="19" width="1" height="1"/><rect x="13" y="19" width="1" height="1"/><rect x="16" y="19" width="1" height="1"/><rect x="18" y="19" width="1" height="1"/><rect x="20" y="19" width="1" height="1"/><rect x="25" y="19" width="1" height="1"/><rect x="27" y="19" width="1" height="1"/>
+      <rect x="8" y="20" width="1" height="1"/><rect x="10" y="20" width="1" height="1"/><rect x="12" y="20" width="1" height="1"/><rect x="14" y="20" width="1" height="1"/><rect x="16" y="20" width="1" height="1"/><rect x="17" y="20" width="1" height="1"/><rect x="19" y="20" width="1" height="1"/>
+      <rect x="9" y="21" width="1" height="1"/><rect x="11" y="21" width="1" height="1"/><rect x="13" y="21" width="1" height="1"/><rect x="15" y="21" width="1" height="1"/><rect x="18" y="21" width="1" height="1"/>
+      <rect x="8" y="22" width="1" height="1"/><rect x="10" y="22" width="1" height="1"/><rect x="11" y="22" width="1" height="1"/><rect x="13" y="22" width="1" height="1"/><rect x="14" y="22" width="1" height="1"/><rect x="16" y="22" width="1" height="1"/><rect x="19" y="22" width="1" height="1"/><rect x="26" y="22" width="1" height="1"/><rect x="28" y="22" width="1" height="1"/>
+      <rect x="9" y="23" width="1" height="1"/><rect x="12" y="23" width="1" height="1"/><rect x="15" y="23" width="1" height="1"/><rect x="17" y="23" width="1" height="1"/><rect x="18" y="23" width="1" height="1"/><rect x="20" y="23" width="1" height="1"/><rect x="25" y="23" width="1" height="1"/><rect x="27" y="23" width="1" height="1"/>
+      <rect x="8" y="24" width="1" height="1"/><rect x="11" y="24" width="1" height="1"/><rect x="13" y="24" width="1" height="1"/><rect x="14" y="24" width="1" height="1"/><rect x="16" y="24" width="1" height="1"/><rect x="19" y="24" width="1" height="1"/><rect x="26" y="24" width="1" height="1"/><rect x="28" y="24" width="1" height="1"/>
+      <rect x="9" y="25" width="1" height="1"/><rect x="10" y="25" width="1" height="1"/><rect x="12" y="25" width="1" height="1"/><rect x="15" y="25" width="1" height="1"/><rect x="17" y="25" width="1" height="1"/><rect x="18" y="25" width="1" height="1"/><rect x="20" y="25" width="1" height="1"/><rect x="25" y="25" width="1" height="1"/><rect x="27" y="25" width="1" height="1"/>
+      <rect x="8" y="26" width="1" height="1"/><rect x="10" y="26" width="1" height="1"/><rect x="13" y="26" width="1" height="1"/><rect x="14" y="26" width="1" height="1"/><rect x="16" y="26" width="1" height="1"/><rect x="19" y="26" width="1" height="1"/><rect x="21" y="26" width="1" height="1"/><rect x="26" y="26" width="1" height="1"/>
+      <rect x="9" y="27" width="1" height="1"/><rect x="11" y="27" width="1" height="1"/><rect x="12" y="27" width="1" height="1"/><rect x="15" y="27" width="1" height="1"/><rect x="17" y="27" width="1" height="1"/><rect x="20" y="27" width="1" height="1"/><rect x="25" y="27" width="1" height="1"/><rect x="28" y="27" width="1" height="1"/>
+      <rect x="8" y="28" width="1" height="1"/><rect x="10" y="28" width="1" height="1"/><rect x="13" y="28" width="1" height="1"/><rect x="14" y="28" width="1" height="1"/><rect x="16" y="28" width="1" height="1"/><rect x="18" y="28" width="1" height="1"/><rect x="19" y="28" width="1" height="1"/><rect x="21" y="28" width="1" height="1"/><rect x="26" y="28" width="1" height="1"/><rect x="27" y="28" width="1" height="1"/>
+    </g>
+  </symbol>
+</svg>
+<!-- defs from cliente -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <path id="vs-symbol-path" fill-rule="evenodd" d="M 445.00 596.00 C 440.01 599.06, 428.00 601.00, 428.00 601.00 C 428.00 601.00, 394.93 601.91, 387.00 601.00 C 379.07 600.09, 370.77 595.95, 367.00 594.00 C 363.23 592.05, 358.00 586.00, 358.00 586.00 C 358.00 586.00, 47.40 65.97, 45.00 61.80 C 37.92 53.03, 37.92 36.70, 53.72 34.90 C 56.40 34.80, 138.06 33.36, 150.00 35.00 C 166.13 36.88, 171.67 42.47, 182.00 52.61 C 185.09 57.81, 408.07 444.73, 408.07 444.73 C 408.07 444.73, 457.48 355.64, 459.00 353.00 C 463.18 345.91, 465.66 341.75, 469.81 341.20 C 474.85 340.93, 486.38 354.43, 491.00 358.00 C 495.62 361.57, 505.35 368.68, 513.00 373.00 C 520.65 377.32, 547.48 388.10, 549.38 389.23 C 551.27 390.37, 555.11 394.62, 554.34 400.23 C 553.48 404.70, 550.54 409.12, 548.27 414.51 C 546.00 419.90, 540.68 428.18, 537.00 435.00 C 533.32 441.82, 530.14 447.91, 520.00 467.00 C 509.86 486.09, 462.30 576.16, 459.00 581.84 C 455.70 587.52, 449.99 592.94, 445.00 596.00 Z M 872.22 91.62 C 872.68 125.01, 843.18 147.44, 819.11 147.49 C 809.41 147.93, 701.44 148.17, 615.18 149.00 C 563.14 157.43, 561.99 199.04, 561.63 208.41 C 563.14 229.70, 577.76 255.04, 611.62 262.47 C 650.19 262.52, 781.54 261.79, 798.00 263.00 C 814.46 264.21, 832.43 271.01, 846.00 277.00 C 859.57 282.99, 873.01 291.05, 884.00 301.00 C 894.99 310.95, 910.82 327.93, 920.00 344.00 C 929.18 360.07, 937.00 379.92, 940.00 399.00 C 943.00 418.08, 944.46 460.35, 932.77 491.21 C 910.20 540.45, 871.48 572.49, 850.46 583.12 C 825.64 599.19, 781.95 601.90, 772.00 602.00 C 762.05 602.10, 519.08 602.05, 515.00 602.00 C 510.92 601.95, 505.05 601.48, 502.08 599.50 C 499.11 597.52, 496.82 594.03, 496.31 590.50 C 495.81 586.97, 498.17 581.65, 500.00 578.00 C 501.83 574.35, 529.18 523.73, 533.00 517.68 C 536.82 511.62, 542.75 505.61, 548.00 502.00 C 553.25 498.39, 559.56 496.33, 565.93 496.09 C 572.29 495.85, 777.60 494.40, 785.35 494.00 C 793.11 493.60, 800.80 487.12, 807.00 482.68 C 813.20 478.24, 819.11 471.95, 823.00 466.00 C 826.89 460.05, 829.61 452.97, 831.00 446.00 C 832.39 439.03, 833.65 429.09, 832.00 421.00 C 830.35 412.91, 826.85 399.77, 820.00 392.00 C 813.15 384.23, 805.62 374.86, 787.00 370.00 C 773.99 368.55, 625.16 371.25, 595.00 367.00 C 519.94 352.27, 499.24 323.23, 477.10 293.20 C 453.35 258.78, 452.08 212.30, 455.58 182.20 C 459.09 152.10, 472.00 119.54, 496.15 95.51 C 515.61 74.26, 562.68 41.53, 607.00 40.54 C 615.03 40.41, 813.94 39.62, 819.16 39.73 C 840.03 39.83, 871.79 58.94, 872.22 91.62 Z"/>
+  </defs>
+  <symbol id="nav-logo-h" viewBox="0 0 1100 280" preserveAspectRatio="xMinYMid meet">
+    <g transform="translate(30 50) scale(0.2898550724637681)"><use href="#vs-symbol-path" fill="#ffffff"/></g>
+    <text fill="#ffffff" x="717.03" y="155" text-anchor="middle" font-family="Montserrat, 'Helvetica Neue', Arial, sans-serif" font-weight="800" font-size="72" letter-spacing="3">VINÍCIUS SOUZA</text>
+    <g>
+      <line x1="524" y1="198" x2="552" y2="198" stroke="#ede8e0" stroke-width="2.2" stroke-linecap="round"/>
+      <line x1="882" y1="198" x2="910" y2="198" stroke="#ede8e0" stroke-width="2.2" stroke-linecap="round"/>
+    </g>
+    <text fill="#ede8e0" x="717.03" y="206" text-anchor="middle" font-family="Montserrat, 'Helvetica Neue', Arial, sans-serif" font-weight="700" font-size="36" letter-spacing="6">FOTOGRAFIA</text>
+  </symbol>
+</svg>
+<!-- defs from admin -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <path id="vs-symbol-path" fill-rule="evenodd" d="M 445.00 596.00 C 440.01 599.06, 428.00 601.00, 428.00 601.00 C 428.00 601.00, 394.93 601.91, 387.00 601.00 C 379.07 600.09, 370.77 595.95, 367.00 594.00 C 363.23 592.05, 358.00 586.00, 358.00 586.00 C 358.00 586.00, 47.40 65.97, 45.00 61.80 C 37.92 53.03, 37.92 36.70, 53.72 34.90 C 56.40 34.80, 138.06 33.36, 150.00 35.00 C 166.13 36.88, 171.67 42.47, 182.00 52.61 C 185.09 57.81, 408.07 444.73, 408.07 444.73 C 408.07 444.73, 457.48 355.64, 459.00 353.00 C 463.18 345.91, 465.66 341.75, 469.81 341.20 C 474.85 340.93, 486.38 354.43, 491.00 358.00 C 495.62 361.57, 505.35 368.68, 513.00 373.00 C 520.65 377.32, 547.48 388.10, 549.38 389.23 C 551.27 390.37, 555.11 394.62, 554.34 400.23 C 553.48 404.70, 550.54 409.12, 548.27 414.51 C 546.00 419.90, 540.68 428.18, 537.00 435.00 C 533.32 441.82, 530.14 447.91, 520.00 467.00 C 509.86 486.09, 462.30 576.16, 459.00 581.84 C 455.70 587.52, 449.99 592.94, 445.00 596.00 Z M 872.22 91.62 C 872.68 125.01, 843.18 147.44, 819.11 147.49 C 809.41 147.93, 701.44 148.17, 615.18 149.00 C 563.14 157.43, 561.99 199.04, 561.63 208.41 C 563.14 229.70, 577.76 255.04, 611.62 262.47 C 650.19 262.52, 781.54 261.79, 798.00 263.00 C 814.46 264.21, 832.43 271.01, 846.00 277.00 C 859.57 282.99, 873.01 291.05, 884.00 301.00 C 894.99 310.95, 910.82 327.93, 920.00 344.00 C 929.18 360.07, 937.00 379.92, 940.00 399.00 C 943.00 418.08, 944.46 460.35, 932.77 491.21 C 910.20 540.45, 871.48 572.49, 850.46 583.12 C 825.64 599.19, 781.95 601.90, 772.00 602.00 C 762.05 602.10, 519.08 602.05, 515.00 602.00 C 510.92 601.95, 505.05 601.48, 502.08 599.50 C 499.11 597.52, 496.82 594.03, 496.31 590.50 C 495.81 586.97, 498.17 581.65, 500.00 578.00 C 501.83 574.35, 529.18 523.73, 533.00 517.68 C 536.82 511.62, 542.75 505.61, 548.00 502.00 C 553.25 498.39, 559.56 496.33, 565.93 496.09 C 572.29 495.85, 777.60 494.40, 785.35 494.00 C 793.11 493.60, 800.80 487.12, 807.00 482.68 C 813.20 478.24, 819.11 471.95, 823.00 466.00 C 826.89 460.05, 829.61 452.97, 831.00 446.00 C 832.39 439.03, 833.65 429.09, 832.00 421.00 C 830.35 412.91, 826.85 399.77, 820.00 392.00 C 813.15 384.23, 805.62 374.86, 787.00 370.00 C 773.99 368.55, 625.16 371.25, 595.00 367.00 C 519.94 352.27, 499.24 323.23, 477.10 293.20 C 453.35 258.78, 452.08 212.30, 455.58 182.20 C 459.09 152.10, 472.00 119.54, 496.15 95.51 C 515.61 74.26, 562.68 41.53, 607.00 40.54 C 615.03 40.41, 813.94 39.62, 819.16 39.73 C 840.03 39.83, 871.79 58.94, 872.22 91.62 Z"/>
+  </defs>
+  <symbol id="nav-logo-h" viewBox="0 0 1100 280" preserveAspectRatio="xMinYMid meet">
+    <g transform="translate(30 50) scale(0.2898550724637681)"><use href="#vs-symbol-path" fill="#ffffff"/></g>
+    <text fill="#ffffff" x="717.03" y="155" text-anchor="middle" font-family="Montserrat, 'Helvetica Neue', Arial, sans-serif" font-weight="800" font-size="72" letter-spacing="3">VINÍCIUS SOUZA</text>
+    <g>
+      <line x1="524" y1="198" x2="552" y2="198" stroke="#ede8e0" stroke-width="2.2" stroke-linecap="round"/>
+      <line x1="882" y1="198" x2="910" y2="198" stroke="#ede8e0" stroke-width="2.2" stroke-linecap="round"/>
+    </g>
+    <text fill="#ede8e0" x="717.03" y="206" text-anchor="middle" font-family="Montserrat, 'Helvetica Neue', Arial, sans-serif" font-weight="700" font-size="36" letter-spacing="6">FOTOGRAFIA</text>
+  </symbol>
+
+  <!-- reusable sidebar template (will be cloned with active states) -->
+</svg>
+
 <div class="sim-topbar" id="simTopbar">
   <span class="brand-pill" id="modePill">PÚBLICO</span>
   <div class="sep"></div>
   <button id="btnHome" title="Início" type="button">⌂</button>
-  <button id="btnBack" title="Tela anterior" type="button">←</button>
-  <button id="btnFwd" title="Próxima tela" type="button">→</button>
+
+  <!-- NAV PAGINATION: ← X / Y → -->
+  <div class="sim-pager" role="group" aria-label="Navegação entre telas">
+    <button id="btnBack" title="Tela anterior (Alt+←)" type="button">←</button>
+    <span class="sim-pager-count" id="pagerCount" title="Tela atual / total">— / —</span>
+    <button id="btnFwd" title="Próxima tela (Alt+→)" type="button">→</button>
+  </div>
 
   <div class="sep"></div>
   <button id="btnPublic" type="button" title="Modo público"><span class="label-text">👁 Público</span><span class="icon-only" style="display:none">👁</span></button>
@@ -2537,6 +2720,10 @@
   <div class="route-info desktop-only">
     rota <b id="routeNow">/</b>
   </div>
+
+  <button id="btnTour" type="button" title="Tour guiado (espaço pra avançar, T pra parar)">▶ Tour</button>
+  <button id="btnShare" type="button" title="Copiar link da tela atual">🔗</button>
+  <button id="btnReset" type="button" title="Limpar carrinho/login/state e voltar pro início">↺</button>
 
   <div class="sim-toc" id="simToc">
     <button id="btnToc" type="button">☰</button>
@@ -10824,49 +11011,49 @@
               <div class="head"><h3>Patrocinadores ativos</h3><span class="meta">arraste para reordenar</span></div>
               <div>
                 <div class="sponsor-row">
-                  <div class="logo" style="overflow:hidden; padding: 0;"><img src="https://via.placeholder.com/128x80/1a1a1a/c8a84b?text=SELA+TORQUE" alt="Sela Torque" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:4px;"></div>
+                  <div class="logo" style="overflow:hidden; padding: 0;"><img src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20128%2080%22%3E%3Crect%20width%3D%22128%22%20height%3D%2280%22%20fill%3D%22%231a1a1a%22%20rx%3D%224%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22%23c8a84b%22%20font-family%3D%22-apple-system%2CBlinkMacSystemFont%2C%27Segoe%20UI%27%2CRoboto%2CArial%2Csans-serif%22%20font-weight%3D%22700%22%20font-size%3D%2221.2%22%20letter-spacing%3D%220.5%22%20style%3D%22text-transform%3Auppercase%22%3ESELA%20TORQUE%3C%2Ftext%3E%3C%2Fsvg%3E" alt="Sela Torque" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:4px;"></div>
                   <div class="info"><h5>Sela Torque</h5><p>seladostorque.com.br · cota R$ 8.000</p></div>
                   <span class="badge b-paid">★ OURO</span>
                   <span class="badge b-pub">VISÍVEL</span>
                   <button class="btn sm" type="button" data-modal-open="sponsorModal">Editar</button>
                 </div>
                 <div class="sponsor-row">
-                  <div class="logo" style="overflow:hidden; padding: 0;"><img src="https://via.placeholder.com/128x80/1a1a1a/c8a84b?text=BOI+FORTE" alt="Boi Forte" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:4px;"></div>
+                  <div class="logo" style="overflow:hidden; padding: 0;"><img src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20128%2080%22%3E%3Crect%20width%3D%22128%22%20height%3D%2280%22%20fill%3D%22%231a1a1a%22%20rx%3D%224%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22%23c8a84b%22%20font-family%3D%22-apple-system%2CBlinkMacSystemFont%2C%27Segoe%20UI%27%2CRoboto%2CArial%2Csans-serif%22%20font-weight%3D%22700%22%20font-size%3D%2225.9%22%20letter-spacing%3D%220.5%22%20style%3D%22text-transform%3Auppercase%22%3EBOI%20FORTE%3C%2Ftext%3E%3C%2Fsvg%3E" alt="Boi Forte" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:4px;"></div>
                   <div class="info"><h5>Veterinária Boi Forte</h5><p>boiforte.com · cota R$ 6.000</p></div>
                   <span class="badge b-paid">★ OURO</span>
                   <span class="badge b-pub">VISÍVEL</span>
                   <button class="btn sm">Editar</button>
                 </div>
                 <div class="sponsor-row">
-                  <div class="logo" style="overflow:hidden; padding: 0;"><img src="https://via.placeholder.com/128x80/222/aaa?text=GOYAZ" alt="Rações Goyaz" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:4px;"></div>
+                  <div class="logo" style="overflow:hidden; padding: 0;"><img src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20128%2080%22%3E%3Crect%20width%3D%22128%22%20height%3D%2280%22%20fill%3D%22%23222%22%20rx%3D%224%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22%23aaa%22%20font-family%3D%22-apple-system%2CBlinkMacSystemFont%2C%27Segoe%20UI%27%2CRoboto%2CArial%2Csans-serif%22%20font-weight%3D%22700%22%20font-size%3D%2227.2%22%20letter-spacing%3D%220.5%22%20style%3D%22text-transform%3Auppercase%22%3EGOYAZ%3C%2Ftext%3E%3C%2Fsvg%3E" alt="Rações Goyaz" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:4px;"></div>
                   <div class="info"><h5>Rações Goyaz</h5><p>goyaz.com.br · cota R$ 3.500</p></div>
                   <span class="badge" style="background: var(--ink-300); color: var(--ink-900); border: 1px solid var(--ink-500);">PRATA</span>
                   <span class="badge b-pub">VISÍVEL</span>
                   <button class="btn sm">Editar</button>
                 </div>
                 <div class="sponsor-row">
-                  <div class="logo" style="overflow:hidden; padding: 0;"><img src="https://via.placeholder.com/128x80/222/aaa?text=CAJU" alt="Cervejaria Caju" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:4px;"></div>
+                  <div class="logo" style="overflow:hidden; padding: 0;"><img src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20128%2080%22%3E%3Crect%20width%3D%22128%22%20height%3D%2280%22%20fill%3D%22%23222%22%20rx%3D%224%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22%23aaa%22%20font-family%3D%22-apple-system%2CBlinkMacSystemFont%2C%27Segoe%20UI%27%2CRoboto%2CArial%2Csans-serif%22%20font-weight%3D%22700%22%20font-size%3D%2227.2%22%20letter-spacing%3D%220.5%22%20style%3D%22text-transform%3Auppercase%22%3ECAJU%3C%2Ftext%3E%3C%2Fsvg%3E" alt="Cervejaria Caju" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:4px;"></div>
                   <div class="info"><h5>Cervejaria Caju</h5><p>cajubeers.com · cota R$ 2.800</p></div>
                   <span class="badge" style="background: var(--ink-300); color: var(--ink-900); border: 1px solid var(--ink-500);">PRATA</span>
                   <span class="badge b-pub">VISÍVEL</span>
                   <button class="btn sm">Editar</button>
                 </div>
                 <div class="sponsor-row">
-                  <div class="logo" style="overflow:hidden; padding: 0;"><img src="https://via.placeholder.com/128x80/222/888?text=BOA+SAFRA" alt="Boa Safra" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:4px;"></div>
+                  <div class="logo" style="overflow:hidden; padding: 0;"><img src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20128%2080%22%3E%3Crect%20width%3D%22128%22%20height%3D%2280%22%20fill%3D%22%23222%22%20rx%3D%224%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22%23888%22%20font-family%3D%22-apple-system%2CBlinkMacSystemFont%2C%27Segoe%20UI%27%2CRoboto%2CArial%2Csans-serif%22%20font-weight%3D%22700%22%20font-size%3D%2225.9%22%20letter-spacing%3D%220.5%22%20style%3D%22text-transform%3Auppercase%22%3EBOA%20SAFRA%3C%2Ftext%3E%3C%2Fsvg%3E" alt="Boa Safra" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:4px;"></div>
                   <div class="info"><h5>Mercado Boa Safra</h5><p>boasafra.com.br · cota R$ 1.200</p></div>
                   <span class="badge" style="background: var(--warning-dim); color: var(--warning-600); border: 1px solid var(--warning-dim);">BRONZE</span>
                   <span class="badge b-pub">VISÍVEL</span>
                   <button class="btn sm">Editar</button>
                 </div>
                 <div class="sponsor-row">
-                  <div class="logo" style="overflow:hidden; padding: 0;"><img src="https://via.placeholder.com/128x80/222/888?text=LAVA-JATO" alt="Lava-Jato Itajá" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:4px;"></div>
+                  <div class="logo" style="overflow:hidden; padding: 0;"><img src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20128%2080%22%3E%3Crect%20width%3D%22128%22%20height%3D%2280%22%20fill%3D%22%23222%22%20rx%3D%224%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22%23888%22%20font-family%3D%22-apple-system%2CBlinkMacSystemFont%2C%27Segoe%20UI%27%2CRoboto%2CArial%2Csans-serif%22%20font-weight%3D%22700%22%20font-size%3D%2225.9%22%20letter-spacing%3D%220.5%22%20style%3D%22text-transform%3Auppercase%22%3ELAVA-JATO%3C%2Ftext%3E%3C%2Fsvg%3E" alt="Lava-Jato Itajá" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:4px;"></div>
                   <div class="info"><h5>Lava-Jato Itajá</h5><p>— · cota R$ 800</p></div>
                   <span class="badge" style="background: var(--warning-dim); color: var(--warning-600); border: 1px solid var(--warning-dim);">BRONZE</span>
                   <span class="badge b-priv">OCULTO</span>
                   <button class="btn sm">Editar</button>
                 </div>
                 <div class="sponsor-row">
-                  <div class="logo" style="overflow:hidden; padding: 0;"><img src="https://via.placeholder.com/128x80/1a1a1a/666?text=FM+102.5" alt="FM Rural" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:4px;"></div>
+                  <div class="logo" style="overflow:hidden; padding: 0;"><img src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20128%2080%22%3E%3Crect%20width%3D%22128%22%20height%3D%2280%22%20fill%3D%22%231a1a1a%22%20rx%3D%224%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22%23666%22%20font-family%3D%22-apple-system%2CBlinkMacSystemFont%2C%27Segoe%20UI%27%2CRoboto%2CArial%2Csans-serif%22%20font-weight%3D%22700%22%20font-size%3D%2227.2%22%20letter-spacing%3D%220.5%22%20style%3D%22text-transform%3Auppercase%22%3EFM%20102.5%3C%2Ftext%3E%3C%2Fsvg%3E" alt="FM Rural" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:4px;"></div>
                   <div class="info"><h5>FM 102.5 Rural</h5><p>fmrural.com.br · permuta</p></div>
                   <span class="badge b-soft">APOIO</span>
                   <span class="badge b-pub">VISÍVEL</span>
@@ -10946,10 +11133,10 @@
             </div>
 
             <h3 style="margin: 14px 14px 0; font-family: var(--font-mono); font-size: 10px; color: var(--ink-700); letter-spacing: .14em; text-transform: uppercase;">Patrocinadores · 7</h3>
-            <div class="m-adm-sponsor"><div class="logo" style="overflow:hidden;padding:0;"><img src="https://via.placeholder.com/96x64/1a1a1a/c8a84b?text=SELA" alt="Sela Torque" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:4px;"></div><div><h5>Sela Torque</h5><p>cota R$ 8.000</p></div><span class="badge b-paid">★ OURO</span></div>
-            <div class="m-adm-sponsor"><div class="logo" style="overflow:hidden;padding:0;"><img src="https://via.placeholder.com/96x64/1a1a1a/c8a84b?text=BOI" alt="Boi Forte" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:4px;"></div><div><h5>Veterinária Boi Forte</h5><p>cota R$ 6.000</p></div><span class="badge b-paid">★ OURO</span></div>
-            <div class="m-adm-sponsor"><div class="logo" style="overflow:hidden;padding:0;"><img src="https://via.placeholder.com/96x64/222/aaa?text=GOYAZ" alt="Rações Goyaz" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:4px;"></div><div><h5>Rações Goyaz</h5><p>cota R$ 3.500</p></div><span class="badge">PRATA</span></div>
-            <div class="m-adm-sponsor"><div class="logo" style="overflow:hidden;padding:0;"><img src="https://via.placeholder.com/96x64/222/888?text=BOA+SAFRA" alt="Boa Safra" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:4px;"></div><div><h5>Mercado Boa Safra</h5><p>cota R$ 1.200</p></div><span class="badge" style="background: var(--warning-dim); color: var(--warning-600);">BRONZE</span></div>
+            <div class="m-adm-sponsor"><div class="logo" style="overflow:hidden;padding:0;"><img src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2096%2064%22%3E%3Crect%20width%3D%2296%22%20height%3D%2264%22%20fill%3D%22%231a1a1a%22%20rx%3D%224%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22%23c8a84b%22%20font-family%3D%22-apple-system%2CBlinkMacSystemFont%2C%27Segoe%20UI%27%2CRoboto%2CArial%2Csans-serif%22%20font-weight%3D%22700%22%20font-size%3D%2221.8%22%20letter-spacing%3D%220.5%22%20style%3D%22text-transform%3Auppercase%22%3ESELA%3C%2Ftext%3E%3C%2Fsvg%3E" alt="Sela Torque" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:4px;"></div><div><h5>Sela Torque</h5><p>cota R$ 8.000</p></div><span class="badge b-paid">★ OURO</span></div>
+            <div class="m-adm-sponsor"><div class="logo" style="overflow:hidden;padding:0;"><img src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2096%2064%22%3E%3Crect%20width%3D%2296%22%20height%3D%2264%22%20fill%3D%22%231a1a1a%22%20rx%3D%224%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22%23c8a84b%22%20font-family%3D%22-apple-system%2CBlinkMacSystemFont%2C%27Segoe%20UI%27%2CRoboto%2CArial%2Csans-serif%22%20font-weight%3D%22700%22%20font-size%3D%2221.8%22%20letter-spacing%3D%220.5%22%20style%3D%22text-transform%3Auppercase%22%3EBOI%3C%2Ftext%3E%3C%2Fsvg%3E" alt="Boi Forte" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:4px;"></div><div><h5>Veterinária Boi Forte</h5><p>cota R$ 6.000</p></div><span class="badge b-paid">★ OURO</span></div>
+            <div class="m-adm-sponsor"><div class="logo" style="overflow:hidden;padding:0;"><img src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2096%2064%22%3E%3Crect%20width%3D%2296%22%20height%3D%2264%22%20fill%3D%22%23222%22%20rx%3D%224%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22%23aaa%22%20font-family%3D%22-apple-system%2CBlinkMacSystemFont%2C%27Segoe%20UI%27%2CRoboto%2CArial%2Csans-serif%22%20font-weight%3D%22700%22%20font-size%3D%2221.8%22%20letter-spacing%3D%220.5%22%20style%3D%22text-transform%3Auppercase%22%3EGOYAZ%3C%2Ftext%3E%3C%2Fsvg%3E" alt="Rações Goyaz" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:4px;"></div><div><h5>Rações Goyaz</h5><p>cota R$ 3.500</p></div><span class="badge">PRATA</span></div>
+            <div class="m-adm-sponsor"><div class="logo" style="overflow:hidden;padding:0;"><img src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2096%2064%22%3E%3Crect%20width%3D%2296%22%20height%3D%2264%22%20fill%3D%22%23222%22%20rx%3D%224%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22%23888%22%20font-family%3D%22-apple-system%2CBlinkMacSystemFont%2C%27Segoe%20UI%27%2CRoboto%2CArial%2Csans-serif%22%20font-weight%3D%22700%22%20font-size%3D%2219.4%22%20letter-spacing%3D%220.5%22%20style%3D%22text-transform%3Auppercase%22%3EBOA%20SAFRA%3C%2Ftext%3E%3C%2Fsvg%3E" alt="Boa Safra" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:4px;"></div><div><h5>Mercado Boa Safra</h5><p>cota R$ 1.200</p></div><span class="badge" style="background: var(--warning-dim); color: var(--warning-600);">BRONZE</span></div>
             <div style="margin: 12px 14px 16px; padding: 12px; background: var(--brand-dim); border: 1px solid var(--brand-glow); border-radius: var(--radius); font-size: 12px; color: var(--ink-1000); display: flex; gap: 8px; align-items: flex-start; line-height: 1.45;">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--brand-400); flex-shrink: 0; margin-top: 2px;"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/></svg>
               Total captado: <strong>R$ 22.300</strong>
@@ -12714,8 +12901,10 @@
       <tr><td><kbd>h</kbd></td><td>Esconde a barra superior (para screenshots)</td></tr>
       <tr><td><kbd>m</kbd></td><td>Alterna viewport mobile / auto</td></tr>
       <tr><td><kbd>d</kbd></td><td>Alterna viewport desktop / auto</td></tr>
+      <tr><td><kbd>t</kbd></td><td>Inicia/para tour automático</td></tr>
+      <tr><td><kbd>Espaço</kbd></td><td>Avança no tour (quando ativo)</td></tr>
       <tr><td><kbd>Alt</kbd>+<kbd>←</kbd>/<kbd>→</kbd></td><td>Navegar entre telas</td></tr>
-      <tr><td><kbd>Esc</kbd></td><td>Fecha modais e overlays</td></tr>
+      <tr><td><kbd>Esc</kbd></td><td>Fecha modais e para tour</td></tr>
       <tr><td>Voltar do browser</td><td>Funciona normalmente</td></tr>
     </table>
     <h3 style="margin-top:22px">Como testar</h3>
@@ -12793,6 +12982,7 @@ function renderRoute() {
   }
   const routeNow = document.getElementById('routeNow');
   if (routeNow) routeNow.textContent = route;
+  updatePagerCount();
   updateTocActive();
   if (route.startsWith('/admin') && state.role !== 'admin') state.role = 'admin';
   else if (route.startsWith('/cliente') && state.role === 'public') state.role = 'cliente';
@@ -12907,11 +13097,79 @@ function initTopbar() {
   });
   document.getElementById('btnHelp').addEventListener('click', () => document.getElementById('simHelp').classList.add('open'));
   document.getElementById('helpClose').addEventListener('click', () => document.getElementById('simHelp').classList.remove('open'));
+  // recursos extras v0.5
+  const tourBtn = document.getElementById('btnTour');
+  if (tourBtn) tourBtn.addEventListener('click', toggleTour);
+  const shareBtn = document.getElementById('btnShare');
+  if (shareBtn) shareBtn.addEventListener('click', shareLink);
+  const resetBtn = document.getElementById('btnReset');
+  if (resetBtn) resetBtn.addEventListener('click', resetState);
 }
 function navStep(delta) {
   const idx = TOC.findIndex(t => t.route === currentRoute());
   const next = (idx + delta + TOC.length) % TOC.length;
   setRoute(TOC[next].route);
+}
+
+function updatePagerCount() {
+  const el = document.getElementById('pagerCount');
+  if (!el) return;
+  const idx = TOC.findIndex(t => t.route === currentRoute());
+  if (idx < 0) {
+    el.innerHTML = '<b>—</b> / ' + TOC.length;
+  } else {
+    el.innerHTML = '<b>' + (idx + 1) + '</b> / ' + TOC.length;
+  }
+}
+
+// ─── Tour guiado ─────────────────────────────────────────────
+let _tourTimer = null;
+let _tourActive = false;
+function startTour() {
+  _tourActive = true;
+  const btn = document.getElementById('btnTour');
+  if (btn) { btn.classList.add('active'); btn.textContent = '■ Parar tour'; }
+  toast('Tour iniciado · pressione espaço pra avançar, T pra parar', null, 'tour');
+  _tourTimer = setInterval(() => navStep(1), 4500);
+}
+function stopTour() {
+  _tourActive = false;
+  if (_tourTimer) { clearInterval(_tourTimer); _tourTimer = null; }
+  const btn = document.getElementById('btnTour');
+  if (btn) { btn.classList.remove('active'); btn.textContent = '▶ Tour'; }
+}
+function toggleTour() { _tourActive ? stopTour() : startTour(); }
+
+// ─── Share (copy link) ───────────────────────────────────────
+function shareLink() {
+  const url = location.href;
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(url).then(() => {
+      toast('Link copiado: ' + url.replace(location.origin, ''), 'success', 'compartilhar');
+    }).catch(() => {
+      toast('Não foi possível copiar', 'danger', 'compartilhar');
+    });
+  } else {
+    toast('Clipboard indisponível', 'danger', 'compartilhar');
+  }
+}
+
+// ─── Reset state ─────────────────────────────────────────────
+function resetState() {
+  if (!confirm('Limpar tudo (carrinho, login, viewport) e voltar pro início?')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  state = loadState();
+  state.cart = [
+    { id: 'REF #0421', price: 35 },
+    { id: 'REF #1782', price: 35 },
+    { id: 'REF #2945', price: 35 },
+  ];
+  saveState();
+  applyMode();
+  applyViewport();
+  refreshCartCounts();
+  setRoute('/');
+  toast('Estado resetado · de volta ao início', 'success', 'reset');
 }
 
 document.addEventListener('keydown', (e) => {
@@ -12925,11 +13183,18 @@ document.addEventListener('keydown', (e) => {
     setViewport(state.viewport === 'mobile' ? 'auto' : 'mobile');
   } else if (e.key === 'd' || e.key === 'D') {
     setViewport(state.viewport === 'desktop' ? 'auto' : 'desktop');
+  } else if (e.key === 't' || e.key === 'T') {
+    e.preventDefault();
+    toggleTour();
+  } else if (e.key === ' ' && _tourActive) {
+    e.preventDefault();
+    navStep(1);
   } else if (e.key === 'ArrowLeft' && e.altKey) {
     navStep(-1);
   } else if (e.key === 'ArrowRight' && e.altKey) {
     navStep(1);
   } else if (e.key === 'Escape') {
+    if (_tourActive) stopTour();
     document.getElementById('simLightbox').classList.remove('open');
     document.getElementById('simHelp').classList.remove('open');
     document.getElementById('simToc').classList.remove('open');
