@@ -13154,10 +13154,46 @@ function renderRoute() {
   normalizeSidebars();
   applyIcons();
   markActiveZoneButtons();
+  injectMissingPhotos();
   fixMobileFallbackHeight();
 }
 
 // Após zoom no mobile shell, calcula altura final pra eliminar espaço vazio.
+// Injeta imagens picsum em tiles de foto que estão sem <img> (tiles cinza vazios).
+// Detecta divs com texto tipo "#001" + preço/check.
+function injectMissingPhotos() {
+  const scope = document.querySelector('.sim-screen.active');
+  if (!scope) return;
+  const candidates = scope.querySelectorAll('div');
+  let injected = 0;
+  candidates.forEach(d => {
+    if (d.dataset.simPhoto) return;
+    // já tem img filho direto?
+    if (d.querySelector(':scope > img')) return;
+    // texto começa com #NNN (ref de foto)
+    const t = d.firstChild && d.firstChild.textContent ? d.firstChild.textContent.trim() : '';
+    const m = (d.textContent || '').trim().match(/^#(\d{3})/);
+    if (!m) return;
+    // descarta divs muito grandes (cards, não tiles)
+    const r = d.getBoundingClientRect();
+    if (r.width > 320) return;
+    const id = m[1];
+    const img = document.createElement('img');
+    img.src = 'https://picsum.photos/seed/event-tile-' + id + '/200/200';
+    img.loading = 'lazy';
+    img.alt = '#' + id;
+    img.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;';
+    // garante que d é position:relative pra image inset:0 funcionar
+    if (getComputedStyle(d).position === 'static') d.style.position = 'relative';
+    // garante que filhos atuais ficam acima
+    Array.from(d.children).forEach(c => { if (!c.style.position) c.style.position = 'relative'; if (!c.style.zIndex) c.style.zIndex = '1'; });
+    d.insertBefore(img, d.firstChild);
+    d.dataset.simPhoto = '1';
+    injected++;
+  });
+  return injected;
+}
+
 function fixMobileFallbackHeight() {
   if (!document.documentElement.classList.contains('sim-force-mobile')) return;
   document.querySelectorAll('.sim-screen.active .view-desktop-fallback').forEach(fb => {
@@ -13487,10 +13523,48 @@ function findIconForText(text) {
   return null;
 }
 
+// Injeta o shell (sidebar + main) em rotas admin/cliente que NÃO foram desenhadas
+// com sidebar nos mockups originais (acontece em ~18 rotas admin).
+function injectMissingSidebar(scope) {
+  if (!scope) return;
+  const route = currentRoute();
+  const isAdmin = route.startsWith('/admin');
+  const isCliente = route.startsWith('/cliente');
+  if (!isAdmin && !isCliente) return;
+  // Procura o frame do desktop (e do mobile NÃO tocamos)
+  scope.querySelectorAll(':scope > .view-desktop > .frame, :scope > .view-desktop-fallback > .frame').forEach(frame => {
+    const sideSel = isAdmin ? 'aside.adm-side' : 'aside.acc-side';
+    if (frame.querySelector(sideSel)) return; // já tem sidebar — nada a fazer
+    if (frame.dataset.simShelled) return;
+    // Move TODO o conteúdo do frame pra dentro de um novo main.
+    // Mantém adm-topbar fora do main (se existir): ele fica acima do shell.
+    const topbar = frame.querySelector(':scope > .adm-topbar');
+    const childrenSnapshot = Array.from(frame.children);
+    const shell = document.createElement('div');
+    shell.className = 'adm-shell';
+    const aside = document.createElement('aside');
+    aside.className = isAdmin ? 'adm-side' : 'acc-side';
+    const main = document.createElement('main');
+    main.className = isAdmin ? 'adm-main' : 'acc-main';
+    // tudo exceto adm-topbar vira filho do main
+    childrenSnapshot.forEach(c => {
+      if (c === topbar) return;
+      main.appendChild(c);
+    });
+    shell.appendChild(aside);
+    shell.appendChild(main);
+    // monta de volta: topbar (se houver) + shell
+    if (topbar && topbar.parentNode !== frame) frame.appendChild(topbar);
+    frame.appendChild(shell);
+    frame.dataset.simShelled = '1';
+  });
+}
+
 // Substitui o conteúdo das sidebars por versões canônicas (consistência total).
 function normalizeSidebars() {
   const scope = document.querySelector('.sim-screen.active');
   if (!scope) return;
+  injectMissingSidebar(scope);
   // cliente
   scope.querySelectorAll('aside.acc-side').forEach(aside => {
     aside.removeAttribute('style');
