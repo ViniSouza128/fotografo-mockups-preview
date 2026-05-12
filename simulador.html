@@ -2277,6 +2277,25 @@
     background: var(--brand-dim); color: var(--brand-400);
     border-color: var(--brand-500);
   }
+  /* zone-active: marca o botão (Público/Cliente/Admin) que casa com a ZONA da rota atual */
+  .sim-topbar #btnPublic.zone-active {
+    background: rgba(237,232,224,.12);
+    color: var(--ink-1000);
+    border-color: rgba(237,232,224,.4);
+    box-shadow: inset 0 -2px 0 var(--ink-1000);
+  }
+  .sim-topbar #btnCliente.zone-active {
+    background: var(--brand-dim);
+    color: var(--brand-400);
+    border-color: var(--brand-500);
+    box-shadow: inset 0 -2px 0 var(--brand-500);
+  }
+  .sim-topbar #btnAdmin.zone-active {
+    background: rgba(232,163,58,.18);
+    color: var(--warning-500, #e8a33a);
+    border-color: rgba(232,163,58,.5);
+    box-shadow: inset 0 -2px 0 var(--warning-500, #e8a33a);
+  }
   .sim-topbar .spacer { flex: 1; }
   .sim-topbar .route-info {
     font-family: var(--font-mono); font-size: 10.5px;
@@ -2517,6 +2536,43 @@
   }
 
   .sim-screen .topbar { position: relative !important; }
+
+  /* Event Detail tabs (admin/eventos/123 enriquecido) */
+  .ev-tabs {
+    display: flex; gap: 0; padding: 0 22px;
+    border-bottom: 1px solid var(--ink-500);
+    margin-bottom: 18px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .ev-tabs::-webkit-scrollbar { display: none; }
+  .ev-tabs .ev-tab {
+    background: transparent; border: 0;
+    color: var(--ink-800); cursor: pointer;
+    padding: 12px 16px; font: inherit;
+    font-size: 13px; display: inline-flex; align-items: center; gap: 8px;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px; white-space: nowrap;
+    transition: color .15s, border-color .15s;
+  }
+  .ev-tabs .ev-tab:hover { color: var(--ink-1000); }
+  .ev-tabs .ev-tab.active {
+    color: var(--brand-400);
+    border-bottom-color: var(--brand-500);
+  }
+  .ev-panes { padding: 0 22px 22px; }
+  .ev-pane { display: none; }
+  .ev-pane.active { display: block; animation: simFadeIn .2s ease-out; }
+  @keyframes simFadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+  .ev-pane-head {
+    display: flex; align-items: end; justify-content: space-between;
+    padding-bottom: 12px; margin-bottom: 14px;
+    border-bottom: 1px solid var(--ink-500);
+    flex-wrap: wrap; gap: 10px;
+  }
+  .ev-pane-head h3 { margin: 0; font-size: 16px; font-weight: 500; color: var(--ink-1000); }
+  .ev-pane-head .meta { font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-700); letter-spacing: .04em; }
+  .ev-pane-head .actions { display: flex; gap: 8px; flex-wrap: wrap; }
 </style>
 </head>
 <body>
@@ -10944,96 +11000,156 @@
 <section class="sim-screen" data-route="/admin/eventos/123" data-mode="admin" hidden>
   <div class="view-desktop view-desktop-fallback">
     <div class="frame" data-screen-label="Admin · Detalhe Evento">
-        <div class="adm-topbar">
-          <div class="adm-brand-pill"><svg class="nav-logo"><use href="#nav-logo-h"/></svg><span class="role">Painel</span></div>
-          <nav class="adm-crumbs"><span>Painel</span><span class="sep">/</span><span>Eventos</span><span class="sep">/</span><span class="here">Abertura da Safra 2026</span></nav>
-          <div class="adm-search-mini"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/></svg><input placeholder="Buscar foto por ID, pasta…"/><span class="kbd">⌘K</span></div>
-          <div class="adm-icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18z"/></svg></div>
-          <div class="adm-avatar-pill"><div class="avatar" style="width:26px;height:26px;font-size:10px;background:var(--brand-500);color:#fff;"><img src="https://i.pravatar.cc/100?img=12" alt="VS" loading="lazy"></div><div><div class="name">Vinícius</div><div class="role">FOTÓGRAFO</div></div></div>
+    <div class="adm-topbar">
+      <div class="adm-brand-pill"><svg class="nav-logo"><use href="#nav-logo-h"/></svg><span class="role">Painel</span></div>
+      <nav class="adm-crumbs"><span>Painel</span><span class="sep">/</span><span>Conteúdo</span><span class="sep">/</span><span>Eventos</span><span class="sep">/</span><span class="here">Abertura da Safra 2026</span></nav>
+      <div class="adm-search-mini" style="margin-left:auto;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-search"/></svg><input placeholder="Buscar foto por ID, pasta…"/><span class="kbd">⌘K</span></div>
+      <div class="adm-icon-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-bell"/></svg></div>
+      <div class="adm-avatar-pill"><div class="avatar" style="width:26px;height:26px;font-size:10px;"><img src="https://i.pravatar.cc/100?img=12" alt="VS" loading="lazy"></div><div><div class="name sim-user-name">Vinícius</div><div class="role">FOTÓGRAFO</div></div></div>
+    </div>
+    <div class="adm-shell">
+      <aside class="adm-side"></aside>
+      <main class="adm-main">
+        <div class="adm-page-head">
+          <div>
+            <h2>Abertura da Safra 2026</h2>
+            <div class="sub">— RODEIO · 17 ABR 2026 · ITAJÁ/GO · PÚBLICO · COLAB MARIA L. (15%) —</div>
+          </div>
+          <div class="actions">
+            <button class="btn">Compartilhar</button>
+            <button class="btn">Despublicar</button>
+            <button class="btn primary">Editar evento</button>
+          </div>
         </div>
-        <div class="adm">
-          <aside class="adm-side">
-            <div class="lbl">Visão</div>
-            <a>Dashboard</a><a>Estatísticas</a>
-            <div class="lbl">Conteúdo</div>
-            <a class="active">Eventos / Álbuns<span class="badge b-info">142</span></a>
-            <a>Criar evento</a><a>Upload de fotos</a>
-            <div class="lbl">Vendas</div>
-            <a>Pedidos<span class="badge b-pend">3</span></a><a>Carrinhos abertos<span class="badge b-info">9</span></a><a>Cupons</a><a>Propostas<span class="badge b-info">2</span></a><a>Repasses</a>
-            <div class="lbl">Pessoas</div><a>Clientes</a><a>Colaboradores</a><a>Chat<span class="badge b-info">2</span></a>
-            <div class="lbl">Moderação</div><a>Comentários<span class="badge b-pend">5</span></a><a>Contatos<span class="badge b-pend">3</span></a><a>Remoções LGPD<span class="badge b-pend">1</span></a>
-            <div class="lbl">Sistema</div><a>Marca d'água</a><a>Personalizar</a><a>Configurações</a><a>Storage</a><a>Recompensas</a><a>Logs &amp; auditoria</a><a>Notificações</a><a>Reconhecimento</a><a>Reset</a>
-          </aside>
-          <main class="adm-main">
-            <div class="adm-page-head">
-              <div>
-                <div style="font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-700); letter-spacing: .12em; text-transform: uppercase;">← EVENTOS · ID 200000018</div>
-                <h2>Abertura da Safra 2026</h2>
-                <div class="sub">— RODEIO · 17 ABR 2026 · ITAJÁ/GO · PÚBLICO · COLAB MARIA L. (15%) —</div>
-              </div>
-              <div class="actions">
-                <button class="btn">Compartilhar</button>
-                <button class="btn">Despublicar</button>
-                <button class="btn primary">Editar evento</button>
-              </div>
-            </div>
+        <div class="ev-tabs" role="tablist"><button class="ev-tab active" data-ev-tab="vendas" type="button"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#sim-i-shopping-bag"/></svg><span>Vendas & Contas</span></button><button class="ev-tab" data-ev-tab="carrinhos" type="button"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#sim-i-shopping-cart"/></svg><span>Carrinhos Ativos</span></button><button class="ev-tab" data-ev-tab="fotos" type="button"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#sim-i-image"/></svg><span>Mídia</span></button><button class="ev-tab" data-ev-tab="patrocinadores" type="button"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#sim-i-star"/></svg><span>Patrocinadores</span></button><button class="ev-tab" data-ev-tab="watermark" type="button"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#sim-i-image"/></svg><span>Marca d'água</span></button><button class="ev-tab" data-ev-tab="relatorios" type="button"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#sim-i-bar-chart-2"/></svg><span>Relatórios</span></button><button class="ev-tab" data-ev-tab="precos" type="button"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#sim-i-ticket"/></svg><span>Preços & Descontos</span></button><button class="ev-tab" data-ev-tab="info" type="button"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#sim-i-file-text"/></svg><span>Informações</span></button></div>
+        <div class="ev-panes">
+<div class="ev-pane active" data-ev-pane="vendas">
+  <div class="ev-pane-head"><h3>Vendas & Contas</h3><span class="meta">112 pedidos · R$ 14.882 · 87 clientes</span></div>
+  <div class="adm-stats">
+    <div class="adm-stat"><div class="lbl">Faturamento</div><div class="v signal">R$ 14.882</div><div class="delta">↗ +28% vs evento anterior</div></div>
+    <div class="adm-stat"><div class="lbl">Pedidos pagos</div><div class="v">112</div><div class="delta">↗ +12 hoje</div></div>
+    <div class="adm-stat"><div class="lbl">Taxa conversão</div><div class="v brand">7.6%</div><div class="delta">↗ +1.2pp vs média</div></div>
+    <div class="adm-stat"><div class="lbl">Contas únicas</div><div class="v">87</div><div class="delta">↗ +9 esta semana</div></div>
+  </div>
+  <table class="tbl" style="margin-top: 14px;">
+    <thead><tr><th>#</th><th>Cliente</th><th>Itens</th><th>Pagamento</th><th>Status</th><th style="text-align:right">Total</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">#200000041</td><td>Maria F. Silva</td><td>3 fotos</td><td>PIX</td><td><span class="badge b-paid">PAGO</span></td><td class="num" style="text-align:right;color:var(--signal-500);">R$ 86,40</td></tr>
+      <tr><td class="mono">#200000040</td><td>João M. Santos</td><td>5 fotos + 1 vídeo</td><td>Cartão</td><td><span class="badge b-paid">PAGO</span></td><td class="num" style="text-align:right;color:var(--signal-500);">R$ 207,30</td></tr>
+      <tr><td class="mono">#200000039</td><td>Ana L. Pereira</td><td>2 fotos</td><td>PIX</td><td><span class="badge b-pend">AGUARDANDO</span></td><td class="num" style="text-align:right;color:var(--warning-500);">R$ 57,60</td></tr>
+      <tr><td class="mono">#200000038</td><td>Patrícia S.</td><td>8 fotos</td><td>Boleto</td><td><span class="badge b-paid">PAGO</span></td><td class="num" style="text-align:right;color:var(--signal-500);">R$ 230,40</td></tr>
+      <tr><td class="mono">#200000037</td><td>Roberto S.</td><td>1 foto</td><td>PIX</td><td><span class="badge b-pend">EXPIRADO</span></td><td class="num" style="text-align:right;color:var(--danger-500, #e84444);">R$ 28,80</td></tr>
+    </tbody>
+  </table>
+</div>
 
-            <div class="adm-tabs">
-              <a><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"/></svg>Detalhes</a>
-              <a class="active"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Fotos<span class="num">1.581</span></a>
-              <a><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>Vídeos<span class="num">18</span></a>
-              <a><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>Patrocinadores<span class="num">7</span></a>
-              <a><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7"/></svg>Comentários<span class="num">42</span></a>
-              <a><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/></svg>Vendas<span class="num">142</span></a>
-            </div>
+<div class="ev-pane" data-ev-pane="carrinhos">
+  <div class="ev-pane-head"><h3>Carrinhos Ativos</h3><span class="meta">9 abertos · R$ 1.142 potencial</span></div>
+  <table class="tbl">
+    <thead><tr><th>Cliente</th><th>Itens</th><th>Última atividade</th><th>Potencial</th><th>Ação</th></tr></thead>
+    <tbody>
+      <tr><td>Vinícius R.</td><td>4 fotos</td><td class="mono">há 26h</td><td class="num">R$ 86,40</td><td><button class="btn sm">Enviar lembrete</button></td></tr>
+      <tr><td>João M.</td><td>3 fotos · 1 vídeo</td><td class="mono">há 2 dias</td><td class="num">R$ 156,30</td><td><button class="btn sm">Enviar lembrete</button></td></tr>
+      <tr><td>Ana L.</td><td>2 fotos</td><td class="mono">há 5h</td><td class="num">R$ 57,60</td><td><button class="btn sm">Aguardar</button></td></tr>
+      <tr><td>Roberto S.</td><td>1 foto</td><td class="mono">há 3 dias</td><td class="num">R$ 28,80</td><td><button class="btn sm">Recuperar</button></td></tr>
+    </tbody>
+  </table>
+</div>
 
-            <div class="bulk-bar">
-              <span class="count">3 fotos selecionadas</span>
-              <div class="actions">
-                <button class="btn sm">Mover para pasta</button>
-                <button class="btn sm">Alterar preço</button>
-                <button class="btn sm primary">Marcar como GRÁTIS</button>
-                <button class="btn sm">Definir como capa</button>
-                <button class="btn sm danger">Remover do acervo</button>
-              </div>
-            </div>
+<div class="ev-pane" data-ev-pane="fotos">
+  <div class="ev-pane-head">
+    <div><h3>Mídia</h3><span class="meta">1.581 fotos · 18 vídeos · 1.402 publicadas</span></div>
+    <div class="actions">
+      <button class="btn">Selecionar todas</button>
+      <button class="btn primary"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-upload"/></svg> Upload</button>
+    </div>
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px;"><div style="aspect-ratio:1;background:var(--ink-300);border-radius:6px;overflow:hidden;position:relative;"><img src="https://picsum.photos/seed/event-photo-0/300/300" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div style="position:absolute;bottom:4px;left:4px;background:rgba(0,0,0,.65);padding:2px 6px;border-radius:3px;font-family:var(--font-mono);font-size:9px;color:var(--ink-1000);">#001</div></div><div style="aspect-ratio:1;background:var(--ink-300);border-radius:6px;overflow:hidden;position:relative;"><img src="https://picsum.photos/seed/event-photo-1/300/300" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div style="position:absolute;bottom:4px;left:4px;background:rgba(0,0,0,.65);padding:2px 6px;border-radius:3px;font-family:var(--font-mono);font-size:9px;color:var(--ink-1000);">#002</div></div><div style="aspect-ratio:1;background:var(--ink-300);border-radius:6px;overflow:hidden;position:relative;"><img src="https://picsum.photos/seed/event-photo-2/300/300" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div style="position:absolute;bottom:4px;left:4px;background:rgba(0,0,0,.65);padding:2px 6px;border-radius:3px;font-family:var(--font-mono);font-size:9px;color:var(--ink-1000);">#003</div></div><div style="aspect-ratio:1;background:var(--ink-300);border-radius:6px;overflow:hidden;position:relative;"><img src="https://picsum.photos/seed/event-photo-3/300/300" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div style="position:absolute;bottom:4px;left:4px;background:rgba(0,0,0,.65);padding:2px 6px;border-radius:3px;font-family:var(--font-mono);font-size:9px;color:var(--ink-1000);">#004</div></div><div style="aspect-ratio:1;background:var(--ink-300);border-radius:6px;overflow:hidden;position:relative;"><img src="https://picsum.photos/seed/event-photo-4/300/300" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div style="position:absolute;bottom:4px;left:4px;background:rgba(0,0,0,.65);padding:2px 6px;border-radius:3px;font-family:var(--font-mono);font-size:9px;color:var(--ink-1000);">#005</div></div><div style="aspect-ratio:1;background:var(--ink-300);border-radius:6px;overflow:hidden;position:relative;"><img src="https://picsum.photos/seed/event-photo-5/300/300" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div style="position:absolute;bottom:4px;left:4px;background:rgba(0,0,0,.65);padding:2px 6px;border-radius:3px;font-family:var(--font-mono);font-size:9px;color:var(--ink-1000);">#006</div></div><div style="aspect-ratio:1;background:var(--ink-300);border-radius:6px;overflow:hidden;position:relative;"><img src="https://picsum.photos/seed/event-photo-6/300/300" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div style="position:absolute;bottom:4px;left:4px;background:rgba(0,0,0,.65);padding:2px 6px;border-radius:3px;font-family:var(--font-mono);font-size:9px;color:var(--ink-1000);">#007</div></div><div style="aspect-ratio:1;background:var(--ink-300);border-radius:6px;overflow:hidden;position:relative;"><img src="https://picsum.photos/seed/event-photo-7/300/300" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div style="position:absolute;bottom:4px;left:4px;background:rgba(0,0,0,.65);padding:2px 6px;border-radius:3px;font-family:var(--font-mono);font-size:9px;color:var(--ink-1000);">#008</div></div><div style="aspect-ratio:1;background:var(--ink-300);border-radius:6px;overflow:hidden;position:relative;"><img src="https://picsum.photos/seed/event-photo-8/300/300" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div style="position:absolute;bottom:4px;left:4px;background:rgba(0,0,0,.65);padding:2px 6px;border-radius:3px;font-family:var(--font-mono);font-size:9px;color:var(--ink-1000);">#009</div></div><div style="aspect-ratio:1;background:var(--ink-300);border-radius:6px;overflow:hidden;position:relative;"><img src="https://picsum.photos/seed/event-photo-9/300/300" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div style="position:absolute;bottom:4px;left:4px;background:rgba(0,0,0,.65);padding:2px 6px;border-radius:3px;font-family:var(--font-mono);font-size:9px;color:var(--ink-1000);">#010</div></div><div style="aspect-ratio:1;background:var(--ink-300);border-radius:6px;overflow:hidden;position:relative;"><img src="https://picsum.photos/seed/event-photo-10/300/300" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div style="position:absolute;bottom:4px;left:4px;background:rgba(0,0,0,.65);padding:2px 6px;border-radius:3px;font-family:var(--font-mono);font-size:9px;color:var(--ink-1000);">#011</div></div><div style="aspect-ratio:1;background:var(--ink-300);border-radius:6px;overflow:hidden;position:relative;"><img src="https://picsum.photos/seed/event-photo-11/300/300" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div style="position:absolute;bottom:4px;left:4px;background:rgba(0,0,0,.65);padding:2px 6px;border-radius:3px;font-family:var(--font-mono);font-size:9px;color:var(--ink-1000);">#012</div></div><div style="aspect-ratio:1;background:var(--ink-300);border-radius:6px;overflow:hidden;position:relative;"><img src="https://picsum.photos/seed/event-photo-12/300/300" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div style="position:absolute;bottom:4px;left:4px;background:rgba(0,0,0,.65);padding:2px 6px;border-radius:3px;font-family:var(--font-mono);font-size:9px;color:var(--ink-1000);">#013</div></div><div style="aspect-ratio:1;background:var(--ink-300);border-radius:6px;overflow:hidden;position:relative;"><img src="https://picsum.photos/seed/event-photo-13/300/300" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div style="position:absolute;bottom:4px;left:4px;background:rgba(0,0,0,.65);padding:2px 6px;border-radius:3px;font-family:var(--font-mono);font-size:9px;color:var(--ink-1000);">#014</div></div><div style="aspect-ratio:1;background:var(--ink-300);border-radius:6px;overflow:hidden;position:relative;"><img src="https://picsum.photos/seed/event-photo-14/300/300" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div style="position:absolute;bottom:4px;left:4px;background:rgba(0,0,0,.65);padding:2px 6px;border-radius:3px;font-family:var(--font-mono);font-size:9px;color:var(--ink-1000);">#015</div></div><div style="aspect-ratio:1;background:var(--ink-300);border-radius:6px;overflow:hidden;position:relative;"><img src="https://picsum.photos/seed/event-photo-15/300/300" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div style="position:absolute;bottom:4px;left:4px;background:rgba(0,0,0,.65);padding:2px 6px;border-radius:3px;font-family:var(--font-mono);font-size:9px;color:var(--ink-1000);">#016</div></div><div style="aspect-ratio:1;background:var(--ink-300);border-radius:6px;overflow:hidden;position:relative;"><img src="https://picsum.photos/seed/event-photo-16/300/300" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div style="position:absolute;bottom:4px;left:4px;background:rgba(0,0,0,.65);padding:2px 6px;border-radius:3px;font-family:var(--font-mono);font-size:9px;color:var(--ink-1000);">#017</div></div><div style="aspect-ratio:1;background:var(--ink-300);border-radius:6px;overflow:hidden;position:relative;"><img src="https://picsum.photos/seed/event-photo-17/300/300" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div style="position:absolute;bottom:4px;left:4px;background:rgba(0,0,0,.65);padding:2px 6px;border-radius:3px;font-family:var(--font-mono);font-size:9px;color:var(--ink-1000);">#018</div></div></div>
+</div>
 
-            <div style="display: flex; gap: 8px; margin-bottom: 14px; align-items: center;">
-              <span class="chip active">Todas · 1.581</span>
-              <span class="chip">Geral · 1.402</span>
-              <span class="chip">Premiação · 124</span>
-              <span class="chip">Bastidores · 55</span>
-              <button class="btn sm">+ Pasta</button>
-              <div style="margin-left: auto; display: flex; gap: 6px;">
-                <select><option>Todas</option><option>Vendidas</option><option>Sem venda</option></select>
-                <select><option>Mais recentes</option><option>Mais compradas</option><option>ID</option></select>
-              </div>
-            </div>
+<div class="ev-pane" data-ev-pane="patrocinadores">
+  <div class="ev-pane-head"><h3>Patrocinadores</h3><span class="meta">7 ativos · R$ 22.300 captado</span></div>
+  <table class="tbl">
+    <thead><tr><th>Patrocinador</th><th>Cota</th><th>Status</th><th>Visibilidade</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Sela Torque</strong> · seladostorque.com.br</td><td class="num">R$ 8.000</td><td><span class="badge b-paid">★ OURO</span></td><td>Visível</td></tr>
+      <tr><td><strong>Veterinária Boi Forte</strong> · boiforte.com.br</td><td class="num">R$ 6.000</td><td><span class="badge b-paid">★ OURO</span></td><td>Visível</td></tr>
+      <tr><td><strong>Rações Goyaz</strong> · goyaz.com.br</td><td class="num">R$ 3.500</td><td><span class="badge">PRATA</span></td><td>Visível</td></tr>
+      <tr><td><strong>Cervejaria Caju</strong></td><td class="num">R$ 2.800</td><td><span class="badge">PRATA</span></td><td>Visível</td></tr>
+      <tr><td><strong>Mercado Boa Safra</strong></td><td class="num">R$ 1.200</td><td><span class="badge" style="background:var(--warning-dim);color:var(--warning-500);">BRONZE</span></td><td>Visível</td></tr>
+      <tr><td><strong>Lava-Jato Itajá</strong></td><td class="num">R$ 600</td><td><span class="badge" style="background:var(--warning-dim);color:var(--warning-500);">BRONZE</span></td><td>Visível</td></tr>
+      <tr><td><strong>FM 102.5 Rural</strong></td><td class="num">Permuta</td><td><span class="badge b-soft">APOIO</span></td><td>Visível</td></tr>
+    </tbody>
+  </table>
+  <button class="btn primary" style="margin-top:14px;"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-plus"/></svg> Adicionar patrocinador</button>
+</div>
 
-                        <div class="photo-grid is-admin">
-              <div class="photo-tile is-admin-sel" data-id="100400001"><div class="photo-tile__media"><div class="ph" data-label="001"><img src="https://picsum.photos/seed/sport01/600/600" alt="Foto 001" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><span class="photo-tile__id">#001</span><span class="photo-tile__price">R$ 28,80</span><button class="photo-tile__check" type="button" aria-label="Selecionar">&#10003;</button></div>
-              <div class="photo-tile" data-id="100400002"><div class="photo-tile__media"><div class="ph" data-label="002"><img src="https://picsum.photos/seed/sport02/600/600" alt="Foto 002" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><span class="photo-tile__id">#002</span><span class="photo-tile__price">R$ 28,80</span><button class="photo-tile__check" type="button" aria-label="Selecionar"></button></div>
-              <div class="photo-tile is-admin-sel" data-id="100400003"><div class="photo-tile__media"><div class="ph" data-label="003"><img src="https://picsum.photos/seed/sport03/600/600" alt="Foto 003" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><span class="photo-tile__id">#003</span><span class="photo-tile__price">R$ 28,80</span><button class="photo-tile__check" type="button" aria-label="Selecionar">&#10003;</button></div>
-              <div class="photo-tile is-free" data-id="100400004"><div class="photo-tile__media"><div class="ph" data-label="004"><img src="https://picsum.photos/seed/sport04/600/600" alt="Foto 004" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><span class="photo-tile__id">#004</span><span class="photo-tile__price">GR&#193;TIS</span><button class="photo-tile__check" type="button" aria-label="Selecionar"></button></div>
-              <div class="photo-tile" data-id="100400005"><div class="photo-tile__media"><div class="ph" data-label="005"><img src="https://picsum.photos/seed/sport05/600/600" alt="Foto 005" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><span class="photo-tile__id">#005</span><span class="photo-tile__price">R$ 28,80</span><button class="photo-tile__check" type="button" aria-label="Selecionar"></button></div>
-              <div class="photo-tile is-admin-sel" data-id="100400006"><div class="photo-tile__media"><div class="ph" data-label="006"><img src="https://picsum.photos/seed/sport06/600/600" alt="Foto 006" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><span class="photo-tile__id">#006</span><span class="photo-tile__price">R$ 28,80</span><button class="photo-tile__check" type="button" aria-label="Selecionar">&#10003;</button></div>
-              <div class="photo-tile" data-id="100400007"><div class="photo-tile__media"><div class="ph" data-label="007"><img src="https://picsum.photos/seed/sport07/600/600" alt="Foto 007" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><span class="photo-tile__id">#007</span><span class="photo-tile__price">R$ 28,80</span><button class="photo-tile__check" type="button" aria-label="Selecionar"></button></div>
-              <div class="photo-tile" data-id="100400008"><div class="photo-tile__media"><div class="ph" data-label="008"><img src="https://picsum.photos/seed/sport08/600/600" alt="Foto 008" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><span class="photo-tile__id">#008</span><span class="photo-tile__price">R$ 28,80</span><button class="photo-tile__check" type="button" aria-label="Selecionar"></button></div>
-              <div class="photo-tile" data-id="100400009"><div class="photo-tile__media"><div class="ph" data-label="009"><img src="https://picsum.photos/seed/sport09/600/600" alt="Foto 009" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><span class="photo-tile__id">#009</span><span class="photo-tile__price">R$ 28,80</span><button class="photo-tile__check" type="button" aria-label="Selecionar"></button></div>
-              <div class="photo-tile" data-id="100400010"><div class="photo-tile__media"><div class="ph" data-label="010"><img src="https://picsum.photos/seed/sport10/600/600" alt="Foto 010" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><span class="photo-tile__id">#010</span><span class="photo-tile__price">R$ 28,80</span><button class="photo-tile__check" type="button" aria-label="Selecionar"></button></div>
-              <div class="photo-tile" data-id="100400011"><div class="photo-tile__media"><div class="ph" data-label="011"><img src="https://picsum.photos/seed/run01/600/600" alt="Foto 011" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><span class="photo-tile__id">#011</span><span class="photo-tile__price">R$ 28,80</span><button class="photo-tile__check" type="button" aria-label="Selecionar"></button></div>
-              <div class="photo-tile" data-id="100400012"><div class="photo-tile__media"><div class="ph" data-label="012"><img src="https://picsum.photos/seed/run02/600/600" alt="Foto 012" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><span class="photo-tile__id">#012</span><span class="photo-tile__price">R$ 28,80</span><button class="photo-tile__check" type="button" aria-label="Selecionar"></button></div>
-              <div class="photo-tile" data-id="100400013"><div class="photo-tile__media"><div class="ph" data-label="013"><img src="https://picsum.photos/seed/run03/600/600" alt="Foto 013" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><span class="photo-tile__id">#013</span><span class="photo-tile__price">R$ 28,80</span><button class="photo-tile__check" type="button" aria-label="Selecionar"></button></div>
-              <div class="photo-tile" data-id="100400014"><div class="photo-tile__media"><div class="ph" data-label="014"><img src="https://picsum.photos/seed/run04/600/600" alt="Foto 014" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><span class="photo-tile__id">#014</span><span class="photo-tile__price">R$ 28,80</span><button class="photo-tile__check" type="button" aria-label="Selecionar"></button></div>
-              <div class="photo-tile" data-id="100400015"><div class="photo-tile__media"><div class="ph" data-label="015"><img src="https://picsum.photos/seed/run05/600/600" alt="Foto 015" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><span class="photo-tile__id">#015</span><span class="photo-tile__price">R$ 28,80</span><button class="photo-tile__check" type="button" aria-label="Selecionar"></button></div>
-              <div class="photo-tile" data-id="100400016"><div class="photo-tile__media"><div class="ph" data-label="016"><img src="https://picsum.photos/seed/race01/600/600" alt="Foto 016" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><span class="photo-tile__id">#016</span><span class="photo-tile__price">R$ 28,80</span><button class="photo-tile__check" type="button" aria-label="Selecionar"></button></div>
-              <div class="photo-tile" data-id="100400017"><div class="photo-tile__media"><div class="ph" data-label="017"><img src="https://picsum.photos/seed/race02/600/600" alt="Foto 017" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><span class="photo-tile__id">#017</span><span class="photo-tile__price">R$ 28,80</span><button class="photo-tile__check" type="button" aria-label="Selecionar"></button></div>
-              <div class="photo-tile" data-id="100400018"><div class="photo-tile__media"><div class="ph" data-label="018"><img src="https://picsum.photos/seed/horse01/600/600" alt="Foto 018" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div><span class="photo-tile__id">#018</span><span class="photo-tile__price">R$ 28,80</span><button class="photo-tile__check" type="button" aria-label="Selecionar"></button></div>
-            </div>
-            <div style="text-align: center; margin-top: 14px; font-family: var(--font-mono); font-size: 11px; color: var(--ink-700);">— Mostrando 18 de 1.581 · paginação de 60 por página —</div>
-          </main>
-        </div>
+<div class="ev-pane" data-ev-pane="watermark">
+  <div class="ev-pane-head"><h3>Marca d'água personalizada</h3><span class="meta">aplicada em fotos &amp; vídeos do evento</span></div>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+    <div>
+      <div class="field"><label>Imagem da marca</label><div style="aspect-ratio:1;background:var(--ink-300);border:1px dashed var(--ink-500);border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--ink-700);font-size:12px;">vss-logo.png · 240×240px</div></div>
+      <div class="field"><label>Posição</label><select><option>Canto inferior direito</option><option>Canto inferior esquerdo</option><option>Centro</option></select></div>
+      <div class="field"><label>Opacidade (65%)</label><input type="range" min="0" max="100" value="65"/></div>
+      <div class="field"><label>Escala (18%)</label><input type="range" min="5" max="40" value="18"/></div>
+      <button class="btn primary" style="margin-top:8px;">Aplicar nas 1.581 fotos</button>
+    </div>
+    <div>
+      <div style="background:var(--ink-200);border:1px solid var(--ink-500);border-radius:6px;padding:12px;">
+        <h4 style="margin:0 0 8px;font-size:12px;color:var(--ink-700);letter-spacing:.08em;text-transform:uppercase;">Preview</h4>
+        <div style="position:relative;aspect-ratio:3/2;border-radius:4px;overflow:hidden;"><img src="https://picsum.photos/seed/wm-preview/600/400" style="width:100%;height:100%;object-fit:cover;"><img src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2280%22%20height%3D%2240%22%3E%3Crect%20width%3D%2280%22%20height%3D%2240%22%20rx%3D%226%22%20fill%3D%22%23ede8e0%22%20opacity%3D%220.65%22%2F%3E%3Ctext%20x%3D%2240%22%20y%3D%2225%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2214%22%20font-weight%3D%22700%22%20fill%3D%22%230d0d0d%22%3EVS%20%C2%B7%20FOTO%3C%2Ftext%3E%3C%2Fsvg%3E" style="position:absolute;bottom:8px;right:8px;width:80px;opacity:.65;"></div>
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="ev-pane" data-ev-pane="relatorios">
+  <div class="ev-pane-head"><h3>Relatórios</h3><span class="meta">exportar dados do evento</span></div>
+  <div class="adm-stats" style="grid-template-columns: repeat(4, 1fr);">
+    <div class="adm-stat"><div class="lbl">Fotos enviadas</div><div class="v">1.581</div></div>
+    <div class="adm-stat"><div class="lbl">Fotos vendidas</div><div class="v signal">607</div></div>
+    <div class="adm-stat"><div class="lbl">Taxa conversão</div><div class="v brand">38.4%</div></div>
+    <div class="adm-stat"><div class="lbl">Faturamento</div><div class="v signal">R$ 14.882</div></div>
+  </div>
+  <div style="margin-top:20px;display:flex;gap:8px;flex-wrap:wrap;">
+    <button class="btn"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-file-text"/></svg> CSV de pedidos</button>
+    <button class="btn"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-file-text"/></svg> CSV de mídias vendidas</button>
+    <button class="btn"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-file-text"/></svg> Relatório fiscal (PDF)</button>
+    <button class="btn"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-file-text"/></svg> Repasses por colaborador</button>
+  </div>
+</div>
+
+<div class="ev-pane" data-ev-pane="precos">
+  <div class="ev-pane-head"><h3>Preços & Descontos progressivos</h3><span class="meta">R$ 28,80 por foto · escalonado</span></div>
+  <div class="field"><label>Preço unitário (1 foto)</label><input type="text" value="R$ 28,80"/></div>
+  <h4 style="margin: 18px 0 8px; font-size: 12px; color: var(--ink-700); letter-spacing: .08em; text-transform: uppercase;">Tiers de desconto</h4>
+  <table class="tbl">
+    <thead><tr><th>De</th><th>Até</th><th>Desconto</th><th>Preço unitário</th></tr></thead>
+    <tbody>
+      <tr><td>3 fotos</td><td>5</td><td class="num">−10%</td><td class="num">R$ 25,92</td></tr>
+      <tr><td>6 fotos</td><td>9</td><td class="num">−15%</td><td class="num">R$ 24,48</td></tr>
+      <tr><td>10 fotos</td><td>19</td><td class="num">−20%</td><td class="num">R$ 23,04</td></tr>
+      <tr><td>20+ fotos</td><td>—</td><td class="num">−25%</td><td class="num">R$ 21,60</td></tr>
+    </tbody>
+  </table>
+  <button class="btn primary" style="margin-top:12px;">Salvar preços do evento</button>
+</div>
+
+<div class="ev-pane" data-ev-pane="info">
+  <div class="ev-pane-head"><h3>Informações</h3><span class="meta">dados básicos do evento</span></div>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+    <div class="field"><label>Nome</label><input type="text" value="Abertura da Safra 2026"/></div>
+    <div class="field"><label>Data</label><input type="date" value="2026-04-17"/></div>
+    <div class="field"><label>Local</label><input type="text" value="Itajá · GO"/></div>
+    <div class="field"><label>Categoria</label><select><option>Rodeio</option><option>Corrida</option><option>Festival</option><option>Equestre</option></select></div>
+    <div class="field"><label>Visibilidade</label><select><option>Público</option><option>Não listado</option><option>Privado (link)</option></select></div>
+    <div class="field"><label>Colaborador (% repasse)</label><input type="text" value="Maria L. · 15%"/></div>
+    <div class="field" style="grid-column: 1 / -1;"><label>Descrição</label><textarea rows="3">Abertura da temporada 2026 do rodeio em Itajá-GO. Provas de touros, sela e tambor. Mais de 300 participantes.</textarea></div>
+    <button class="btn primary" style="grid-column: 1 / -1; justify-self: start;">Salvar alterações</button>
+  </div>
+</div></div>
+      </main>
+    </div></div>
   </div>
 </section>
 
@@ -12967,6 +13083,8 @@
 <script src="app.js"></script>
 <script>
 const TOC = [{"route":"/","mode":"public","label":"Public · Home Desktop","hasDesktop":true,"hasMobile":true},{"route":"/404","mode":"public","label":"Public · 404","hasDesktop":true,"hasMobile":true},{"route":"/500","mode":"public","label":"Public · 500 Erro Servidor","hasDesktop":true,"hasMobile":true},{"route":"/autenticidade","mode":"public","label":"Public · Autenticidade","hasDesktop":true,"hasMobile":false},{"route":"/busca-sem-resultado","mode":"public","label":"Public · Galeria Busca Sem Resultado","hasDesktop":true,"hasMobile":true},{"route":"/cadastro","mode":"public","label":"Public · Cadastro","hasDesktop":true,"hasMobile":false},{"route":"/cadastro-sucesso","mode":"public","label":"Public · Cadastro Sucesso","hasDesktop":true,"hasMobile":false},{"route":"/carrinho","mode":"public","label":"Public · Cart Review","hasDesktop":true,"hasMobile":true},{"route":"/carrinho-vazio","mode":"public","label":"Public · Carrinho Vazio","hasDesktop":true,"hasMobile":true},{"route":"/checkout","mode":"public","label":"Public · Checkout Desktop","hasDesktop":true,"hasMobile":true},{"route":"/checkout/boleto","mode":"public","label":"Public · Checkout Boleto Gerado","hasDesktop":true,"hasMobile":true},{"route":"/checkout/confirmado","mode":"public","label":"Public · Confirmation","hasDesktop":true,"hasMobile":true},{"route":"/checkout/pix","mode":"public","label":"Public · Checkout PIX Aguardando","hasDesktop":true,"hasMobile":true},{"route":"/checkout/recusado","mode":"public","label":"Public · Checkout Pagamento Recusado","hasDesktop":true,"hasMobile":true},{"route":"/compras-guest","mode":"public","label":"Public · Compras Guest","hasDesktop":true,"hasMobile":true},{"route":"/conta-bloqueada","mode":"public","label":"Public · Conta Bloqueada","hasDesktop":true,"hasMobile":false},{"route":"/contato","mode":"public","label":"Public · Contato","hasDesktop":true,"hasMobile":true},{"route":"/cookies","mode":"public","label":"Public · Cookies","hasDesktop":true,"hasMobile":false},{"route":"/evento-privado","mode":"public","label":"Public · Evento Privado","hasDesktop":true,"hasMobile":true},{"route":"/evento-sem-fotos","mode":"public","label":"Public · Evento Sem Fotos","hasDesktop":true,"hasMobile":true},{"route":"/evento/safra-2026","mode":"public","label":"Public · Event Gallery","hasDesktop":true,"hasMobile":true},{"route":"/foto/safra-2026/0421","mode":"public","label":"Public · Lightbox Foto","hasDesktop":true,"hasMobile":true},{"route":"/login","mode":"public","label":"Public · Login","hasDesktop":true,"hasMobile":false},{"route":"/manutencao","mode":"public","label":"Public · Manutenção","hasDesktop":true,"hasMobile":true},{"route":"/privacidade","mode":"public","label":"Public · Privacidade","hasDesktop":true,"hasMobile":false},{"route":"/recuperar-senha","mode":"public","label":"Public · Trocar Senha","hasDesktop":true,"hasMobile":false},{"route":"/termos","mode":"public","label":"Public · Termos","hasDesktop":true,"hasMobile":false},{"route":"/video/safra-2026/v07","mode":"public","label":"Public · Lightbox Vídeo Mobile","hasDesktop":true,"hasMobile":true},{"route":"/cliente","mode":"cliente","label":"Cliente · Dashboard Desktop","hasDesktop":true,"hasMobile":true},{"route":"/cliente/carrinho","mode":"cliente","label":"Cliente · Carrinho","hasDesktop":true,"hasMobile":true},{"route":"/cliente/chat","mode":"cliente","label":"Cliente · Chat","hasDesktop":true,"hasMobile":true},{"route":"/cliente/comentarios","mode":"cliente","label":"Cliente · Comentários","hasDesktop":true,"hasMobile":true},{"route":"/cliente/comentarios-vazio","mode":"cliente","label":"Cliente · Comentários Vazio","hasDesktop":true,"hasMobile":true},{"route":"/cliente/compras","mode":"cliente","label":"Cliente · Compras","hasDesktop":true,"hasMobile":true},{"route":"/cliente/compras-vazio","mode":"cliente","label":"Cliente · Compras Vazio","hasDesktop":true,"hasMobile":true},{"route":"/cliente/compras/123","mode":"cliente","label":"Cliente · Detalhe Compra","hasDesktop":true,"hasMobile":true},{"route":"/cliente/compras/124-reembolso","mode":"cliente","label":"Cliente · Detalhe Compra · Reembolso","hasDesktop":true,"hasMobile":true},{"route":"/cliente/configuracoes","mode":"cliente","label":"Cliente · Configurações","hasDesktop":true,"hasMobile":true},{"route":"/cliente/downloads-expirando","mode":"cliente","label":"Cliente · Downloads Expirando","hasDesktop":true,"hasMobile":true},{"route":"/cliente/favoritos","mode":"cliente","label":"Cliente · Favoritos","hasDesktop":true,"hasMobile":true},{"route":"/cliente/favoritos-vazio","mode":"cliente","label":"Cliente · Favoritos Vazio","hasDesktop":true,"hasMobile":true},{"route":"/cliente/notificacoes","mode":"cliente","label":"Cliente · Notificações","hasDesktop":true,"hasMobile":true},{"route":"/cliente/notificacoes-vazio","mode":"cliente","label":"Cliente · Notificações Vazio","hasDesktop":true,"hasMobile":true},{"route":"/cliente/recompensas","mode":"cliente","label":"Cliente · Recompensas","hasDesktop":true,"hasMobile":true},{"route":"/cliente/reconhecimento","mode":"cliente","label":"Cliente · Reconhecimento","hasDesktop":true,"hasMobile":true},{"route":"/cliente/reconhecimento-consent","mode":"cliente","label":"Cliente · Reconhecimento Pre-Consent","hasDesktop":true,"hasMobile":true},{"route":"/cliente/reconhecimento-vazio","mode":"cliente","label":"Cliente · Reconhecimento Sem Referências","hasDesktop":true,"hasMobile":true},{"route":"/cliente/remocoes","mode":"cliente","label":"Cliente · Remoções LGPD","hasDesktop":true,"hasMobile":true},{"route":"/cliente/sessao-expirada","mode":"cliente","label":"Cliente · Sessão Expirada","hasDesktop":true,"hasMobile":false},{"route":"/admin","mode":"admin","label":"Admin · Dashboard","hasDesktop":true,"hasMobile":true},{"route":"/admin/403","mode":"admin","label":"Admin · 403 Sem Permissão","hasDesktop":true,"hasMobile":false},{"route":"/admin/carrinhos","mode":"admin","label":"Admin · Carrinhos","hasDesktop":true,"hasMobile":false},{"route":"/admin/chat","mode":"admin","label":"Admin · Chat","hasDesktop":true,"hasMobile":true},{"route":"/admin/clientes","mode":"admin","label":"Admin · Clientes","hasDesktop":true,"hasMobile":false},{"route":"/admin/colaboradores","mode":"admin","label":"Admin · Colaboradores","hasDesktop":true,"hasMobile":false},{"route":"/admin/comentarios","mode":"admin","label":"Admin · Comentários","hasDesktop":true,"hasMobile":false},{"route":"/admin/comentarios/moderacao","mode":"admin","label":"Admin · Comentário em Moderação","hasDesktop":true,"hasMobile":false},{"route":"/admin/configuracoes","mode":"admin","label":"Admin · Configurações","hasDesktop":true,"hasMobile":true},{"route":"/admin/contatos","mode":"admin","label":"Admin · Contatos","hasDesktop":true,"hasMobile":false},{"route":"/admin/cupons","mode":"admin","label":"Admin · Cupons","hasDesktop":true,"hasMobile":true},{"route":"/admin/dashboard-vazio","mode":"admin","label":"Admin · Dashboard Vazio","hasDesktop":true,"hasMobile":false},{"route":"/admin/estatisticas","mode":"admin","label":"Admin · Estatísticas","hasDesktop":true,"hasMobile":true},{"route":"/admin/eventos","mode":"admin","label":"Admin · Eventos","hasDesktop":true,"hasMobile":true},{"route":"/admin/eventos-sem-fotos","mode":"admin","label":"Admin · Evento Sem Fotos","hasDesktop":true,"hasMobile":false},{"route":"/admin/eventos/123","mode":"admin","label":"Admin · Detalhe Evento","hasDesktop":true,"hasMobile":false},{"route":"/admin/eventos/123-patrocinadores","mode":"admin","label":"Admin · Detalhe Evento (Patrocinadores)","hasDesktop":true,"hasMobile":true},{"route":"/admin/eventos/123-upload","mode":"admin","label":"Admin · Upload Fotos","hasDesktop":true,"hasMobile":true},{"route":"/admin/eventos/123-videos","mode":"admin","label":"Admin · Detalhe Evento (Vídeos)","hasDesktop":true,"hasMobile":false},{"route":"/admin/eventos/novo","mode":"admin","label":"Admin · Criar Evento","hasDesktop":true,"hasMobile":false},{"route":"/admin/jobs","mode":"admin","label":"Admin · Fila de Jobs","hasDesktop":true,"hasMobile":true},{"route":"/admin/logs","mode":"admin","label":"Admin · Logs & auditoria","hasDesktop":true,"hasMobile":true},{"route":"/admin/marca-dagua","mode":"admin","label":"Admin · Marca d'água","hasDesktop":true,"hasMobile":true},{"route":"/admin/notificacoes","mode":"admin","label":"Admin · Notificações","hasDesktop":true,"hasMobile":false},{"route":"/admin/pedidos","mode":"admin","label":"Admin · Pedidos","hasDesktop":true,"hasMobile":true},{"route":"/admin/pedidos/reembolso","mode":"admin","label":"Admin · Pedido com Reembolso","hasDesktop":true,"hasMobile":false},{"route":"/admin/personalizar","mode":"admin","label":"Admin · Personalizar","hasDesktop":true,"hasMobile":false},{"route":"/admin/propostas","mode":"admin","label":"Admin · Propostas","hasDesktop":true,"hasMobile":false},{"route":"/admin/recompensas","mode":"admin","label":"Admin · Recompensas","hasDesktop":true,"hasMobile":true},{"route":"/admin/reconhecimento","mode":"admin","label":"Admin · Reconhecimento","hasDesktop":true,"hasMobile":false},{"route":"/admin/remocoes","mode":"admin","label":"Admin · Remoções","hasDesktop":true,"hasMobile":true},{"route":"/admin/repasses","mode":"admin","label":"Admin · Repasses","hasDesktop":true,"hasMobile":true},{"route":"/admin/reset","mode":"admin","label":"Admin · Reset","hasDesktop":true,"hasMobile":true},{"route":"/admin/storage","mode":"admin","label":"Admin · Storage","hasDesktop":true,"hasMobile":true}];
+const CANONICAL_CLIENT_SIDEBAR_HTML = "\n<div class=\"who\">\n  <div class=\"avatar brand\"><img src=\"https://i.pravatar.cc/100?img=12\" alt=\"VS\" loading=\"lazy\"></div>\n  <div class=\"info\">\n    <h4 class=\"sim-user-name\">Vinícius Souza</h4>\n    <p>cliente desde mar/26</p>\n  </div>\n</div>\n<div class=\"lbl\">Minha conta</div><a data-sim-route=\"/cliente\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Início</a><a data-sim-route=\"/cliente/compras\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Compras<span class=\"badge b-paid\">12</span></a><a data-sim-route=\"/cliente/carrinho\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Carrinho<span class=\"badge b-info\">2</span></a><a data-sim-route=\"/cliente/favoritos\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Salvos &amp; curtidas</a><a data-sim-route=\"/cliente/comentarios\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Comentários</a><a data-sim-route=\"/cliente/remocoes\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Remoções LGPD</a><div class=\"lbl\">Atalhos</div><a data-sim-route=\"/cliente/notificacoes\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Notificações<span class=\"badge b-info\">3</span></a><a data-sim-route=\"/cliente/chat\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Chat</a><a data-sim-route=\"/cliente/reconhecimento\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Reconhecimento<span class=\"badge b-info\">beta</span></a><div class=\"lbl\">Conta</div><a data-sim-route=\"/cliente/configuracoes\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Configurações</a>\n<div class=\"logout\">\n  <a data-sim-route=\"__logout__\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Sair</a>\n</div>";
+const CANONICAL_ADMIN_SIDEBAR_HTML = "\n<div class=\"lbl\">Visão</div><a data-sim-route=\"/admin\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Dashboard</a><a data-sim-route=\"/admin/estatisticas\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Estatísticas</a><div class=\"lbl\">Conteúdo</div><a data-sim-route=\"/admin/eventos\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Eventos / Álbuns<span class=\"badge b-info\">142</span></a><a data-sim-route=\"/admin/eventos/novo\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Criar evento</a><a data-sim-route=\"/admin/eventos/123-upload\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Upload de fotos</a><div class=\"lbl\">Vendas</div><a data-sim-route=\"/admin/pedidos\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Pedidos<span class=\"badge b-pend\">3</span></a><a data-sim-route=\"/admin/carrinhos\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Carrinhos abertos<span class=\"badge b-info\">9</span></a><a data-sim-route=\"/admin/cupons\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Cupons</a><a data-sim-route=\"/admin/propostas\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Propostas<span class=\"badge b-info\">2</span></a><a data-sim-route=\"/admin/repasses\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Repasses</a><div class=\"lbl\">Pessoas</div><a data-sim-route=\"/admin/clientes\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Clientes</a><a data-sim-route=\"/admin/colaboradores\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Colaboradores</a><a data-sim-route=\"/admin/chat\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Chat<span class=\"badge b-info\">2</span></a><div class=\"lbl\">Moderação</div><a data-sim-route=\"/admin/comentarios\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Comentários<span class=\"badge b-pend\">5</span></a><a data-sim-route=\"/admin/contatos\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Contatos<span class=\"badge b-pend\">3</span></a><a data-sim-route=\"/admin/remocoes\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Remoções LGPD<span class=\"badge b-pend\">1</span></a><div class=\"lbl\">Sistema</div><a data-sim-route=\"/admin/marca-dagua\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Marca d&#39;água</a><a data-sim-route=\"/admin/personalizar\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Personalizar</a><a data-sim-route=\"/admin/configuracoes\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Configurações</a><a data-sim-route=\"/admin/storage\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Storage</a><a data-sim-route=\"/admin/recompensas\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Recompensas</a><a data-sim-route=\"/admin/logs\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Logs &amp; auditoria</a><a data-sim-route=\"/admin/notificacoes\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Notificações</a><a data-sim-route=\"/admin/reconhecimento\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Reconhecimento</a><a data-sim-route=\"/admin/reset\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Reset</a>\n<div class=\"role-switcher\">\n  <div class=\"avatar\" style=\"width: 26px; height: 26px; font-size: 10px;\"><img src=\"https://i.pravatar.cc/100?img=12\" alt=\"VS\" loading=\"lazy\"></div>\n  <div class=\"info\">\n    <h5 class=\"sim-user-name\">Vinícius Souza</h5>\n    <p>Fotógrafo · Admin</p>\n  </div>\n  <a class=\"switch-btn\" data-sim-route=\"__logout__\" title=\"Sair\">↻</a>\n</div>";
 
 const STORAGE_KEY = 'sim_v1';
 const defaultState = { cart: [], role: 'public', user: null, lastRoute: '/', viewport: 'auto' };
@@ -13033,7 +13151,9 @@ function renderRoute() {
   applyMode();
   window.scrollTo(0, 0);
   refreshCartCounts();
+  normalizeSidebars();
   applyIcons();
+  markActiveZoneButtons();
   fixMobileFallbackHeight();
 }
 
@@ -13367,6 +13487,44 @@ function findIconForText(text) {
   return null;
 }
 
+// Substitui o conteúdo das sidebars por versões canônicas (consistência total).
+function normalizeSidebars() {
+  const scope = document.querySelector('.sim-screen.active');
+  if (!scope) return;
+  // cliente
+  scope.querySelectorAll('aside.acc-side').forEach(aside => {
+    aside.removeAttribute('style');
+    aside.innerHTML = CANONICAL_CLIENT_SIDEBAR_HTML;
+  });
+  // admin
+  scope.querySelectorAll('aside.adm-side').forEach(aside => {
+    aside.removeAttribute('style');
+    aside.innerHTML = CANONICAL_ADMIN_SIDEBAR_HTML;
+  });
+  // atualiza nome do user na sidebar
+  const userName = state.user?.name || (state.role === 'admin' ? 'Vinícius Souza' : (state.role === 'cliente' ? 'Lucas Oliveira' : 'visitante'));
+  scope.querySelectorAll('.sim-user-name').forEach(el => { el.textContent = userName; });
+  // marca link ativo baseado na rota
+  const route = currentRoute();
+  scope.querySelectorAll('[data-sim-route]').forEach(a => {
+    a.classList.toggle('active', a.getAttribute('data-sim-route') === route);
+  });
+}
+
+// Marca o botão Público/Cliente/Admin acordo com a ZONA da rota atual
+function markActiveZoneButtons() {
+  const z = routeZone(currentRoute());
+  ['btnPublic', 'btnCliente', 'btnAdmin'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.remove('zone-active');
+  });
+  const btn = z === 'public' ? document.getElementById('btnPublic')
+            : z === 'cliente' ? document.getElementById('btnCliente')
+            : document.getElementById('btnAdmin');
+  if (btn) btn.classList.add('zone-active');
+}
+
 function applyIcons() {
   // Substitui <svg> inline em links de sidebars/navs por símbolo Lucide
   // (mantém atributos visuais; só troca conteúdo).
@@ -13399,6 +13557,23 @@ function applyIcons() {
     useEl.setAttribute('href', '#sim-i-' + icon);
     svg.appendChild(useEl);
     a.dataset.simIcon = icon;
+  });
+}
+
+function bindEventTabs() {
+  document.querySelectorAll('.sim-screen.active .ev-tab').forEach(btn => {
+    if (btn.dataset.simBound) return;
+    btn.dataset.simBound = '1';
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const id = btn.getAttribute('data-ev-tab');
+      const scope = btn.closest('.sim-screen');
+      if (!scope) return;
+      scope.querySelectorAll('.ev-tab').forEach(b => b.classList.toggle('active', b === btn));
+      scope.querySelectorAll('.ev-pane').forEach(p => {
+        p.classList.toggle('active', p.getAttribute('data-ev-pane') === id);
+      });
+    });
   });
 }
 
@@ -13441,6 +13616,21 @@ function bindNavLinks() {
     if (a.hasAttribute('data-toggle')) return;
     if (a.hasAttribute('data-cart-toggle')) return;
     if (a.classList.contains('cart-btn') || a.hasAttribute('data-cart-bump')) return;
+    if (a.hasAttribute('data-ev-tab') || a.classList.contains('ev-tab')) return;
+
+    // data-sim-route (sidebar canônica) — prioridade absoluta
+    const simRoute = a.getAttribute('data-sim-route');
+    if (simRoute) {
+      e.preventDefault();
+      if (simRoute === '__logout__') {
+        state.role = 'public'; state.user = null; saveState();
+        toast('Sessão encerrada', null, 'logout');
+        setRoute('/');
+      } else {
+        setRoute(simRoute);
+      }
+      return;
+    }
 
     const txt = (a.textContent || '').trim().toLowerCase();
     const href = (a.getAttribute('href') || '').trim();
@@ -13630,9 +13820,9 @@ function init() {
   renderRoute();
   window.addEventListener('hashchange', () => {
     renderRoute();
-    setTimeout(bindGalleryPhotos, 60);
+    setTimeout(() => { bindGalleryPhotos(); bindEventTabs(); }, 60);
   });
-  setTimeout(bindGalleryPhotos, 100);
+  setTimeout(() => { bindGalleryPhotos(); bindEventTabs(); }, 100);
 }
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', init);
