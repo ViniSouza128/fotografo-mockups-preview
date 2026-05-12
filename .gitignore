@@ -1,0 +1,15 @@
+# Internal docs
+PATCH-*.md
+AUDIT-*.md
+REVIEW.md
+
+# Backups
+*.legacy-*.html
+*.bkp
+*.bak
+
+# OS/IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
