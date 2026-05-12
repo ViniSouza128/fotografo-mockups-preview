@@ -2448,6 +2448,39 @@
     font-family: var(--font-mono); font-size: 11px;
     color: var(--ink-800); letter-spacing: .08em;
   }
+  /* favorito (estrela) ao lado do meta */
+  .sim-lightbox-overlay .lb-fav-btn {
+    position: absolute; top: 56px; left: 200px;
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18);
+    color: var(--ink-1000); cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background .15s, border-color .15s;
+  }
+  .sim-lightbox-overlay .lb-fav-btn.active { color: var(--warning-500); background: rgba(232,163,58,.18); border-color: var(--warning-500); }
+  .sim-lightbox-overlay .lb-fav-btn:hover { background: rgba(255,255,255,.16); }
+  /* preço pill bottom-left */
+  .sim-lightbox-overlay .lb-price-pill {
+    position: absolute; bottom: 100px; left: 20px;
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 14px; border-radius: 9999px;
+    background: rgba(0,0,0,.65); border: 1px solid rgba(255,255,255,.18);
+    color: var(--ink-1000); backdrop-filter: blur(6px);
+    font-family: var(--font-mono); font-size: 14px; font-variant-numeric: tabular-nums;
+  }
+  .sim-lightbox-overlay .lb-price-pill .tier-label { font-size: 10px; color: var(--ink-800); letter-spacing: .1em; text-transform: uppercase; }
+  /* heart pill bottom-right (curtidas) */
+  .sim-lightbox-overlay .lb-heart-pill {
+    position: absolute; bottom: 100px; right: 20px;
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 14px; border-radius: 9999px;
+    background: rgba(0,0,0,.65); border: 1px solid rgba(255,255,255,.18);
+    color: var(--ink-1000); cursor: pointer; backdrop-filter: blur(6px);
+    transition: background .15s, border-color .15s;
+  }
+  .sim-lightbox-overlay .lb-heart-pill.active { color: var(--danger-500, #e84444); border-color: var(--danger-500, #e84444); background: rgba(232,68,68,.18); }
+  .sim-lightbox-overlay .lb-heart-pill:hover { background: rgba(255,255,255,.12); }
+  .sim-lightbox-overlay .lb-heart-pill .hp-count { font-family: var(--font-body); font-weight: 700; font-size: 16px; font-variant-numeric: tabular-nums; }
   .sim-lightbox-overlay .lb-nav {
     position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
     display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
@@ -2926,7 +2959,11 @@
                 </div>
               </a>
               <a class="event-card cat-natureza">
-                <div class="cover"><img src="https://picsum.photos/seed/holambra/720/450" alt=""/><span class="cat">Festival</span></div>
+                <div class="cover" style="position: relative;">
+                  <img src="https://picsum.photos/seed/holambra/720/450" alt=""/>
+                  <span class="cat">Festival</span>
+                  <span style="position: absolute; bottom: 10px; left: 10px; background: rgba(34,197,94,.92); color: var(--ink-100); font-family: var(--font-mono); font-size: 10px; font-weight: 700; padding: 4px 10px; border-radius: 999px; letter-spacing: .04em; box-shadow: 0 4px 12px rgba(0,0,0,.25);">🎁 Álbum gratuito</span>
+                </div>
                 <div class="body">
                   <h3>ExpoFlora Holambra</h3>
                   <div class="meta-line"><span>28 fev 2026</span><span>Holambra · SP</span><span>1.114 fotos</span></div>
@@ -3062,6 +3099,7 @@
             </div>
           </div>
           <div style="display: flex; gap: 8px;">
+            <button class="btn sm" type="button" title="Salvar este álbum nos seus favoritos"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> Salvar álbum</button>
             <button class="btn sm" type="button"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg> Compartilhar</button>
           </div>
         </div>
@@ -3138,6 +3176,91 @@
         <div data-tab-pane="evFotos" class="active">
           <div class="gallery-wrap" data-cart-side>
             <div class="gallery-main">
+              <!-- folder navigation + EXIF filter (v1.0.27 paridade com src/app/evento/[id]/page.js) -->
+              <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px;">
+                <div>
+                  <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 10px;">
+                    <button class="chip active" type="button" style="display: inline-flex; align-items: center; gap: 6px;">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+                      Todas as pastas
+                    </button>
+                    <span style="color: var(--ink-700); font-family: var(--font-mono); font-size: 11px;">›</span>
+                    <span style="font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-700); letter-spacing: .08em; text-transform: uppercase;">5 pastas · 1.581 fotos</span>
+                  </div>
+                  <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px;">
+                    <a style="background: var(--ink-200); border: 1px solid var(--ink-500); border-radius: var(--radius); overflow: hidden; cursor: pointer;">
+                      <div style="position: relative; height: 90px; background: var(--ink-300); display: flex; align-items: center; justify-content: center;">
+                        <img src="https://picsum.photos/seed/bateria/240/120" alt="" style="width: 100%; height: 100%; object-fit: cover; opacity: .55;"/>
+                        <span style="position: absolute; font-size: 1.8rem;">📂</span>
+                      </div>
+                      <div style="padding: 8px 10px;">
+                        <div style="font-size: 12.5px; font-weight: 500; color: var(--ink-1000); margin-bottom: 2px;">Bateria</div>
+                        <div style="font-family: var(--font-mono); font-size: 10px; color: var(--ink-700);">412 fotos</div>
+                      </div>
+                    </a>
+                    <a style="background: var(--ink-200); border: 1px solid var(--ink-500); border-radius: var(--radius); overflow: hidden; cursor: pointer;">
+                      <div style="position: relative; height: 90px; background: var(--ink-300); display: flex; align-items: center; justify-content: center;">
+                        <img src="https://picsum.photos/seed/premiacao/240/120" alt="" style="width: 100%; height: 100%; object-fit: cover; opacity: .55;"/>
+                        <span style="position: absolute; font-size: 1.8rem;">📂</span>
+                      </div>
+                      <div style="padding: 8px 10px;">
+                        <div style="font-size: 12.5px; font-weight: 500; color: var(--ink-1000); margin-bottom: 2px;">Premiação</div>
+                        <div style="font-family: var(--font-mono); font-size: 10px; color: var(--ink-700);">186 fotos</div>
+                      </div>
+                    </a>
+                    <a style="background: var(--ink-200); border: 1px solid var(--ink-500); border-radius: var(--radius); overflow: hidden; cursor: pointer;">
+                      <div style="position: relative; height: 90px; background: var(--ink-300); display: flex; align-items: center; justify-content: center;">
+                        <img src="https://picsum.photos/seed/backstage/240/120" alt="" style="width: 100%; height: 100%; object-fit: cover; opacity: .55;"/>
+                        <span style="position: absolute; font-size: 1.8rem;">📂</span>
+                      </div>
+                      <div style="padding: 8px 10px;">
+                        <div style="font-size: 12.5px; font-weight: 500; color: var(--ink-1000); margin-bottom: 2px;">Backstage</div>
+                        <div style="font-family: var(--font-mono); font-size: 10px; color: var(--ink-700);">237 fotos</div>
+                      </div>
+                    </a>
+                    <a style="background: var(--ink-200); border: 1px solid var(--ink-500); border-radius: var(--radius); overflow: hidden; cursor: pointer;">
+                      <div style="position: relative; height: 90px; background: var(--ink-300); display: flex; align-items: center; justify-content: center;">
+                        <img src="https://picsum.photos/seed/abertura/240/120" alt="" style="width: 100%; height: 100%; object-fit: cover; opacity: .55;"/>
+                        <span style="position: absolute; font-size: 1.8rem;">📂</span>
+                      </div>
+                      <div style="padding: 8px 10px;">
+                        <div style="font-size: 12.5px; font-weight: 500; color: var(--ink-1000); margin-bottom: 2px;">Abertura</div>
+                        <div style="font-family: var(--font-mono); font-size: 10px; color: var(--ink-700);">158 fotos</div>
+                      </div>
+                    </a>
+                    <a style="background: var(--ink-200); border: 1px solid rgba(34,197,94,.45); border-radius: var(--radius); overflow: hidden; cursor: pointer; position: relative;">
+                      <div style="position: relative; height: 90px; background: var(--ink-300); display: flex; align-items: center; justify-content: center;">
+                        <img src="https://picsum.photos/seed/aquecimento/240/120" alt="" style="width: 100%; height: 100%; object-fit: cover; opacity: .55;"/>
+                        <span style="position: absolute; font-size: 1.8rem;">📂</span>
+                        <span style="position: absolute; top: 6px; right: 6px; background: rgba(34,197,94,.9); color: var(--ink-100); font-family: var(--font-mono); font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 999px; letter-spacing: .06em;">🎁 GRÁTIS</span>
+                      </div>
+                      <div style="padding: 8px 10px;">
+                        <div style="font-size: 12.5px; font-weight: 500; color: var(--ink-1000); margin-bottom: 2px;">Aquecimento</div>
+                        <div style="font-family: var(--font-mono); font-size: 10px; color: var(--ink-700);">88 fotos</div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+
+                <!-- filtro de horário EXIF (real condicional: photosComHorario > 30) -->
+                <div style="display: flex; gap: 14px; align-items: center; padding: 12px 14px; background: var(--ink-200); border: 1px solid var(--ink-500); border-radius: var(--radius); flex-wrap: wrap;">
+                  <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--ink-900); font-weight: 500;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    Filtrar por horário (EXIF):
+                  </span>
+                  <label style="display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 11px; color: var(--ink-800);">
+                    De
+                    <input type="time" value="08:00" style="background: var(--ink-100); border: 1px solid var(--ink-500); border-radius: 4px; color: var(--ink-1000); padding: 4px 8px; font-family: var(--font-mono); font-size: 11px;"/>
+                  </label>
+                  <label style="display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 11px; color: var(--ink-800);">
+                    até
+                    <input type="time" value="18:30" style="background: var(--ink-100); border: 1px solid var(--ink-500); border-radius: 4px; color: var(--ink-1000); padding: 4px 8px; font-family: var(--font-mono); font-size: 11px;"/>
+                  </label>
+                  <button type="button" class="btn sm">✕ Limpar filtro</button>
+                  <span style="font-family: var(--font-mono); font-size: 11px; color: var(--brand-400); letter-spacing: .04em;">1.392 fotos no intervalo</span>
+                </div>
+              </div>
+
               <div class="photo-grid">
                 <div class="photo-tile in-cart" data-id="100400101">
                   <div class="photo-tile__media"><img src="https://picsum.photos/seed/p001/600/600" alt="Foto 100400101" loading="lazy"></div>
@@ -3391,38 +3514,6 @@
           </div>
         </div>
 
-        <!-- ============ ABA PATROCINADORES ============ -->
-        <div data-tab-pane="evPatrocinadores" hidden>
-          <div class="sponsors-wrap">
-            <div class="intro">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-              <span>Marcas que tornaram este evento possível. Clique no logo para visitar o site do patrocinador.</span>
-            </div>
-            <div class="sponsors-tier">
-              <h4><span class="star">★</span> Cota ouro</h4>
-              <div class="sponsors-grid">
-                <a class="sponsor gold"><div class="logo">marca-1</div><div class="name">Sela Torque</div></a>
-                <a class="sponsor gold"><div class="logo">marca-2</div><div class="name">Veterinária Boi Forte</div></a>
-              </div>
-            </div>
-            <div class="sponsors-tier">
-              <h4>Cota prata</h4>
-              <div class="sponsors-grid">
-                <a class="sponsor silver"><div class="logo">marca-3</div><div class="name">Rações Goyaz</div></a>
-                <a class="sponsor silver"><div class="logo">marca-4</div><div class="name">Cervejaria Caju</div></a>
-              </div>
-            </div>
-            <div class="sponsors-tier">
-              <h4>Apoio</h4>
-              <div class="sponsors-grid">
-                <a class="sponsor bronze"><div class="logo">marca-5</div><div class="name">Mercado Boa Safra</div></a>
-                <a class="sponsor bronze"><div class="logo">marca-6</div><div class="name">Lava-Jato Itajá</div></a>
-                <a class="sponsor bronze"><div class="logo">marca-7</div><div class="name">FM 102.5 Rural</div></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <!-- ============ ABA COMENTÁRIOS ============ -->
         <div data-tab-pane="evComentarios" hidden>
           <div class="event-comments">
@@ -3477,7 +3568,7 @@
 
         <footer class="site-foot">
           <span>© 2026 Vinícius Rodrigues de Souza</span>
-          <span class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a></span>
+          <span class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a><a>Contato</a></span>
         </footer>
       </div>
   </div>
@@ -3489,12 +3580,19 @@
               <a class="nav-logo-link"><svg class="nav-logo compact"><use href="#nav-logo-h"/></svg></a>
               <div class="right">
                 <button class="nav-cart" type="button" style="font-size: 11px; padding: 6px 10px;">Carrinho <span class="count">3</span></button>
+                <button class="m-burger" type="button" data-drawer-open="homeDrawer" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button>
               </div>
             </div>
             <!-- gallery head mobile -->
             <div style="padding: 14px 16px 10px; border-bottom: 1px solid var(--ink-500);">
               <div style="font-size: 10px; color: var(--ink-700); font-family: var(--font-mono); margin-bottom: 4px;"><a style="color: var(--brand-400);">← voltar</a> · Rodeio</div>
-              <div style="font-size: 17px; font-weight: 500; margin-bottom: 4px;">Abertura da Safra 2026</div>
+              <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 4px;">
+                <div style="font-size: 17px; font-weight: 500;">Abertura da Safra 2026</div>
+                <button class="btn sm" type="button" title="Salvar álbum" style="flex-shrink: 0; padding: 4px 10px; font-size: 11px; display: inline-flex; align-items: center; gap: 4px;">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  Salvar
+                </button>
+              </div>
               <div style="font-family: var(--font-mono); font-size: 10px; color: var(--ink-800); display: flex; gap: 10px; flex-wrap: wrap;">
                 <span>17 abr 2026</span><span>Itajá · GO</span><span>1.900 fotos · 18 vídeos</span>
               </div>
@@ -3536,8 +3634,26 @@
               <button data-tab-target="mEvVideos" style="padding: 12px 14px; font-size: 12px; color: var(--ink-800); border-bottom: 2px solid transparent; background: transparent; border-top: 0; border-left: 0; border-right: 0; white-space: nowrap; font-family: inherit; cursor: pointer;">Vídeos (18)</button>
               <button data-tab-target="mEvComentarios" style="padding: 12px 14px; font-size: 12px; color: var(--ink-800); border-bottom: 2px solid transparent; background: transparent; border-top: 0; border-left: 0; border-right: 0; white-space: nowrap; font-family: inherit; cursor: pointer;">Comentários (32)</button>
             </div>
-            <!-- painel Fotos — estrutura idêntica ao desktop, sem style inline -->
-            <div data-tab-pane="mEvFotos" class="active" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 12px 16px;">
+            <!-- painel Fotos — pastas + EXIF + grid (v1.0.27 paridade real) -->
+            <div data-tab-pane="mEvFotos" class="active" style="padding: 12px 16px; display: flex; flex-direction: column; gap: 10px;">
+              <!-- pastas chips (scroll horizontal) -->
+              <div style="display: flex; gap: 6px; overflow-x: auto; padding-bottom: 2px; margin-left: -2px; margin-right: -2px; padding-left: 2px; padding-right: 2px;">
+                <button class="chip active" type="button" style="white-space: nowrap; font-size: 11px;">🏠 Todas · 1.581</button>
+                <button class="chip" type="button" style="white-space: nowrap; font-size: 11px;">📂 Bateria · 412</button>
+                <button class="chip" type="button" style="white-space: nowrap; font-size: 11px;">📂 Premiação · 186</button>
+                <button class="chip" type="button" style="white-space: nowrap; font-size: 11px;">📂 Backstage · 237</button>
+                <button class="chip" type="button" style="white-space: nowrap; font-size: 11px;">📂 Abertura · 158</button>
+                <button class="chip" type="button" style="white-space: nowrap; font-size: 11px; border-color: rgba(34,197,94,.45); color: var(--signal-500);">🎁 Aquecimento · 88</button>
+              </div>
+              <!-- EXIF filter compacto -->
+              <div style="display: flex; gap: 8px; align-items: center; padding: 8px 10px; background: var(--ink-200); border: 1px solid var(--ink-500); border-radius: var(--radius); font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-800); flex-wrap: wrap;">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <label style="display: inline-flex; align-items: center; gap: 4px;">De <input type="time" value="08:00" style="background: var(--ink-100); border: 1px solid var(--ink-500); border-radius: 4px; color: var(--ink-1000); padding: 2px 6px; font-family: var(--font-mono); font-size: 10.5px; width: 70px;"/></label>
+                <label style="display: inline-flex; align-items: center; gap: 4px;">até <input type="time" value="18:30" style="background: var(--ink-100); border: 1px solid var(--ink-500); border-radius: 4px; color: var(--ink-1000); padding: 2px 6px; font-family: var(--font-mono); font-size: 10.5px; width: 70px;"/></label>
+                <span style="color: var(--brand-400); margin-left: auto; font-weight: 600;">1.392 fotos</span>
+              </div>
+              <!-- photo grid -->
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
               <div class="photo-tile in-cart" data-id="100400101">
                 <div class="photo-tile__media"><img src="https://picsum.photos/seed/p001/600/600" alt="Foto 100400101" loading="lazy"></div>
                 <span class="photo-tile__id">#100400101</span>
@@ -3574,6 +3690,7 @@
                 <span class="photo-tile__price">R$ 28,80</span>
                 <button class="photo-tile__cart" type="button" data-cart-bump aria-label="Adicionar ao carrinho"><svg width="20" height="20"><use href="#i-cart"/></svg></button>
               </div>
+              </div><!-- /grid mEvFotos -->
             </div>
             <!-- painel Vídeos -->
             <div data-tab-pane="mEvVideos" hidden style="padding: 12px 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
@@ -3720,22 +3837,48 @@
               <h3 style="margin-top: 6px;">Bull-riding · 1ª passada</h3>
             </div>
 
-            <div class="lb-price-block">
-              <div class="row">
-                <span>Preço</span>
-                <span class="v" style="font-variant-numeric: tabular-nums;">R$ 28,80</span>
+            <!-- Tiers de resolução (paridade real PhotoModal.js linhas 510-534) -->
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <span style="font-family: var(--font-mono); font-size: 10px; color: var(--ink-700); letter-spacing: .14em; text-transform: uppercase;">Resolução · escolha o tier</span>
+              <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;">
+                <button type="button" class="chip" style="font-size: 10.5px; padding: 8px 6px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 3px; line-height: 1.2;">
+                  <span>Lite · 1000px</span>
+                  <strong style="color: var(--ink-1000); font-variant-numeric: tabular-nums; font-family: var(--font-mono); font-size: 11.5px;">R$ 14,40</strong>
+                </button>
+                <button type="button" class="chip active" style="font-size: 10.5px; padding: 8px 6px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 3px; line-height: 1.2;">
+                  <span>Padrão · 2000px</span>
+                  <strong style="color: var(--ink-1000); font-variant-numeric: tabular-nums; font-family: var(--font-mono); font-size: 11.5px;">R$ 28,80</strong>
+                </button>
+                <button type="button" class="chip" style="font-size: 10.5px; padding: 8px 6px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 3px; line-height: 1.2;">
+                  <span>HD · full</span>
+                  <strong style="color: var(--ink-1000); font-variant-numeric: tabular-nums; font-family: var(--font-mono); font-size: 11.5px;">R$ 43,20</strong>
+                </button>
               </div>
             </div>
 
             <button class="lb-add-cart" type="button">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-              Adicionar ao carrinho
+              Adicionar · Padrão · R$ 28,80
             </button>
 
             <div class="lb-meta-row">
               <span class="item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="n">128</span></span>
               <span class="item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span class="n">12</span></span>
               <span style="margin-left: auto;">3.842 views</span>
+            </div>
+
+            <!-- Detalhes técnicos (paridade real PhotoModal.js linhas 628-639) -->
+            <div style="background: var(--ink-200); border: 1px solid var(--ink-500); border-radius: var(--radius); padding: 12px 14px; display: flex; flex-direction: column; gap: 6px;">
+              <div style="font-family: var(--font-mono); font-size: 10px; color: var(--ink-700); letter-spacing: .14em; text-transform: uppercase;">Detalhes técnicos</div>
+              <div style="display: grid; grid-template-columns: auto 1fr; gap: 4px 10px; font-size: 11.5px; color: var(--ink-900);">
+                <span style="color: var(--ink-700);">ID</span><span style="font-family: var(--font-mono);">100400101</span>
+                <span style="color: var(--ink-700);">Tirada em</span><span style="font-family: var(--font-mono);">17 abr 2026 — 18:42</span>
+                <span style="color: var(--ink-700);">Arquivo</span><span style="font-family: var(--font-mono); word-break: break-all;">IMG_2657.cr3</span>
+                <span style="color: var(--ink-700);">Resolução</span><span style="font-family: var(--font-mono);">6720 × 4480 (30.1 MP)</span>
+                <span style="color: var(--ink-700);">Tamanho</span><span style="font-family: var(--font-mono);">42.8 MB</span>
+                <span style="color: var(--ink-700);">Autor</span><span>Vinícius Souza</span>
+              </div>
+              <div style="margin-top: 4px; padding-top: 8px; border-top: 1px solid var(--ink-500); font-size: 10.5px; color: var(--ink-700); line-height: 1.5;">⚠️ Protegido pela Lei nº 9.610/98. Reprodução sem autorização é proibida.</div>
             </div>
 
             <div>
@@ -3875,18 +4018,23 @@
               </button>
             </div>
             <!-- bottom sheet ancorado — flex-shrink:0 garante que infos ficam sempre visíveis na base -->
-            <div style="flex-shrink: 0; background: var(--ink-100); padding: 16px; display: flex; flex-direction: column; gap: 12px; overflow-y: auto; max-height: 55%;">
+            <div style="flex-shrink: 0; background: var(--ink-100); padding: 16px; display: flex; flex-direction: column; gap: 12px; overflow-y: auto; max-height: 60%;">
               <div>
                 <div style="font-family: var(--font-mono); font-size: 9.5px; color: var(--brand-400); letter-spacing: .04em; margin-bottom: 2px;">— Abertura da Safra 2026 —</div>
                 <div style="font-size: 15px; font-weight: 500;">Bull-riding · 1ª passada</div>
               </div>
-              <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-top: 1px solid var(--ink-500); border-bottom: 1px solid var(--ink-500);">
-                <span style="font-size: 12px; color: var(--ink-800);">Preço</span>
-                <span style="font-family: var(--font-mono); font-size: 22px; color: var(--signal-500); font-variant-numeric: tabular-nums; font-weight: 500;">R$ 28,80</span>
+              <!-- Tiers de resolução mobile (paridade real) -->
+              <div style="display: flex; flex-direction: column; gap: 6px;">
+                <span style="font-family: var(--font-mono); font-size: 9px; color: var(--ink-700); letter-spacing: .12em; text-transform: uppercase;">Resolução</span>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px;">
+                  <button type="button" class="chip" style="font-size: 9.5px; padding: 6px 4px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 2px;"><span>Lite</span><strong style="font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--ink-1000);">R$ 14,40</strong></button>
+                  <button type="button" class="chip active" style="font-size: 9.5px; padding: 6px 4px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 2px;"><span>Padrão</span><strong style="font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--ink-1000);">R$ 28,80</strong></button>
+                  <button type="button" class="chip" style="font-size: 9.5px; padding: 6px 4px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 2px;"><span>HD</span><strong style="font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--ink-1000);">R$ 43,20</strong></button>
+                </div>
               </div>
               <button class="lb-add-cart" type="button">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                Adicionar ao carrinho
+                Adicionar · Padrão · R$ 28,80
               </button>
               <div style="display: flex; flex-direction: column; gap: 8px;">
                 <button class="btn primary" type="button" style="width: 100%; justify-content: center;">
@@ -3897,7 +4045,31 @@
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
                   Comentários (32)
                 </button>
+                <button class="btn" type="button" style="width: 100%; justify-content: center;" data-drawer-open="lbDetailsDrawer03">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                  Detalhes técnicos
+                </button>
                 <button class="btn danger" type="button" style="width: 100%; justify-content: center;">Solicitar remoção</button>
+              </div>
+            </div>
+            <!-- drawer detalhes técnicos foto mobile -->
+            <div class="m-drawer" id="lbDetailsDrawer03" style="padding: 0; flex-direction: column; top: 30%;">
+              <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; border-bottom: 1px solid var(--ink-500); flex-shrink: 0;">
+                <span style="font-size: 13px; font-weight: 500;">Detalhes técnicos</span>
+                <button class="close-x" type="button" data-drawer-close="lbDetailsDrawer03" aria-label="Fechar" style="position: static; width: 32px; height: 32px;">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+              </div>
+              <div style="flex: 1; padding: 16px; display: flex; flex-direction: column; gap: 12px; overflow-y: auto;">
+                <div style="display: grid; grid-template-columns: auto 1fr; gap: 8px 12px; font-size: 12px; color: var(--ink-900);">
+                  <span style="color: var(--ink-700);">ID</span><span style="font-family: var(--font-mono);">100400101</span>
+                  <span style="color: var(--ink-700);">Tirada em</span><span style="font-family: var(--font-mono);">17 abr 2026 — 18:42</span>
+                  <span style="color: var(--ink-700);">Arquivo</span><span style="font-family: var(--font-mono); word-break: break-all;">IMG_2657.cr3</span>
+                  <span style="color: var(--ink-700);">Resolução</span><span style="font-family: var(--font-mono);">6720 × 4480 (30.1 MP)</span>
+                  <span style="color: var(--ink-700);">Tamanho</span><span style="font-family: var(--font-mono);">42.8 MB</span>
+                  <span style="color: var(--ink-700);">Autor</span><span>Vinícius Souza</span>
+                </div>
+                <div style="padding: 10px 12px; background: var(--ink-200); border: 1px solid var(--ink-500); border-radius: var(--radius); font-size: 11px; color: var(--ink-800); line-height: 1.5;">⚠️ Protegido pela Lei nº 9.610/98. Reprodução sem autorização é proibida.</div>
               </div>
             </div>
           </div>
@@ -4001,22 +4173,47 @@
               <h3 style="margin-top: 6px;">Highlight oficial · Abertura da arena</h3>
             </div>
 
-            <div class="lb-price-block">
-              <div class="row">
-                <span>Preço</span>
-                <span class="v" style="font-variant-numeric: tabular-nums;">R$ 49,90</span>
+            <!-- Versão de entrega (paridade real: buildVideoCartItem raw vs editado) -->
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <span style="font-family: var(--font-mono); font-size: 10px; color: var(--ink-700); letter-spacing: .14em; text-transform: uppercase;">Versão · escolha a entrega</span>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+                <button type="button" class="chip active" style="font-size: 10.5px; padding: 8px 8px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 3px; line-height: 1.2;">
+                  <span>Editado · 2:14 · 1080p</span>
+                  <strong style="color: var(--ink-1000); font-variant-numeric: tabular-nums; font-family: var(--font-mono); font-size: 11.5px;">R$ 49,90</strong>
+                </button>
+                <button type="button" class="chip" style="font-size: 10.5px; padding: 8px 8px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 3px; line-height: 1.2;">
+                  <span>Cru · sem corte · 4K</span>
+                  <strong style="color: var(--ink-1000); font-variant-numeric: tabular-nums; font-family: var(--font-mono); font-size: 11.5px;">R$ 79,00</strong>
+                </button>
               </div>
+              <span style="font-family: var(--font-mono); font-size: 10px; color: var(--ink-700); line-height: 1.4;">A versão Cru é entregue sem edição/cor (raw delivery) — para você editar do seu jeito.</span>
             </div>
 
             <button class="lb-add-cart" type="button">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-              Adicionar ao carrinho
+              Adicionar · Editado · R$ 49,90
             </button>
 
             <div class="lb-meta-row">
               <span class="item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="n">82</span></span>
               <span class="item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span class="n">7</span></span>
               <span style="margin-left: auto;">2.018 plays</span>
+            </div>
+
+            <!-- Detalhes técnicos do vídeo -->
+            <div style="background: var(--ink-200); border: 1px solid var(--ink-500); border-radius: var(--radius); padding: 12px 14px; display: flex; flex-direction: column; gap: 6px;">
+              <div style="font-family: var(--font-mono); font-size: 10px; color: var(--ink-700); letter-spacing: .14em; text-transform: uppercase;">Detalhes técnicos</div>
+              <div style="display: grid; grid-template-columns: auto 1fr; gap: 4px 10px; font-size: 11.5px; color: var(--ink-900);">
+                <span style="color: var(--ink-700);">ID</span><span style="font-family: var(--font-mono);">200400102</span>
+                <span style="color: var(--ink-700);">Gravado em</span><span style="font-family: var(--font-mono);">17 abr 2026 — 19:08</span>
+                <span style="color: var(--ink-700);">Arquivo</span><span style="font-family: var(--font-mono); word-break: break-all;">VID_0002.mp4</span>
+                <span style="color: var(--ink-700);">Duração</span><span style="font-family: var(--font-mono);">2:14 (134 s)</span>
+                <span style="color: var(--ink-700);">Resolução</span><span style="font-family: var(--font-mono);">3840 × 2160 (4K UHD)</span>
+                <span style="color: var(--ink-700);">Codec</span><span style="font-family: var(--font-mono);">H.264 · 24 Mbps</span>
+                <span style="color: var(--ink-700);">Tamanho</span><span style="font-family: var(--font-mono);">412 MB</span>
+                <span style="color: var(--ink-700);">Autor</span><span>Vinícius Souza</span>
+              </div>
+              <div style="margin-top: 4px; padding-top: 8px; border-top: 1px solid var(--ink-500); font-size: 10.5px; color: var(--ink-700); line-height: 1.5;">⚠️ Protegido pela Lei nº 9.610/98. Reprodução sem autorização é proibida.</div>
             </div>
 
             <div>
@@ -4082,18 +4279,22 @@
               </button>
             </div>
             <!-- bottom sheet ancorado — flex-shrink:0 garante que infos ficam sempre visíveis na base -->
-            <div style="flex-shrink: 0; background: var(--ink-100); padding: 16px; display: flex; flex-direction: column; gap: 12px; max-height: 55%; overflow-y: auto;">
+            <div style="flex-shrink: 0; background: var(--ink-100); padding: 16px; display: flex; flex-direction: column; gap: 12px; max-height: 60%; overflow-y: auto;">
               <div>
                 <div style="font-family: var(--font-mono); font-size: 9.5px; color: var(--brand-400); letter-spacing: .04em; margin-bottom: 2px;">— Abertura da Safra 2026 —</div>
                 <div style="font-size: 14px; font-weight: 500;">Highlight oficial · Abertura da arena</div>
               </div>
-              <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-top: 1px solid var(--ink-500); border-bottom: 1px solid var(--ink-500);">
-                <span style="font-size: 12px; color: var(--ink-800);">Preço</span>
-                <span style="font-family: var(--font-mono); font-size: 22px; color: var(--signal-500); font-variant-numeric: tabular-nums; font-weight: 500;">R$ 49,90</span>
+              <!-- Versão raw vs editada (paridade real) -->
+              <div style="display: flex; flex-direction: column; gap: 6px;">
+                <span style="font-family: var(--font-mono); font-size: 9px; color: var(--ink-700); letter-spacing: .12em; text-transform: uppercase;">Versão</span>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px;">
+                  <button type="button" class="chip active" style="font-size: 10px; padding: 7px 6px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 2px;"><span>Editado · 1080p</span><strong style="font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--ink-1000); font-size: 11px;">R$ 49,90</strong></button>
+                  <button type="button" class="chip" style="font-size: 10px; padding: 7px 6px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 2px;"><span>Cru · 4K</span><strong style="font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--ink-1000); font-size: 11px;">R$ 79,00</strong></button>
+                </div>
               </div>
               <button class="lb-add-cart" type="button">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                Adicionar ao carrinho
+                Adicionar · Editado · R$ 49,90
               </button>
               <div style="display: flex; flex-direction: column; gap: 8px;">
                 <button class="btn primary" type="button" style="width: 100%; justify-content: center;">
@@ -4104,7 +4305,33 @@
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
                   Comentários (14)
                 </button>
+                <button class="btn" type="button" style="width: 100%; justify-content: center;" data-drawer-open="lbDetailsDrawer04">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                  Detalhes técnicos
+                </button>
                 <button class="btn danger" type="button" style="width: 100%; justify-content: center;">Solicitar remoção</button>
+              </div>
+            </div>
+            <!-- drawer detalhes técnicos vídeo mobile -->
+            <div class="m-drawer" id="lbDetailsDrawer04" style="padding: 0; flex-direction: column; top: 30%;">
+              <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; border-bottom: 1px solid var(--ink-500); flex-shrink: 0;">
+                <span style="font-size: 13px; font-weight: 500;">Detalhes técnicos</span>
+                <button class="close-x" type="button" data-drawer-close="lbDetailsDrawer04" aria-label="Fechar" style="position: static; width: 32px; height: 32px;">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+              </div>
+              <div style="flex: 1; padding: 16px; display: flex; flex-direction: column; gap: 12px; overflow-y: auto;">
+                <div style="display: grid; grid-template-columns: auto 1fr; gap: 8px 12px; font-size: 12px; color: var(--ink-900);">
+                  <span style="color: var(--ink-700);">ID</span><span style="font-family: var(--font-mono);">200400102</span>
+                  <span style="color: var(--ink-700);">Gravado em</span><span style="font-family: var(--font-mono);">17 abr 2026 — 19:08</span>
+                  <span style="color: var(--ink-700);">Arquivo</span><span style="font-family: var(--font-mono); word-break: break-all;">VID_0002.mp4</span>
+                  <span style="color: var(--ink-700);">Duração</span><span style="font-family: var(--font-mono);">2:14 (134 s)</span>
+                  <span style="color: var(--ink-700);">Resolução</span><span style="font-family: var(--font-mono);">3840 × 2160 (4K UHD)</span>
+                  <span style="color: var(--ink-700);">Codec</span><span style="font-family: var(--font-mono);">H.264 · 24 Mbps</span>
+                  <span style="color: var(--ink-700);">Tamanho</span><span style="font-family: var(--font-mono);">412 MB</span>
+                  <span style="color: var(--ink-700);">Autor</span><span>Vinícius Souza</span>
+                </div>
+                <div style="padding: 10px 12px; background: var(--ink-200); border: 1px solid var(--ink-500); border-radius: var(--radius); font-size: 11px; color: var(--ink-800); line-height: 1.5;">⚠️ Protegido pela Lei nº 9.610/98. Reprodução sem autorização é proibida.</div>
               </div>
             </div>
           </div>
@@ -4176,6 +4403,15 @@
         <div style="padding: 28px 36px 0;">
           <h2 style="font-size: 32px; font-weight: 300; letter-spacing: -.02em; margin: 0 0 6px;">Seu carrinho</h2>
           <p style="font-family: var(--font-mono); font-size: 11.5px; color: var(--ink-700); letter-spacing: .04em; margin: 0;">5 itens · 2 eventos · pedido #VS-2026-04-182</p>
+        </div>
+
+        <!-- Alerta de fotos indisponíveis (paridade CartView.js linhas 539-546) -->
+        <div style="margin: 18px 36px 0; padding: 12px 16px; background: rgba(232,68,68,.12); border: 1px solid var(--danger-500); border-left: 3px solid var(--danger-500); border-radius: var(--radius); display: flex; align-items: center; justify-content: space-between; gap: 14px;">
+          <div style="display: flex; align-items: center; gap: 10px; font-size: 12.5px; color: var(--ink-900); line-height: 1.5;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="color: var(--danger-500); flex-shrink: 0;"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+            <span><strong style="color: var(--ink-1000);">1 foto removida</strong> pelo fotógrafo e não pode ser comprada. Remova para finalizar a compra.</span>
+          </div>
+          <button class="btn sm" type="button" style="border-color: var(--danger-500); color: var(--danger-500); flex-shrink: 0;">Remover indisponíveis</button>
         </div>
 
         <div class="cart-review">
@@ -4283,7 +4519,7 @@
 
         <footer class="site-foot">
           <span>© 2026 Vinícius Rodrigues de Souza</span>
-          <span class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a></span>
+          <span class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a><a>Contato</a></span>
         </footer>
       </div>
   </div>
@@ -4570,7 +4806,7 @@
 
           <footer class="site-foot">
             <span>© 2026 Vinícius Rodrigues de Souza</span>
-            <span class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a></span>
+            <span class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a><a>Contato</a></span>
           </footer>
         </div>
   </div>
@@ -4724,7 +4960,7 @@
 
           <footer class="site-foot">
             <span>© 2026 Vinícius Rodrigues de Souza</span>
-            <span class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a></span>
+            <span class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a><a>Contato</a></span>
           </footer>
         </div>
   </div>
@@ -4875,7 +5111,7 @@
 
           <footer class="site-foot">
             <span>© 2026 Vinícius Rodrigues de Souza</span>
-            <span class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a></span>
+            <span class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a><a>Contato</a></span>
           </footer>
         </div>
   </div>
@@ -4924,7 +5160,7 @@
             </div>
             <div class="m-foot">
               <span>© 2026 Vinícius Rodrigues de Souza</span>
-              <div class="links"><a>Termos</a><a>Privacidade</a><a>Autenticidade</a></div>
+              <div class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a></div>
             </div>
           </div>
         </div>
@@ -4954,6 +5190,19 @@
             <span style="color: var(--ink-700);">·</span>
             <span class="lbl" style="color: var(--signal-500);">PAGO</span>
           </div>
+
+          <!-- Warning Pagamento Simulado (paridade SuccessScreen.isSimulated checkout/page.js linhas 302+312) -->
+          <div style="margin: 14px auto 0; max-width: 520px; padding: 12px 18px; background: rgba(232,163,58,.12); border: 1px solid var(--warning-500); border-radius: var(--radius); display: flex; align-items: center; gap: 10px; font-size: 12.5px; color: var(--ink-1000); line-height: 1.5; text-align: left;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="color: var(--warning-500); flex-shrink: 0;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <span><strong>Pagamento Simulado</strong> — Nenhuma cobrança real foi realizada (sandbox)</span>
+          </div>
+
+          <!-- Botão WhatsApp avisar fotógrafo (paridade SuccessScreen waLink linhas 319-324) -->
+          <a href="#" style="display: inline-flex; align-items: center; gap: 12px; background: var(--tp-whatsapp); color: var(--ink-1000); padding: 12px 24px; border-radius: var(--radius); font-size: 14px; font-weight: 500; text-decoration: none; margin: 16px 0;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448L.057 24z"/></svg>
+            Avisar o fotógrafo pelo WhatsApp
+          </a>
+
           <div class="actions">
             <button class="btn primary lg" type="button">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
@@ -5009,14 +5258,28 @@
               </div>
             </div>
           </div>
-          <div style="margin-top: 36px; padding: 16px 20px; background: var(--ink-200); border: 1px solid var(--ink-500); border-radius: var(--radius); text-align: left; font-size: 12.5px; color: var(--ink-900); line-height: 1.6;">
+          <!-- Sistema de feedback 5 estrelas (paridade SuccessScreen linhas 354-369) -->
+          <div style="margin: 32px auto 0; max-width: 520px; padding: 22px 24px; background: var(--ink-200); border: 1px solid var(--ink-500); border-radius: var(--radius-lg); text-align: center;">
+            <p style="font-family: var(--font-heading); font-size: 16px; font-weight: 500; margin: 0 0 12px; color: var(--ink-1000);">Como foi sua experiência?</p>
+            <div style="display: flex; justify-content: center; gap: 6px; margin-bottom: 14px;">
+              <button type="button" style="background: none; border: 0; cursor: pointer; font-size: 28px; color: var(--warning-500); padding: 0;">★</button>
+              <button type="button" style="background: none; border: 0; cursor: pointer; font-size: 28px; color: var(--warning-500); padding: 0;">★</button>
+              <button type="button" style="background: none; border: 0; cursor: pointer; font-size: 28px; color: var(--warning-500); padding: 0;">★</button>
+              <button type="button" style="background: none; border: 0; cursor: pointer; font-size: 28px; color: var(--warning-500); padding: 0;">★</button>
+              <button type="button" style="background: none; border: 0; cursor: pointer; font-size: 28px; color: var(--ink-700); padding: 0;">★</button>
+            </div>
+            <textarea placeholder="Comentário opcional" rows="3" style="width: 100%; padding: 10px 12px; background: var(--ink-100); border: 1px solid var(--ink-500); border-radius: var(--radius); color: var(--ink-1000); font-family: var(--font-body); font-size: 13px; resize: vertical; margin-bottom: 12px;"></textarea>
+            <button class="btn primary" type="button">Enviar Feedback</button>
+          </div>
+
+          <div style="margin-top: 28px; padding: 16px 20px; background: var(--ink-200); border: 1px solid var(--ink-500); border-radius: var(--radius); text-align: left; font-size: 12.5px; color: var(--ink-900); line-height: 1.6;">
             <strong style="color: var(--brand-400); font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; display: block; margin-bottom: 6px;">— Próximo passo —</strong>
             Crie uma conta para acessar o histórico, baixar novamente quando quiser e ativar o reconhecimento facial automático em seus próximos eventos. <a class="lnk">Criar conta agora →</a>
           </div>
         </div>
         <footer class="site-foot">
           <span>© 2026 Vinícius Rodrigues de Souza</span>
-          <span class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a></span>
+          <span class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a><a>Contato</a></span>
         </footer>
       </div>
   </div>
@@ -5200,6 +5463,12 @@
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                   Baixar ZIP · todos os 5
                 </button>
+                <!-- Remover do navegador (paridade compras/page.js removeGuestOrderAccess) -->
+                <div style="margin-top: 10px; display: flex; justify-content: flex-end;">
+                  <button class="btn sm" type="button" style="font-size: 11px; color: var(--ink-700); border-color: transparent; padding: 4px 10px;" title="Remove o token desta compra deste navegador">
+                    Remover deste navegador
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -5229,7 +5498,7 @@
         </div>
         <footer class="site-foot">
           <span>© 2026 Vinícius Rodrigues de Souza</span>
-          <span class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a></span>
+          <span class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a><a>Contato</a></span>
         </footer>
       </div>
   </div>
@@ -5373,15 +5642,24 @@
               <h2>Crie sua conta.</h2>
               <p class="lede">Histórico de compras, downloads ilimitados, comentários e reconhecimento facial.</p>
               <form>
-                <div class="form-grid-2">
-                  <label class="field"><span>Nome</span><input type="text"/></label>
-                  <label class="field"><span>CPF</span><input type="text" placeholder="000.000.000-00"/></label>
+                <label class="field"><span>Nome completo</span><input type="text" placeholder="Como você assina"/></label>
+                <!-- Toggle CPF/CNPJ (paridade real /cadastro documentType) -->
+                <div class="field">
+                  <span>Tipo de documento</span>
+                  <div style="display: flex; gap: 6px; margin-top: 4px;">
+                    <button type="button" class="chip active" style="flex: 1; font-size: 11.5px;">CPF</button>
+                    <button type="button" class="chip" style="flex: 1; font-size: 11.5px;">CNPJ</button>
+                  </div>
                 </div>
-                <label class="field"><span>E-mail</span><input type="email"/></label>
+                <div class="form-grid-2">
+                  <label class="field"><span>CPF</span><input type="text" placeholder="000.000.000-00"/></label>
+                  <label class="field"><span>Data de nascimento</span><input type="date"/></label>
+                </div>
+                <label class="field"><span>E-mail</span><input type="email" placeholder="seu@email.com"/></label>
                 <label class="field"><span>WhatsApp</span><input type="tel" placeholder="(00) 00000-0000"/></label>
                 <div class="form-grid-2">
-                  <label class="field"><span>Senha</span><input type="password"/></label>
-                  <label class="field"><span>Confirmar</span><input type="password"/></label>
+                  <label class="field"><span>Senha</span><input type="password" placeholder="mín. 6 caracteres"/></label>
+                  <label class="field"><span>Confirmar</span><input type="password" placeholder="repita a senha"/></label>
                 </div>
                 <label class="check-row"><input type="checkbox" checked/><span class="check-row-label">Concordo com os <a class="lnk">termos</a> e <a class="lnk">política de privacidade</a>.</span></label>
                 <button class="full-btn" type="button">Criar conta</button>
@@ -5516,7 +5794,7 @@
         </div>
         <footer class="site-foot">
           <span>© 2026 Vinícius Rodrigues de Souza</span>
-          <span class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a></span>
+          <span class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a><a>Contato</a></span>
         </footer>
       </div>
   </div>
@@ -5596,6 +5874,10 @@
                 </div>
               </div>
             </div>
+            <div class="m-foot">
+              <span>© 2026 Vinícius Rodrigues de Souza</span>
+              <div class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a></div>
+            </div>
           </div>
         </div>
   </div>
@@ -5664,7 +5946,7 @@
         </div>
         <footer class="site-foot">
           <span>© 2026 Vinícius Rodrigues de Souza</span>
-          <span class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a></span>
+          <span class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a><a>Contato</a></span>
         </footer>
       </div>
   </div>
@@ -5690,6 +5972,12 @@
 <section class="sim-screen" data-route="/termos" data-mode="public" hidden>
   <div class="view-desktop">
     <div class="frame" data-screen-label="Public · Termos">
+          <div class="nav">
+            <a class="nav-logo-link"><svg class="nav-logo"><use href="#nav-logo-h"/></svg></a>
+            <div class="nav-spacer"></div>
+            <button class="nav-cart" type="button">Carrinho <span class="count">0</span></button>
+            <a class="nav-login">Entrar</a>
+          </div>
           <div class="legal">
             <div class="eyebrow">— Documento —</div>
             <h2>Termos de uso</h2>
@@ -5723,7 +6011,17 @@
               <h3><span class="num">06.</span> Alterações</h3>
               <p>Estes termos podem ser revisados. A data no topo reflete a versão vigente.</p>
             </div>
+
+            <!-- Ações finais (paridade LegalPage.js linhas 78-81) -->
+            <div style="margin-top: 24px; display: flex; gap: 8px; flex-wrap: wrap;">
+              <button class="btn sm" type="button">Falar com o estúdio</button>
+              <button class="btn sm" type="button">Solicitações LGPD</button>
+            </div>
           </div>
+          <footer class="site-foot">
+            <span>© 2026 Vinícius Rodrigues de Souza</span>
+            <span class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a><a>Contato</a></span>
+          </footer>
         </div>
   </div>
   <div class="view-mobile">
@@ -5744,6 +6042,12 @@
 <section class="sim-screen" data-route="/privacidade" data-mode="public" hidden>
   <div class="view-desktop">
     <div class="frame" data-screen-label="Public · Privacidade">
+          <div class="nav">
+            <a class="nav-logo-link"><svg class="nav-logo"><use href="#nav-logo-h"/></svg></a>
+            <div class="nav-spacer"></div>
+            <button class="nav-cart" type="button">Carrinho <span class="count">0</span></button>
+            <a class="nav-login">Entrar</a>
+          </div>
           <div class="legal">
             <div class="eyebrow">— LGPD —</div>
             <h2>Política de privacidade</h2>
@@ -5790,7 +6094,17 @@
               <h3><span class="num">08.</span> Segurança</h3>
               <p>Acesso por sessão criptografada, senhas armazenadas com hash forte, backup automático em storage seguro.</p>
             </div>
+
+            <!-- Ações finais (paridade LegalPage.js linhas 78-81) -->
+            <div style="margin-top: 24px; display: flex; gap: 8px; flex-wrap: wrap;">
+              <button class="btn sm" type="button">Falar com o estúdio</button>
+              <button class="btn sm" type="button">Solicitações LGPD</button>
+            </div>
           </div>
+          <footer class="site-foot">
+            <span>© 2026 Vinícius Rodrigues de Souza</span>
+            <span class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a><a>Contato</a></span>
+          </footer>
         </div>
   </div>
   <div class="view-mobile">
@@ -5811,6 +6125,12 @@
 <section class="sim-screen" data-route="/cookies" data-mode="public" hidden>
   <div class="view-desktop">
     <div class="frame" data-screen-label="Public · Cookies">
+          <div class="nav">
+            <a class="nav-logo-link"><svg class="nav-logo"><use href="#nav-logo-h"/></svg></a>
+            <div class="nav-spacer"></div>
+            <button class="nav-cart" type="button">Carrinho <span class="count">0</span></button>
+            <a class="nav-login">Entrar</a>
+          </div>
           <div class="legal">
             <div class="eyebrow">— Documento —</div>
             <h2>Política de cookies</h2>
@@ -5844,7 +6164,17 @@
                 <li>Sem cookies de retargeting / publicidade comportamental</li>
               </ul>
             </div>
+
+            <!-- Ações finais (paridade LegalPage.js linhas 78-81) -->
+            <div style="margin-top: 24px; display: flex; gap: 8px; flex-wrap: wrap;">
+              <button class="btn sm" type="button">Falar com o estúdio</button>
+              <button class="btn sm" type="button">Solicitações LGPD</button>
+            </div>
           </div>
+          <footer class="site-foot">
+            <span>© 2026 Vinícius Rodrigues de Souza</span>
+            <span class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a><a>Contato</a></span>
+          </footer>
         </div>
   </div>
   <div class="view-mobile">
@@ -5877,7 +6207,7 @@
               <div style="padding: 14px 16px; background: var(--ink-200); border: 1px solid var(--ink-500); border-radius: var(--radius); margin-bottom: 18px; text-align: left;">
                 <div style="font-family: var(--font-mono); font-size: 10px; color: var(--ink-700); letter-spacing: .14em; text-transform: uppercase; margin-bottom: 8px;">Sua conta</div>
                 <div style="display: flex; align-items: center; gap: 12px;">
-                  <div style="width: 44px; height: 44px; border-radius: 50%; overflow: hidden; flex-shrink: 0;"><img src="https://i.pravatar.cc/150?img=37" alt="" style="width:100%;height:100%;object-fit:cover;"/></div>
+                  <div style="width: 44px; height: 44px; border-radius: 50%; overflow: hidden; flex-shrink: 0;"><img src="https://i.pravatar.cc/150?img=3" alt="" style="width:100%;height:100%;object-fit:cover;"/></div>
                   <div>
                     <div style="font-size: 13.5px; font-weight: 500; color: var(--ink-1000);">Lucas Almeida</div>
                     <div style="font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-700); letter-spacing: .04em;">lucas.almeida@email.com</div>
@@ -5957,7 +6287,7 @@
           </div>
           <footer class="site-foot">
             <span>© 2026 Vinícius Rodrigues de Souza</span>
-            <span class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a></span>
+            <span class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a><a>Contato</a></span>
           </footer>
         </div>
   </div>
@@ -5990,7 +6320,7 @@
             </div>
             <div class="m-foot">
               <span>© 2026 Vinícius Rodrigues de Souza</span>
-              <div class="links"><a>Termos</a><a>Privacidade</a><a>Autenticidade</a></div>
+              <div class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a></div>
             </div>
           </div>
         </div>
@@ -6052,7 +6382,7 @@
 
           <footer class="site-foot">
             <span>© 2026 Vinícius Rodrigues de Souza</span>
-            <span class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a></span>
+            <span class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a><a>Contato</a></span>
           </footer>
         </div>
   </div>
@@ -6062,7 +6392,10 @@
             <div class="phone-status"><span>9:41</span><span class="right">●●●●●  100%</span></div>
             <div class="m-nav">
               <a class="nav-logo-link"><svg class="nav-logo compact"><use href="#nav-logo-h"/></svg></a>
-              <div class="right"><button class="nav-cart" type="button" style="font-size: 11px; padding: 6px 10px;">Carrinho <span class="count">0</span></button></div>
+              <div class="right">
+                <button class="nav-cart" type="button" style="font-size: 11px; padding: 6px 10px;">Carrinho <span class="count">0</span></button>
+                <button class="m-burger" type="button" data-drawer-open="homeDrawer" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button>
+              </div>
             </div>
             <div style="padding: 24px 16px 16px; background:
                 linear-gradient(180deg, rgba(0,0,0,0) 0%, var(--ink-100) 100%),
@@ -6089,7 +6422,7 @@
             </div>
             <div class="m-foot">
               <span>© 2026 Vinícius Rodrigues de Souza</span>
-              <div class="links"><a>Termos</a><a>Privacidade</a><a>Autenticidade</a></div>
+              <div class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a></div>
             </div>
           </div>
         </div>
@@ -6142,7 +6475,7 @@
 
           <footer class="site-foot">
             <span>© 2026 Vinícius Rodrigues de Souza</span>
-            <span class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a></span>
+            <span class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a><a>Contato</a></span>
           </footer>
         </div>
   </div>
@@ -6152,7 +6485,10 @@
             <div class="phone-status"><span>9:41</span><span class="right">●●●●●  100%</span></div>
             <div class="m-nav">
               <a class="nav-logo-link"><svg class="nav-logo compact"><use href="#nav-logo-h"/></svg></a>
-              <div class="right"><a class="nav-login" style="font-size: 11px;">Entrar</a></div>
+              <div class="right">
+                <a class="nav-login" style="font-size: 11px;">Entrar</a>
+                <button class="m-burger" type="button" data-drawer-open="homeDrawer" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button>
+              </div>
             </div>
             <div style="position: relative; height: 110px; background: linear-gradient(180deg, rgba(0,0,0,.2), rgba(0,0,0,.55)), url('https://picsum.photos/seed/casamento-mh-privado/780/300') center/cover no-repeat;">
               <div style="position: absolute; bottom: 10px; left: 16px; color: var(--ink-1000);">
@@ -6182,7 +6518,7 @@
             </div>
             <div class="m-foot">
               <span>© 2026 Vinícius Rodrigues de Souza</span>
-              <div class="links"><a>Termos</a><a>Privacidade</a><a>Autenticidade</a></div>
+              <div class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a></div>
             </div>
           </div>
         </div>
@@ -6252,7 +6588,7 @@
 
           <footer class="site-foot">
             <span>© 2026 Vinícius Rodrigues de Souza</span>
-            <span class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a></span>
+            <span class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a><a>Contato</a></span>
           </footer>
         </div>
   </div>
@@ -6262,7 +6598,10 @@
             <div class="phone-status"><span>9:41</span><span class="right">●●●●●  100%</span></div>
             <div class="m-nav">
               <a class="nav-logo-link"><svg class="nav-logo compact"><use href="#nav-logo-h"/></svg></a>
-              <div class="right"><button class="nav-cart" type="button" style="font-size: 11px; padding: 6px 10px;">Carrinho <span class="count">0</span></button></div>
+              <div class="right">
+                <button class="nav-cart" type="button" style="font-size: 11px; padding: 6px 10px;">Carrinho <span class="count">0</span></button>
+                <button class="m-burger" type="button" data-drawer-open="homeDrawer" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button>
+              </div>
             </div>
             <div style="padding: 14px 16px; border-bottom: 1px solid var(--ink-500); position: relative;">
               <label class="field" style="margin: 0;">
@@ -6292,7 +6631,7 @@
             </div>
             <div class="m-foot">
               <span>© 2026 Vinícius Rodrigues de Souza</span>
-              <div class="links"><a>Termos</a><a>Privacidade</a><a>Autenticidade</a></div>
+              <div class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a></div>
             </div>
           </div>
         </div>
@@ -6315,9 +6654,9 @@
           </div>
           <div style="display: grid; grid-template-columns: 1fr 320px; gap: 28px; padding: 28px 36px 36px;">
             <div style="display: flex; flex-direction: column; gap: 18px;">
-              <div style="padding: 22px; background: var(--ink-200); border: 1px solid var(--signal-500); border-left: 3px solid var(--signal-500); border-radius: var(--radius-lg); display: flex; flex-direction: column; gap: 14px; align-items: flex-start;">
+              <div style="padding: 22px; background: var(--ink-200); border: 1px solid var(--danger-500); border-left: 3px solid var(--danger-500); border-radius: var(--radius-lg); display: flex; flex-direction: column; gap: 14px; align-items: flex-start;">
                 <div style="display: flex; align-items: center; gap: 14px;">
-                  <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--signal-500); display: grid; place-items: center; color: var(--ink-100); flex-shrink: 0;">
+                  <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--danger-500); display: grid; place-items: center; color: var(--ink-100); flex-shrink: 0;">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
                   </div>
                   <div>
@@ -6369,7 +6708,7 @@
               <div class="os-row d"><span>Cupom MARATONA1FREE</span><span class="v">−R$ 28,80</span></div>
               <hr class="hr"/>
               <div class="os-row t"><span>Total</span><span class="v">R$ 101,74</span></div>
-              <div style="margin-top: 14px; padding: 10px 12px; background: var(--ink-300); border: 1px solid var(--signal-500); border-radius: var(--radius); font-size: 11.5px; color: var(--signal-500); font-family: var(--font-mono); letter-spacing: .04em; line-height: 1.5;">
+              <div style="margin-top: 14px; padding: 10px 12px; background: var(--ink-300); border: 1px solid var(--danger-500); border-radius: var(--radius); font-size: 11.5px; color: var(--danger-500); font-family: var(--font-mono); letter-spacing: .04em; line-height: 1.5;">
                 Status: Pendente · Pagamento não autorizado
               </div>
             </aside>
@@ -6377,7 +6716,7 @@
 
           <footer class="site-foot">
             <span>© 2026 Vinícius Rodrigues de Souza</span>
-            <span class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a></span>
+            <span class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a><a>Contato</a></span>
           </footer>
         </div>
   </div>
@@ -6387,14 +6726,14 @@
             <div class="phone-status"><span>9:41</span><span class="right">●●●●●  100%</span></div>
             <div class="m-nav">
               <a class="nav-logo-link"><svg class="nav-logo compact"><use href="#nav-logo-h"/></svg></a>
-              <div class="right"><span style="font-family: var(--font-mono); font-size: 10.5px; color: var(--signal-500); letter-spacing: .12em;">RECUSADO</span></div>
+              <div class="right"><span style="font-family: var(--font-mono); font-size: 10.5px; color: var(--danger-500); letter-spacing: .12em;">RECUSADO</span></div>
             </div>
             <div style="padding: 16px; display: flex; flex-direction: column; gap: 14px;">
               <div style="font-family: var(--font-mono); font-size: 10px; color: var(--ink-700); letter-spacing: .14em;">CARRINHO → <span style="color: var(--brand-400);">CHECKOUT</span> → CONFIRMAÇÃO</div>
 
-              <div style="padding: 16px; background: var(--ink-200); border: 1px solid var(--signal-500); border-left: 3px solid var(--signal-500); border-radius: var(--radius-lg); display: flex; flex-direction: column; gap: 12px;">
+              <div style="padding: 16px; background: var(--ink-200); border: 1px solid var(--danger-500); border-left: 3px solid var(--danger-500); border-radius: var(--radius-lg); display: flex; flex-direction: column; gap: 12px;">
                 <div style="display: flex; gap: 10px; align-items: center;">
-                  <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--signal-500); display: grid; place-items: center; color: var(--ink-100); flex-shrink: 0;">
+                  <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--danger-500); display: grid; place-items: center; color: var(--ink-100); flex-shrink: 0;">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
                   </div>
                   <div>
@@ -6442,11 +6781,11 @@
     <div class="frame" data-screen-label="Public · Conta Bloqueada">
           <div class="auth-wrap">
             <div class="auth-card">
-              <div class="eyebrow" style="color: var(--signal-500);">— Acesso bloqueado —</div>
+              <div class="eyebrow" style="color: var(--danger-500);">— Acesso bloqueado —</div>
               <h2>Conta desativada.</h2>
 
-              <div style="padding: 14px 16px; background: var(--ink-200); border: 1px solid var(--signal-500); border-left: 3px solid var(--signal-500); border-radius: var(--radius); display: flex; gap: 12px; align-items: flex-start; margin-bottom: 18px;">
-                <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--signal-500); display: grid; place-items: center; color: var(--ink-100); flex-shrink: 0;">
+              <div style="padding: 14px 16px; background: var(--ink-200); border: 1px solid var(--danger-500); border-left: 3px solid var(--danger-500); border-radius: var(--radius); display: flex; gap: 12px; align-items: flex-start; margin-bottom: 18px;">
+                <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--danger-500); display: grid; place-items: center; color: var(--ink-100); flex-shrink: 0;">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
                 </div>
                 <div style="font-size: 12.5px; color: var(--ink-900); line-height: 1.55;">
@@ -6509,14 +6848,14 @@
             <h2>Página não encontrada.</h2>
             <p>A página que você procurou não existe ou foi movida. Talvez você queira voltar à home ou explorar os álbuns.</p>
             <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-              <button class="btn primary" type="button">← Voltar à home</button>
-              <button class="btn" type="button">Ver todos os álbuns</button>
+              <button class="btn primary" type="button" data-sim-route="/">← Voltar à home</button>
+              <button class="btn" type="button" data-sim-route="/">Ver todos os álbuns</button>
             </div>
           </div>
         </div>
         <footer class="site-foot">
           <span>© 2026 Vinícius Rodrigues de Souza</span>
-          <span class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a></span>
+          <span class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a><a>Contato</a></span>
         </footer>
       </div>
   </div>
@@ -6536,15 +6875,15 @@
                 <h2 style="font-size: 20px; font-weight: 400; letter-spacing: -.01em; margin: 0 0 10px; color: var(--ink-1000);">Página não encontrada.</h2>
                 <p style="font-size: 13px; color: var(--ink-800); line-height: 1.6; margin: 0 0 24px; max-width: 280px;">A página que você procurou não existe ou foi movida. Volte à home ou explore os álbuns.</p>
                 <div style="display: flex; flex-direction: column; gap: 8px;">
-                  <button class="btn primary" type="button" style="width: 100%; justify-content: center;">← Voltar à home</button>
-                  <button class="btn" type="button" style="width: 100%; justify-content: center;">Ver todos os álbuns</button>
+                  <button class="btn primary" type="button" data-sim-route="/" style="width: 100%; justify-content: center;">← Voltar à home</button>
+                  <button class="btn" type="button" data-sim-route="/" style="width: 100%; justify-content: center;">Ver todos os álbuns</button>
                 </div>
               </div>
             </div>
             <!-- rodapé mobile mínimo -->
             <div class="m-foot">
               <span>© 2026 Vinícius Rodrigues de Souza</span>
-              <div class="links"><a>Termos</a><a>Privacidade</a><a>Autenticidade</a></div>
+              <div class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a></div>
             </div>
           </div>
         </div>
@@ -6562,7 +6901,7 @@
           </div>
           <div class="err">
             <div>
-              <div class="code" style="color: var(--signal-500);">500</div>
+              <div class="code" style="color: var(--danger-500);">500</div>
               <h2>Ops, algo deu errado.</h2>
               <p>Tivemos um problema interno. Já fomos notificados. Tente novamente em alguns minutos.</p>
               <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
@@ -6570,7 +6909,7 @@
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.81 1 6.5 2.6L21 8"/><path d="M21 3v5h-5"/></svg>
                   Tentar novamente
                 </button>
-                <button class="btn" type="button">← Voltar à home</button>
+                <button class="btn" type="button" data-sim-route="/">← Voltar à home</button>
               </div>
               <div style="margin-top: 24px; padding: 12px 16px; background: var(--ink-200); border: 1px solid var(--ink-500); border-radius: var(--radius); font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-700); letter-spacing: .04em; max-width: 420px; margin-left: auto; margin-right: auto; text-align: left;">
                 <div><span style="color: var(--ink-800); margin-right: 8px;">REF:</span>err_a1b2c3d4_2026-05-12T14:08</div>
@@ -6580,7 +6919,7 @@
           </div>
           <footer class="site-foot">
             <span>© 2026 Vinícius Rodrigues de Souza</span>
-            <span class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a></span>
+            <span class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a><a>Contato</a></span>
           </footer>
         </div>
   </div>
@@ -6593,12 +6932,12 @@
             </div>
             <div style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 32px 24px; text-align: center;">
               <div>
-                <div style="font-family: var(--font-display); font-size: 96px; line-height: 1; color: var(--signal-500); letter-spacing: -.04em; font-style: italic; margin-bottom: 16px;">500</div>
+                <div style="font-family: var(--font-display); font-size: 96px; line-height: 1; color: var(--danger-500); letter-spacing: -.04em; font-style: italic; margin-bottom: 16px;">500</div>
                 <h2 style="font-size: 20px; font-weight: 400; letter-spacing: -.01em; margin: 0 0 10px; color: var(--ink-1000);">Ops, algo deu errado.</h2>
                 <p style="font-size: 13px; color: var(--ink-800); line-height: 1.6; margin: 0 0 24px; max-width: 280px;">Tivemos um problema interno. Já fomos notificados. Tente novamente em alguns minutos.</p>
                 <div style="display: flex; flex-direction: column; gap: 8px;">
                   <button class="btn primary" type="button" style="width: 100%; justify-content: center;">Tentar novamente</button>
-                  <button class="btn" type="button" style="width: 100%; justify-content: center;">← Voltar à home</button>
+                  <button class="btn" type="button" data-sim-route="/" style="width: 100%; justify-content: center;">← Voltar à home</button>
                 </div>
                 <div style="margin-top: 18px; padding: 8px 10px; background: var(--ink-200); border: 1px solid var(--ink-500); border-radius: var(--radius); font-family: var(--font-mono); font-size: 9px; color: var(--ink-700); letter-spacing: .04em; line-height: 1.5; text-align: left; display: inline-block;">
                   <div>REF · err_a1b2c3d4</div>
@@ -6608,7 +6947,7 @@
             </div>
             <div class="m-foot">
               <span>© 2026 Vinícius Rodrigues de Souza</span>
-              <div class="links"><a>Termos</a><a>Privacidade</a><a>Autenticidade</a></div>
+              <div class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a></div>
             </div>
           </div>
         </div>
@@ -6649,7 +6988,7 @@
           </div>
           <footer class="site-foot">
             <span>© 2026 Vinícius Rodrigues de Souza</span>
-            <span class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a></span>
+            <span class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a><a>Contato</a></span>
           </footer>
         </div>
   </div>
@@ -6680,7 +7019,7 @@
             </div>
             <div class="m-foot">
               <span>© 2026 Vinícius Rodrigues de Souza</span>
-              <div class="links"><a>Termos</a><a>Privacidade</a><a>Autenticidade</a></div>
+              <div class="links"><a>Termos</a><a>Privacidade</a><a>Cookies</a><a>Autenticidade</a></div>
             </div>
           </div>
         </div>
@@ -6694,7 +7033,7 @@
           <div class="nav">
             <a class="nav-logo-link"><svg class="nav-logo"><use href="#nav-logo-h"/></svg></a>
             <div class="nav-spacer"></div>
-            <div class="nav-cart">Carrinho <span class="count">2</span></div>
+            <button class="nav-cart" type="button" data-sim-route="/cliente/carrinho">Carrinho <span class="count">2</span></button>
             <div style="display: flex; align-items: center; gap: 12px; font-size: 12.5px; color: var(--ink-900);">
               <span style="font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-700); letter-spacing: .04em;">vinicius@gmail.com</span>
               <div class="avatar" style="background: var(--brand-500); width: 32px; height: 32px; font-size: 12px;"><img src="https://i.pravatar.cc/100?img=12" alt="VS" loading="lazy"></div>
@@ -6724,7 +7063,7 @@
               <div class="lbl">Conta</div>
               <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Configurações</a>
               <div class="logout">
-                <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Sair</a>
+                <a data-sim-route="__logout__"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Sair</a>
               </div>
             </aside>
             <main class="acc-main">
@@ -6929,7 +7268,7 @@
         <div class="nav">
           <a class="nav-logo-link"><svg class="nav-logo"><use href="#nav-logo-h"/></svg></a>
           <div class="nav-spacer"></div>
-          <div class="nav-cart">Carrinho <span class="count">2</span></div>
+          <button class="nav-cart" type="button" data-sim-route="/cliente/carrinho">Carrinho <span class="count">2</span></button>
           <div style="display: flex; align-items: center; gap: 12px;"><span style="font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-700);">vinicius@gmail.com</span><div class="avatar" style="background: var(--brand-500); width: 32px; height: 32px; font-size: 12px;"><img src="https://i.pravatar.cc/100?img=12" alt="VS" loading="lazy"></div></div>
         </div>
         <div class="acc">
@@ -6948,7 +7287,7 @@
             <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/></svg>Reconhecimento<span class="badge b-info">beta</span></a>
             <div class="lbl">Conta</div>
             <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/></svg>Configurações</a>
-            <div class="logout"><a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/></svg>Sair</a></div>
+            <div class="logout"><a data-sim-route="__logout__"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/></svg>Sair</a></div>
           </aside>
           <main class="acc-main">
             <div class="page-head">
@@ -7128,7 +7467,7 @@
         <div class="nav">
           <a class="nav-logo-link"><svg class="nav-logo"><use href="#nav-logo-h"/></svg></a>
           <div class="nav-spacer"></div>
-          <div class="nav-cart">Carrinho <span class="count">2</span></div>
+          <button class="nav-cart" type="button" data-sim-route="/cliente/carrinho">Carrinho <span class="count">2</span></button>
           <div style="display: flex; align-items: center; gap: 12px;"><div class="avatar" style="background: var(--brand-500); width: 32px; height: 32px; font-size: 12px;"><img src="https://i.pravatar.cc/100?img=12" alt="VS" loading="lazy"></div></div>
         </div>
         <div class="acc">
@@ -7312,7 +7651,7 @@
         <div class="nav">
           <a class="nav-logo-link"><svg class="nav-logo"><use href="#nav-logo-h"/></svg></a>
           <div class="nav-spacer"></div>
-          <div class="nav-cart">Carrinho <span class="count">2</span></div>
+          <button class="nav-cart" type="button" data-sim-route="/cliente/carrinho">Carrinho <span class="count">2</span></button>
           <div class="avatar" style="background: var(--brand-500); width: 32px; height: 32px; font-size: 12px;"><img src="https://i.pravatar.cc/100?img=12" alt="VS" loading="lazy"></div>
         </div>
         <div class="acc">
@@ -7420,7 +7759,7 @@
         <div class="nav">
           <a class="nav-logo-link"><svg class="nav-logo"><use href="#nav-logo-h"/></svg></a>
           <div class="nav-spacer"></div>
-          <div class="nav-cart">Carrinho <span class="count">2</span></div>
+          <button class="nav-cart" type="button" data-sim-route="/cliente/carrinho">Carrinho <span class="count">2</span></button>
           <div class="avatar" style="background: var(--brand-500); width: 32px; height: 32px; font-size: 12px;"><img src="https://i.pravatar.cc/100?img=12" alt="VS" loading="lazy"></div>
         </div>
         <div class="acc">
@@ -8069,7 +8408,7 @@
         <div class="nav">
           <a class="nav-logo-link"><svg class="nav-logo"><use href="#nav-logo-h"/></svg></a>
           <div class="nav-spacer"></div>
-          <button class="nav-cart" type="button">Carrinho <span class="count">2</span></button>
+          <button class="nav-cart" type="button" data-sim-route="/cliente/carrinho">Carrinho <span class="count">2</span></button>
           <div class="avatar brand" style="width: 32px; height: 32px; font-size: 12px;"><img src="https://i.pravatar.cc/100?img=12" alt="VS" loading="lazy"></div>
         </div>
         <div class="acc">
@@ -8579,12 +8918,12 @@
           <div class="nav">
             <a class="nav-logo-link"><svg class="nav-logo"><use href="#nav-logo-h"/></svg></a>
             <div class="nav-spacer"></div>
-            <div class="nav-cart">Carrinho <span class="count">0</span></div>
-            <div class="avatar" style="background: var(--brand-500); width: 32px; height: 32px; font-size: 12px;"><img src="https://i.pravatar.cc/150?img=33" alt="LA" loading="lazy"></div>
+            <button class="nav-cart" type="button" data-sim-route="/cliente/carrinho">Carrinho <span class="count">0</span></button>
+            <div class="avatar" style="background: var(--brand-500); width: 32px; height: 32px; font-size: 12px;"><img src="https://i.pravatar.cc/150?img=3" alt="LA" loading="lazy"></div>
           </div>
           <div class="acc">
             <aside class="acc-side">
-              <div class="who"><div class="avatar brand"><img src="https://i.pravatar.cc/150?img=33" alt="LA" loading="lazy"></div><div class="info"><h4>Lucas Almeida</h4><p>cliente desde mai/26</p></div></div>
+              <div class="who"><div class="avatar brand"><img src="https://i.pravatar.cc/150?img=3" alt="LA" loading="lazy"></div><div class="info"><h4>Lucas Almeida</h4><p>cliente desde mai/26</p></div></div>
               <div class="lbl">Minha conta</div>
               <a>Início</a>
               <a class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/></svg>Compras<span class="badge b-paid">3</span></a>
@@ -8694,7 +9033,7 @@
               <a class="nav-logo-link"><svg class="nav-logo tiny"><use href="#nav-logo-h"/></svg></a>
               <div style="margin-left: auto; display: flex; gap: 6px; align-items: center;">
                 <span class="badge b-pend" style="font-size: 8px;">3 dias</span>
-                <div class="avatar" style="width: 22px; height: 22px; background: var(--brand-500); font-size: 9px;"><img src="https://i.pravatar.cc/150?img=33" alt="LA" loading="lazy"></div>
+                <div class="avatar" style="width: 22px; height: 22px; background: var(--brand-500); font-size: 9px;"><img src="https://i.pravatar.cc/150?img=3" alt="LA" loading="lazy"></div>
               </div>
             </div>
             <div style="flex: 1; overflow-y: auto; padding: 14px 16px; display: flex; flex-direction: column; gap: 14px;">
@@ -8773,12 +9112,12 @@
           <div class="nav">
             <a class="nav-logo-link"><svg class="nav-logo"><use href="#nav-logo-h"/></svg></a>
             <div class="nav-spacer"></div>
-            <div class="nav-cart">Carrinho <span class="count">0</span></div>
-            <div style="display: flex; align-items: center; gap: 12px;"><span style="font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-700);">lucas@gmail.com</span><div class="avatar" style="background: var(--brand-500); width: 32px; height: 32px; font-size: 12px;"><img src="https://i.pravatar.cc/150?img=33" alt="LA" loading="lazy"></div></div>
+            <button class="nav-cart" type="button" data-sim-route="/cliente/carrinho">Carrinho <span class="count">0</span></button>
+            <div style="display: flex; align-items: center; gap: 12px;"><span style="font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-700);">lucas@gmail.com</span><div class="avatar" style="background: var(--brand-500); width: 32px; height: 32px; font-size: 12px;"><img src="https://i.pravatar.cc/150?img=3" alt="LA" loading="lazy"></div></div>
           </div>
           <div class="acc">
             <aside class="acc-side">
-              <div class="who"><div class="avatar brand"><img src="https://i.pravatar.cc/150?img=33" alt="LA" loading="lazy"></div><div class="info"><h4>Lucas Almeida</h4><p>cliente desde mai/26</p></div></div>
+              <div class="who"><div class="avatar brand"><img src="https://i.pravatar.cc/150?img=3" alt="LA" loading="lazy"></div><div class="info"><h4>Lucas Almeida</h4><p>cliente desde mai/26</p></div></div>
               <div class="lbl">Minha conta</div>
               <a>Início</a>
               <a class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/></svg>Compras<span class="badge b-pend">1</span></a>
@@ -8941,11 +9280,11 @@
           <div class="nav">
             <a class="nav-logo-link"><svg class="nav-logo"><use href="#nav-logo-h"/></svg></a>
             <div class="nav-spacer"></div>
-            <div style="display: flex; align-items: center; gap: 12px;"><span style="font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-700);">lucas@gmail.com</span><div class="avatar" style="background: var(--brand-500); width: 32px; height: 32px; font-size: 12px;"><img src="https://i.pravatar.cc/150?img=33" alt="LA" loading="lazy"></div></div>
+            <div style="display: flex; align-items: center; gap: 12px;"><span style="font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-700);">lucas@gmail.com</span><div class="avatar" style="background: var(--brand-500); width: 32px; height: 32px; font-size: 12px;"><img src="https://i.pravatar.cc/150?img=3" alt="LA" loading="lazy"></div></div>
           </div>
           <div class="acc">
             <aside class="acc-side">
-              <div class="who"><div class="avatar brand"><img src="https://i.pravatar.cc/150?img=33" alt="LA" loading="lazy"></div><div class="info"><h4>Lucas Almeida</h4><p>cliente desde mai/26</p></div></div>
+              <div class="who"><div class="avatar brand"><img src="https://i.pravatar.cc/150?img=3" alt="LA" loading="lazy"></div><div class="info"><h4>Lucas Almeida</h4><p>cliente desde mai/26</p></div></div>
               <div class="lbl">Minha conta</div>
               <a>Início</a><a>Compras</a><a>Carrinho</a><a>Salvos &amp; curtidas</a><a>Comentários</a><a>Remoções LGPD</a>
               <div class="lbl">Atalhos</div>
@@ -9054,11 +9393,11 @@
           <div class="nav">
             <a class="nav-logo-link"><svg class="nav-logo"><use href="#nav-logo-h"/></svg></a>
             <div class="nav-spacer"></div>
-            <div style="display: flex; align-items: center; gap: 12px;"><span style="font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-700);">lucas@gmail.com</span><div class="avatar" style="background: var(--brand-500); width: 32px; height: 32px; font-size: 12px;"><img src="https://i.pravatar.cc/150?img=33" alt="LA" loading="lazy"></div></div>
+            <div style="display: flex; align-items: center; gap: 12px;"><span style="font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-700);">lucas@gmail.com</span><div class="avatar" style="background: var(--brand-500); width: 32px; height: 32px; font-size: 12px;"><img src="https://i.pravatar.cc/150?img=3" alt="LA" loading="lazy"></div></div>
           </div>
           <div class="acc">
             <aside class="acc-side">
-              <div class="who"><div class="avatar brand"><img src="https://i.pravatar.cc/150?img=33" alt="LA" loading="lazy"></div><div class="info"><h4>Lucas Almeida</h4><p>cliente desde mai/26</p></div></div>
+              <div class="who"><div class="avatar brand"><img src="https://i.pravatar.cc/150?img=3" alt="LA" loading="lazy"></div><div class="info"><h4>Lucas Almeida</h4><p>cliente desde mai/26</p></div></div>
               <div class="lbl">Minha conta</div>
               <a>Início</a><a>Compras</a><a>Carrinho</a><a>Salvos &amp; curtidas</a><a>Comentários</a><a>Remoções LGPD</a>
               <div class="lbl">Atalhos</div>
@@ -9154,12 +9493,12 @@
           <div class="nav">
             <a class="nav-logo-link"><svg class="nav-logo"><use href="#nav-logo-h"/></svg></a>
             <div class="nav-spacer"></div>
-            <div class="nav-cart">Carrinho <span class="count">0</span></div>
-            <div style="display: flex; align-items: center; gap: 12px;"><span style="font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-700);">lucas@gmail.com</span><div class="avatar" style="background: var(--brand-500); width: 32px; height: 32px; font-size: 12px;"><img src="https://i.pravatar.cc/150?img=33" alt="LA" loading="lazy"></div></div>
+            <button class="nav-cart" type="button" data-sim-route="/cliente/carrinho">Carrinho <span class="count">0</span></button>
+            <div style="display: flex; align-items: center; gap: 12px;"><span style="font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-700);">lucas@gmail.com</span><div class="avatar" style="background: var(--brand-500); width: 32px; height: 32px; font-size: 12px;"><img src="https://i.pravatar.cc/150?img=3" alt="LA" loading="lazy"></div></div>
           </div>
           <div class="acc">
             <aside class="acc-side">
-              <div class="who"><div class="avatar brand"><img src="https://i.pravatar.cc/150?img=33" alt="LA" loading="lazy"></div><div class="info"><h4>Lucas Almeida</h4><p>cliente desde mai/26</p></div></div>
+              <div class="who"><div class="avatar brand"><img src="https://i.pravatar.cc/150?img=3" alt="LA" loading="lazy"></div><div class="info"><h4>Lucas Almeida</h4><p>cliente desde mai/26</p></div></div>
               <div class="lbl">Minha conta</div>
               <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/></svg>Início</a>
               <a class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Compras</a>
@@ -9173,7 +9512,7 @@
               <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>Reconhecimento<span class="badge b-info">beta</span></a>
               <div class="lbl">Conta</div>
               <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/></svg>Configurações</a>
-              <div class="logout"><a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/></svg>Sair</a></div>
+              <div class="logout"><a data-sim-route="__logout__"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/></svg>Sair</a></div>
             </aside>
             <main class="acc-main">
               <div class="page-head">
@@ -9232,12 +9571,12 @@
           <div class="nav">
             <a class="nav-logo-link"><svg class="nav-logo"><use href="#nav-logo-h"/></svg></a>
             <div class="nav-spacer"></div>
-            <div class="nav-cart">Carrinho <span class="count">0</span></div>
-            <div style="display: flex; align-items: center; gap: 12px;"><span style="font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-700);">lucas@gmail.com</span><div class="avatar" style="background: var(--brand-500); width: 32px; height: 32px; font-size: 12px;"><img src="https://i.pravatar.cc/150?img=33" alt="LA" loading="lazy"></div></div>
+            <button class="nav-cart" type="button" data-sim-route="/cliente/carrinho">Carrinho <span class="count">0</span></button>
+            <div style="display: flex; align-items: center; gap: 12px;"><span style="font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-700);">lucas@gmail.com</span><div class="avatar" style="background: var(--brand-500); width: 32px; height: 32px; font-size: 12px;"><img src="https://i.pravatar.cc/150?img=3" alt="LA" loading="lazy"></div></div>
           </div>
           <div class="acc">
             <aside class="acc-side">
-              <div class="who"><div class="avatar brand"><img src="https://i.pravatar.cc/150?img=33" alt="LA" loading="lazy"></div><div class="info"><h4>Lucas Almeida</h4><p>cliente desde mai/26</p></div></div>
+              <div class="who"><div class="avatar brand"><img src="https://i.pravatar.cc/150?img=3" alt="LA" loading="lazy"></div><div class="info"><h4>Lucas Almeida</h4><p>cliente desde mai/26</p></div></div>
               <div class="lbl">Minha conta</div>
               <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"/></svg>Início</a>
               <a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2z"/></svg>Compras</a>
@@ -9319,11 +9658,11 @@
           <div class="nav">
             <a class="nav-logo-link"><svg class="nav-logo"><use href="#nav-logo-h"/></svg></a>
             <div class="nav-spacer"></div>
-            <div style="display: flex; align-items: center; gap: 12px;"><span style="font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-700);">lucas@gmail.com</span><div class="avatar" style="background: var(--brand-500); width: 32px; height: 32px; font-size: 12px;"><img src="https://i.pravatar.cc/150?img=33" alt="LA" loading="lazy"></div></div>
+            <div style="display: flex; align-items: center; gap: 12px;"><span style="font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-700);">lucas@gmail.com</span><div class="avatar" style="background: var(--brand-500); width: 32px; height: 32px; font-size: 12px;"><img src="https://i.pravatar.cc/150?img=3" alt="LA" loading="lazy"></div></div>
           </div>
           <div class="acc">
             <aside class="acc-side">
-              <div class="who"><div class="avatar brand"><img src="https://i.pravatar.cc/150?img=33" alt="LA" loading="lazy"></div><div class="info"><h4>Lucas Almeida</h4><p>cliente desde mai/26</p></div></div>
+              <div class="who"><div class="avatar brand"><img src="https://i.pravatar.cc/150?img=3" alt="LA" loading="lazy"></div><div class="info"><h4>Lucas Almeida</h4><p>cliente desde mai/26</p></div></div>
               <div class="lbl">Minha conta</div>
               <a>Início</a>
               <a>Compras</a>
@@ -9404,11 +9743,11 @@
           <div class="nav">
             <a class="nav-logo-link"><svg class="nav-logo"><use href="#nav-logo-h"/></svg></a>
             <div class="nav-spacer"></div>
-            <div style="display: flex; align-items: center; gap: 12px;"><span style="font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-700);">lucas@gmail.com</span><div class="avatar" style="background: var(--brand-500); width: 32px; height: 32px; font-size: 12px;"><img src="https://i.pravatar.cc/150?img=33" alt="LA" loading="lazy"></div></div>
+            <div style="display: flex; align-items: center; gap: 12px;"><span style="font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-700);">lucas@gmail.com</span><div class="avatar" style="background: var(--brand-500); width: 32px; height: 32px; font-size: 12px;"><img src="https://i.pravatar.cc/150?img=3" alt="LA" loading="lazy"></div></div>
           </div>
           <div class="acc">
             <aside class="acc-side">
-              <div class="who"><div class="avatar brand"><img src="https://i.pravatar.cc/150?img=33" alt="LA" loading="lazy"></div><div class="info"><h4>Lucas Almeida</h4><p>cliente desde mai/26</p></div></div>
+              <div class="who"><div class="avatar brand"><img src="https://i.pravatar.cc/150?img=3" alt="LA" loading="lazy"></div><div class="info"><h4>Lucas Almeida</h4><p>cliente desde mai/26</p></div></div>
               <div class="lbl">Minha conta</div>
               <a>Início</a><a>Compras</a><a>Carrinho</a><a>Salvos &amp; curtidas</a><a>Comentários</a><a>Remoções LGPD</a>
               <div class="lbl">Atalhos</div>
@@ -9500,12 +9839,12 @@
           <div class="nav">
             <a class="nav-logo-link"><svg class="nav-logo"><use href="#nav-logo-h"/></svg></a>
             <div class="nav-spacer"></div>
-            <div class="nav-cart">Carrinho <span class="count">2</span></div>
-            <div style="display: flex; align-items: center; gap: 12px;"><span style="font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-700);">lucas@gmail.com</span><div class="avatar" style="background: var(--brand-500); width: 32px; height: 32px; font-size: 12px;"><img src="https://i.pravatar.cc/150?img=33" alt="LA" loading="lazy"></div></div>
+            <button class="nav-cart" type="button" data-sim-route="/cliente/carrinho">Carrinho <span class="count">2</span></button>
+            <div style="display: flex; align-items: center; gap: 12px;"><span style="font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-700);">lucas@gmail.com</span><div class="avatar" style="background: var(--brand-500); width: 32px; height: 32px; font-size: 12px;"><img src="https://i.pravatar.cc/150?img=3" alt="LA" loading="lazy"></div></div>
           </div>
           <div class="acc" style="filter: blur(2px) brightness(.55); pointer-events: none; user-select: none;">
             <aside class="acc-side">
-              <div class="who"><div class="avatar brand"><img src="https://i.pravatar.cc/150?img=33" alt="LA" loading="lazy"></div><div class="info"><h4>Lucas Almeida</h4><p>cliente desde mai/26</p></div></div>
+              <div class="who"><div class="avatar brand"><img src="https://i.pravatar.cc/150?img=3" alt="LA" loading="lazy"></div><div class="info"><h4>Lucas Almeida</h4><p>cliente desde mai/26</p></div></div>
               <div class="lbl">Minha conta</div>
               <a class="active">Início</a>
               <a>Compras<span class="badge b-paid">3</span></a>
@@ -9542,7 +9881,7 @@
               <strong style="font-size: 14px;">Sua sessão expirou.</strong>
               <span style="font-size: 12.5px; margin-left: 6px;">Faça login para continuar — redirecionando em <span style="font-family: var(--font-mono); font-weight: 600;">3s</span>.</span>
             </div>
-            <button class="btn sm" type="button" style="background: var(--ink-1000); color: var(--ink-100); border-color: var(--ink-1000);">Fazer login agora</button>
+            <button class="btn sm" type="button" data-sim-route="/login" style="background: var(--ink-1000); color: var(--ink-100); border-color: var(--ink-1000);">Fazer login agora</button>
             <button class="btn sm" type="button" style="background: transparent; border-color: var(--signal-text); color: var(--signal-text);">Ficar aqui</button>
           </div>
 
@@ -9555,8 +9894,8 @@
               <h3 style="font-size: 18px; font-weight: 500; margin: 0 0 6px; color: var(--ink-1000);">Sessão expirada</h3>
               <p style="font-size: 12.5px; color: var(--ink-800); margin: 0 0 18px; line-height: 1.5;">Por segurança, encerramos sua sessão após 30 minutos de inatividade. Refaça o login para continuar de onde parou — seu carrinho e favoritos foram salvos.</p>
               <div style="display: flex; gap: 8px; justify-content: center;">
-                <button class="btn primary" type="button">Fazer login</button>
-                <button class="btn" type="button">Voltar ao site público</button>
+                <button class="btn primary" type="button" data-sim-route="/login">Fazer login</button>
+                <button class="btn" type="button" data-sim-route="/">Voltar ao site público</button>
               </div>
               <div style="margin-top: 14px; font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-700); letter-spacing: .08em;">redirecionando automaticamente em 3 segundos</div>
             </div>
@@ -9644,7 +9983,7 @@
                 <h5>Vinícius Souza</h5>
                 <p>Fotógrafo · Admin</p>
               </div>
-              <a class="switch-btn">↻</a>
+              <a class="switch-btn" data-sim-route="__logout__" title="Sair">↻</a>
             </div>
           </aside>
           <main class="adm-main">
@@ -9655,7 +9994,7 @@
               </div>
               <div class="actions">
                 <button class="btn">Exportar relatório</button>
-                <button class="btn primary">+ Novo evento</button>
+                <button class="btn primary" type="button" data-sim-route="/admin/eventos/novo">+ Novo evento</button>
               </div>
             </div>
 
@@ -9794,7 +10133,7 @@
               <div class="sub">— 17 ABR 18:42 · SQLITE / WAL —</div>
               <div class="actions">
                 <button class="btn sm">Exportar</button>
-                <button class="btn primary sm">+ Novo evento</button>
+                <button class="btn primary sm" type="button" data-sim-route="/admin/eventos/novo">+ Novo evento</button>
               </div>
             </div>
             <div style="margin: 12px 14px; padding: 10px 12px; background: var(--signal-dim); border: 1px solid rgba(34,197,94,.3); border-radius: var(--radius); display: flex; gap: 8px; align-items: center; font-size: 11.5px; color: var(--ink-1000); line-height: 1.4;">
@@ -9895,7 +10234,7 @@
           <nav class="adm-crumbs"><span>Painel</span><span class="sep">/</span><span>Visão</span><span class="sep">/</span><span class="here">Estatísticas</span></nav>
           <div class="adm-search-mini"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/></svg><input placeholder="Buscar…"/><span class="kbd">⌘K</span></div>
           <div class="adm-icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18z"/></svg></div>
-          <div class="adm-avatar-pill"><div class="avatar" style="width:26px;height:26px;font-size:10px;background:var(--brand-500);color:#fff;"><img src="https://i.pravatar.cc/100?img=12" alt="VS" loading="lazy"></div><div><div class="name">Vinícius</div><div class="role">FOTÓGRAFO</div></div></div>
+          <div class="adm-avatar-pill"><div class="avatar" style="width:26px;height:26px;font-size:10px;background:var(--brand-500);color:var(--ink-1000);"><img src="https://i.pravatar.cc/100?img=12" alt="VS" loading="lazy"></div><div><div class="name">Vinícius</div><div class="role">FOTÓGRAFO</div></div></div>
         </div>
         <div class="adm">
           <aside class="adm-side">
@@ -10103,7 +10442,7 @@
           <nav class="adm-crumbs"><span>Painel</span><span class="sep">/</span><span>Conteúdo</span><span class="sep">/</span><span class="here">Eventos / Álbuns</span></nav>
           <div class="adm-search-mini"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/></svg><input placeholder="Buscar…"/><span class="kbd">⌘K</span></div>
           <div class="adm-icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18z"/></svg></div>
-          <div class="adm-avatar-pill"><div class="avatar" style="width:26px;height:26px;font-size:10px;background:var(--brand-500);color:#fff;"><img src="https://i.pravatar.cc/100?img=12" alt="VS" loading="lazy"></div><div><div class="name">Vinícius</div><div class="role">FOTÓGRAFO</div></div></div>
+          <div class="adm-avatar-pill"><div class="avatar" style="width:26px;height:26px;font-size:10px;background:var(--brand-500);color:var(--ink-1000);"><img src="https://i.pravatar.cc/100?img=12" alt="VS" loading="lazy"></div><div><div class="name">Vinícius</div><div class="role">FOTÓGRAFO</div></div></div>
         </div>
         <div class="adm">
           <aside class="adm-side">
@@ -10123,7 +10462,7 @@
               <div><h2>Eventos / Álbuns</h2><div class="sub">— 142 ÁLBUNS · 38.217 FOTOS · 1.402 VÍDEOS —</div></div>
               <div class="actions">
                 <button class="btn">Importar CSV</button>
-                <button class="btn primary">+ Criar evento</button>
+                <button class="btn primary" type="button" data-sim-route="/admin/eventos/novo">+ Criar evento</button>
               </div>
             </div>
 
@@ -10147,8 +10486,8 @@
                     <span class="badge b-pub">PÚBLICO</span>
                   </div>
                   <div style="display: flex; gap: 6px; margin-top: 10px;">
-                    <button class="btn sm primary" style="flex: 1;">Abrir</button>
-                    <button class="btn sm">Editar</button>
+                    <button class="btn sm primary" type="button" data-sim-route="/admin/eventos/123" style="flex: 1;">Abrir</button>
+                    <button class="btn sm" data-sim-route="/admin/eventos/123">Editar</button>
                     <button class="btn sm">⋯</button>
                   </div>
                 </div>
@@ -10163,8 +10502,8 @@
                     <span class="badge b-pub">PÚBLICO</span>
                   </div>
                   <div style="display: flex; gap: 6px; margin-top: 10px;">
-                    <button class="btn sm primary" style="flex: 1;">Abrir</button>
-                    <button class="btn sm">Editar</button>
+                    <button class="btn sm primary" type="button" data-sim-route="/admin/eventos/123" style="flex: 1;">Abrir</button>
+                    <button class="btn sm" data-sim-route="/admin/eventos/123">Editar</button>
                     <button class="btn sm">⋯</button>
                   </div>
                 </div>
@@ -10179,8 +10518,8 @@
                     <span class="badge b-pub">PÚBLICO</span>
                   </div>
                   <div style="display: flex; gap: 6px; margin-top: 10px;">
-                    <button class="btn sm primary" style="flex: 1;">Abrir</button>
-                    <button class="btn sm">Editar</button>
+                    <button class="btn sm primary" type="button" data-sim-route="/admin/eventos/123" style="flex: 1;">Abrir</button>
+                    <button class="btn sm" data-sim-route="/admin/eventos/123">Editar</button>
                     <button class="btn sm">⋯</button>
                   </div>
                 </div>
@@ -10195,8 +10534,8 @@
                     <span class="badge b-priv">PRIVADO</span>
                   </div>
                   <div style="display: flex; gap: 6px; margin-top: 10px;">
-                    <button class="btn sm primary" style="flex: 1;">Abrir</button>
-                    <button class="btn sm">Editar</button>
+                    <button class="btn sm primary" type="button" data-sim-route="/admin/eventos/123" style="flex: 1;">Abrir</button>
+                    <button class="btn sm" data-sim-route="/admin/eventos/123">Editar</button>
                     <button class="btn sm">⋯</button>
                   </div>
                 </div>
@@ -10211,8 +10550,8 @@
                     <span class="badge b-pub">PÚBLICO</span>
                   </div>
                   <div style="display: flex; gap: 6px; margin-top: 10px;">
-                    <button class="btn sm primary" style="flex: 1;">Abrir</button>
-                    <button class="btn sm">Editar</button>
+                    <button class="btn sm primary" type="button" data-sim-route="/admin/eventos/123" style="flex: 1;">Abrir</button>
+                    <button class="btn sm" data-sim-route="/admin/eventos/123">Editar</button>
                     <button class="btn sm">⋯</button>
                   </div>
                 </div>
@@ -10227,8 +10566,8 @@
                     <span class="badge b-pub">PÚBLICO</span>
                   </div>
                   <div style="display: flex; gap: 6px; margin-top: 10px;">
-                    <button class="btn sm primary" style="flex: 1;">Abrir</button>
-                    <button class="btn sm">Editar</button>
+                    <button class="btn sm primary" type="button" data-sim-route="/admin/eventos/123" style="flex: 1;">Abrir</button>
+                    <button class="btn sm" data-sim-route="/admin/eventos/123">Editar</button>
                     <button class="btn sm">⋯</button>
                   </div>
                 </div>
@@ -10284,8 +10623,8 @@
                   <div class="meta"><span>17 abr</span><span>Itajá · GO</span><span class="badge b-pub">PÚBLICO</span></div>
                   <div class="meta"><span>1.581 fotos · 18 vídeos</span></div>
                   <div class="foot">
-                    <button class="btn sm primary">Abrir</button>
-                    <button class="btn sm">Editar</button>
+                    <button class="btn sm primary" type="button" data-sim-route="/admin/eventos/123">Abrir</button>
+                    <button class="btn sm" data-sim-route="/admin/eventos/123">Editar</button>
                   </div>
                 </div>
               </div>
@@ -10296,8 +10635,8 @@
                   <div class="meta"><span>02 abr</span><span>Goiânia · GO</span><span class="badge b-pub">PÚBLICO</span></div>
                   <div class="meta"><span>2.104 fotos · 32 vídeos</span></div>
                   <div class="foot">
-                    <button class="btn sm primary">Abrir</button>
-                    <button class="btn sm">Editar</button>
+                    <button class="btn sm primary" type="button" data-sim-route="/admin/eventos/123">Abrir</button>
+                    <button class="btn sm" data-sim-route="/admin/eventos/123">Editar</button>
                   </div>
                 </div>
               </div>
@@ -10308,8 +10647,8 @@
                   <div class="meta"><span>24 mar</span><span>Anápolis · GO</span><span class="badge b-pub">PÚBLICO</span></div>
                   <div class="meta"><span>3.802 fotos · 14 vídeos</span></div>
                   <div class="foot">
-                    <button class="btn sm primary">Abrir</button>
-                    <button class="btn sm">Editar</button>
+                    <button class="btn sm primary" type="button" data-sim-route="/admin/eventos/123">Abrir</button>
+                    <button class="btn sm" data-sim-route="/admin/eventos/123">Editar</button>
                   </div>
                 </div>
               </div>
@@ -10320,8 +10659,8 @@
                   <div class="meta"><span>15 mar</span><span>Brasília · DF</span><span class="badge b-priv">PRIVADO</span></div>
                   <div class="meta"><span>892 fotos · 6 vídeos</span></div>
                   <div class="foot">
-                    <button class="btn sm primary">Abrir</button>
-                    <button class="btn sm">Editar</button>
+                    <button class="btn sm primary" type="button" data-sim-route="/admin/eventos/123">Abrir</button>
+                    <button class="btn sm" data-sim-route="/admin/eventos/123">Editar</button>
                   </div>
                 </div>
               </div>
@@ -10716,42 +11055,42 @@
                   <div class="info"><h5>Veterinária Boi Forte</h5><p>boiforte.com · cota R$ 6.000</p></div>
                   <span class="badge b-paid">★ OURO</span>
                   <span class="badge b-pub">VISÍVEL</span>
-                  <button class="btn sm">Editar</button>
+                  <button class="btn sm" data-sim-route="/admin/eventos/123">Editar</button>
                 </div>
                 <div class="sponsor-row">
                   <div class="logo" style="overflow:hidden; padding: 0;"><img src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20128%2080%22%3E%3Crect%20width%3D%22128%22%20height%3D%2280%22%20fill%3D%22%23222%22%20rx%3D%224%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22%23aaa%22%20font-family%3D%22-apple-system%2CBlinkMacSystemFont%2C%27Segoe%20UI%27%2CRoboto%2CArial%2Csans-serif%22%20font-weight%3D%22700%22%20font-size%3D%2227.2%22%20letter-spacing%3D%220.5%22%20style%3D%22text-transform%3Auppercase%22%3EGOYAZ%3C%2Ftext%3E%3C%2Fsvg%3E" alt="Rações Goyaz" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:4px;"></div>
                   <div class="info"><h5>Rações Goyaz</h5><p>goyaz.com.br · cota R$ 3.500</p></div>
                   <span class="badge" style="background: var(--ink-300); color: var(--ink-900); border: 1px solid var(--ink-500);">PRATA</span>
                   <span class="badge b-pub">VISÍVEL</span>
-                  <button class="btn sm">Editar</button>
+                  <button class="btn sm" data-sim-route="/admin/eventos/123">Editar</button>
                 </div>
                 <div class="sponsor-row">
                   <div class="logo" style="overflow:hidden; padding: 0;"><img src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20128%2080%22%3E%3Crect%20width%3D%22128%22%20height%3D%2280%22%20fill%3D%22%23222%22%20rx%3D%224%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22%23aaa%22%20font-family%3D%22-apple-system%2CBlinkMacSystemFont%2C%27Segoe%20UI%27%2CRoboto%2CArial%2Csans-serif%22%20font-weight%3D%22700%22%20font-size%3D%2227.2%22%20letter-spacing%3D%220.5%22%20style%3D%22text-transform%3Auppercase%22%3ECAJU%3C%2Ftext%3E%3C%2Fsvg%3E" alt="Cervejaria Caju" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:4px;"></div>
                   <div class="info"><h5>Cervejaria Caju</h5><p>cajubeers.com · cota R$ 2.800</p></div>
                   <span class="badge" style="background: var(--ink-300); color: var(--ink-900); border: 1px solid var(--ink-500);">PRATA</span>
                   <span class="badge b-pub">VISÍVEL</span>
-                  <button class="btn sm">Editar</button>
+                  <button class="btn sm" data-sim-route="/admin/eventos/123">Editar</button>
                 </div>
                 <div class="sponsor-row">
                   <div class="logo" style="overflow:hidden; padding: 0;"><img src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20128%2080%22%3E%3Crect%20width%3D%22128%22%20height%3D%2280%22%20fill%3D%22%23222%22%20rx%3D%224%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22%23888%22%20font-family%3D%22-apple-system%2CBlinkMacSystemFont%2C%27Segoe%20UI%27%2CRoboto%2CArial%2Csans-serif%22%20font-weight%3D%22700%22%20font-size%3D%2225.9%22%20letter-spacing%3D%220.5%22%20style%3D%22text-transform%3Auppercase%22%3EBOA%20SAFRA%3C%2Ftext%3E%3C%2Fsvg%3E" alt="Boa Safra" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:4px;"></div>
                   <div class="info"><h5>Mercado Boa Safra</h5><p>boasafra.com.br · cota R$ 1.200</p></div>
                   <span class="badge" style="background: var(--warning-dim); color: var(--warning-600); border: 1px solid var(--warning-dim);">BRONZE</span>
                   <span class="badge b-pub">VISÍVEL</span>
-                  <button class="btn sm">Editar</button>
+                  <button class="btn sm" data-sim-route="/admin/eventos/123">Editar</button>
                 </div>
                 <div class="sponsor-row">
                   <div class="logo" style="overflow:hidden; padding: 0;"><img src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20128%2080%22%3E%3Crect%20width%3D%22128%22%20height%3D%2280%22%20fill%3D%22%23222%22%20rx%3D%224%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22%23888%22%20font-family%3D%22-apple-system%2CBlinkMacSystemFont%2C%27Segoe%20UI%27%2CRoboto%2CArial%2Csans-serif%22%20font-weight%3D%22700%22%20font-size%3D%2225.9%22%20letter-spacing%3D%220.5%22%20style%3D%22text-transform%3Auppercase%22%3ELAVA-JATO%3C%2Ftext%3E%3C%2Fsvg%3E" alt="Lava-Jato Itajá" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:4px;"></div>
                   <div class="info"><h5>Lava-Jato Itajá</h5><p>— · cota R$ 800</p></div>
                   <span class="badge" style="background: var(--warning-dim); color: var(--warning-600); border: 1px solid var(--warning-dim);">BRONZE</span>
                   <span class="badge b-priv">OCULTO</span>
-                  <button class="btn sm">Editar</button>
+                  <button class="btn sm" data-sim-route="/admin/eventos/123">Editar</button>
                 </div>
                 <div class="sponsor-row">
                   <div class="logo" style="overflow:hidden; padding: 0;"><img src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20128%2080%22%3E%3Crect%20width%3D%22128%22%20height%3D%2280%22%20fill%3D%22%231a1a1a%22%20rx%3D%224%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22%23666%22%20font-family%3D%22-apple-system%2CBlinkMacSystemFont%2C%27Segoe%20UI%27%2CRoboto%2CArial%2Csans-serif%22%20font-weight%3D%22700%22%20font-size%3D%2227.2%22%20letter-spacing%3D%220.5%22%20style%3D%22text-transform%3Auppercase%22%3EFM%20102.5%3C%2Ftext%3E%3C%2Fsvg%3E" alt="FM Rural" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:4px;"></div>
                   <div class="info"><h5>FM 102.5 Rural</h5><p>fmrural.com.br · permuta</p></div>
                   <span class="badge b-soft">APOIO</span>
                   <span class="badge b-pub">VISÍVEL</span>
-                  <button class="btn sm">Editar</button>
+                  <button class="btn sm" data-sim-route="/admin/eventos/123">Editar</button>
                 </div>
               </div>
             </div>
@@ -10875,7 +11214,7 @@
             </div>
             <div style="margin-top: 14px; display: flex; gap: 8px; justify-content: end;">
               <button class="btn">Cancelar</button>
-              <button class="btn primary">Criar evento &amp; ir para upload →</button>
+              <button class="btn primary" type="button" data-sim-route="/admin/eventos/123-upload">Criar evento &amp; ir para upload →</button>
             </div>
           </div>
         </div>
@@ -11030,7 +11369,7 @@
           <nav class="adm-crumbs"><span>Painel</span><span class="sep">/</span><span>Vendas</span><span class="sep">/</span><span class="here">Pedidos</span></nav>
           <div class="adm-search-mini" style="margin-left: auto;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/></svg><input placeholder="Buscar pedido por ID, cliente…"/></div>
           <div class="adm-icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18z"/></svg></div>
-          <div class="adm-avatar-pill"><div class="avatar" style="width:26px;height:26px;font-size:10px;background:var(--brand-500);color:#fff;"><img src="https://i.pravatar.cc/100?img=12" alt="VS" loading="lazy"></div><div><div class="name">Vinícius</div><div class="role">FOTÓGRAFO</div></div></div>
+          <div class="adm-avatar-pill"><div class="avatar" style="width:26px;height:26px;font-size:10px;background:var(--brand-500);color:var(--ink-1000);"><img src="https://i.pravatar.cc/100?img=12" alt="VS" loading="lazy"></div><div><div class="name">Vinícius</div><div class="role">FOTÓGRAFO</div></div></div>
         </div>
         <div class="adm">
           <aside class="adm-side">
@@ -11416,7 +11755,7 @@
             <input placeholder="Buscar cliente…" style="width: 100%; margin-bottom: 12px;"/>
             <div class="ac">
               <table class="tbl"><thead><tr><th>Cliente</th><th>Compras</th><th style="text-align: right;">LTV</th></tr></thead><tbody>
-                <tr><td><div style="display:flex;gap:8px;align-items:center;"><div class="avatar" style="width:26px;height:26px;font-size:11px;background:var(--brand-500);color:#fff;">MF</div><div><div>Maria F. Silva</div><div style="font-family:var(--font-mono);font-size:10px;color:var(--ink-700);">5 eventos</div></div></div></td><td class="num">22</td><td class="num" style="text-align:right;color:var(--signal-500);">R$ 642</td></tr>
+                <tr><td><div style="display:flex;gap:8px;align-items:center;"><div class="avatar" style="width:26px;height:26px;font-size:11px;background:var(--brand-500);color:var(--ink-1000);">MF</div><div><div>Maria F. Silva</div><div style="font-family:var(--font-mono);font-size:10px;color:var(--ink-700);">5 eventos</div></div></div></td><td class="num">22</td><td class="num" style="text-align:right;color:var(--signal-500);">R$ 642</td></tr>
                 <tr><td><div style="display:flex;gap:8px;align-items:center;"><div class="avatar" style="width:26px;height:26px;font-size:11px;">JM</div><div><div>João M. Santos</div><div style="font-family:var(--font-mono);font-size:10px;color:var(--ink-700);">3 eventos</div></div></div></td><td class="num">14</td><td class="num" style="text-align:right;color:var(--signal-500);">R$ 488</td></tr>
                 <tr><td><div style="display:flex;gap:8px;align-items:center;"><div class="avatar" style="width:26px;height:26px;font-size:11px;">AL</div><div><div>Ana L. Pereira</div><div style="font-family:var(--font-mono);font-size:10px;color:var(--ink-700);">4 eventos · <span class="badge b-new" style="font-size:8px;padding:1px 5px;">NOVA</span></div></div></div></td><td class="num">8</td><td class="num" style="text-align:right;color:var(--signal-500);">R$ 412</td></tr>
                 <tr><td><div style="display:flex;gap:8px;align-items:center;"><div class="avatar" style="width:26px;height:26px;font-size:11px;">RR</div><div><div>Rafael R. Costa</div><div style="font-family:var(--font-mono);font-size:10px;color:var(--ink-700);">2 eventos</div></div></div></td><td class="num">6</td><td class="num" style="text-align:right;color:var(--signal-500);">R$ 366</td></tr>
@@ -12999,7 +13338,7 @@
                 </div>
                 <div class="adm-stat">
                   <div class="top"><span class="lbl">Falhas</span></div>
-                  <div class="v" style="color: var(--signal-500);">1</div>
+                  <div class="v" style="color: var(--danger-500);">1</div>
                   <div class="delta down">3/3 tentativas esgotadas</div>
                 </div>
               </div>
@@ -13042,9 +13381,9 @@
                       <td><span class="type-mono" style="color: var(--brand-400);">video-preview-wm</span></td>
                       <td>Circuito Praia</td>
                       <td><span class="badge b-cancel">failed</span></td>
-                      <td class="mono" style="color: var(--signal-500);">3/3</td>
+                      <td class="mono" style="color: var(--danger-500);">3/3</td>
                       <td class="mono">14/05 09:29 · há 5min</td>
-                      <td style="font-family: var(--font-mono); font-size: 11px; color: var(--signal-500);">ffmpeg timeout após 240s</td>
+                      <td style="font-family: var(--font-mono); font-size: 11px; color: var(--danger-500);">ffmpeg timeout após 240s</td>
                       <td style="display: flex; gap: 4px;"><button class="btn sm primary">Tentar novamente</button><button class="btn sm">Ver log</button></td>
                     </tr>
                     <tr>
@@ -13100,7 +13439,7 @@
             <div class="m-adm-stats">
               <div class="m-adm-stat"><div class="lbl">Pendentes</div><div class="v warn">2</div><div class="delta">aguardando</div></div>
               <div class="m-adm-stat"><div class="lbl">Processando</div><div class="v brand">2</div><div class="delta">2 workers</div></div>
-              <div class="m-adm-stat"><div class="lbl">Falhas</div><div class="v" style="color: var(--signal-500);">1</div><div class="delta">3/3 esgotadas</div></div>
+              <div class="m-adm-stat"><div class="lbl">Falhas</div><div class="v" style="color: var(--danger-500);">1</div><div class="delta">3/3 esgotadas</div></div>
             </div>
             <div class="m-adm-chips">
               <span class="chip active">Todos · 5</span>
@@ -13111,7 +13450,7 @@
             <div class="m-adm-row"><div><h5 style="font-family: var(--font-mono); font-size: 11px; color: var(--brand-400);">job_005 · video-preview-wm</h5><div class="meta"><span>Pedalada Verão</span><span>2/3</span><span class="badge b-info">PROC</span></div></div></div>
             <div class="m-adm-row"><div><h5 style="font-family: var(--font-mono); font-size: 11px; color: var(--brand-400);">job_002 · video-poster</h5><div class="meta"><span>Cross Games E3</span><span>0/3</span><span class="badge b-pend">PEND</span></div></div></div>
             <div class="m-adm-row"><div><h5 style="font-family: var(--font-mono); font-size: 11px; color: var(--brand-400);">job_004 · photo-derivatives</h5><div class="meta"><span>Casamento M&amp;L</span><span>0/3</span><span class="badge b-pend">PEND</span></div></div></div>
-            <div class="m-adm-row"><div><h5 style="font-family: var(--font-mono); font-size: 11px; color: var(--brand-400);">job_003 · video-preview-wm</h5><div class="meta"><span>Circuito Praia</span><span style="color: var(--signal-500);">3/3</span><span class="badge b-cancel">FAIL</span><span style="color: var(--signal-500);">ffmpeg timeout 240s</span></div></div><button class="btn sm primary">Retry</button></div>
+            <div class="m-adm-row"><div><h5 style="font-family: var(--font-mono); font-size: 11px; color: var(--brand-400);">job_003 · video-preview-wm</h5><div class="meta"><span>Circuito Praia</span><span style="color: var(--danger-500);">3/3</span><span class="badge b-cancel">FAIL</span><span style="color: var(--danger-500);">ffmpeg timeout 240s</span></div></div><button class="btn sm primary">Retry</button></div>
             <div style="text-align: center; padding: 12px 14px 24px; font-family: var(--font-mono); font-size: 10px; color: var(--ink-700); line-height: 1.6;">MAX_ATTEMPTS=3 · WORKER PERSISTIDO<br/>data/jobs.json · *.partial DESCARTADO NO BOOT</div>
           </div>
         </div>
@@ -13246,7 +13585,7 @@
                 </div>
                 <div class="actions">
                   <button class="btn">Importar de outra plataforma</button>
-                  <button class="btn primary">+ Novo evento</button>
+                  <button class="btn primary" type="button" data-sim-route="/admin/eventos/novo">+ Novo evento</button>
                 </div>
               </div>
 
@@ -13298,7 +13637,7 @@
                     <p style="margin: 0; font-size: 13.5px; color: var(--ink-800); max-width: 520px; line-height: 1.5;">Crie seu primeiro álbum para começar a vender fotos e vídeos. Você pode importar fotos depois e ajustar preço por evento.</p>
                   </div>
                   <div style="display: flex; gap: 12px; margin-top: 4px;">
-                    <a class="btn primary" style="padding: 14px 28px; font-size: 14px;">
+                    <a class="btn primary" data-sim-route="/admin/eventos/novo" style="padding: 14px 28px; font-size: 14px;">
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="margin-right: 6px; vertical-align: -2px;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                       Criar primeiro álbum
                     </a>
@@ -13820,19 +14159,19 @@
             </aside>
             <main class="adm-main">
               <div style="padding: 80px 32px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 24px;">
-                <div style="width: 120px; height: 120px; border-radius: 50%; background: rgba(239,68,68,.08); border: 2px solid var(--signal-500); display: grid; place-items: center; color: var(--signal-500);">
+                <div style="width: 120px; height: 120px; border-radius: 50%; background: var(--danger-dim); border: 2px solid var(--danger-500); display: grid; place-items: center; color: var(--danger-500);">
                   <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
                     <rect x="3" y="11" width="18" height="11" rx="2"/>
                     <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                   </svg>
                 </div>
-                <div style="font-family: var(--font-mono); font-size: 92px; font-weight: 600; color: var(--signal-500); letter-spacing: -.04em; line-height: 1;">403</div>
+                <div style="font-family: var(--font-mono); font-size: 92px; font-weight: 600; color: var(--danger-500); letter-spacing: -.04em; line-height: 1;">403</div>
                 <div>
                   <h2 style="margin: 0 0 10px; font-size: 26px; color: var(--ink-1000);">Acesso restrito</h2>
                   <p style="margin: 0 auto; font-size: 14px; color: var(--ink-800); max-width: 520px; line-height: 1.55;">Esta área é apenas para administradores plenos. Como colaborador, você não tem permissão para acessar. Se acha que é um engano, fale com o fotógrafo responsável pelo evento.</p>
                 </div>
                 <div style="display: flex; gap: 10px; margin-top: 12px;">
-                  <a class="btn primary" style="padding: 12px 26px; font-size: 13.5px;">
+                  <a class="btn primary" data-sim-route="/admin" style="padding: 12px 26px; font-size: 13.5px;">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="margin-right: 6px; vertical-align: -2px;"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
                     Voltar ao painel
                   </a>
@@ -13882,7 +14221,18 @@
 <div class="sim-lightbox-overlay" id="simLightbox" role="dialog" aria-label="Visualizar foto">
   <button class="lb-close" id="lbClose" type="button" aria-label="Fechar">×</button>
   <div class="lb-meta" id="lbMeta">REF #0001</div>
+  <button class="lb-fav-btn" id="lbFav" type="button" aria-label="Favoritar" title="Salvar nos favoritos">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+  </button>
   <img class="lb-photo" id="lbPhoto" src="" alt="">
+  <div class="lb-price-pill" id="lbPrice">
+    <span class="tier-label">Padrão</span>
+    <strong id="lbPriceValue">R$ 28,80</strong>
+  </div>
+  <button class="lb-heart-pill" id="lbHeart" type="button" aria-label="Curtir foto">
+    <span class="hp-count" id="lbHeartCount">247</span>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+  </button>
   <div class="lb-nav">
     <button id="lbPrev" type="button">← Anterior</button>
     <button id="lbAdd" type="button">+ Adicionar ao carrinho</button>
@@ -13920,7 +14270,7 @@
 <script>
 const TOC = [{"route":"/","mode":"public","label":"Public · Home Desktop","hasDesktop":true,"hasMobile":true},{"route":"/evento/safra-2026","mode":"public","label":"Public · Event Gallery","hasDesktop":true,"hasMobile":true},{"route":"/foto/safra-2026/0421","mode":"public","label":"Public · Lightbox Foto","hasDesktop":true,"hasMobile":true},{"route":"/video/safra-2026/v07","mode":"public","label":"Public · Lightbox Vídeo Mobile","hasDesktop":true,"hasMobile":true},{"route":"/carrinho","mode":"public","label":"Public · Cart Review","hasDesktop":true,"hasMobile":true},{"route":"/checkout","mode":"public","label":"Public · Checkout Desktop","hasDesktop":true,"hasMobile":true},{"route":"/checkout/pix","mode":"public","label":"Public · Checkout PIX Aguardando","hasDesktop":true,"hasMobile":true},{"route":"/checkout/boleto","mode":"public","label":"Public · Checkout Boleto Gerado","hasDesktop":true,"hasMobile":true},{"route":"/checkout/confirmado","mode":"public","label":"Public · Confirmation","hasDesktop":true,"hasMobile":true},{"route":"/compras-guest","mode":"public","label":"Public · Compras Guest","hasDesktop":true,"hasMobile":true},{"route":"/login","mode":"public","label":"Public · Login","hasDesktop":true,"hasMobile":true},{"route":"/cadastro","mode":"public","label":"Public · Cadastro","hasDesktop":true,"hasMobile":true},{"route":"/recuperar-senha","mode":"public","label":"Public · Trocar Senha","hasDesktop":true,"hasMobile":true},{"route":"/contato","mode":"public","label":"Public · Contato","hasDesktop":true,"hasMobile":true},{"route":"/autenticidade","mode":"public","label":"Public · Autenticidade","hasDesktop":true,"hasMobile":true},{"route":"/termos","mode":"public","label":"Public · Termos","hasDesktop":true,"hasMobile":true},{"route":"/privacidade","mode":"public","label":"Public · Privacidade","hasDesktop":true,"hasMobile":true},{"route":"/cookies","mode":"public","label":"Public · Cookies","hasDesktop":true,"hasMobile":true},{"route":"/cadastro-sucesso","mode":"public","label":"Public · Cadastro Sucesso","hasDesktop":true,"hasMobile":true},{"route":"/carrinho-vazio","mode":"public","label":"Public · Carrinho Vazio","hasDesktop":true,"hasMobile":true},{"route":"/evento-sem-fotos","mode":"public","label":"Public · Evento Sem Fotos","hasDesktop":true,"hasMobile":true},{"route":"/evento-privado","mode":"public","label":"Public · Evento Privado","hasDesktop":true,"hasMobile":true},{"route":"/busca-sem-resultado","mode":"public","label":"Public · Galeria Busca Sem Resultado","hasDesktop":true,"hasMobile":true},{"route":"/checkout/recusado","mode":"public","label":"Public · Checkout Pagamento Recusado","hasDesktop":true,"hasMobile":true},{"route":"/conta-bloqueada","mode":"public","label":"Public · Conta Bloqueada","hasDesktop":true,"hasMobile":true},{"route":"/404","mode":"public","label":"Public · 404","hasDesktop":true,"hasMobile":true},{"route":"/500","mode":"public","label":"Public · 500 Erro Servidor","hasDesktop":true,"hasMobile":true},{"route":"/manutencao","mode":"public","label":"Public · Manutenção","hasDesktop":true,"hasMobile":true},{"route":"/cliente","mode":"cliente","label":"Cliente · Dashboard Desktop","hasDesktop":true,"hasMobile":true},{"route":"/cliente/compras","mode":"cliente","label":"Cliente · Compras","hasDesktop":true,"hasMobile":true},{"route":"/cliente/compras/123","mode":"cliente","label":"Cliente · Detalhe Compra","hasDesktop":true,"hasMobile":true},{"route":"/cliente/carrinho","mode":"cliente","label":"Cliente · Carrinho","hasDesktop":true,"hasMobile":true},{"route":"/cliente/favoritos","mode":"cliente","label":"Cliente · Favoritos","hasDesktop":true,"hasMobile":true},{"route":"/cliente/comentarios","mode":"cliente","label":"Cliente · Comentários","hasDesktop":true,"hasMobile":true},{"route":"/cliente/notificacoes","mode":"cliente","label":"Cliente · Notificações","hasDesktop":true,"hasMobile":true},{"route":"/cliente/chat","mode":"cliente","label":"Cliente · Chat","hasDesktop":true,"hasMobile":true},{"route":"/cliente/reconhecimento","mode":"cliente","label":"Cliente · Reconhecimento","hasDesktop":true,"hasMobile":true},{"route":"/cliente/recompensas","mode":"cliente","label":"Cliente · Recompensas","hasDesktop":true,"hasMobile":true},{"route":"/cliente/configuracoes","mode":"cliente","label":"Cliente · Configurações","hasDesktop":true,"hasMobile":true},{"route":"/cliente/remocoes","mode":"cliente","label":"Cliente · Remoções LGPD","hasDesktop":true,"hasMobile":true},{"route":"/cliente/downloads-expirando","mode":"cliente","label":"Cliente · Downloads Expirando","hasDesktop":true,"hasMobile":true},{"route":"/cliente/compras/124-reembolso","mode":"cliente","label":"Cliente · Detalhe Compra · Reembolso","hasDesktop":true,"hasMobile":true},{"route":"/cliente/reconhecimento-consent","mode":"cliente","label":"Cliente · Reconhecimento Pre-Consent","hasDesktop":true,"hasMobile":true},{"route":"/cliente/reconhecimento-vazio","mode":"cliente","label":"Cliente · Reconhecimento Sem Referências","hasDesktop":true,"hasMobile":true},{"route":"/cliente/compras-vazio","mode":"cliente","label":"Cliente · Compras Vazio","hasDesktop":true,"hasMobile":true},{"route":"/cliente/favoritos-vazio","mode":"cliente","label":"Cliente · Favoritos Vazio","hasDesktop":true,"hasMobile":true},{"route":"/cliente/comentarios-vazio","mode":"cliente","label":"Cliente · Comentários Vazio","hasDesktop":true,"hasMobile":true},{"route":"/cliente/notificacoes-vazio","mode":"cliente","label":"Cliente · Notificações Vazio","hasDesktop":true,"hasMobile":true},{"route":"/cliente/sessao-expirada","mode":"cliente","label":"Cliente · Sessão Expirada","hasDesktop":true,"hasMobile":true},{"route":"/admin","mode":"admin","label":"Admin · Dashboard","hasDesktop":true,"hasMobile":true},{"route":"/admin/estatisticas","mode":"admin","label":"Admin · Estatísticas","hasDesktop":true,"hasMobile":true},{"route":"/admin/eventos","mode":"admin","label":"Admin · Eventos","hasDesktop":true,"hasMobile":true},{"route":"/admin/eventos/123","mode":"admin","label":"Admin · Detalhe Evento","hasDesktop":true,"hasMobile":true},{"route":"/admin/eventos/123-videos","mode":"admin","label":"Admin · Detalhe Evento (Vídeos)","hasDesktop":true,"hasMobile":true},{"route":"/admin/eventos/123-patrocinadores","mode":"admin","label":"Admin · Detalhe Evento (Patrocinadores)","hasDesktop":true,"hasMobile":true},{"route":"/admin/eventos/novo","mode":"admin","label":"Admin · Criar Evento","hasDesktop":true,"hasMobile":true},{"route":"/admin/eventos/123-upload","mode":"admin","label":"Admin · Upload Fotos","hasDesktop":true,"hasMobile":true},{"route":"/admin/pedidos","mode":"admin","label":"Admin · Pedidos","hasDesktop":true,"hasMobile":true},{"route":"/admin/carrinhos","mode":"admin","label":"Admin · Carrinhos","hasDesktop":true,"hasMobile":true},{"route":"/admin/cupons","mode":"admin","label":"Admin · Cupons","hasDesktop":true,"hasMobile":true},{"route":"/admin/propostas","mode":"admin","label":"Admin · Propostas","hasDesktop":true,"hasMobile":true},{"route":"/admin/repasses","mode":"admin","label":"Admin · Repasses","hasDesktop":true,"hasMobile":true},{"route":"/admin/clientes","mode":"admin","label":"Admin · Clientes","hasDesktop":true,"hasMobile":true},{"route":"/admin/colaboradores","mode":"admin","label":"Admin · Colaboradores","hasDesktop":true,"hasMobile":true},{"route":"/admin/chat","mode":"admin","label":"Admin · Chat","hasDesktop":true,"hasMobile":true},{"route":"/admin/comentarios","mode":"admin","label":"Admin · Comentários","hasDesktop":true,"hasMobile":true},{"route":"/admin/contatos","mode":"admin","label":"Admin · Contatos","hasDesktop":true,"hasMobile":true},{"route":"/admin/remocoes","mode":"admin","label":"Admin · Remoções","hasDesktop":true,"hasMobile":true},{"route":"/admin/marca-dagua","mode":"admin","label":"Admin · Marca d'água","hasDesktop":true,"hasMobile":true},{"route":"/admin/personalizar","mode":"admin","label":"Admin · Personalizar","hasDesktop":true,"hasMobile":true},{"route":"/admin/configuracoes","mode":"admin","label":"Admin · Configurações","hasDesktop":true,"hasMobile":true},{"route":"/admin/notificacoes","mode":"admin","label":"Admin · Notificações","hasDesktop":true,"hasMobile":true},{"route":"/admin/reconhecimento","mode":"admin","label":"Admin · Reconhecimento","hasDesktop":true,"hasMobile":true},{"route":"/admin/recompensas","mode":"admin","label":"Admin · Recompensas","hasDesktop":true,"hasMobile":true},{"route":"/admin/storage","mode":"admin","label":"Admin · Storage","hasDesktop":true,"hasMobile":true},{"route":"/admin/logs","mode":"admin","label":"Admin · Logs & auditoria","hasDesktop":true,"hasMobile":true},{"route":"/admin/jobs","mode":"admin","label":"Admin · Fila de Jobs","hasDesktop":true,"hasMobile":true},{"route":"/admin/eventos-sem-fotos","mode":"admin","label":"Admin · Evento Sem Fotos","hasDesktop":true,"hasMobile":true},{"route":"/admin/dashboard-vazio","mode":"admin","label":"Admin · Dashboard Vazio","hasDesktop":true,"hasMobile":true},{"route":"/admin/pedidos/reembolso","mode":"admin","label":"Admin · Pedido com Reembolso","hasDesktop":true,"hasMobile":true},{"route":"/admin/comentarios/moderacao","mode":"admin","label":"Admin · Comentário em Moderação","hasDesktop":true,"hasMobile":true},{"route":"/admin/reset","mode":"admin","label":"Admin · Reset","hasDesktop":true,"hasMobile":true},{"route":"/admin/403","mode":"admin","label":"Admin · 403 Sem Permissão","hasDesktop":true,"hasMobile":true}];
 const CANONICAL_CLIENT_SIDEBAR_HTML = "\n<div class=\"who\">\n  <div class=\"avatar brand\"><img src=\"https://i.pravatar.cc/100?img=12\" alt=\"VS\" loading=\"lazy\"></div>\n  <div class=\"info\">\n    <h4 class=\"sim-user-name\">Vinícius Souza</h4>\n    <p>cliente desde mar/26</p>\n  </div>\n</div>\n<div class=\"lbl\">Minha conta</div><a data-sim-route=\"/cliente\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Início</a><a data-sim-route=\"/cliente/compras\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Compras<span class=\"badge b-paid\">12</span></a><a data-sim-route=\"/cliente/carrinho\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Carrinho<span class=\"badge b-info\">2</span></a><a data-sim-route=\"/cliente/favoritos\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Salvos &amp; curtidas</a><a data-sim-route=\"/cliente/comentarios\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Comentários</a><a data-sim-route=\"/cliente/remocoes\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Remoções LGPD</a><div class=\"lbl\">Atalhos</div><a data-sim-route=\"/cliente/notificacoes\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Notificações<span class=\"badge b-info\">3</span></a><a data-sim-route=\"/cliente/chat\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Chat</a><a data-sim-route=\"/cliente/reconhecimento\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Reconhecimento<span class=\"badge b-info\">beta</span></a><div class=\"lbl\">Conta</div><a data-sim-route=\"/cliente/configuracoes\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Configurações</a>\n<div class=\"logout\">\n  <a data-sim-route=\"__logout__\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Sair</a>\n</div>";
-const CANONICAL_ADMIN_SIDEBAR_HTML = "\n<div class=\"lbl\">Visão</div><a data-sim-route=\"/admin\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Dashboard</a><a data-sim-route=\"/admin/estatisticas\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Estatísticas</a><div class=\"lbl\">Conteúdo</div><a data-sim-route=\"/admin/eventos\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Eventos / Álbuns<span class=\"badge b-info\">142</span></a><a data-sim-route=\"/admin/eventos/novo\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Criar evento</a><a data-sim-route=\"/admin/eventos/123-upload\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Upload de fotos</a><div class=\"lbl\">Vendas</div><a data-sim-route=\"/admin/pedidos\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Pedidos<span class=\"badge b-pend\">3</span></a><a data-sim-route=\"/admin/carrinhos\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Carrinhos abertos<span class=\"badge b-info\">9</span></a><a data-sim-route=\"/admin/cupons\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Cupons</a><a data-sim-route=\"/admin/propostas\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Propostas<span class=\"badge b-info\">2</span></a><a data-sim-route=\"/admin/repasses\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Repasses</a><div class=\"lbl\">Pessoas</div><a data-sim-route=\"/admin/clientes\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Clientes</a><a data-sim-route=\"/admin/colaboradores\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Colaboradores</a><a data-sim-route=\"/admin/chat\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Chat<span class=\"badge b-info\">2</span></a><div class=\"lbl\">Moderação</div><a data-sim-route=\"/admin/comentarios\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Comentários<span class=\"badge b-pend\">5</span></a><a data-sim-route=\"/admin/contatos\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Contatos<span class=\"badge b-pend\">3</span></a><a data-sim-route=\"/admin/remocoes\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Remoções LGPD<span class=\"badge b-pend\">1</span></a><div class=\"lbl\">Sistema</div><a data-sim-route=\"/admin/marca-dagua\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Marca d&#39;água</a><a data-sim-route=\"/admin/personalizar\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Personalizar</a><a data-sim-route=\"/admin/configuracoes\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Configurações</a><a data-sim-route=\"/admin/storage\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Storage</a><a data-sim-route=\"/admin/recompensas\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Recompensas</a><a data-sim-route=\"/admin/logs\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Logs &amp; auditoria</a><a data-sim-route=\"/admin/notificacoes\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Notificações</a><a data-sim-route=\"/admin/reconhecimento\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Reconhecimento</a><a data-sim-route=\"/admin/reset\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Reset</a>\n<div class=\"role-switcher\">\n  <div class=\"avatar\" style=\"width: 26px; height: 26px; font-size: 10px;\"><img src=\"https://i.pravatar.cc/100?img=12\" alt=\"VS\" loading=\"lazy\"></div>\n  <div class=\"info\">\n    <h5 class=\"sim-user-name\">Vinícius Souza</h5>\n    <p>Fotógrafo · Admin</p>\n  </div>\n  <a class=\"switch-btn\" data-sim-route=\"__logout__\" title=\"Sair\">↻</a>\n</div>";
+const CANONICAL_ADMIN_SIDEBAR_HTML = "\n<div class=\"lbl\">Visão</div><a data-sim-route=\"/admin\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Dashboard</a><a data-sim-route=\"/admin/estatisticas\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Estatísticas</a><div class=\"lbl\">Conteúdo</div><a data-sim-route=\"/admin/eventos\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Eventos / Álbuns<span class=\"badge b-info\">142</span></a><a data-sim-route=\"/admin/eventos/novo\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Criar evento</a><a data-sim-route=\"/admin/eventos/123-upload\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Upload de fotos</a><div class=\"lbl\">Vendas</div><a data-sim-route=\"/admin/pedidos\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Pedidos<span class=\"badge b-pend\">3</span></a><a data-sim-route=\"/admin/carrinhos\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Carrinhos abertos<span class=\"badge b-info\">9</span></a><a data-sim-route=\"/admin/cupons\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Cupons</a><a data-sim-route=\"/admin/propostas\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Propostas<span class=\"badge b-info\">2</span></a><a data-sim-route=\"/admin/repasses\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Repasses</a><div class=\"lbl\">Pessoas</div><a data-sim-route=\"/admin/clientes\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Clientes</a><a data-sim-route=\"/admin/colaboradores\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Colaboradores</a><a data-sim-route=\"/admin/chat\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Chat<span class=\"badge b-info\">2</span></a><div class=\"lbl\">Moderação</div><a data-sim-route=\"/admin/comentarios\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Comentários<span class=\"badge b-pend\">5</span></a><a data-sim-route=\"/admin/contatos\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Contatos<span class=\"badge b-pend\">3</span></a><a data-sim-route=\"/admin/remocoes\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Remoções LGPD<span class=\"badge b-pend\">1</span></a><div class=\"lbl\">Sistema</div><a data-sim-route=\"/admin/marca-dagua\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Marca d&#39;água</a><a data-sim-route=\"/admin/personalizar\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Personalizar</a><a data-sim-route=\"/admin/configuracoes\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Configurações</a><a data-sim-route=\"/admin/storage\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Storage</a><a data-sim-route=\"/admin/recompensas\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Recompensas</a><a data-sim-route=\"/admin/logs\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Logs &amp; auditoria</a><a data-sim-route=\"/admin/jobs\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Fila de Jobs<span class=\"badge b-pend\">2</span></a><a data-sim-route=\"/admin/notificacoes\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Notificações</a><a data-sim-route=\"/admin/reconhecimento\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Reconhecimento</a><a data-sim-route=\"/admin/reset\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Reset</a>\n<div class=\"role-switcher\">\n  <div class=\"avatar\" style=\"width: 26px; height: 26px; font-size: 10px;\"><img src=\"https://i.pravatar.cc/100?img=12\" alt=\"VS\" loading=\"lazy\"></div>\n  <div class=\"info\">\n    <h5 class=\"sim-user-name\">Vinícius Souza</h5>\n    <p>Fotógrafo · Admin</p>\n  </div>\n  <a class=\"switch-btn\" data-sim-route=\"__logout__\" title=\"Sair\">↻</a>\n</div>";
 
 const STORAGE_KEY = 'sim_v1';
 const defaultState = { cart: [], role: 'public', user: null, lastRoute: '/', viewport: 'auto' };
@@ -14276,6 +14626,20 @@ function initLightbox() {
     const id = document.getElementById('lbMeta').textContent;
     addToCart(id, 35);
   });
+  // Favorito (toggle visual + toast)
+  document.getElementById('lbFav').addEventListener('click', (e) => {
+    const btn = e.currentTarget;
+    btn.classList.toggle('active');
+    showToast(btn.classList.contains('active') ? 'Foto salva nos favoritos' : 'Removida dos favoritos');
+  });
+  // Curtir (toggle visual + atualiza contador)
+  document.getElementById('lbHeart').addEventListener('click', (e) => {
+    const btn = e.currentTarget;
+    const counter = document.getElementById('lbHeartCount');
+    const isActive = btn.classList.toggle('active');
+    const n = parseInt(counter.textContent, 10) || 0;
+    counter.textContent = String(n + (isActive ? 1 : -1));
+  });
   document.getElementById('simLightbox').addEventListener('click', (e) => {
     if (e.target.id === 'simLightbox') closeLightbox();
   });
@@ -14291,6 +14655,11 @@ function renderLightbox() {
   if (!item) return;
   document.getElementById('lbPhoto').src = item.src;
   document.getElementById('lbMeta').textContent = item.id || ('REF #' + String(_lbIdx + 1).padStart(4, '0'));
+  // Reset estado de fav/curtir ao trocar de foto + valores pseudo-randômicos pra dar vida
+  const seed = (_lbIdx * 97 + 13) % 1000;
+  document.getElementById('lbHeartCount').textContent = String(40 + seed % 250);
+  document.getElementById('lbHeart').classList.remove('active');
+  document.getElementById('lbFav').classList.remove('active');
 }
 function stepLightbox(d) {
   _lbIdx = (_lbIdx + d + _lbList.length) % _lbList.length;
@@ -14414,10 +14783,20 @@ function normalizeSidebars() {
   // atualiza nome do user na sidebar
   const userName = state.user?.name || (state.role === 'admin' ? 'Vinícius Souza' : (state.role === 'cliente' ? 'Lucas Oliveira' : 'visitante'));
   scope.querySelectorAll('.sim-user-name').forEach(el => { el.textContent = userName; });
-  // marca link ativo baseado na rota
+  // marca link ativo baseado na rota (com fallback para rota-pai conhecida)
   const route = currentRoute();
+  const SIDEBAR_ROUTE_ALIASES = {
+    '/admin/dashboard-vazio': '/admin',
+    '/admin/eventos/123': '/admin/eventos',
+    '/admin/eventos/123-videos': '/admin/eventos',
+    '/admin/eventos/123-patrocinadores': '/admin/eventos',
+    '/admin/eventos-sem-fotos': '/admin/eventos',
+    '/admin/pedidos/reembolso': '/admin/pedidos',
+    '/admin/comentarios/moderacao': '/admin/comentarios',
+  };
+  const activeRoute = SIDEBAR_ROUTE_ALIASES[route] || route;
   scope.querySelectorAll('[data-sim-route]').forEach(a => {
-    a.classList.toggle('active', a.getAttribute('data-sim-route') === route);
+    a.classList.toggle('active', a.getAttribute('data-sim-route') === activeRoute);
   });
 }
 
