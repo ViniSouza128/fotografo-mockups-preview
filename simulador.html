@@ -5322,7 +5322,7 @@
 
 <!-- /login · public -->
 <section class="sim-screen" data-route="/login" data-mode="public" hidden>
-  <div class="view-desktop view-desktop-fallback">
+  <div class="view-desktop">
     <div class="frame" data-screen-label="Public · Login">
           <div class="auth-wrap">
             <div class="auth-card">
@@ -5342,11 +5342,30 @@
           </div>
         </div>
   </div>
+  <div class="view-mobile">
+    <div class="phone" data-screen-label="Public · Login Mobile"><div class="phone-screen"><div class="m-status"><span>9:41</span><span class="right">●●●●●  100%</span></div>
+  <div class="m-topbar">
+    <a class="m-logo"><svg class="nav-logo compact"><use href="#nav-logo-h"/></svg></a>
+    <button class="m-burger" type="button" data-drawer-open="mDrawerSim" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-menu"/></svg></button>
+  </div>
+  <div class="m-crumb">Entrar</div>
+    <div style="padding: 28px 22px;">
+      <h2 style="font-family:var(--font-display);font-style:italic;font-size:28px;margin:0 0 8px;">Entrar</h2>
+      <p style="color:var(--ink-800);font-size:13px;margin:0 0 24px;">Acesse com seu e-mail e senha.</p>
+      <form>
+        <div class="field"><label>E-mail</label><input type="email" value="lucas@gmail.com"/></div>
+        <div class="field"><label>Senha</label><input type="password" value="••••••••••"/></div>
+        <button class="btn primary full-btn" style="width:100%;margin-top:12px;">Entrar</button>
+        <a class="lnk" style="display:block;text-align:center;margin-top:12px;font-size:13px;">Esqueceu a senha?</a>
+        <div style="text-align:center;font-size:13px;color:var(--ink-800);margin-top:18px;">Novo aqui? <a class="lnk" data-sim-route="/cadastro">Criar conta</a></div>
+      </form>
+    </div></div></div>
+  </div>
 </section>
 
 <!-- /cadastro · public -->
 <section class="sim-screen" data-route="/cadastro" data-mode="public" hidden>
-  <div class="view-desktop view-desktop-fallback">
+  <div class="view-desktop">
     <div class="frame" data-screen-label="Public · Cadastro">
           <div class="auth-wrap">
             <div class="auth-card">
@@ -5372,11 +5391,32 @@
           </div>
         </div>
   </div>
+  <div class="view-mobile">
+    <div class="phone" data-screen-label="Public · Cadastro Mobile"><div class="phone-screen"><div class="m-status"><span>9:41</span><span class="right">●●●●●  100%</span></div>
+  <div class="m-topbar">
+    <a class="m-logo"><svg class="nav-logo compact"><use href="#nav-logo-h"/></svg></a>
+    <button class="m-burger" type="button" data-drawer-open="mDrawerSim" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-menu"/></svg></button>
+  </div>
+  <div class="m-crumb">Criar conta</div>
+    <div style="padding: 28px 22px;">
+      <h2 style="font-family:var(--font-display);font-style:italic;font-size:28px;margin:0 0 8px;">Criar conta</h2>
+      <p style="color:var(--ink-800);font-size:13px;margin:0 0 24px;">Use o mesmo e-mail do evento.</p>
+      <form>
+        <div class="field"><label>Nome completo</label><input type="text" /></div>
+        <div class="field"><label>E-mail</label><input type="email" /></div>
+        <div class="field"><label>WhatsApp</label><input type="tel" value="(64) 9____-____"/></div>
+        <div class="field"><label>Senha</label><input type="password" /></div>
+        <div class="field"><label>Confirmar senha</label><input type="password" /></div>
+        <button class="btn primary full-btn" style="width:100%;margin-top:12px;">Criar conta</button>
+        <div style="text-align:center;font-size:13px;color:var(--ink-800);margin-top:18px;">Já tem conta? <a class="lnk" data-sim-route="/login">Entrar</a></div>
+      </form>
+    </div></div></div>
+  </div>
 </section>
 
 <!-- /recuperar-senha · public -->
 <section class="sim-screen" data-route="/recuperar-senha" data-mode="public" hidden>
-  <div class="view-desktop view-desktop-fallback">
+  <div class="view-desktop">
     <div class="frame" data-screen-label="Public · Trocar Senha">
           <div class="auth-wrap">
             <div class="auth-card">
@@ -5395,6 +5435,23 @@
             </div>
           </div>
         </div>
+  </div>
+  <div class="view-mobile">
+    <div class="phone" data-screen-label="Public · Trocar Senha Mobile"><div class="phone-screen"><div class="m-status"><span>9:41</span><span class="right">●●●●●  100%</span></div>
+  <div class="m-topbar">
+    <a class="m-logo"><svg class="nav-logo compact"><use href="#nav-logo-h"/></svg></a>
+    <button class="m-burger" type="button" data-drawer-open="mDrawerSim" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-menu"/></svg></button>
+  </div>
+  <div class="m-crumb">Recuperar senha</div>
+    <div style="padding: 28px 22px;">
+      <h2 style="font-family:var(--font-display);font-style:italic;font-size:28px;margin:0 0 8px;">Esqueceu a senha?</h2>
+      <p style="color:var(--ink-800);font-size:13px;margin:0 0 24px;">Te enviamos um link de recuperação pelo e-mail.</p>
+      <form>
+        <div class="field"><label>E-mail cadastrado</label><input type="email" /></div>
+        <button class="btn primary full-btn" style="width:100%;margin-top:12px;">Enviar link</button>
+        <div style="text-align:center;font-size:13px;color:var(--ink-800);margin-top:18px;"><a class="lnk" data-sim-route="/login">← Voltar pro login</a></div>
+      </form>
+    </div></div></div>
   </div>
 </section>
 
@@ -5546,7 +5603,7 @@
 
 <!-- /autenticidade · public -->
 <section class="sim-screen" data-route="/autenticidade" data-mode="public" hidden>
-  <div class="view-desktop view-desktop-fallback">
+  <div class="view-desktop">
     <div class="frame" data-screen-label="Public · Autenticidade">
         <div class="nav">
           <a class="nav-logo-link"><svg class="nav-logo"><use href="#nav-logo-h"/></svg></a>
@@ -5611,11 +5668,27 @@
         </footer>
       </div>
   </div>
+  <div class="view-mobile">
+    <div class="phone" data-screen-label="Public · Autenticidade Mobile"><div class="phone-screen"><div class="m-status"><span>9:41</span><span class="right">●●●●●  100%</span></div>
+  <div class="m-topbar">
+    <a class="m-logo"><svg class="nav-logo compact"><use href="#nav-logo-h"/></svg></a>
+    <button class="m-burger" type="button" data-drawer-open="mDrawerSim" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-menu"/></svg></button>
+  </div>
+  <div class="m-crumb">Autenticidade</div><div style="padding: 24px 22px 40px;">
+    <h2 style="font-family:var(--font-display);font-style:italic;font-size:26px;margin:0 0 12px;">Autenticidade da foto</h2>
+    <p style="font-size:13px;line-height:1.6;color:var(--ink-900);margin:0 0 14px;">Cada foto vendida tem certificado de autoria com hash SHA-256 do arquivo, data de captura (EXIF) e selo de aquisição vinculado ao seu CPF.</p>
+    <div class="field"><label>Verificar pelo hash</label><input type="text" value="a3f1c92d8e..."/></div>
+    <button class="btn primary full-btn" style="width:100%;margin-top:12px;">Verificar autenticidade</button>
+    <div style="margin-top:20px;padding:14px;background:var(--ink-200);border:1px solid var(--ink-500);border-radius:6px;font-size:12.5px;color:var(--ink-900);line-height:1.5;">
+      <strong style="color:var(--brand-400);">✓ Aceito como prova jurídica</strong><br>O selo gera um JSON assinado que pode ser apresentado em juízo pra comprovar autoria da foto.
+    </div>
+  </div></div></div>
+  </div>
 </section>
 
 <!-- /termos · public -->
 <section class="sim-screen" data-route="/termos" data-mode="public" hidden>
-  <div class="view-desktop view-desktop-fallback">
+  <div class="view-desktop">
     <div class="frame" data-screen-label="Public · Termos">
           <div class="legal">
             <div class="eyebrow">— Documento —</div>
@@ -5653,11 +5726,23 @@
           </div>
         </div>
   </div>
+  <div class="view-mobile">
+    <div class="phone" data-screen-label="Public · Termos Mobile"><div class="phone-screen"><div class="m-status"><span>9:41</span><span class="right">●●●●●  100%</span></div>
+  <div class="m-topbar">
+    <a class="m-logo"><svg class="nav-logo compact"><use href="#nav-logo-h"/></svg></a>
+    <button class="m-burger" type="button" data-drawer-open="mDrawerSim" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-menu"/></svg></button>
+  </div>
+  <div class="m-crumb">Termos de uso</div><div style="padding: 24px 22px 40px;">
+    <h2 style="font-family:var(--font-display);font-style:italic;font-size:26px;margin:0 0 16px;">Termos de uso</h2>
+    <h3 style="font-size:13px;color:var(--ink-1000);margin:18px 0 6px;font-weight:500;">1. Aceite</h3><p style="font-size:13px;line-height:1.6;color:var(--ink-900);margin:0 0 10px;">Ao usar este site você concorda com estes termos. Caso discorde, não utilize o serviço.</p><h3 style="font-size:13px;color:var(--ink-1000);margin:18px 0 6px;font-weight:500;">2. Conteúdo</h3><p style="font-size:13px;line-height:1.6;color:var(--ink-900);margin:0 0 10px;">As fotos publicadas pertencem ao fotógrafo Vinícius Souza, autor da obra. A compra concede licença pessoal de uso digital.</p><h3 style="font-size:13px;color:var(--ink-1000);margin:18px 0 6px;font-weight:500;">3. Pagamentos</h3><p style="font-size:13px;line-height:1.6;color:var(--ink-900);margin:0 0 10px;">PIX (Asaas), cartão (Stripe) e boleto (MercadoPago). Reembolso até 7 dias se a foto ainda não foi baixada.</p><h3 style="font-size:13px;color:var(--ink-1000);margin:18px 0 6px;font-weight:500;">4. Privacidade</h3><p style="font-size:13px;line-height:1.6;color:var(--ink-900);margin:0 0 10px;">Veja nossa Política de Privacidade. Não compartilhamos seu e-mail.</p><h3 style="font-size:13px;color:var(--ink-1000);margin:18px 0 6px;font-weight:500;">5. Foro</h3><p style="font-size:13px;line-height:1.6;color:var(--ink-900);margin:0 0 10px;">Itajá-GO, Comarca de Quirinópolis.</p>
+    <div style="margin-top:24px;font-family:var(--font-mono);font-size:10.5px;color:var(--ink-700);">Versão de 17/04/2026 · vinicius@vss.fot</div>
+  </div></div></div>
+  </div>
 </section>
 
 <!-- /privacidade · public -->
 <section class="sim-screen" data-route="/privacidade" data-mode="public" hidden>
-  <div class="view-desktop view-desktop-fallback">
+  <div class="view-desktop">
     <div class="frame" data-screen-label="Public · Privacidade">
           <div class="legal">
             <div class="eyebrow">— LGPD —</div>
@@ -5708,11 +5793,23 @@
           </div>
         </div>
   </div>
+  <div class="view-mobile">
+    <div class="phone" data-screen-label="Public · Privacidade Mobile"><div class="phone-screen"><div class="m-status"><span>9:41</span><span class="right">●●●●●  100%</span></div>
+  <div class="m-topbar">
+    <a class="m-logo"><svg class="nav-logo compact"><use href="#nav-logo-h"/></svg></a>
+    <button class="m-burger" type="button" data-drawer-open="mDrawerSim" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-menu"/></svg></button>
+  </div>
+  <div class="m-crumb">Privacidade</div><div style="padding: 24px 22px 40px;">
+    <h2 style="font-family:var(--font-display);font-style:italic;font-size:26px;margin:0 0 16px;">Política de Privacidade</h2>
+    <h3 style="font-size:13px;color:var(--ink-1000);margin:18px 0 6px;font-weight:500;">Dados coletados</h3><p style="font-size:13px;line-height:1.6;color:var(--ink-900);margin:0 0 10px;">Nome, e-mail, WhatsApp e foto de perfil (para reconhecimento facial, opt-in).</p><h3 style="font-size:13px;color:var(--ink-1000);margin:18px 0 6px;font-weight:500;">Uso dos dados</h3><p style="font-size:13px;line-height:1.6;color:var(--ink-900);margin:0 0 10px;">Identificar você como cliente e ligar sua compra à sua conta. Não vendemos dados.</p><h3 style="font-size:13px;color:var(--ink-1000);margin:18px 0 6px;font-weight:500;">Reconhecimento facial (LGPD)</h3><p style="font-size:13px;line-height:1.6;color:var(--ink-900);margin:0 0 10px;">Opt-in. Você pode pedir remoção a qualquer momento em /cliente/remocoes.</p><h3 style="font-size:13px;color:var(--ink-1000);margin:18px 0 6px;font-weight:500;">Backup</h3><p style="font-size:13px;line-height:1.6;color:var(--ink-900);margin:0 0 10px;">SQLite + R2 (Cloudflare). Cifrado em trânsito e em repouso.</p><h3 style="font-size:13px;color:var(--ink-1000);margin:18px 0 6px;font-weight:500;">Contato DPO</h3><p style="font-size:13px;line-height:1.6;color:var(--ink-900);margin:0 0 10px;">dpo@vinicius-souza.foto · resposta em até 7 dias.</p>
+    <div style="margin-top:24px;font-family:var(--font-mono);font-size:10.5px;color:var(--ink-700);">Versão de 17/04/2026 · vinicius@vss.fot</div>
+  </div></div></div>
+  </div>
 </section>
 
 <!-- /cookies · public -->
 <section class="sim-screen" data-route="/cookies" data-mode="public" hidden>
-  <div class="view-desktop view-desktop-fallback">
+  <div class="view-desktop">
     <div class="frame" data-screen-label="Public · Cookies">
           <div class="legal">
             <div class="eyebrow">— Documento —</div>
@@ -5750,11 +5847,23 @@
           </div>
         </div>
   </div>
+  <div class="view-mobile">
+    <div class="phone" data-screen-label="Public · Cookies Mobile"><div class="phone-screen"><div class="m-status"><span>9:41</span><span class="right">●●●●●  100%</span></div>
+  <div class="m-topbar">
+    <a class="m-logo"><svg class="nav-logo compact"><use href="#nav-logo-h"/></svg></a>
+    <button class="m-burger" type="button" data-drawer-open="mDrawerSim" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-menu"/></svg></button>
+  </div>
+  <div class="m-crumb">Cookies</div><div style="padding: 24px 22px 40px;">
+    <h2 style="font-family:var(--font-display);font-style:italic;font-size:26px;margin:0 0 16px;">Política de Cookies</h2>
+    <h3 style="font-size:13px;color:var(--ink-1000);margin:18px 0 6px;font-weight:500;">O que usamos</h3><p style="font-size:13px;line-height:1.6;color:var(--ink-900);margin:0 0 10px;">Apenas cookies funcionais: sessão de login, carrinho aberto, preferência de tema.</p><h3 style="font-size:13px;color:var(--ink-1000);margin:18px 0 6px;font-weight:500;">O que NÃO usamos</h3><p style="font-size:13px;line-height:1.6;color:var(--ink-900);margin:0 0 10px;">Sem cookies de rastreamento de terceiros. Sem Google Analytics. Sem Facebook Pixel.</p><h3 style="font-size:13px;color:var(--ink-1000);margin:18px 0 6px;font-weight:500;">Como desativar</h3><p style="font-size:13px;line-height:1.6;color:var(--ink-900);margin:0 0 10px;">Pelo próprio navegador você pode bloquear cookies, mas isso pode quebrar o login e carrinho.</p>
+    <div style="margin-top:24px;font-family:var(--font-mono);font-size:10.5px;color:var(--ink-700);">Versão de 17/04/2026 · vinicius@vss.fot</div>
+  </div></div></div>
+  </div>
 </section>
 
 <!-- /cadastro-sucesso · public -->
 <section class="sim-screen" data-route="/cadastro-sucesso" data-mode="public" hidden>
-  <div class="view-desktop view-desktop-fallback">
+  <div class="view-desktop">
     <div class="frame" data-screen-label="Public · Cadastro Sucesso">
           <div class="auth-wrap">
             <div class="auth-card" style="text-align: center;">
@@ -5793,6 +5902,21 @@
             </div>
           </div>
         </div>
+  </div>
+  <div class="view-mobile">
+    <div class="phone" data-screen-label="Public · Cadastro Sucesso Mobile"><div class="phone-screen"><div class="m-status"><span>9:41</span><span class="right">●●●●●  100%</span></div>
+  <div class="m-topbar">
+    <a class="m-logo"><svg class="nav-logo compact"><use href="#nav-logo-h"/></svg></a>
+    <button class="m-burger" type="button" data-drawer-open="mDrawerSim" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-menu"/></svg></button>
+  </div>
+  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:48px 24px;min-height:60vh;gap:12px;">
+    <div style="width:72px;height:72px;border-radius:50%;background:rgba(34,197,94,.15);display:flex;align-items:center;justify-content:center;">
+      <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="var(--signal-500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#sim-i-check"/></svg>
+    </div>
+    <h2 style="font-family:var(--font-heading);font-size:22px;font-weight:500;margin:8px 0 0;color:var(--ink-1000);">Conta criada!</h2>
+    <p style="font-size:14px;color:var(--ink-800);line-height:1.5;margin:0;max-width:300px;">Te enviamos um e-mail de boas-vindas. Já pode entrar e ver suas fotos.</p>
+    <button class="btn primary" data-sim-route="/cliente" style="margin-top:8px;">Ir pra área do cliente</button>
+  </div></div></div>
   </div>
 </section>
 
@@ -6314,7 +6438,7 @@
 
 <!-- /conta-bloqueada · public -->
 <section class="sim-screen" data-route="/conta-bloqueada" data-mode="public" hidden>
-  <div class="view-desktop view-desktop-fallback">
+  <div class="view-desktop">
     <div class="frame" data-screen-label="Public · Conta Bloqueada">
           <div class="auth-wrap">
             <div class="auth-card">
@@ -6352,6 +6476,21 @@
             </div>
           </div>
         </div>
+  </div>
+  <div class="view-mobile">
+    <div class="phone" data-screen-label="Public · Conta Bloqueada Mobile"><div class="phone-screen"><div class="m-status"><span>9:41</span><span class="right">●●●●●  100%</span></div>
+  <div class="m-topbar">
+    <a class="m-logo"><svg class="nav-logo compact"><use href="#nav-logo-h"/></svg></a>
+    <button class="m-burger" type="button" data-drawer-open="mDrawerSim" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-menu"/></svg></button>
+  </div>
+  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:48px 24px;min-height:60vh;gap:12px;">
+    <div style="width:72px;height:72px;border-radius:50%;background:rgba(232,68,68,.15);display:flex;align-items:center;justify-content:center;">
+      <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="var(--danger-500, #e84444)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#sim-i-lock"/></svg>
+    </div>
+    <h2 style="font-family:var(--font-heading);font-size:22px;font-weight:500;margin:8px 0 0;color:var(--ink-1000);">Conta bloqueada</h2>
+    <p style="font-size:14px;color:var(--ink-800);line-height:1.5;margin:0;max-width:300px;">Sua conta foi bloqueada por suspeita de uso indevido. Entre em contato com o suporte pra revisar.</p>
+    <button class="btn primary" data-sim-route="/contato" style="margin-top:8px;">Falar com suporte</button>
+  </div></div></div>
   </div>
 </section>
 
@@ -9356,7 +9495,7 @@
 
 <!-- /cliente/sessao-expirada · cliente -->
 <section class="sim-screen" data-route="/cliente/sessao-expirada" data-mode="cliente" hidden>
-  <div class="view-desktop view-desktop-fallback">
+  <div class="view-desktop">
     <div class="frame" data-screen-label="Cliente · Sessão Expirada">
           <div class="nav">
             <a class="nav-logo-link"><svg class="nav-logo"><use href="#nav-logo-h"/></svg></a>
@@ -9423,6 +9562,21 @@
             </div>
           </div>
         </div>
+  </div>
+  <div class="view-mobile">
+    <div class="phone" data-screen-label="Cliente · Sessão Expirada Mobile"><div class="phone-screen"><div class="m-status"><span>9:41</span><span class="right">●●●●●  100%</span></div>
+  <div class="m-topbar">
+    <a class="m-logo"><svg class="nav-logo compact"><use href="#nav-logo-h"/></svg></a>
+    <button class="m-burger" type="button" data-drawer-open="mDrawerSim" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-menu"/></svg></button>
+  </div>
+  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:48px 24px;min-height:60vh;gap:12px;">
+    <div style="width:72px;height:72px;border-radius:50%;background:rgba(232,163,58,.15);display:flex;align-items:center;justify-content:center;">
+      <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="var(--warning-500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#sim-i-clock"/></svg>
+    </div>
+    <h2 style="font-family:var(--font-heading);font-size:22px;font-weight:500;margin:8px 0 0;color:var(--ink-1000);">Sua sessão expirou</h2>
+    <p style="font-size:14px;color:var(--ink-800);line-height:1.5;margin:0;max-width:300px;">Por segurança, você foi desconectado após 30 dias inativo. Entre de novo.</p>
+    <button class="btn primary" data-sim-route="/login" style="margin-top:8px;">Entrar de novo</button>
+  </div></div></div>
   </div>
 </section>
 
@@ -10180,7 +10334,7 @@
 
 <!-- /admin/eventos/123 · admin -->
 <section class="sim-screen" data-route="/admin/eventos/123" data-mode="admin" hidden>
-  <div class="view-desktop view-desktop-fallback">
+  <div class="view-desktop">
     <div class="frame" data-screen-label="Admin · Detalhe Evento">
     <div class="adm-topbar">
       <div class="adm-brand-pill"><svg class="nav-logo"><use href="#nav-logo-h"/></svg><span class="role">Painel</span></div>
@@ -10333,11 +10487,122 @@
       </main>
     </div></div>
   </div>
+  <div class="view-mobile">
+    <div class="phone" data-screen-label="Admin · Detalhe Evento Mobile"><div class="phone-screen"><div class="m-status"><span>9:41</span><span class="right">●●●●●  100%</span></div>
+  <div class="m-adm-topbar">
+    <div class="brand-pill"><svg class="nav-logo"><use href="#nav-logo-h"/></svg><span class="role">Painel</span></div>
+    <div class="right">
+      <div class="bell"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-bell"/></svg><span class="pip"></span></div>
+      <button class="burger" type="button" data-drawer-open="mDrawerSim" aria-label="Menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-menu"/></svg></button>
+    </div>
+  </div>
+  <div class="m-adm-crumbs"><span>Painel</span><span class="sep">/</span><span class="here">Safra 2026</span></div><div style="padding: 14px 16px;">
+    <h2 style="margin:0 0 2px;font-size:18px;font-weight:500;">Abertura da Safra 2026</h2>
+    <div style="font-family:var(--font-mono);font-size:10px;color:var(--ink-700);margin-bottom:14px;letter-spacing:.04em;">RODEIO · 17 ABR · ITAJÁ · COLAB 15%</div>
+    <button class="btn primary" style="width:100%;margin-bottom:14px;">Editar evento</button>
+  </div>
+  <!-- tabs -->
+  <div style="display:flex;gap:0;border-bottom:1px solid var(--ink-500);overflow-x:auto;scrollbar-width:none;padding:0 8px;">
+    <button class="ev-tab active" data-ev-tab="vendas" type="button" style="padding:10px 12px;font-size:12px;white-space:nowrap;background:transparent;border:0;border-bottom:2px solid var(--brand-500);color:var(--brand-400);">Vendas</button>
+    <button class="ev-tab" data-ev-tab="fotos" type="button" style="padding:10px 12px;font-size:12px;white-space:nowrap;background:transparent;border:0;color:var(--ink-800);">Mídia</button>
+    <button class="ev-tab" data-ev-tab="patrocinadores" type="button" style="padding:10px 12px;font-size:12px;white-space:nowrap;background:transparent;border:0;color:var(--ink-800);">Patroc.</button>
+    <button class="ev-tab" data-ev-tab="watermark" type="button" style="padding:10px 12px;font-size:12px;white-space:nowrap;background:transparent;border:0;color:var(--ink-800);">Marca d'água</button>
+    <button class="ev-tab" data-ev-tab="info" type="button" style="padding:10px 12px;font-size:12px;white-space:nowrap;background:transparent;border:0;color:var(--ink-800);">Info</button>
+  </div>
+  <!-- panes -->
+  <div class="ev-pane active" data-ev-pane="vendas" style="padding:14px 16px;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;">
+      <div class="m-adm-stat"><div class="lbl">FATURAMENTO</div><div class="v signal">R$ 14.882</div></div>
+      <div class="m-adm-stat"><div class="lbl">PEDIDOS</div><div class="v">112</div></div>
+      <div class="m-adm-stat"><div class="lbl">CONVERSÃO</div><div class="v brand">7.6%</div></div>
+      <div class="m-adm-stat"><div class="lbl">CLIENTES</div><div class="v">87</div></div>
+    </div>
+    <div class="m-adm-card" style="padding: 14px 16px; border-bottom: 1px solid var(--ink-500); display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <div style="flex:1;min-width:0;">
+      <div style="font-size: 13.5px; color: var(--ink-1000); font-weight: 500;">#200000041 · Maria F.</div>
+      <div style="font-size: 11px; color: var(--ink-700); font-family: var(--font-mono); letter-spacing:.04em; margin-top:4px;">3 fotos · PIX · 14/04</div>
+    </div>
+    <div style="text-align: right;flex-shrink:0;"><span class="badge b-paid">PAGO</span></div>
+  </div><div class="m-adm-card" style="padding: 14px 16px; border-bottom: 1px solid var(--ink-500); display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <div style="flex:1;min-width:0;">
+      <div style="font-size: 13.5px; color: var(--ink-1000); font-weight: 500;">#200000040 · João M.</div>
+      <div style="font-size: 11px; color: var(--ink-700); font-family: var(--font-mono); letter-spacing:.04em; margin-top:4px;">5 fotos + 1 vídeo · Cartão</div>
+    </div>
+    <div style="text-align: right;flex-shrink:0;"><span class="badge b-paid">PAGO</span></div>
+  </div><div class="m-adm-card" style="padding: 14px 16px; border-bottom: 1px solid var(--ink-500); display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <div style="flex:1;min-width:0;">
+      <div style="font-size: 13.5px; color: var(--ink-1000); font-weight: 500;">#200000039 · Ana L.</div>
+      <div style="font-size: 11px; color: var(--ink-700); font-family: var(--font-mono); letter-spacing:.04em; margin-top:4px;">2 fotos · PIX · 13/04</div>
+    </div>
+    <div style="text-align: right;flex-shrink:0;"><span class="badge b-pend">AGUARDA</span></div>
+  </div>
+  </div>
+  <div class="ev-pane" data-ev-pane="fotos" style="padding:14px 16px;display:none;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:12px;">
+      <div><strong>Mídia · 1.581</strong><div style="font-size:11px;color:var(--ink-700);">607 vendidas · 38.4% conv.</div></div>
+      <button class="btn primary sm">+ Upload</button>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;">
+      <div style="position:relative;aspect-ratio:1;border-radius:4px;overflow:hidden;"><img src="https://picsum.photos/seed/evm-0/200/200" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div style="position:absolute;bottom:3px;left:3px;background:rgba(0,0,0,.7);color:white;padding:1px 5px;border-radius:2px;font-family:var(--font-mono);font-size:9px;">#001</div></div><div style="position:relative;aspect-ratio:1;border-radius:4px;overflow:hidden;"><img src="https://picsum.photos/seed/evm-1/200/200" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div style="position:absolute;bottom:3px;left:3px;background:rgba(0,0,0,.7);color:white;padding:1px 5px;border-radius:2px;font-family:var(--font-mono);font-size:9px;">#002</div></div><div style="position:relative;aspect-ratio:1;border-radius:4px;overflow:hidden;"><img src="https://picsum.photos/seed/evm-2/200/200" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div style="position:absolute;bottom:3px;left:3px;background:rgba(0,0,0,.7);color:white;padding:1px 5px;border-radius:2px;font-family:var(--font-mono);font-size:9px;">#003</div></div><div style="position:relative;aspect-ratio:1;border-radius:4px;overflow:hidden;"><img src="https://picsum.photos/seed/evm-3/200/200" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div style="position:absolute;bottom:3px;left:3px;background:rgba(0,0,0,.7);color:white;padding:1px 5px;border-radius:2px;font-family:var(--font-mono);font-size:9px;">#004</div></div><div style="position:relative;aspect-ratio:1;border-radius:4px;overflow:hidden;"><img src="https://picsum.photos/seed/evm-4/200/200" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div style="position:absolute;bottom:3px;left:3px;background:rgba(0,0,0,.7);color:white;padding:1px 5px;border-radius:2px;font-family:var(--font-mono);font-size:9px;">#005</div></div><div style="position:relative;aspect-ratio:1;border-radius:4px;overflow:hidden;"><img src="https://picsum.photos/seed/evm-5/200/200" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div style="position:absolute;bottom:3px;left:3px;background:rgba(0,0,0,.7);color:white;padding:1px 5px;border-radius:2px;font-family:var(--font-mono);font-size:9px;">#006</div></div><div style="position:relative;aspect-ratio:1;border-radius:4px;overflow:hidden;"><img src="https://picsum.photos/seed/evm-6/200/200" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div style="position:absolute;bottom:3px;left:3px;background:rgba(0,0,0,.7);color:white;padding:1px 5px;border-radius:2px;font-family:var(--font-mono);font-size:9px;">#007</div></div><div style="position:relative;aspect-ratio:1;border-radius:4px;overflow:hidden;"><img src="https://picsum.photos/seed/evm-7/200/200" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div style="position:absolute;bottom:3px;left:3px;background:rgba(0,0,0,.7);color:white;padding:1px 5px;border-radius:2px;font-family:var(--font-mono);font-size:9px;">#008</div></div><div style="position:relative;aspect-ratio:1;border-radius:4px;overflow:hidden;"><img src="https://picsum.photos/seed/evm-8/200/200" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div style="position:absolute;bottom:3px;left:3px;background:rgba(0,0,0,.7);color:white;padding:1px 5px;border-radius:2px;font-family:var(--font-mono);font-size:9px;">#009</div></div><div style="position:relative;aspect-ratio:1;border-radius:4px;overflow:hidden;"><img src="https://picsum.photos/seed/evm-9/200/200" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div style="position:absolute;bottom:3px;left:3px;background:rgba(0,0,0,.7);color:white;padding:1px 5px;border-radius:2px;font-family:var(--font-mono);font-size:9px;">#010</div></div><div style="position:relative;aspect-ratio:1;border-radius:4px;overflow:hidden;"><img src="https://picsum.photos/seed/evm-10/200/200" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div style="position:absolute;bottom:3px;left:3px;background:rgba(0,0,0,.7);color:white;padding:1px 5px;border-radius:2px;font-family:var(--font-mono);font-size:9px;">#011</div></div><div style="position:relative;aspect-ratio:1;border-radius:4px;overflow:hidden;"><img src="https://picsum.photos/seed/evm-11/200/200" loading="lazy" style="width:100%;height:100%;object-fit:cover;"><div style="position:absolute;bottom:3px;left:3px;background:rgba(0,0,0,.7);color:white;padding:1px 5px;border-radius:2px;font-family:var(--font-mono);font-size:9px;">#012</div></div>
+    </div>
+  </div>
+  <div class="ev-pane" data-ev-pane="patrocinadores" style="padding:14px 16px;display:none;">
+    <div style="margin-bottom:10px;"><strong>7 patrocinadores</strong><div style="font-size:11px;color:var(--ink-700);">R$ 22.300 captado</div></div>
+    <div class="m-adm-card" style="padding: 14px 16px; border-bottom: 1px solid var(--ink-500); display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <div style="flex:1;min-width:0;">
+      <div style="font-size: 13.5px; color: var(--ink-1000); font-weight: 500;">Sela Torque</div>
+      <div style="font-size: 11px; color: var(--ink-700); font-family: var(--font-mono); letter-spacing:.04em; margin-top:4px;">R$ 8.000 · seladostorque.com.br</div>
+    </div>
+    <div style="text-align: right;flex-shrink:0;"><span class="badge b-paid">OURO</span></div>
+  </div><div class="m-adm-card" style="padding: 14px 16px; border-bottom: 1px solid var(--ink-500); display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <div style="flex:1;min-width:0;">
+      <div style="font-size: 13.5px; color: var(--ink-1000); font-weight: 500;">Vet. Boi Forte</div>
+      <div style="font-size: 11px; color: var(--ink-700); font-family: var(--font-mono); letter-spacing:.04em; margin-top:4px;">R$ 6.000 · boiforte.com.br</div>
+    </div>
+    <div style="text-align: right;flex-shrink:0;"><span class="badge b-paid">OURO</span></div>
+  </div><div class="m-adm-card" style="padding: 14px 16px; border-bottom: 1px solid var(--ink-500); display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <div style="flex:1;min-width:0;">
+      <div style="font-size: 13.5px; color: var(--ink-1000); font-weight: 500;">Rações Goyaz</div>
+      <div style="font-size: 11px; color: var(--ink-700); font-family: var(--font-mono); letter-spacing:.04em; margin-top:4px;">R$ 3.500 · goyaz.com.br</div>
+    </div>
+    <div style="text-align: right;flex-shrink:0;"><span class="badge">PRATA</span></div>
+  </div><div class="m-adm-card" style="padding: 14px 16px; border-bottom: 1px solid var(--ink-500); display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <div style="flex:1;min-width:0;">
+      <div style="font-size: 13.5px; color: var(--ink-1000); font-weight: 500;">Cervejaria Caju</div>
+      <div style="font-size: 11px; color: var(--ink-700); font-family: var(--font-mono); letter-spacing:.04em; margin-top:4px;">R$ 2.800</div>
+    </div>
+    <div style="text-align: right;flex-shrink:0;"><span class="badge">PRATA</span></div>
+  </div><div class="m-adm-card" style="padding: 14px 16px; border-bottom: 1px solid var(--ink-500); display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <div style="flex:1;min-width:0;">
+      <div style="font-size: 13.5px; color: var(--ink-1000); font-weight: 500;">Mercado Boa Safra</div>
+      <div style="font-size: 11px; color: var(--ink-700); font-family: var(--font-mono); letter-spacing:.04em; margin-top:4px;">R$ 1.200</div>
+    </div>
+    <div style="text-align: right;flex-shrink:0;"><span class="badge" style="background:var(--warning-dim);color:var(--warning-500);">BRONZE</span></div>
+  </div>
+  </div>
+  <div class="ev-pane" data-ev-pane="watermark" style="padding:14px 16px;display:none;">
+    <div style="background:var(--ink-200);border:1px solid var(--ink-500);border-radius:6px;padding:12px;margin-bottom:12px;"><h4 style="margin:0 0 8px;font-size:11px;color:var(--ink-700);letter-spacing:.08em;text-transform:uppercase;">Preview</h4>
+      <div style="position:relative;aspect-ratio:3/2;border-radius:4px;overflow:hidden;"><img src="https://picsum.photos/seed/wm-ev/600/400" style="width:100%;height:100%;object-fit:cover;"><div style="position:absolute;bottom:8px;right:8px;background:rgba(237,232,224,.65);color:#0d0d0d;padding:3px 8px;border-radius:3px;font-family:Arial;font-weight:700;font-size:10px;">VS · FOTO</div></div>
+    </div>
+    <div class="field"><label>Posição</label><select><option>Canto inf. direito</option><option>Centro</option></select></div>
+    <div class="field"><label>Opacidade · 65%</label><input type="range" min="0" max="100" value="65"/></div>
+    <button class="btn primary" style="width:100%;margin-top:10px;">Aplicar em todas</button>
+  </div>
+  <div class="ev-pane" data-ev-pane="info" style="padding:14px 16px;display:none;">
+    <div class="field"><label>Nome</label><input type="text" value="Abertura da Safra 2026"/></div>
+    <div class="field"><label>Data</label><input type="date" value="2026-04-17"/></div>
+    <div class="field"><label>Local</label><input type="text" value="Itajá · GO"/></div>
+    <div class="field"><label>Categoria</label><select><option>Rodeio</option><option>Corrida</option></select></div>
+    <div class="field"><label>Visibilidade</label><select><option>Público</option><option>Não listado</option><option>Privado</option></select></div>
+    <div class="field"><label>Descrição</label><textarea rows="3">Abertura da temporada 2026.</textarea></div>
+    <button class="btn primary" style="width:100%;margin-top:10px;">Salvar</button>
+  </div></div></div>
+  </div>
 </section>
 
 <!-- /admin/eventos/123-videos · admin -->
 <section class="sim-screen" data-route="/admin/eventos/123-videos" data-mode="admin" hidden>
-  <div class="view-desktop view-desktop-fallback">
+  <div class="view-desktop">
     <div class="frame" data-screen-label="Admin · Detalhe Evento (Vídeos)">
         <div class="adm">
           <aside class="adm-side" style="opacity: .35;"><div style="padding: 36px 18px; font-family: var(--font-mono); font-size: 10px; color: var(--ink-700); letter-spacing: .12em; text-transform: uppercase;">— sidebar idêntica · omitida para clareza —</div></aside>
@@ -10368,6 +10633,55 @@
           </main>
         </div>
       </div>
+  </div>
+  <div class="view-mobile">
+    <div class="phone" data-screen-label="Admin · Detalhe Evento (Vídeos) Mobile"><div class="phone-screen"><div class="m-status"><span>9:41</span><span class="right">●●●●●  100%</span></div>
+  <div class="m-adm-topbar">
+    <div class="brand-pill"><svg class="nav-logo"><use href="#nav-logo-h"/></svg><span class="role">Painel</span></div>
+    <div class="right">
+      <div class="bell"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-bell"/></svg><span class="pip"></span></div>
+      <button class="burger" type="button" data-drawer-open="mDrawerSim" aria-label="Menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-menu"/></svg></button>
+    </div>
+  </div>
+  <div class="m-adm-crumbs"><span>Painel</span><span class="sep">/</span><span class="here">Vídeos · Safra 2026</span></div><div style="padding: 14px 16px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;gap:8px;">
+      <div><h2 style="margin:0;font-size:18px;font-weight:500;">Vídeos · 18</h2><div style="font-family:var(--font-mono);font-size:10px;color:var(--ink-700);">12 VENDIDOS · R$ 1.342</div></div>
+      <button class="btn primary sm">+ Upload</button>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr;gap:10px;">
+      <div style="position:relative;aspect-ratio:16/9;border-radius:6px;overflow:hidden;background:var(--ink-300);">
+        <img src="https://picsum.photos/seed/video-1/600/340" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.3);"><svg width="38" height="38" viewBox="0 0 24 24" fill="rgba(255,255,255,.9)"><polygon points="6,4 20,12 6,20"/></svg></div>
+        <div style="position:absolute;bottom:6px;left:8px;background:rgba(0,0,0,.7);color:white;padding:3px 8px;border-radius:3px;font-family:var(--font-mono);font-size:10px;">VID-001 · 1:27</div>
+        <div style="position:absolute;bottom:6px;right:8px;background:var(--brand-500);color:var(--ink-1000);padding:3px 8px;border-radius:3px;font-family:var(--font-mono);font-size:10px;font-weight:500;">R$ 49,90</div>
+      </div><div style="position:relative;aspect-ratio:16/9;border-radius:6px;overflow:hidden;background:var(--ink-300);">
+        <img src="https://picsum.photos/seed/video-2/600/340" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.3);"><svg width="38" height="38" viewBox="0 0 24 24" fill="rgba(255,255,255,.9)"><polygon points="6,4 20,12 6,20"/></svg></div>
+        <div style="position:absolute;bottom:6px;left:8px;background:rgba(0,0,0,.7);color:white;padding:3px 8px;border-radius:3px;font-family:var(--font-mono);font-size:10px;">VID-002 · 1:34</div>
+        <div style="position:absolute;bottom:6px;right:8px;background:var(--brand-500);color:var(--ink-1000);padding:3px 8px;border-radius:3px;font-family:var(--font-mono);font-size:10px;font-weight:500;">R$ 49,90</div>
+      </div><div style="position:relative;aspect-ratio:16/9;border-radius:6px;overflow:hidden;background:var(--ink-300);">
+        <img src="https://picsum.photos/seed/video-3/600/340" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.3);"><svg width="38" height="38" viewBox="0 0 24 24" fill="rgba(255,255,255,.9)"><polygon points="6,4 20,12 6,20"/></svg></div>
+        <div style="position:absolute;bottom:6px;left:8px;background:rgba(0,0,0,.7);color:white;padding:3px 8px;border-radius:3px;font-family:var(--font-mono);font-size:10px;">VID-003 · 1:41</div>
+        <div style="position:absolute;bottom:6px;right:8px;background:var(--brand-500);color:var(--ink-1000);padding:3px 8px;border-radius:3px;font-family:var(--font-mono);font-size:10px;font-weight:500;">R$ 49,90</div>
+      </div><div style="position:relative;aspect-ratio:16/9;border-radius:6px;overflow:hidden;background:var(--ink-300);">
+        <img src="https://picsum.photos/seed/video-4/600/340" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.3);"><svg width="38" height="38" viewBox="0 0 24 24" fill="rgba(255,255,255,.9)"><polygon points="6,4 20,12 6,20"/></svg></div>
+        <div style="position:absolute;bottom:6px;left:8px;background:rgba(0,0,0,.7);color:white;padding:3px 8px;border-radius:3px;font-family:var(--font-mono);font-size:10px;">VID-004 · 1:48</div>
+        <div style="position:absolute;bottom:6px;right:8px;background:var(--brand-500);color:var(--ink-1000);padding:3px 8px;border-radius:3px;font-family:var(--font-mono);font-size:10px;font-weight:500;">R$ 49,90</div>
+      </div><div style="position:relative;aspect-ratio:16/9;border-radius:6px;overflow:hidden;background:var(--ink-300);">
+        <img src="https://picsum.photos/seed/video-5/600/340" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.3);"><svg width="38" height="38" viewBox="0 0 24 24" fill="rgba(255,255,255,.9)"><polygon points="6,4 20,12 6,20"/></svg></div>
+        <div style="position:absolute;bottom:6px;left:8px;background:rgba(0,0,0,.7);color:white;padding:3px 8px;border-radius:3px;font-family:var(--font-mono);font-size:10px;">VID-005 · 1:55</div>
+        <div style="position:absolute;bottom:6px;right:8px;background:var(--brand-500);color:var(--ink-1000);padding:3px 8px;border-radius:3px;font-family:var(--font-mono);font-size:10px;font-weight:500;">R$ 49,90</div>
+      </div><div style="position:relative;aspect-ratio:16/9;border-radius:6px;overflow:hidden;background:var(--ink-300);">
+        <img src="https://picsum.photos/seed/video-6/600/340" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.3);"><svg width="38" height="38" viewBox="0 0 24 24" fill="rgba(255,255,255,.9)"><polygon points="6,4 20,12 6,20"/></svg></div>
+        <div style="position:absolute;bottom:6px;left:8px;background:rgba(0,0,0,.7);color:white;padding:3px 8px;border-radius:3px;font-family:var(--font-mono);font-size:10px;">VID-006 · 1:62</div>
+        <div style="position:absolute;bottom:6px;right:8px;background:var(--brand-500);color:var(--ink-1000);padding:3px 8px;border-radius:3px;font-family:var(--font-mono);font-size:10px;font-weight:500;">R$ 49,90</div>
+      </div>
+    </div>
+  </div></div></div>
   </div>
 </section>
 
@@ -10528,7 +10842,7 @@
 
 <!-- /admin/eventos/novo · admin -->
 <section class="sim-screen" data-route="/admin/eventos/novo" data-mode="admin" hidden>
-  <div class="view-desktop view-desktop-fallback">
+  <div class="view-desktop">
     <div class="frame" data-screen-label="Admin · Criar Evento">
           <div class="adm-topbar">
             <div class="adm-brand-pill"><svg class="nav-logo"><use href="#nav-logo-h"/></svg><span class="role">Painel</span></div>
@@ -10565,6 +10879,30 @@
             </div>
           </div>
         </div>
+  </div>
+  <div class="view-mobile">
+    <div class="phone" data-screen-label="Admin · Criar Evento Mobile"><div class="phone-screen"><div class="m-status"><span>9:41</span><span class="right">●●●●●  100%</span></div>
+  <div class="m-adm-topbar">
+    <div class="brand-pill"><svg class="nav-logo"><use href="#nav-logo-h"/></svg><span class="role">Painel</span></div>
+    <div class="right">
+      <div class="bell"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-bell"/></svg><span class="pip"></span></div>
+      <button class="burger" type="button" data-drawer-open="mDrawerSim" aria-label="Menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-menu"/></svg></button>
+    </div>
+  </div>
+  <div class="m-adm-crumbs"><span>Painel</span><span class="sep">/</span><span class="here">Criar evento</span></div><div style="padding: 20px 16px;">
+    <h2 style="margin:0 0 4px;font-size:20px;font-weight:500;">Criar evento</h2>
+    <p style="font-size:12.5px;color:var(--ink-700);margin:0 0 18px;">Cada evento vira uma galeria pública (ou privada por link).</p>
+    <form>
+      <div class="field"><label>Nome do evento</label><input type="text" value="Abertura da Safra 2026"/></div>
+      <div class="field"><label>Data</label><input type="date" value="2026-04-17"/></div>
+      <div class="field"><label>Local</label><input type="text" value="Itajá · GO"/></div>
+      <div class="field"><label>Categoria</label><select><option>Rodeio</option><option>Corrida</option><option>Festival</option><option>Equestre</option><option>Futebol</option></select></div>
+      <div class="field"><label>Visibilidade</label><select><option>Público</option><option>Não listado (link)</option><option>Privado (senha)</option></select></div>
+      <div class="field"><label>Colaborador (% repasse)</label><input type="text" value="Maria L. · 15%"/></div>
+      <div class="field"><label>Descrição</label><textarea rows="3">Abertura da temporada 2026 do rodeio em Itajá-GO.</textarea></div>
+      <button class="btn primary full-btn" style="width:100%;margin-top:12px;">Criar e ir para upload →</button>
+    </form>
+  </div></div></div>
   </div>
 </section>
 
@@ -10782,7 +11120,7 @@
 
 <!-- /admin/carrinhos · admin -->
 <section class="sim-screen" data-route="/admin/carrinhos" data-mode="admin" hidden>
-  <div class="view-desktop view-desktop-fallback">
+  <div class="view-desktop">
     <div class="frame" data-screen-label="Admin · Carrinhos">
           <div class="adm-topbar">
             <div class="adm-brand-pill"><svg class="nav-logo"><use href="#nav-logo-h"/></svg><span class="role">Painel</span></div>
@@ -10804,6 +11142,52 @@
             </div>
           </div>
         </div>
+  </div>
+  <div class="view-mobile">
+    <div class="phone" data-screen-label="Admin · Carrinhos Mobile"><div class="phone-screen"><div class="m-status"><span>9:41</span><span class="right">●●●●●  100%</span></div>
+  <div class="m-adm-topbar">
+    <div class="brand-pill"><svg class="nav-logo"><use href="#nav-logo-h"/></svg><span class="role">Painel</span></div>
+    <div class="right">
+      <div class="bell"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-bell"/></svg><span class="pip"></span></div>
+      <button class="burger" type="button" data-drawer-open="mDrawerSim" aria-label="Menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-menu"/></svg></button>
+    </div>
+  </div>
+  <div class="m-adm-crumbs"><span>Painel</span><span class="sep">/</span><span class="here">Carrinhos abertos</span></div><div style="padding: 14px 16px;">
+    <h2 style="margin:0 0 4px;font-size:18px;font-weight:500;">Carrinhos abertos · 9</h2>
+    <div style="font-family:var(--font-mono);font-size:10px;color:var(--ink-700);margin-bottom:14px;">POTENCIAL R$ 1.142,00</div>
+    <button class="btn primary" style="width:100%;margin-bottom:14px;">Enviar lembrete em massa</button>
+  </div>
+  <div class="m-adm-card" style="padding: 14px 16px; border-bottom: 1px solid var(--ink-500); display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <div style="flex:1;min-width:0;">
+      <div style="font-size: 13.5px; color: var(--ink-1000); font-weight: 500;">Vinícius R.</div>
+      <div style="font-size: 11px; color: var(--ink-700); font-family: var(--font-mono); letter-spacing:.04em; margin-top:4px;">4 fotos · há 26h · R$ 86,40</div>
+    </div>
+    <div style="text-align: right;flex-shrink:0;"><button class="btn sm" style="background: var(--tp-whatsapp); color: var(--ink-1000); border-color: transparent;">WA</button></div>
+  </div><div class="m-adm-card" style="padding: 14px 16px; border-bottom: 1px solid var(--ink-500); display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <div style="flex:1;min-width:0;">
+      <div style="font-size: 13.5px; color: var(--ink-1000); font-weight: 500;">João M.</div>
+      <div style="font-size: 11px; color: var(--ink-700); font-family: var(--font-mono); letter-spacing:.04em; margin-top:4px;">3 fotos + 1 vídeo · 2 dias · R$ 156,30</div>
+    </div>
+    <div style="text-align: right;flex-shrink:0;"><button class="btn sm" style="background: var(--tp-whatsapp); color: var(--ink-1000); border-color: transparent;">WA</button></div>
+  </div><div class="m-adm-card" style="padding: 14px 16px; border-bottom: 1px solid var(--ink-500); display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <div style="flex:1;min-width:0;">
+      <div style="font-size: 13.5px; color: var(--ink-1000); font-weight: 500;">Ana L.</div>
+      <div style="font-size: 11px; color: var(--ink-700); font-family: var(--font-mono); letter-spacing:.04em; margin-top:4px;">2 fotos · há 5h · R$ 57,60</div>
+    </div>
+    <div style="text-align: right;flex-shrink:0;"><button class="btn sm">⌛</button></div>
+  </div><div class="m-adm-card" style="padding: 14px 16px; border-bottom: 1px solid var(--ink-500); display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <div style="flex:1;min-width:0;">
+      <div style="font-size: 13.5px; color: var(--ink-1000); font-weight: 500;">Patrícia S.</div>
+      <div style="font-size: 11px; color: var(--ink-700); font-family: var(--font-mono); letter-spacing:.04em; margin-top:4px;">6 fotos · há 30 min · R$ 172,80</div>
+    </div>
+    <div style="text-align: right;flex-shrink:0;"><button class="btn sm">⌛</button></div>
+  </div><div class="m-adm-card" style="padding: 14px 16px; border-bottom: 1px solid var(--ink-500); display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <div style="flex:1;min-width:0;">
+      <div style="font-size: 13.5px; color: var(--ink-1000); font-weight: 500;">Roberto S.</div>
+      <div style="font-size: 11px; color: var(--ink-700); font-family: var(--font-mono); letter-spacing:.04em; margin-top:4px;">1 foto · 3 dias · R$ 28,80</div>
+    </div>
+    <div style="text-align: right;flex-shrink:0;"><button class="btn sm">Recuperar</button></div>
+  </div></div></div>
   </div>
 </section>
 
@@ -10875,7 +11259,7 @@
 
 <!-- /admin/propostas · admin -->
 <section class="sim-screen" data-route="/admin/propostas" data-mode="admin" hidden>
-  <div class="view-desktop view-desktop-fallback">
+  <div class="view-desktop">
     <div class="frame" data-screen-label="Admin · Propostas">
           <div class="adm-topbar">
             <div class="adm-brand-pill"><svg class="nav-logo"><use href="#nav-logo-h"/></svg><span class="role">Painel</span></div>
@@ -10917,6 +11301,35 @@
             </div>
           </div>
         </div>
+  </div>
+  <div class="view-mobile">
+    <div class="phone" data-screen-label="Admin · Propostas Mobile"><div class="phone-screen"><div class="m-status"><span>9:41</span><span class="right">●●●●●  100%</span></div>
+  <div class="m-adm-topbar">
+    <div class="brand-pill"><svg class="nav-logo"><use href="#nav-logo-h"/></svg><span class="role">Painel</span></div>
+    <div class="right">
+      <div class="bell"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-bell"/></svg><span class="pip"></span></div>
+      <button class="burger" type="button" data-drawer-open="mDrawerSim" aria-label="Menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-menu"/></svg></button>
+    </div>
+  </div>
+  <div class="m-adm-crumbs"><span>Painel</span><span class="sep">/</span><span class="here">Propostas</span></div><div style="padding: 14px 16px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;gap:8px;">
+      <div><h2 style="margin:0;font-size:18px;font-weight:500;">Propostas · 2</h2><div style="font-family:var(--font-mono);font-size:10px;color:var(--ink-700);">AGUARDANDO RESPOSTA</div></div>
+      <button class="btn primary sm">+ Nova</button>
+    </div>
+  </div>
+  <div class="m-adm-card" style="padding: 14px 16px; border-bottom: 1px solid var(--ink-500); display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <div style="flex:1;min-width:0;">
+      <div style="font-size: 13.5px; color: var(--ink-1000); font-weight: 500;">Casamento Caroline F.</div>
+      <div style="font-size: 11px; color: var(--ink-700); font-family: var(--font-mono); letter-spacing:.04em; margin-top:4px;">BH · 15/09/26 · R$ 4.800</div>
+    </div>
+    <div style="text-align: right;flex-shrink:0;"><span class="badge b-info">ENVIADA</span></div>
+  </div><div class="m-adm-card" style="padding: 14px 16px; border-bottom: 1px solid var(--ink-500); display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <div style="flex:1;min-width:0;">
+      <div style="font-size: 13.5px; color: var(--ink-1000); font-weight: 500;">Aniversário 50 anos · José</div>
+      <div style="font-size: 11px; color: var(--ink-700); font-family: var(--font-mono); letter-spacing:.04em; margin-top:4px;">GO · 22/06/26 · R$ 2.200</div>
+    </div>
+    <div style="text-align: right;flex-shrink:0;"><span class="badge b-pend">AGUARD.</span></div>
+  </div></div></div>
   </div>
 </section>
 
@@ -10993,7 +11406,7 @@
 
 <!-- /admin/clientes · admin -->
 <section class="sim-screen" data-route="/admin/clientes" data-mode="admin" hidden>
-  <div class="view-desktop view-desktop-fallback">
+  <div class="view-desktop">
     <div class="frame" data-screen-label="Admin · Clientes">
           <div style="padding: 18px 22px; border-bottom: 1px solid var(--ink-500); display: flex; justify-content: space-between; align-items: center;">
             <div><h3 style="margin: 0; font-size: 15px;">Clientes · 87</h3><div style="font-family: var(--font-mono); font-size: 10px; color: var(--ink-700);">+9 ESTE MÊS</div></div>
@@ -11013,11 +11426,65 @@
           </div>
         </div>
   </div>
+  <div class="view-mobile">
+    <div class="phone" data-screen-label="Admin · Clientes Mobile"><div class="phone-screen"><div class="m-status"><span>9:41</span><span class="right">●●●●●  100%</span></div>
+  <div class="m-adm-topbar">
+    <div class="brand-pill"><svg class="nav-logo"><use href="#nav-logo-h"/></svg><span class="role">Painel</span></div>
+    <div class="right">
+      <div class="bell"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-bell"/></svg><span class="pip"></span></div>
+      <button class="burger" type="button" data-drawer-open="mDrawerSim" aria-label="Menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-menu"/></svg></button>
+    </div>
+  </div>
+  <div class="m-adm-crumbs"><span>Painel</span><span class="sep">/</span><span class="here">Clientes</span></div><div style="padding: 14px 16px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;gap:8px;">
+      <div><h2 style="margin:0;font-size:18px;font-weight:500;">87 clientes</h2><div style="font-family:var(--font-mono);font-size:10px;color:var(--ink-700);">+9 ESTE MÊS</div></div>
+      <button class="btn primary sm">+ Novo</button>
+    </div>
+    <div class="field"><label></label><input type="search" /></div>
+  </div>
+  <div class="m-adm-card" style="padding: 14px 16px; border-bottom: 1px solid var(--ink-500); display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <div style="flex:1;min-width:0;">
+      <div style="font-size: 13.5px; color: var(--ink-1000); font-weight: 500;">Maria F. Silva</div>
+      <div style="font-size: 11px; color: var(--ink-700); font-family: var(--font-mono); letter-spacing:.04em; margin-top:4px;">5 eventos · LTV R$ 642</div>
+    </div>
+    <div style="text-align: right;flex-shrink:0;"><span class="badge b-paid">VIP</span></div>
+  </div><div class="m-adm-card" style="padding: 14px 16px; border-bottom: 1px solid var(--ink-500); display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <div style="flex:1;min-width:0;">
+      <div style="font-size: 13.5px; color: var(--ink-1000); font-weight: 500;">João M. Santos</div>
+      <div style="font-size: 11px; color: var(--ink-700); font-family: var(--font-mono); letter-spacing:.04em; margin-top:4px;">3 eventos · LTV R$ 488</div>
+    </div>
+    <div style="text-align: right;flex-shrink:0;"></div>
+  </div><div class="m-adm-card" style="padding: 14px 16px; border-bottom: 1px solid var(--ink-500); display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <div style="flex:1;min-width:0;">
+      <div style="font-size: 13.5px; color: var(--ink-1000); font-weight: 500;">Ana L. Pereira</div>
+      <div style="font-size: 11px; color: var(--ink-700); font-family: var(--font-mono); letter-spacing:.04em; margin-top:4px;">4 eventos · NOVA</div>
+    </div>
+    <div style="text-align: right;flex-shrink:0;"><span class="badge b-info">NOVA</span></div>
+  </div><div class="m-adm-card" style="padding: 14px 16px; border-bottom: 1px solid var(--ink-500); display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <div style="flex:1;min-width:0;">
+      <div style="font-size: 13.5px; color: var(--ink-1000); font-weight: 500;">Patrícia S. Oliveira</div>
+      <div style="font-size: 11px; color: var(--ink-700); font-family: var(--font-mono); letter-spacing:.04em; margin-top:4px;">6 eventos · LTV R$ 412</div>
+    </div>
+    <div style="text-align: right;flex-shrink:0;"></div>
+  </div><div class="m-adm-card" style="padding: 14px 16px; border-bottom: 1px solid var(--ink-500); display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <div style="flex:1;min-width:0;">
+      <div style="font-size: 13.5px; color: var(--ink-1000); font-weight: 500;">Roberto S. Lima</div>
+      <div style="font-size: 11px; color: var(--ink-700); font-family: var(--font-mono); letter-spacing:.04em; margin-top:4px;">2 eventos · LTV R$ 184</div>
+    </div>
+    <div style="text-align: right;flex-shrink:0;"></div>
+  </div><div class="m-adm-card" style="padding: 14px 16px; border-bottom: 1px solid var(--ink-500); display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <div style="flex:1;min-width:0;">
+      <div style="font-size: 13.5px; color: var(--ink-1000); font-weight: 500;">Carolina F.</div>
+      <div style="font-size: 11px; color: var(--ink-700); font-family: var(--font-mono); letter-spacing:.04em; margin-top:4px;">1 evento · LTV R$ 87</div>
+    </div>
+    <div style="text-align: right;flex-shrink:0;"></div>
+  </div></div></div>
+  </div>
 </section>
 
 <!-- /admin/colaboradores · admin -->
 <section class="sim-screen" data-route="/admin/colaboradores" data-mode="admin" hidden>
-  <div class="view-desktop view-desktop-fallback">
+  <div class="view-desktop">
     <div class="frame" data-screen-label="Admin · Colaboradores">
           <div style="padding: 18px 22px; border-bottom: 1px solid var(--ink-500); display: flex; justify-content: space-between; align-items: center;">
             <div><h3 style="margin: 0; font-size: 15px;">Colaboradores · 4</h3><div style="font-family: var(--font-mono); font-size: 10px; color: var(--ink-700);">PAPÉIS · ROLES</div></div>
@@ -11062,6 +11529,41 @@
             </div>
           </div>
         </div>
+  </div>
+  <div class="view-mobile">
+    <div class="phone" data-screen-label="Admin · Colaboradores Mobile"><div class="phone-screen"><div class="m-status"><span>9:41</span><span class="right">●●●●●  100%</span></div>
+  <div class="m-adm-topbar">
+    <div class="brand-pill"><svg class="nav-logo"><use href="#nav-logo-h"/></svg><span class="role">Painel</span></div>
+    <div class="right">
+      <div class="bell"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-bell"/></svg><span class="pip"></span></div>
+      <button class="burger" type="button" data-drawer-open="mDrawerSim" aria-label="Menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-menu"/></svg></button>
+    </div>
+  </div>
+  <div class="m-adm-crumbs"><span>Painel</span><span class="sep">/</span><span class="here">Colaboradores</span></div><div style="padding: 14px 16px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;gap:8px;">
+      <div><h2 style="margin:0;font-size:18px;font-weight:500;">3 colaboradores</h2><div style="font-family:var(--font-mono);font-size:10px;color:var(--ink-700);">REPASSE TOTAL · 32%</div></div>
+      <button class="btn primary sm">+ Convidar</button>
+    </div>
+  </div>
+  <div class="m-adm-card" style="padding: 14px 16px; border-bottom: 1px solid var(--ink-500); display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <div style="flex:1;min-width:0;">
+      <div style="font-size: 13.5px; color: var(--ink-1000); font-weight: 500;">Maria L. Souza</div>
+      <div style="font-size: 11px; color: var(--ink-700); font-family: var(--font-mono); letter-spacing:.04em; margin-top:4px;">Editor · 15% · 12 eventos</div>
+    </div>
+    <div style="text-align: right;flex-shrink:0;"><span class="badge b-paid">ATIVO</span></div>
+  </div><div class="m-adm-card" style="padding: 14px 16px; border-bottom: 1px solid var(--ink-500); display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <div style="flex:1;min-width:0;">
+      <div style="font-size: 13.5px; color: var(--ink-1000); font-weight: 500;">Pedro A. Reis</div>
+      <div style="font-size: 11px; color: var(--ink-700); font-family: var(--font-mono); letter-spacing:.04em; margin-top:4px;">Assistente · 10% · 5 eventos</div>
+    </div>
+    <div style="text-align: right;flex-shrink:0;"><span class="badge b-paid">ATIVO</span></div>
+  </div><div class="m-adm-card" style="padding: 14px 16px; border-bottom: 1px solid var(--ink-500); display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <div style="flex:1;min-width:0;">
+      <div style="font-size: 13.5px; color: var(--ink-1000); font-weight: 500;">Carla R. Mota</div>
+      <div style="font-size: 11px; color: var(--ink-700); font-family: var(--font-mono); letter-spacing:.04em; margin-top:4px;">Editor · 7% · 2 eventos</div>
+    </div>
+    <div style="text-align: right;flex-shrink:0;"><span class="badge">PAUSADO</span></div>
+  </div></div></div>
   </div>
 </section>
 
@@ -11160,7 +11662,7 @@
 
 <!-- /admin/comentarios · admin -->
 <section class="sim-screen" data-route="/admin/comentarios" data-mode="admin" hidden>
-  <div class="view-desktop view-desktop-fallback">
+  <div class="view-desktop">
     <div class="frame" data-screen-label="Admin · Comentários">
           <div style="padding: 18px 22px; border-bottom: 1px solid var(--ink-500); display: flex; justify-content: space-between; align-items: center;">
             <div><h3 style="margin: 0; font-size: 15px;">Comentários · 5 a moderar</h3></div>
@@ -11203,11 +11705,57 @@
           </div>
         </div>
   </div>
+  <div class="view-mobile">
+    <div class="phone" data-screen-label="Admin · Comentários Mobile"><div class="phone-screen"><div class="m-status"><span>9:41</span><span class="right">●●●●●  100%</span></div>
+  <div class="m-adm-topbar">
+    <div class="brand-pill"><svg class="nav-logo"><use href="#nav-logo-h"/></svg><span class="role">Painel</span></div>
+    <div class="right">
+      <div class="bell"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-bell"/></svg><span class="pip"></span></div>
+      <button class="burger" type="button" data-drawer-open="mDrawerSim" aria-label="Menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-menu"/></svg></button>
+    </div>
+  </div>
+  <div class="m-adm-crumbs"><span>Painel</span><span class="sep">/</span><span class="here">Comentários</span></div><div style="padding: 14px 16px;">
+    <h2 style="margin:0 0 4px;font-size:18px;font-weight:500;">Comentários · 5 a moderar</h2>
+    <div style="font-family:var(--font-mono);font-size:10px;color:var(--ink-700);margin-bottom:14px;">142 APROVADOS · 3 REJEITADOS</div>
+    <div style="display:flex;gap:6px;margin-bottom:12px;"><span class="chip active">Pendentes · 5</span><span class="chip">Aprovados · 142</span><span class="chip">Rejeitados · 3</span></div>
+  </div>
+  <div class="m-adm-card" style="padding: 14px 16px; border-bottom: 1px solid var(--ink-500); display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <div style="flex:1;min-width:0;">
+      <div style="font-size: 13.5px; color: var(--ink-1000); font-weight: 500;">&quot;Maravilhosa!! 😍😍😍&quot;</div>
+      <div style="font-size: 11px; color: var(--ink-700); font-family: var(--font-mono); letter-spacing:.04em; margin-top:4px;">Maria F. · #142 · Safra 2026</div>
+    </div>
+    <div style="text-align: right;flex-shrink:0;"><button class="btn sm">Aprovar</button></div>
+  </div><div class="m-adm-card" style="padding: 14px 16px; border-bottom: 1px solid var(--ink-500); display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <div style="flex:1;min-width:0;">
+      <div style="font-size: 13.5px; color: var(--ink-1000); font-weight: 500;">&quot;Tem como liberar o RAW?&quot;</div>
+      <div style="font-size: 11px; color: var(--ink-700); font-family: var(--font-mono); letter-spacing:.04em; margin-top:4px;">João M. · #087 · Festival Pop</div>
+    </div>
+    <div style="text-align: right;flex-shrink:0;"><button class="btn sm">Aprovar</button></div>
+  </div><div class="m-adm-card" style="padding: 14px 16px; border-bottom: 1px solid var(--ink-500); display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <div style="flex:1;min-width:0;">
+      <div style="font-size: 13.5px; color: var(--ink-1000); font-weight: 500;">&quot;Quanto seria pra impressão A3?&quot;</div>
+      <div style="font-size: 11px; color: var(--ink-700); font-family: var(--font-mono); letter-spacing:.04em; margin-top:4px;">Ana L. · #221 · Meia Anápolis</div>
+    </div>
+    <div style="text-align: right;flex-shrink:0;"><button class="btn sm">Aprovar</button></div>
+  </div><div class="m-adm-card" style="padding: 14px 16px; border-bottom: 1px solid var(--ink-500); display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <div style="flex:1;min-width:0;">
+      <div style="font-size: 13.5px; color: var(--ink-1000); font-weight: 500;">&quot;Foto 156 está com a cor verde&quot;</div>
+      <div style="font-size: 11px; color: var(--ink-700); font-family: var(--font-mono); letter-spacing:.04em; margin-top:4px;">Patrícia S. · #156 · Safra 2026</div>
+    </div>
+    <div style="text-align: right;flex-shrink:0;"><button class="btn sm">Aprovar</button></div>
+  </div><div class="m-adm-card" style="padding: 14px 16px; border-bottom: 1px solid var(--ink-500); display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <div style="flex:1;min-width:0;">
+      <div style="font-size: 13.5px; color: var(--ink-1000); font-weight: 500;">&quot;Quando libera o evento de jun?&quot;</div>
+      <div style="font-size: 11px; color: var(--ink-700); font-family: var(--font-mono); letter-spacing:.04em; margin-top:4px;">Roberto S. · geral · 12/04</div>
+    </div>
+    <div style="text-align: right;flex-shrink:0;"><button class="btn sm">Aprovar</button></div>
+  </div></div></div>
+  </div>
 </section>
 
 <!-- /admin/contatos · admin -->
 <section class="sim-screen" data-route="/admin/contatos" data-mode="admin" hidden>
-  <div class="view-desktop view-desktop-fallback">
+  <div class="view-desktop">
     <div class="frame" data-screen-label="Admin · Contatos">
           <div style="padding: 18px 22px; border-bottom: 1px solid var(--ink-500); display: flex; justify-content: space-between; align-items: center;">
             <div><h3 style="margin: 0; font-size: 15px;">Contatos · 3 a responder</h3></div>
@@ -11246,6 +11794,48 @@
             </div>
           </div>
         </div>
+  </div>
+  <div class="view-mobile">
+    <div class="phone" data-screen-label="Admin · Contatos Mobile"><div class="phone-screen"><div class="m-status"><span>9:41</span><span class="right">●●●●●  100%</span></div>
+  <div class="m-adm-topbar">
+    <div class="brand-pill"><svg class="nav-logo"><use href="#nav-logo-h"/></svg><span class="role">Painel</span></div>
+    <div class="right">
+      <div class="bell"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-bell"/></svg><span class="pip"></span></div>
+      <button class="burger" type="button" data-drawer-open="mDrawerSim" aria-label="Menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-menu"/></svg></button>
+    </div>
+  </div>
+  <div class="m-adm-crumbs"><span>Painel</span><span class="sep">/</span><span class="here">Contatos</span></div><div style="padding: 14px 16px;">
+    <h2 style="margin:0 0 4px;font-size:18px;font-weight:500;">Contatos · 3 a responder</h2>
+    <div style="font-family:var(--font-mono);font-size:10px;color:var(--ink-700);margin-bottom:14px;">28 RESPONDIDAS · ÚLT. 30 DIAS</div>
+    <div style="display:flex;gap:6px;margin-bottom:12px;"><span class="chip active">Pendentes · 3</span><span class="chip">Respondidas · 28</span></div>
+  </div>
+  <div class="m-adm-card" style="padding: 14px 16px; border-bottom: 1px solid var(--ink-500); display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <div style="flex:1;min-width:0;">
+      <div style="font-size: 13.5px; color: var(--ink-1000); font-weight: 500;">Caroline F.</div>
+      <div style="font-size: 11px; color: var(--ink-700); font-family: var(--font-mono); letter-spacing:.04em; margin-top:4px;">caroline@gmail.com · 14/04 · 18:32</div>
+    </div>
+    <div style="text-align: right;flex-shrink:0;"><span class="badge b-pend">URGENTE</span></div>
+  </div><div class="m-adm-card" style="padding: 14px 16px; border-bottom: 1px solid var(--ink-500); display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <div style="flex:1;min-width:0;">
+      <div style="font-size: 13.5px; color: var(--ink-1000); font-weight: 500;">Bruno H.</div>
+      <div style="font-size: 11px; color: var(--ink-700); font-family: var(--font-mono); letter-spacing:.04em; margin-top:4px;">bruno@hotmail.com · 13/04 · 09:14</div>
+    </div>
+    <div style="text-align: right;flex-shrink:0;"><span class="badge b-pend">PENDENTE</span></div>
+  </div><div class="m-adm-card" style="padding: 14px 16px; border-bottom: 1px solid var(--ink-500); display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <div style="flex:1;min-width:0;">
+      <div style="font-size: 13.5px; color: var(--ink-1000); font-weight: 500;">Ana M.</div>
+      <div style="font-size: 11px; color: var(--ink-700); font-family: var(--font-mono); letter-spacing:.04em; margin-top:4px;">ana@uol.com.br · 12/04 · 15:48</div>
+    </div>
+    <div style="text-align: right;flex-shrink:0;"><span class="badge b-pend">PENDENTE</span></div>
+  </div>
+  <div style="padding:14px 16px;font-size:13px;color:var(--ink-900);line-height:1.5;background:var(--ink-200);border-top:1px solid var(--ink-500);">
+    <strong>"Preciso de orçamento para casamento em Belo Horizonte..."</strong><br>
+    <span style="font-size:11.5px;color:var(--ink-700);">— Caroline F. · 14/04 · 18:32</span>
+  </div>
+  <div style="padding:14px 16px;display:flex;gap:8px;">
+    <button class="btn primary sm" style="flex:1;">Responder</button>
+    <button class="btn sm" style="flex:1;">→ Proposta</button>
+  </div></div></div>
   </div>
 </section>
 
@@ -11513,7 +12103,7 @@
 
 <!-- /admin/personalizar · admin -->
 <section class="sim-screen" data-route="/admin/personalizar" data-mode="admin" hidden>
-  <div class="view-desktop view-desktop-fallback">
+  <div class="view-desktop">
     <div class="frame" data-screen-label="Admin · Personalizar">
           <div class="adm-topbar">
             <div class="adm-brand-pill"><svg class="nav-logo"><use href="#nav-logo-h"/></svg><span class="role">Painel</span></div>
@@ -11549,6 +12139,41 @@
             </div>
           </div>
         </div>
+  </div>
+  <div class="view-mobile">
+    <div class="phone" data-screen-label="Admin · Personalizar Mobile"><div class="phone-screen"><div class="m-status"><span>9:41</span><span class="right">●●●●●  100%</span></div>
+  <div class="m-adm-topbar">
+    <div class="brand-pill"><svg class="nav-logo"><use href="#nav-logo-h"/></svg><span class="role">Painel</span></div>
+    <div class="right">
+      <div class="bell"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-bell"/></svg><span class="pip"></span></div>
+      <button class="burger" type="button" data-drawer-open="mDrawerSim" aria-label="Menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-menu"/></svg></button>
+    </div>
+  </div>
+  <div class="m-adm-crumbs"><span>Painel</span><span class="sep">/</span><span class="here">Personalizar</span></div><div style="padding: 20px 16px;">
+    <h2 style="margin:0 0 4px;font-size:20px;font-weight:500;">Personalizar site</h2>
+    <p style="font-size:12.5px;color:var(--ink-700);margin:0 0 18px;">Tema padrão: escuro · brand âncora azul</p>
+    <form>
+      <div class="field"><label>Título do site</label><input type="text" value="Vinícius Souza · Fotografia"/></div>
+      <div class="field"><label>Frase de capa (hero)</label><input type="text" value="Compre as suas fotos."/></div>
+      <div class="field"><label>Subtítulo (lede)</label><textarea rows="3">Escolha seu evento, encontre suas fotos, pague via Pix ou cartão e baixe os arquivos originais.</textarea></div>
+      <div class="field"><label>Tema padrão</label>
+        <div style="display:flex;gap:6px;">
+          <button type="button" class="btn sm" style="flex:1;">☀ Claro</button>
+          <button type="button" class="btn sm primary" style="flex:1;">🌙 Escuro</button>
+          <button type="button" class="btn sm" style="flex:1;">Auto</button>
+        </div>
+      </div>
+      <div class="field"><label>Cor brand principal</label>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <div style="width:36px;height:36px;border-radius:8px;background:#1F7AE0;border:2px solid var(--ink-1000);"></div>
+          <div style="width:36px;height:36px;border-radius:8px;background:#C83333;border:1px solid var(--ink-500);"></div>
+          <div style="width:36px;height:36px;border-radius:8px;background:#1F7A4A;border:1px solid var(--ink-500);"></div>
+          <div style="width:36px;height:36px;border-radius:8px;background:#C8A84B;border:1px solid var(--ink-500);"></div>
+        </div>
+      </div>
+      <button class="btn primary full-btn" style="width:100%;margin-top:14px;">Salvar alterações</button>
+    </form>
+  </div></div></div>
   </div>
 </section>
 
@@ -11674,7 +12299,7 @@
 
 <!-- /admin/notificacoes · admin -->
 <section class="sim-screen" data-route="/admin/notificacoes" data-mode="admin" hidden>
-  <div class="view-desktop view-desktop-fallback">
+  <div class="view-desktop">
     <div class="frame" data-screen-label="Admin · Notificações">
           <div style="padding: 18px 22px; border-bottom: 1px solid var(--ink-500);">
             <h3 style="margin: 0; font-size: 15px;">Eventos do sistema</h3>
@@ -11709,11 +12334,57 @@
           </div>
         </div>
   </div>
+  <div class="view-mobile">
+    <div class="phone" data-screen-label="Admin · Notificações Mobile"><div class="phone-screen"><div class="m-status"><span>9:41</span><span class="right">●●●●●  100%</span></div>
+  <div class="m-adm-topbar">
+    <div class="brand-pill"><svg class="nav-logo"><use href="#nav-logo-h"/></svg><span class="role">Painel</span></div>
+    <div class="right">
+      <div class="bell"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-bell"/></svg><span class="pip"></span></div>
+      <button class="burger" type="button" data-drawer-open="mDrawerSim" aria-label="Menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-menu"/></svg></button>
+    </div>
+  </div>
+  <div class="m-adm-crumbs"><span>Painel</span><span class="sep">/</span><span class="here">Notificações</span></div><div style="padding: 14px 16px;">
+    <h2 style="margin:0 0 4px;font-size:18px;font-weight:500;">Notificações admin</h2>
+    <div style="font-family:var(--font-mono);font-size:10px;color:var(--ink-700);margin-bottom:14px;">14 NÃO LIDAS · ALL</div>
+    <div style="display:flex;gap:6px;margin-bottom:12px;overflow-x:auto;"><span class="chip active">All · 14</span><span class="chip">Vendas · 5</span><span class="chip">Sistema · 3</span><span class="chip">Coment · 4</span><span class="chip">LGPD · 1</span></div>
+  </div>
+  <div class="m-adm-card" style="padding: 14px 16px; border-bottom: 1px solid var(--ink-500); display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <div style="flex:1;min-width:0;">
+      <div style="font-size: 13.5px; color: var(--ink-1000); font-weight: 500;">Pagamento confirmado #200000039</div>
+      <div style="font-size: 11px; color: var(--ink-700); font-family: var(--font-mono); letter-spacing:.04em; margin-top:4px;">há 12 min · R$ 107,20 · PIX</div>
+    </div>
+    <div style="text-align: right;flex-shrink:0;"><span class="badge b-paid">VENDA</span></div>
+  </div><div class="m-adm-card" style="padding: 14px 16px; border-bottom: 1px solid var(--ink-500); display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <div style="flex:1;min-width:0;">
+      <div style="font-size: 13.5px; color: var(--ink-1000); font-weight: 500;">Novo comentário em foto 142</div>
+      <div style="font-size: 11px; color: var(--ink-700); font-family: var(--font-mono); letter-spacing:.04em; margin-top:4px;">há 38 min · Safra 2026</div>
+    </div>
+    <div style="text-align: right;flex-shrink:0;"><span class="badge">MOD</span></div>
+  </div><div class="m-adm-card" style="padding: 14px 16px; border-bottom: 1px solid var(--ink-500); display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <div style="flex:1;min-width:0;">
+      <div style="font-size: 13.5px; color: var(--ink-1000); font-weight: 500;">Solicitação LGPD · foto 087</div>
+      <div style="font-size: 11px; color: var(--ink-700); font-family: var(--font-mono); letter-spacing:.04em; margin-top:4px;">há 1h · prazo 5 dias úteis</div>
+    </div>
+    <div style="text-align: right;flex-shrink:0;"><span class="badge b-pend">LGPD</span></div>
+  </div><div class="m-adm-card" style="padding: 14px 16px; border-bottom: 1px solid var(--ink-500); display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <div style="flex:1;min-width:0;">
+      <div style="font-size: 13.5px; color: var(--ink-1000); font-weight: 500;">Backup R2 completo</div>
+      <div style="font-size: 11px; color: var(--ink-700); font-family: var(--font-mono); letter-spacing:.04em; margin-top:4px;">há 2h · 412 GB · OK</div>
+    </div>
+    <div style="text-align: right;flex-shrink:0;"><span class="badge b-soft">SIS</span></div>
+  </div><div class="m-adm-card" style="padding: 14px 16px; border-bottom: 1px solid var(--ink-500); display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <div style="flex:1;min-width:0;">
+      <div style="font-size: 13.5px; color: var(--ink-1000); font-weight: 500;">Cliente recuperou senha</div>
+      <div style="font-size: 11px; color: var(--ink-700); font-family: var(--font-mono); letter-spacing:.04em; margin-top:4px;">há 3h · ana@uol.com.br</div>
+    </div>
+    <div style="text-align: right;flex-shrink:0;"><span class="badge b-soft">SIS</span></div>
+  </div></div></div>
+  </div>
 </section>
 
 <!-- /admin/reconhecimento · admin -->
 <section class="sim-screen" data-route="/admin/reconhecimento" data-mode="admin" hidden>
-  <div class="view-desktop view-desktop-fallback">
+  <div class="view-desktop">
     <div class="frame" data-screen-label="Admin · Reconhecimento">
           <div style="padding: 18px 22px; border-bottom: 1px solid var(--ink-500);">
             <h3 style="margin: 0; font-size: 15px;">Reconhecimento facial</h3>
@@ -11749,6 +12420,31 @@
             </div>
           </div>
         </div>
+  </div>
+  <div class="view-mobile">
+    <div class="phone" data-screen-label="Admin · Reconhecimento Mobile"><div class="phone-screen"><div class="m-status"><span>9:41</span><span class="right">●●●●●  100%</span></div>
+  <div class="m-adm-topbar">
+    <div class="brand-pill"><svg class="nav-logo"><use href="#nav-logo-h"/></svg><span class="role">Painel</span></div>
+    <div class="right">
+      <div class="bell"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-bell"/></svg><span class="pip"></span></div>
+      <button class="burger" type="button" data-drawer-open="mDrawerSim" aria-label="Menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-menu"/></svg></button>
+    </div>
+  </div>
+  <div class="m-adm-crumbs"><span>Painel</span><span class="sep">/</span><span class="here">Reconhecimento facial</span></div><div style="padding: 20px 16px;">
+    <h2 style="margin:0 0 4px;font-size:20px;font-weight:500;">Reconhecimento facial</h2>
+    <div style="font-family:var(--font-mono);font-size:10px;color:var(--ink-700);margin-bottom:16px;letter-spacing:.06em;">FACE-API · EMBEDDINGS · TENSORFLOW.JS</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;">
+      <div class="m-adm-stat"><div class="lbl">EMBEDDINGS</div><div class="v signal">3.142</div><div class="delta">87 clientes</div></div>
+      <div class="m-adm-stat"><div class="lbl">CACHE DISCO</div><div class="v brand">142 MB</div><div class="delta">/storage/embeddings</div></div>
+    </div>
+    <div style="background:var(--ink-200);border:1px solid var(--ink-500);border-radius:6px;padding:14px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;">
+      <div><div style="font-size:13.5px;color:var(--ink-1000);">Reconhecimento ativo</div><div style="font-size:11.5px;color:var(--ink-700);">Permite o opt-in dos clientes</div></div>
+      <button class="switch on" data-toggle></button>
+    </div>
+    <div class="field"><label>Confiança mínima exibida</label><select><option>50%</option><option>70%</option><option>85%</option></select></div>
+    <div class="field"><label>Backend de detecção</label><select><option>Auto</option><option>face-api</option><option>tensorflow.js</option><option>manual fallback</option></select></div>
+    <button class="btn danger" style="width:100%;margin-top:14px;border-color:rgba(232,68,68,.4);color:var(--danger-500, #e84444);">Limpar cache de embeddings</button>
+  </div></div></div>
   </div>
 </section>
 
@@ -12424,7 +13120,7 @@
 
 <!-- /admin/eventos-sem-fotos · admin -->
 <section class="sim-screen" data-route="/admin/eventos-sem-fotos" data-mode="admin" hidden>
-  <div class="view-desktop view-desktop-fallback">
+  <div class="view-desktop">
     <div class="frame" data-screen-label="Admin · Evento Sem Fotos">
           <div class="adm-topbar">
             <div class="adm-brand-pill"><svg class="nav-logo"><use href="#nav-logo-h"/></svg><span class="role">Painel</span></div>
@@ -12496,11 +13192,29 @@
           </div>
         </div>
   </div>
+  <div class="view-mobile">
+    <div class="phone" data-screen-label="Admin · Evento Sem Fotos Mobile"><div class="phone-screen"><div class="m-status"><span>9:41</span><span class="right">●●●●●  100%</span></div>
+  <div class="m-adm-topbar">
+    <div class="brand-pill"><svg class="nav-logo"><use href="#nav-logo-h"/></svg><span class="role">Painel</span></div>
+    <div class="right">
+      <div class="bell"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-bell"/></svg><span class="pip"></span></div>
+      <button class="burger" type="button" data-drawer-open="mDrawerSim" aria-label="Menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-menu"/></svg></button>
+    </div>
+  </div>
+  <div class="m-adm-crumbs"><span>Painel</span><span class="sep">/</span><span class="here">Evento</span></div><div style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:48px 24px;min-height:60vh;gap:12px;">
+    <div style="width:72px;height:72px;border-radius:50%;background:var(--ink-300);display:flex;align-items:center;justify-content:center;">
+      <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="var(--ink-800)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#sim-i-upload"/></svg>
+    </div>
+    <h2 style="font-family:var(--font-heading);font-size:22px;font-weight:500;margin:8px 0 0;color:var(--ink-1000);">Sem fotos ainda</h2>
+    <p style="font-size:14px;color:var(--ink-800);line-height:1.5;margin:0;max-width:300px;">O evento foi criado mas você ainda não fez upload das fotos. Faça upload pra liberar pra venda.</p>
+    <button class="btn primary" data-sim-route="/admin/eventos/123-upload" style="margin-top:8px;">Fazer upload agora</button>
+  </div></div></div>
+  </div>
 </section>
 
 <!-- /admin/dashboard-vazio · admin -->
 <section class="sim-screen" data-route="/admin/dashboard-vazio" data-mode="admin" hidden>
-  <div class="view-desktop view-desktop-fallback">
+  <div class="view-desktop">
     <div class="frame" data-screen-label="Admin · Dashboard Vazio">
           <div class="adm-topbar">
             <div class="adm-brand-pill"><svg class="nav-logo"><use href="#nav-logo-h"/></svg><span class="role">Painel</span></div>
@@ -12604,11 +13318,29 @@
           </div>
         </div>
   </div>
+  <div class="view-mobile">
+    <div class="phone" data-screen-label="Admin · Dashboard Vazio Mobile"><div class="phone-screen"><div class="m-status"><span>9:41</span><span class="right">●●●●●  100%</span></div>
+  <div class="m-adm-topbar">
+    <div class="brand-pill"><svg class="nav-logo"><use href="#nav-logo-h"/></svg><span class="role">Painel</span></div>
+    <div class="right">
+      <div class="bell"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-bell"/></svg><span class="pip"></span></div>
+      <button class="burger" type="button" data-drawer-open="mDrawerSim" aria-label="Menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-menu"/></svg></button>
+    </div>
+  </div>
+  <div class="m-adm-crumbs"><span>Painel</span><span class="sep">/</span><span class="here">Dashboard</span></div><div style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:48px 24px;min-height:60vh;gap:12px;">
+    <div style="width:72px;height:72px;border-radius:50%;background:var(--ink-300);display:flex;align-items:center;justify-content:center;">
+      <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="var(--ink-800)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#sim-i-image"/></svg>
+    </div>
+    <h2 style="font-family:var(--font-heading);font-size:22px;font-weight:500;margin:8px 0 0;color:var(--ink-1000);">Sem dados ainda</h2>
+    <p style="font-size:14px;color:var(--ink-800);line-height:1.5;margin:0;max-width:300px;">Você ainda não criou nenhum evento. Comece por aí — cada evento vira uma galeria pra clientes comprarem fotos.</p>
+    <button class="btn primary" data-sim-route="/admin/eventos/novo" style="margin-top:8px;">+ Criar primeiro evento</button>
+  </div></div></div>
+  </div>
 </section>
 
 <!-- /admin/pedidos/reembolso · admin -->
 <section class="sim-screen" data-route="/admin/pedidos/reembolso" data-mode="admin" hidden>
-  <div class="view-desktop view-desktop-fallback">
+  <div class="view-desktop">
     <div class="frame" data-screen-label="Admin · Pedido com Reembolso">
           <div class="adm-topbar">
             <div class="adm-brand-pill"><svg class="nav-logo"><use href="#nav-logo-h"/></svg><span class="role">Painel</span></div>
@@ -12740,11 +13472,66 @@
           </div>
         </div>
   </div>
+  <div class="view-mobile">
+    <div class="phone" data-screen-label="Admin · Pedido com Reembolso Mobile"><div class="phone-screen"><div class="m-status"><span>9:41</span><span class="right">●●●●●  100%</span></div>
+  <div class="m-adm-topbar">
+    <div class="brand-pill"><svg class="nav-logo"><use href="#nav-logo-h"/></svg><span class="role">Painel</span></div>
+    <div class="right">
+      <div class="bell"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-bell"/></svg><span class="pip"></span></div>
+      <button class="burger" type="button" data-drawer-open="mDrawerSim" aria-label="Menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-menu"/></svg></button>
+    </div>
+  </div>
+  <div class="m-adm-crumbs"><span>Painel</span><span class="sep">/</span><span class="here">Pedido #200000019</span></div><div style="padding: 16px 16px;">
+    <div style="background:rgba(232,68,68,.10);border:1px solid rgba(232,68,68,.3);border-radius:6px;padding:12px;margin-bottom:14px;">
+      <strong style="color:var(--danger-500, #e84444);font-size:13px;">⊘ Pedido com reembolso solicitado</strong>
+      <p style="margin:6px 0 0;font-size:12.5px;color:var(--ink-900);line-height:1.4;">Cliente Patrícia S. pediu reembolso de 2 fotos (de 8 compradas). Motivo: "Cor da pele dela ficou esverdeada".</p>
+    </div>
+    <h2 style="margin:0 0 4px;font-size:18px;font-weight:500;">Pedido #200000019</h2>
+    <div style="font-family:var(--font-mono);font-size:10.5px;color:var(--ink-700);margin-bottom:14px;">PATRÍCIA S. · 09/04 · R$ 230,40 · 8 fotos · ABERTURA SAFRA 2026</div>
+    <h3 style="margin:14px 0 8px;font-size:13px;font-weight:500;">Fotos do pedido</h3>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;">
+      <div style="position:relative;aspect-ratio:1;border-radius:4px;overflow:hidden;box-shadow: 0 0 0 2px var(--danger-500, #e84444);">
+        <img src="https://picsum.photos/seed/refund-0/200/200" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+        <div style="position:absolute;inset:0;background:rgba(232,68,68,.3);display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;">✕</div>
+      </div><div style="position:relative;aspect-ratio:1;border-radius:4px;overflow:hidden;box-shadow: 0 0 0 2px var(--danger-500, #e84444);">
+        <img src="https://picsum.photos/seed/refund-1/200/200" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+        <div style="position:absolute;inset:0;background:rgba(232,68,68,.3);display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;">✕</div>
+      </div><div style="position:relative;aspect-ratio:1;border-radius:4px;overflow:hidden;">
+        <img src="https://picsum.photos/seed/refund-2/200/200" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+        
+      </div><div style="position:relative;aspect-ratio:1;border-radius:4px;overflow:hidden;">
+        <img src="https://picsum.photos/seed/refund-3/200/200" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+        
+      </div><div style="position:relative;aspect-ratio:1;border-radius:4px;overflow:hidden;">
+        <img src="https://picsum.photos/seed/refund-4/200/200" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+        
+      </div><div style="position:relative;aspect-ratio:1;border-radius:4px;overflow:hidden;">
+        <img src="https://picsum.photos/seed/refund-5/200/200" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+        
+      </div><div style="position:relative;aspect-ratio:1;border-radius:4px;overflow:hidden;">
+        <img src="https://picsum.photos/seed/refund-6/200/200" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+        
+      </div><div style="position:relative;aspect-ratio:1;border-radius:4px;overflow:hidden;">
+        <img src="https://picsum.photos/seed/refund-7/200/200" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+        
+      </div>
+    </div>
+    <div style="margin-top:14px;background:var(--ink-200);border:1px solid var(--ink-500);border-radius:6px;padding:12px;font-size:13px;">
+      <div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span>Total original</span><span class="num">R$ 230,40</span></div>
+      <div style="display:flex;justify-content:space-between;margin-bottom:4px;color:var(--danger-500, #e84444);"><span>Reembolso (2 fotos)</span><span class="num">- R$ 57,60</span></div>
+      <div style="display:flex;justify-content:space-between;border-top:1px solid var(--ink-500);padding-top:6px;font-weight:500;"><span>Líquido final</span><span class="num" style="color:var(--signal-500);">R$ 172,80</span></div>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:14px;">
+      <button class="btn primary" style="flex:1;">✓ Aprovar reembolso</button>
+      <button class="btn" style="flex:1;">Recusar</button>
+    </div>
+  </div></div></div>
+  </div>
 </section>
 
 <!-- /admin/comentarios/moderacao · admin -->
 <section class="sim-screen" data-route="/admin/comentarios/moderacao" data-mode="admin" hidden>
-  <div class="view-desktop view-desktop-fallback">
+  <div class="view-desktop">
     <div class="frame" data-screen-label="Admin · Comentário em Moderação">
           <div class="adm-topbar">
             <div class="adm-brand-pill"><svg class="nav-logo"><use href="#nav-logo-h"/></svg><span class="role">Painel</span></div>
@@ -12855,6 +13642,37 @@
             </main>
           </div>
         </div>
+  </div>
+  <div class="view-mobile">
+    <div class="phone" data-screen-label="Admin · Comentário em Moderação Mobile"><div class="phone-screen"><div class="m-status"><span>9:41</span><span class="right">●●●●●  100%</span></div>
+  <div class="m-adm-topbar">
+    <div class="brand-pill"><svg class="nav-logo"><use href="#nav-logo-h"/></svg><span class="role">Painel</span></div>
+    <div class="right">
+      <div class="bell"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-bell"/></svg><span class="pip"></span></div>
+      <button class="burger" type="button" data-drawer-open="mDrawerSim" aria-label="Menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-menu"/></svg></button>
+    </div>
+  </div>
+  <div class="m-adm-crumbs"><span>Painel</span><span class="sep">/</span><span class="here">Moderação</span></div><div style="padding: 18px 16px;">
+    <div style="font-family:var(--font-mono);font-size:10px;color:var(--ink-700);margin-bottom:10px;">COMENTÁRIO #142 · #001 SAFRA 2026 · 12/04 · 09:32</div>
+    <div style="background:var(--ink-200);border:1px solid var(--ink-500);border-radius:6px;padding:14px;margin-bottom:14px;">
+      <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
+        <div class="avatar" style="width:32px;height:32px;"><img src="https://i.pravatar.cc/60?img=5" alt="" loading="lazy"></div>
+        <div><div style="font-weight:500;">Maria F. Silva</div><div style="font-size:11px;color:var(--ink-700);font-family:var(--font-mono);">VERIFICADA · 5 EVENTOS</div></div>
+      </div>
+      <p style="margin:0;font-size:14px;color:var(--ink-1000);line-height:1.5;">"Maravilhosa!! 😍😍😍 a melhor da galeria, com certeza vou imprimir essa em A2"</p>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button class="btn primary" style="flex:1;min-width:140px;">✓ Aprovar &amp; publicar</button>
+      <button class="btn" style="flex:1;min-width:140px;">Rejeitar</button>
+    </div>
+    <button class="btn sm" style="width:100%;margin-top:8px;">Marcar como SPAM &amp; bloquear autor</button>
+    <h3 style="margin: 24px 0 8px;font-size:13px;font-weight:500;">Timeline</h3>
+    <div style="font-size:12px;color:var(--ink-800);line-height:1.7;">
+      <div>12/04 09:32 · Comentário enviado</div>
+      <div>12/04 09:33 · Detectado por filtro automático: OK (sem palavrão)</div>
+      <div>12/04 09:35 · Adicionado à fila de moderação</div>
+    </div>
+  </div></div></div>
   </div>
 </section>
 
@@ -12985,7 +13803,7 @@
 
 <!-- /admin/403 · admin -->
 <section class="sim-screen" data-route="/admin/403" data-mode="admin" hidden>
-  <div class="view-desktop view-desktop-fallback">
+  <div class="view-desktop">
     <div class="frame" data-screen-label="Admin · 403 Sem Permissão">
           <div class="adm-topbar">
             <div class="adm-brand-pill"><svg class="nav-logo"><use href="#nav-logo-h"/></svg><span class="role">Painel</span></div>
@@ -13027,6 +13845,24 @@
             </main>
           </div>
         </div>
+  </div>
+  <div class="view-mobile">
+    <div class="phone" data-screen-label="Admin · 403 Sem Permissão Mobile"><div class="phone-screen"><div class="m-status"><span>9:41</span><span class="right">●●●●●  100%</span></div>
+  <div class="m-adm-topbar">
+    <div class="brand-pill"><svg class="nav-logo"><use href="#nav-logo-h"/></svg><span class="role">Painel</span></div>
+    <div class="right">
+      <div class="bell"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-bell"/></svg><span class="pip"></span></div>
+      <button class="burger" type="button" data-drawer-open="mDrawerSim" aria-label="Menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><use href="#sim-i-menu"/></svg></button>
+    </div>
+  </div>
+  <div class="m-adm-crumbs"><span>Painel</span><span class="sep">/</span><span class="here">Acesso negado</span></div><div style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:48px 24px;min-height:60vh;gap:12px;">
+    <div style="width:72px;height:72px;border-radius:50%;background:rgba(232,68,68,.15);display:flex;align-items:center;justify-content:center;">
+      <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="var(--danger-500, #e84444)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#sim-i-lock"/></svg>
+    </div>
+    <h2 style="font-family:var(--font-heading);font-size:22px;font-weight:500;margin:8px 0 0;color:var(--ink-1000);">403 · Acesso restrito</h2>
+    <p style="font-size:14px;color:var(--ink-800);line-height:1.5;margin:0;max-width:300px;">Esta área é só pra administradores plenos. Como colaborador você não tem permissão. Fale com o fotógrafo.</p>
+    <button class="btn primary" data-sim-route="/admin" style="margin-top:8px;">Voltar pro painel</button>
+  </div></div></div>
   </div>
 </section>
 
@@ -13082,7 +13918,7 @@
 
 <script src="app.js"></script>
 <script>
-const TOC = [{"route":"/","mode":"public","label":"Public · Home Desktop","hasDesktop":true,"hasMobile":true},{"route":"/evento/safra-2026","mode":"public","label":"Public · Event Gallery","hasDesktop":true,"hasMobile":true},{"route":"/foto/safra-2026/0421","mode":"public","label":"Public · Lightbox Foto","hasDesktop":true,"hasMobile":true},{"route":"/video/safra-2026/v07","mode":"public","label":"Public · Lightbox Vídeo Mobile","hasDesktop":true,"hasMobile":true},{"route":"/carrinho","mode":"public","label":"Public · Cart Review","hasDesktop":true,"hasMobile":true},{"route":"/checkout","mode":"public","label":"Public · Checkout Desktop","hasDesktop":true,"hasMobile":true},{"route":"/checkout/pix","mode":"public","label":"Public · Checkout PIX Aguardando","hasDesktop":true,"hasMobile":true},{"route":"/checkout/boleto","mode":"public","label":"Public · Checkout Boleto Gerado","hasDesktop":true,"hasMobile":true},{"route":"/checkout/confirmado","mode":"public","label":"Public · Confirmation","hasDesktop":true,"hasMobile":true},{"route":"/compras-guest","mode":"public","label":"Public · Compras Guest","hasDesktop":true,"hasMobile":true},{"route":"/login","mode":"public","label":"Public · Login","hasDesktop":true,"hasMobile":false},{"route":"/cadastro","mode":"public","label":"Public · Cadastro","hasDesktop":true,"hasMobile":false},{"route":"/recuperar-senha","mode":"public","label":"Public · Trocar Senha","hasDesktop":true,"hasMobile":false},{"route":"/contato","mode":"public","label":"Public · Contato","hasDesktop":true,"hasMobile":true},{"route":"/autenticidade","mode":"public","label":"Public · Autenticidade","hasDesktop":true,"hasMobile":false},{"route":"/termos","mode":"public","label":"Public · Termos","hasDesktop":true,"hasMobile":false},{"route":"/privacidade","mode":"public","label":"Public · Privacidade","hasDesktop":true,"hasMobile":false},{"route":"/cookies","mode":"public","label":"Public · Cookies","hasDesktop":true,"hasMobile":false},{"route":"/cadastro-sucesso","mode":"public","label":"Public · Cadastro Sucesso","hasDesktop":true,"hasMobile":false},{"route":"/carrinho-vazio","mode":"public","label":"Public · Carrinho Vazio","hasDesktop":true,"hasMobile":true},{"route":"/evento-sem-fotos","mode":"public","label":"Public · Evento Sem Fotos","hasDesktop":true,"hasMobile":true},{"route":"/evento-privado","mode":"public","label":"Public · Evento Privado","hasDesktop":true,"hasMobile":true},{"route":"/busca-sem-resultado","mode":"public","label":"Public · Galeria Busca Sem Resultado","hasDesktop":true,"hasMobile":true},{"route":"/checkout/recusado","mode":"public","label":"Public · Checkout Pagamento Recusado","hasDesktop":true,"hasMobile":true},{"route":"/conta-bloqueada","mode":"public","label":"Public · Conta Bloqueada","hasDesktop":true,"hasMobile":false},{"route":"/404","mode":"public","label":"Public · 404","hasDesktop":true,"hasMobile":true},{"route":"/500","mode":"public","label":"Public · 500 Erro Servidor","hasDesktop":true,"hasMobile":true},{"route":"/manutencao","mode":"public","label":"Public · Manutenção","hasDesktop":true,"hasMobile":true},{"route":"/cliente","mode":"cliente","label":"Cliente · Dashboard Desktop","hasDesktop":true,"hasMobile":true},{"route":"/cliente/compras","mode":"cliente","label":"Cliente · Compras","hasDesktop":true,"hasMobile":true},{"route":"/cliente/compras/123","mode":"cliente","label":"Cliente · Detalhe Compra","hasDesktop":true,"hasMobile":true},{"route":"/cliente/carrinho","mode":"cliente","label":"Cliente · Carrinho","hasDesktop":true,"hasMobile":true},{"route":"/cliente/favoritos","mode":"cliente","label":"Cliente · Favoritos","hasDesktop":true,"hasMobile":true},{"route":"/cliente/comentarios","mode":"cliente","label":"Cliente · Comentários","hasDesktop":true,"hasMobile":true},{"route":"/cliente/notificacoes","mode":"cliente","label":"Cliente · Notificações","hasDesktop":true,"hasMobile":true},{"route":"/cliente/chat","mode":"cliente","label":"Cliente · Chat","hasDesktop":true,"hasMobile":true},{"route":"/cliente/reconhecimento","mode":"cliente","label":"Cliente · Reconhecimento","hasDesktop":true,"hasMobile":true},{"route":"/cliente/recompensas","mode":"cliente","label":"Cliente · Recompensas","hasDesktop":true,"hasMobile":true},{"route":"/cliente/configuracoes","mode":"cliente","label":"Cliente · Configurações","hasDesktop":true,"hasMobile":true},{"route":"/cliente/remocoes","mode":"cliente","label":"Cliente · Remoções LGPD","hasDesktop":true,"hasMobile":true},{"route":"/cliente/downloads-expirando","mode":"cliente","label":"Cliente · Downloads Expirando","hasDesktop":true,"hasMobile":true},{"route":"/cliente/compras/124-reembolso","mode":"cliente","label":"Cliente · Detalhe Compra · Reembolso","hasDesktop":true,"hasMobile":true},{"route":"/cliente/reconhecimento-consent","mode":"cliente","label":"Cliente · Reconhecimento Pre-Consent","hasDesktop":true,"hasMobile":true},{"route":"/cliente/reconhecimento-vazio","mode":"cliente","label":"Cliente · Reconhecimento Sem Referências","hasDesktop":true,"hasMobile":true},{"route":"/cliente/compras-vazio","mode":"cliente","label":"Cliente · Compras Vazio","hasDesktop":true,"hasMobile":true},{"route":"/cliente/favoritos-vazio","mode":"cliente","label":"Cliente · Favoritos Vazio","hasDesktop":true,"hasMobile":true},{"route":"/cliente/comentarios-vazio","mode":"cliente","label":"Cliente · Comentários Vazio","hasDesktop":true,"hasMobile":true},{"route":"/cliente/notificacoes-vazio","mode":"cliente","label":"Cliente · Notificações Vazio","hasDesktop":true,"hasMobile":true},{"route":"/cliente/sessao-expirada","mode":"cliente","label":"Cliente · Sessão Expirada","hasDesktop":true,"hasMobile":false},{"route":"/admin","mode":"admin","label":"Admin · Dashboard","hasDesktop":true,"hasMobile":true},{"route":"/admin/estatisticas","mode":"admin","label":"Admin · Estatísticas","hasDesktop":true,"hasMobile":true},{"route":"/admin/eventos","mode":"admin","label":"Admin · Eventos","hasDesktop":true,"hasMobile":true},{"route":"/admin/eventos/123","mode":"admin","label":"Admin · Detalhe Evento","hasDesktop":true,"hasMobile":false},{"route":"/admin/eventos/123-videos","mode":"admin","label":"Admin · Detalhe Evento (Vídeos)","hasDesktop":true,"hasMobile":false},{"route":"/admin/eventos/123-patrocinadores","mode":"admin","label":"Admin · Detalhe Evento (Patrocinadores)","hasDesktop":true,"hasMobile":true},{"route":"/admin/eventos/novo","mode":"admin","label":"Admin · Criar Evento","hasDesktop":true,"hasMobile":false},{"route":"/admin/eventos/123-upload","mode":"admin","label":"Admin · Upload Fotos","hasDesktop":true,"hasMobile":true},{"route":"/admin/pedidos","mode":"admin","label":"Admin · Pedidos","hasDesktop":true,"hasMobile":true},{"route":"/admin/carrinhos","mode":"admin","label":"Admin · Carrinhos","hasDesktop":true,"hasMobile":false},{"route":"/admin/cupons","mode":"admin","label":"Admin · Cupons","hasDesktop":true,"hasMobile":true},{"route":"/admin/propostas","mode":"admin","label":"Admin · Propostas","hasDesktop":true,"hasMobile":false},{"route":"/admin/repasses","mode":"admin","label":"Admin · Repasses","hasDesktop":true,"hasMobile":true},{"route":"/admin/clientes","mode":"admin","label":"Admin · Clientes","hasDesktop":true,"hasMobile":false},{"route":"/admin/colaboradores","mode":"admin","label":"Admin · Colaboradores","hasDesktop":true,"hasMobile":false},{"route":"/admin/chat","mode":"admin","label":"Admin · Chat","hasDesktop":true,"hasMobile":true},{"route":"/admin/comentarios","mode":"admin","label":"Admin · Comentários","hasDesktop":true,"hasMobile":false},{"route":"/admin/contatos","mode":"admin","label":"Admin · Contatos","hasDesktop":true,"hasMobile":false},{"route":"/admin/remocoes","mode":"admin","label":"Admin · Remoções","hasDesktop":true,"hasMobile":true},{"route":"/admin/marca-dagua","mode":"admin","label":"Admin · Marca d'água","hasDesktop":true,"hasMobile":true},{"route":"/admin/personalizar","mode":"admin","label":"Admin · Personalizar","hasDesktop":true,"hasMobile":false},{"route":"/admin/configuracoes","mode":"admin","label":"Admin · Configurações","hasDesktop":true,"hasMobile":true},{"route":"/admin/notificacoes","mode":"admin","label":"Admin · Notificações","hasDesktop":true,"hasMobile":false},{"route":"/admin/reconhecimento","mode":"admin","label":"Admin · Reconhecimento","hasDesktop":true,"hasMobile":false},{"route":"/admin/recompensas","mode":"admin","label":"Admin · Recompensas","hasDesktop":true,"hasMobile":true},{"route":"/admin/storage","mode":"admin","label":"Admin · Storage","hasDesktop":true,"hasMobile":true},{"route":"/admin/logs","mode":"admin","label":"Admin · Logs & auditoria","hasDesktop":true,"hasMobile":true},{"route":"/admin/jobs","mode":"admin","label":"Admin · Fila de Jobs","hasDesktop":true,"hasMobile":true},{"route":"/admin/eventos-sem-fotos","mode":"admin","label":"Admin · Evento Sem Fotos","hasDesktop":true,"hasMobile":false},{"route":"/admin/dashboard-vazio","mode":"admin","label":"Admin · Dashboard Vazio","hasDesktop":true,"hasMobile":false},{"route":"/admin/pedidos/reembolso","mode":"admin","label":"Admin · Pedido com Reembolso","hasDesktop":true,"hasMobile":false},{"route":"/admin/comentarios/moderacao","mode":"admin","label":"Admin · Comentário em Moderação","hasDesktop":true,"hasMobile":false},{"route":"/admin/reset","mode":"admin","label":"Admin · Reset","hasDesktop":true,"hasMobile":true},{"route":"/admin/403","mode":"admin","label":"Admin · 403 Sem Permissão","hasDesktop":true,"hasMobile":false}];
+const TOC = [{"route":"/","mode":"public","label":"Public · Home Desktop","hasDesktop":true,"hasMobile":true},{"route":"/evento/safra-2026","mode":"public","label":"Public · Event Gallery","hasDesktop":true,"hasMobile":true},{"route":"/foto/safra-2026/0421","mode":"public","label":"Public · Lightbox Foto","hasDesktop":true,"hasMobile":true},{"route":"/video/safra-2026/v07","mode":"public","label":"Public · Lightbox Vídeo Mobile","hasDesktop":true,"hasMobile":true},{"route":"/carrinho","mode":"public","label":"Public · Cart Review","hasDesktop":true,"hasMobile":true},{"route":"/checkout","mode":"public","label":"Public · Checkout Desktop","hasDesktop":true,"hasMobile":true},{"route":"/checkout/pix","mode":"public","label":"Public · Checkout PIX Aguardando","hasDesktop":true,"hasMobile":true},{"route":"/checkout/boleto","mode":"public","label":"Public · Checkout Boleto Gerado","hasDesktop":true,"hasMobile":true},{"route":"/checkout/confirmado","mode":"public","label":"Public · Confirmation","hasDesktop":true,"hasMobile":true},{"route":"/compras-guest","mode":"public","label":"Public · Compras Guest","hasDesktop":true,"hasMobile":true},{"route":"/login","mode":"public","label":"Public · Login","hasDesktop":true,"hasMobile":true},{"route":"/cadastro","mode":"public","label":"Public · Cadastro","hasDesktop":true,"hasMobile":true},{"route":"/recuperar-senha","mode":"public","label":"Public · Trocar Senha","hasDesktop":true,"hasMobile":true},{"route":"/contato","mode":"public","label":"Public · Contato","hasDesktop":true,"hasMobile":true},{"route":"/autenticidade","mode":"public","label":"Public · Autenticidade","hasDesktop":true,"hasMobile":true},{"route":"/termos","mode":"public","label":"Public · Termos","hasDesktop":true,"hasMobile":true},{"route":"/privacidade","mode":"public","label":"Public · Privacidade","hasDesktop":true,"hasMobile":true},{"route":"/cookies","mode":"public","label":"Public · Cookies","hasDesktop":true,"hasMobile":true},{"route":"/cadastro-sucesso","mode":"public","label":"Public · Cadastro Sucesso","hasDesktop":true,"hasMobile":true},{"route":"/carrinho-vazio","mode":"public","label":"Public · Carrinho Vazio","hasDesktop":true,"hasMobile":true},{"route":"/evento-sem-fotos","mode":"public","label":"Public · Evento Sem Fotos","hasDesktop":true,"hasMobile":true},{"route":"/evento-privado","mode":"public","label":"Public · Evento Privado","hasDesktop":true,"hasMobile":true},{"route":"/busca-sem-resultado","mode":"public","label":"Public · Galeria Busca Sem Resultado","hasDesktop":true,"hasMobile":true},{"route":"/checkout/recusado","mode":"public","label":"Public · Checkout Pagamento Recusado","hasDesktop":true,"hasMobile":true},{"route":"/conta-bloqueada","mode":"public","label":"Public · Conta Bloqueada","hasDesktop":true,"hasMobile":true},{"route":"/404","mode":"public","label":"Public · 404","hasDesktop":true,"hasMobile":true},{"route":"/500","mode":"public","label":"Public · 500 Erro Servidor","hasDesktop":true,"hasMobile":true},{"route":"/manutencao","mode":"public","label":"Public · Manutenção","hasDesktop":true,"hasMobile":true},{"route":"/cliente","mode":"cliente","label":"Cliente · Dashboard Desktop","hasDesktop":true,"hasMobile":true},{"route":"/cliente/compras","mode":"cliente","label":"Cliente · Compras","hasDesktop":true,"hasMobile":true},{"route":"/cliente/compras/123","mode":"cliente","label":"Cliente · Detalhe Compra","hasDesktop":true,"hasMobile":true},{"route":"/cliente/carrinho","mode":"cliente","label":"Cliente · Carrinho","hasDesktop":true,"hasMobile":true},{"route":"/cliente/favoritos","mode":"cliente","label":"Cliente · Favoritos","hasDesktop":true,"hasMobile":true},{"route":"/cliente/comentarios","mode":"cliente","label":"Cliente · Comentários","hasDesktop":true,"hasMobile":true},{"route":"/cliente/notificacoes","mode":"cliente","label":"Cliente · Notificações","hasDesktop":true,"hasMobile":true},{"route":"/cliente/chat","mode":"cliente","label":"Cliente · Chat","hasDesktop":true,"hasMobile":true},{"route":"/cliente/reconhecimento","mode":"cliente","label":"Cliente · Reconhecimento","hasDesktop":true,"hasMobile":true},{"route":"/cliente/recompensas","mode":"cliente","label":"Cliente · Recompensas","hasDesktop":true,"hasMobile":true},{"route":"/cliente/configuracoes","mode":"cliente","label":"Cliente · Configurações","hasDesktop":true,"hasMobile":true},{"route":"/cliente/remocoes","mode":"cliente","label":"Cliente · Remoções LGPD","hasDesktop":true,"hasMobile":true},{"route":"/cliente/downloads-expirando","mode":"cliente","label":"Cliente · Downloads Expirando","hasDesktop":true,"hasMobile":true},{"route":"/cliente/compras/124-reembolso","mode":"cliente","label":"Cliente · Detalhe Compra · Reembolso","hasDesktop":true,"hasMobile":true},{"route":"/cliente/reconhecimento-consent","mode":"cliente","label":"Cliente · Reconhecimento Pre-Consent","hasDesktop":true,"hasMobile":true},{"route":"/cliente/reconhecimento-vazio","mode":"cliente","label":"Cliente · Reconhecimento Sem Referências","hasDesktop":true,"hasMobile":true},{"route":"/cliente/compras-vazio","mode":"cliente","label":"Cliente · Compras Vazio","hasDesktop":true,"hasMobile":true},{"route":"/cliente/favoritos-vazio","mode":"cliente","label":"Cliente · Favoritos Vazio","hasDesktop":true,"hasMobile":true},{"route":"/cliente/comentarios-vazio","mode":"cliente","label":"Cliente · Comentários Vazio","hasDesktop":true,"hasMobile":true},{"route":"/cliente/notificacoes-vazio","mode":"cliente","label":"Cliente · Notificações Vazio","hasDesktop":true,"hasMobile":true},{"route":"/cliente/sessao-expirada","mode":"cliente","label":"Cliente · Sessão Expirada","hasDesktop":true,"hasMobile":true},{"route":"/admin","mode":"admin","label":"Admin · Dashboard","hasDesktop":true,"hasMobile":true},{"route":"/admin/estatisticas","mode":"admin","label":"Admin · Estatísticas","hasDesktop":true,"hasMobile":true},{"route":"/admin/eventos","mode":"admin","label":"Admin · Eventos","hasDesktop":true,"hasMobile":true},{"route":"/admin/eventos/123","mode":"admin","label":"Admin · Detalhe Evento","hasDesktop":true,"hasMobile":true},{"route":"/admin/eventos/123-videos","mode":"admin","label":"Admin · Detalhe Evento (Vídeos)","hasDesktop":true,"hasMobile":true},{"route":"/admin/eventos/123-patrocinadores","mode":"admin","label":"Admin · Detalhe Evento (Patrocinadores)","hasDesktop":true,"hasMobile":true},{"route":"/admin/eventos/novo","mode":"admin","label":"Admin · Criar Evento","hasDesktop":true,"hasMobile":true},{"route":"/admin/eventos/123-upload","mode":"admin","label":"Admin · Upload Fotos","hasDesktop":true,"hasMobile":true},{"route":"/admin/pedidos","mode":"admin","label":"Admin · Pedidos","hasDesktop":true,"hasMobile":true},{"route":"/admin/carrinhos","mode":"admin","label":"Admin · Carrinhos","hasDesktop":true,"hasMobile":true},{"route":"/admin/cupons","mode":"admin","label":"Admin · Cupons","hasDesktop":true,"hasMobile":true},{"route":"/admin/propostas","mode":"admin","label":"Admin · Propostas","hasDesktop":true,"hasMobile":true},{"route":"/admin/repasses","mode":"admin","label":"Admin · Repasses","hasDesktop":true,"hasMobile":true},{"route":"/admin/clientes","mode":"admin","label":"Admin · Clientes","hasDesktop":true,"hasMobile":true},{"route":"/admin/colaboradores","mode":"admin","label":"Admin · Colaboradores","hasDesktop":true,"hasMobile":true},{"route":"/admin/chat","mode":"admin","label":"Admin · Chat","hasDesktop":true,"hasMobile":true},{"route":"/admin/comentarios","mode":"admin","label":"Admin · Comentários","hasDesktop":true,"hasMobile":true},{"route":"/admin/contatos","mode":"admin","label":"Admin · Contatos","hasDesktop":true,"hasMobile":true},{"route":"/admin/remocoes","mode":"admin","label":"Admin · Remoções","hasDesktop":true,"hasMobile":true},{"route":"/admin/marca-dagua","mode":"admin","label":"Admin · Marca d'água","hasDesktop":true,"hasMobile":true},{"route":"/admin/personalizar","mode":"admin","label":"Admin · Personalizar","hasDesktop":true,"hasMobile":true},{"route":"/admin/configuracoes","mode":"admin","label":"Admin · Configurações","hasDesktop":true,"hasMobile":true},{"route":"/admin/notificacoes","mode":"admin","label":"Admin · Notificações","hasDesktop":true,"hasMobile":true},{"route":"/admin/reconhecimento","mode":"admin","label":"Admin · Reconhecimento","hasDesktop":true,"hasMobile":true},{"route":"/admin/recompensas","mode":"admin","label":"Admin · Recompensas","hasDesktop":true,"hasMobile":true},{"route":"/admin/storage","mode":"admin","label":"Admin · Storage","hasDesktop":true,"hasMobile":true},{"route":"/admin/logs","mode":"admin","label":"Admin · Logs & auditoria","hasDesktop":true,"hasMobile":true},{"route":"/admin/jobs","mode":"admin","label":"Admin · Fila de Jobs","hasDesktop":true,"hasMobile":true},{"route":"/admin/eventos-sem-fotos","mode":"admin","label":"Admin · Evento Sem Fotos","hasDesktop":true,"hasMobile":true},{"route":"/admin/dashboard-vazio","mode":"admin","label":"Admin · Dashboard Vazio","hasDesktop":true,"hasMobile":true},{"route":"/admin/pedidos/reembolso","mode":"admin","label":"Admin · Pedido com Reembolso","hasDesktop":true,"hasMobile":true},{"route":"/admin/comentarios/moderacao","mode":"admin","label":"Admin · Comentário em Moderação","hasDesktop":true,"hasMobile":true},{"route":"/admin/reset","mode":"admin","label":"Admin · Reset","hasDesktop":true,"hasMobile":true},{"route":"/admin/403","mode":"admin","label":"Admin · 403 Sem Permissão","hasDesktop":true,"hasMobile":true}];
 const CANONICAL_CLIENT_SIDEBAR_HTML = "\n<div class=\"who\">\n  <div class=\"avatar brand\"><img src=\"https://i.pravatar.cc/100?img=12\" alt=\"VS\" loading=\"lazy\"></div>\n  <div class=\"info\">\n    <h4 class=\"sim-user-name\">Vinícius Souza</h4>\n    <p>cliente desde mar/26</p>\n  </div>\n</div>\n<div class=\"lbl\">Minha conta</div><a data-sim-route=\"/cliente\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Início</a><a data-sim-route=\"/cliente/compras\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Compras<span class=\"badge b-paid\">12</span></a><a data-sim-route=\"/cliente/carrinho\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Carrinho<span class=\"badge b-info\">2</span></a><a data-sim-route=\"/cliente/favoritos\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Salvos &amp; curtidas</a><a data-sim-route=\"/cliente/comentarios\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Comentários</a><a data-sim-route=\"/cliente/remocoes\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Remoções LGPD</a><div class=\"lbl\">Atalhos</div><a data-sim-route=\"/cliente/notificacoes\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Notificações<span class=\"badge b-info\">3</span></a><a data-sim-route=\"/cliente/chat\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Chat</a><a data-sim-route=\"/cliente/reconhecimento\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Reconhecimento<span class=\"badge b-info\">beta</span></a><div class=\"lbl\">Conta</div><a data-sim-route=\"/cliente/configuracoes\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Configurações</a>\n<div class=\"logout\">\n  <a data-sim-route=\"__logout__\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Sair</a>\n</div>";
 const CANONICAL_ADMIN_SIDEBAR_HTML = "\n<div class=\"lbl\">Visão</div><a data-sim-route=\"/admin\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Dashboard</a><a data-sim-route=\"/admin/estatisticas\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Estatísticas</a><div class=\"lbl\">Conteúdo</div><a data-sim-route=\"/admin/eventos\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Eventos / Álbuns<span class=\"badge b-info\">142</span></a><a data-sim-route=\"/admin/eventos/novo\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Criar evento</a><a data-sim-route=\"/admin/eventos/123-upload\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Upload de fotos</a><div class=\"lbl\">Vendas</div><a data-sim-route=\"/admin/pedidos\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Pedidos<span class=\"badge b-pend\">3</span></a><a data-sim-route=\"/admin/carrinhos\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Carrinhos abertos<span class=\"badge b-info\">9</span></a><a data-sim-route=\"/admin/cupons\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Cupons</a><a data-sim-route=\"/admin/propostas\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Propostas<span class=\"badge b-info\">2</span></a><a data-sim-route=\"/admin/repasses\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Repasses</a><div class=\"lbl\">Pessoas</div><a data-sim-route=\"/admin/clientes\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Clientes</a><a data-sim-route=\"/admin/colaboradores\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Colaboradores</a><a data-sim-route=\"/admin/chat\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Chat<span class=\"badge b-info\">2</span></a><div class=\"lbl\">Moderação</div><a data-sim-route=\"/admin/comentarios\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Comentários<span class=\"badge b-pend\">5</span></a><a data-sim-route=\"/admin/contatos\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Contatos<span class=\"badge b-pend\">3</span></a><a data-sim-route=\"/admin/remocoes\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Remoções LGPD<span class=\"badge b-pend\">1</span></a><div class=\"lbl\">Sistema</div><a data-sim-route=\"/admin/marca-dagua\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Marca d&#39;água</a><a data-sim-route=\"/admin/personalizar\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Personalizar</a><a data-sim-route=\"/admin/configuracoes\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Configurações</a><a data-sim-route=\"/admin/storage\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Storage</a><a data-sim-route=\"/admin/recompensas\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Recompensas</a><a data-sim-route=\"/admin/logs\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Logs &amp; auditoria</a><a data-sim-route=\"/admin/notificacoes\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Notificações</a><a data-sim-route=\"/admin/reconhecimento\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Reconhecimento</a><a data-sim-route=\"/admin/reset\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></svg>Reset</a>\n<div class=\"role-switcher\">\n  <div class=\"avatar\" style=\"width: 26px; height: 26px; font-size: 10px;\"><img src=\"https://i.pravatar.cc/100?img=12\" alt=\"VS\" loading=\"lazy\"></div>\n  <div class=\"info\">\n    <h5 class=\"sim-user-name\">Vinícius Souza</h5>\n    <p>Fotógrafo · Admin</p>\n  </div>\n  <a class=\"switch-btn\" data-sim-route=\"__logout__\" title=\"Sair\">↻</a>\n</div>";
 
